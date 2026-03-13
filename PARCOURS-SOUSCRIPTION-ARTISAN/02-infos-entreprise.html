@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelkun — Informations entreprise</title>
+  <link rel="stylesheet" href="shared/tokens.css">
+  <link rel="stylesheet" href="shared/components.css">
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__inner">
+        <a href="00-landing.html" class="header__logo">kelkun</a>
+        <span class="header__link" style="font-size: var(--font-size-sm); color: var(--color-text-muted);">Plus que 3 etapes !</span>
+      </div>
+    </header>
+
+    <!-- Stepper -->
+    <nav class="stepper" style="padding: var(--space-6) var(--space-6) 0;">
+      <a href="01-creation-compte.html" class="stepper__step stepper__step--completed">
+        <span class="stepper__circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="stepper__label">Compte</span>
+      </a>
+      <div class="stepper__line stepper__line--completed"></div>
+      <div class="stepper__step stepper__step--current">
+        <span class="stepper__circle">2</span>
+        <span class="stepper__label">Entreprise</span>
+      </div>
+      <div class="stepper__line"></div>
+      <div class="stepper__step stepper__step--upcoming">
+        <span class="stepper__circle">3</span>
+        <span class="stepper__label">Documents</span>
+      </div>
+      <div class="stepper__line"></div>
+      <div class="stepper__step stepper__step--upcoming">
+        <span class="stepper__circle">4</span>
+        <span class="stepper__label">Profil</span>
+      </div>
+      <div class="stepper__line"></div>
+      <div class="stepper__step stepper__step--upcoming">
+        <span class="stepper__circle">5</span>
+        <span class="stepper__label">Validation</span>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="container">
+
+        <!-- Ecran 2.1 — Identification entreprise -->
+        <div class="card card--lg" id="screen-siret">
+          <h1 class="card__title">Ton entreprise</h1>
+          <p class="card__subtitle">Saisis ton SIRET et on s'occupe du reste.</p>
+
+          <form>
+            <div class="form-group">
+              <label class="form-label" for="siret">Numero SIRET</label>
+              <input type="text" id="siret" class="form-input" placeholder="123 456 789 00012" value="123 456 789 00012" maxlength="17">
+              <span class="form-hint">14 chiffres — tu le trouves sur ton extrait Kbis ou sur societe.com</span>
+            </div>
+
+            <!-- Loader state (hidden) -->
+            <div id="siret-loader" style="display: none; text-align: center; padding: var(--space-6); color: var(--color-text-muted);">
+              Verification en cours...
+            </div>
+
+            <!-- Auto-filled fields -->
+            <div id="siret-fields">
+              <div class="alert alert--success" style="margin-bottom: var(--space-6);">
+                <span class="alert__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </span>
+                <span>Entreprise trouvee ! Verifie les informations ci-dessous.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="raison-sociale">Raison sociale</label>
+                <input type="text" id="raison-sociale" class="form-input" value="Dupont Plomberie">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="forme-juridique">Forme juridique</label>
+                <select id="forme-juridique" class="form-input">
+                  <option>Auto-entrepreneur</option>
+                  <option selected>SARL</option>
+                  <option>SAS</option>
+                  <option>SASU</option>
+                  <option>EURL</option>
+                  <option>SA</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="adresse-siege">Adresse du siege</label>
+                <input type="text" id="adresse-siege" class="form-input" value="15 rue des Artisans, 34000 Montpellier">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="date-creation">Date de creation</label>
+                <input type="date" id="date-creation" class="form-input" value="2014-03-15">
+              </div>
+            </div>
+
+            <div class="btn-row btn-row--between">
+              <a href="01-creation-compte.html" class="btn btn--secondary">Retour</a>
+              <button type="button" class="btn btn--primary" onclick="showMetier()">Continuer</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Ecran 2.2 — Metier et specialites -->
+        <div class="card card--lg" id="screen-metier" style="display: none;">
+          <h1 class="card__title">Ton metier</h1>
+          <p class="card__subtitle">Ces informations nous aident a t'envoyer les demandes les plus pertinentes.</p>
+
+          <form>
+            <div class="form-group">
+              <label class="form-label" for="metier">Metier principal</label>
+              <select id="metier" class="form-input" onchange="updateSpecialites()">
+                <option value="">Selectionne ton metier</option>
+                <option value="plomberie" selected>Plomberie</option>
+                <option value="electricite">Electricite</option>
+                <option value="serrurerie">Serrurerie</option>
+                <option value="chauffage">Chauffage / Climatisation</option>
+                <option value="menuiserie">Menuiserie</option>
+                <option value="peinture">Peinture</option>
+                <option value="maconnerie">Maconnerie</option>
+                <option value="couverture">Couverture</option>
+                <option value="carrelage">Carrelage</option>
+                <option value="isolation">Isolation</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Specialites <span class="optional">(facultatif)</span></label>
+              <div class="chips" id="specialites">
+                <button type="button" class="chip chip--active" onclick="this.classList.toggle('chip--active')">Debouchage</button>
+                <button type="button" class="chip chip--active" onclick="this.classList.toggle('chip--active')">Recherche de fuite</button>
+                <button type="button" class="chip chip--active" onclick="this.classList.toggle('chip--active')">Installation sanitaire</button>
+                <button type="button" class="chip chip--active" onclick="this.classList.toggle('chip--active')">Chauffe-eau</button>
+                <button type="button" class="chip" onclick="this.classList.toggle('chip--active')">Robinetterie</button>
+                <button type="button" class="chip" onclick="this.classList.toggle('chip--active')">Canalisation</button>
+                <button type="button" class="chip" onclick="this.classList.toggle('chip--active')">WC / Toilettes</button>
+                <button type="button" class="chip" onclick="this.classList.toggle('chip--active')">Salle de bain</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Types d'intervention</label>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" checked> Urgences / depannages</label>
+                <label class="checkbox-label"><input type="checkbox" checked> Travaux planifies</label>
+                <label class="checkbox-label"><input type="checkbox"> Entretien</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="experience">Annees d'experience <span class="optional">(facultatif)</span></label>
+              <select id="experience" class="form-input">
+                <option value="">Selectionne</option>
+                <option>Moins de 2 ans</option>
+                <option>2-5 ans</option>
+                <option>5-10 ans</option>
+                <option selected>10+ ans</option>
+              </select>
+            </div>
+
+            <div class="btn-row btn-row--between">
+              <button type="button" class="btn btn--secondary" onclick="showSiret()">Retour</button>
+              <a href="03-documents.html" class="btn btn--primary">Continuer</a>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function showMetier() {
+      document.getElementById('screen-siret').style.display = 'none';
+      document.getElementById('screen-metier').style.display = 'block';
+    }
+    function showSiret() {
+      document.getElementById('screen-metier').style.display = 'none';
+      document.getElementById('screen-siret').style.display = 'block';
+    }
+
+    // Simulate SIRET lookup
+    document.getElementById('siret').addEventListener('blur', function() {
+      const val = this.value.replace(/\s/g, '');
+      if (val.length === 14) {
+        document.getElementById('siret-loader').style.display = 'block';
+        document.getElementById('siret-fields').style.display = 'none';
+        setTimeout(() => {
+          document.getElementById('siret-loader').style.display = 'none';
+          document.getElementById('siret-fields').style.display = 'block';
+        }, 800);
+      }
+    });
+  </script>
+</body>
+</html>

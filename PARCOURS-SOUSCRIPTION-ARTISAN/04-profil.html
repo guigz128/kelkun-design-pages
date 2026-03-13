@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelkun — Configuration du profil</title>
+  <link rel="stylesheet" href="shared/tokens.css">
+  <link rel="stylesheet" href="shared/components.css">
+  <style>
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-8);
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .split-layout { grid-template-columns: 1fr; }
+    }
+    .photo-upload {
+      width: 120px;
+      height: 120px;
+      border-radius: var(--radius-full);
+      border: 2px dashed var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin: 0 auto var(--space-4);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+      background: var(--color-bg-page);
+    }
+    .photo-upload:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+    }
+    .photo-upload input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .photo-upload__placeholder {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-xs);
+      text-align: center;
+    }
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: var(--space-8) 0;
+    }
+    .section-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: var(--space-5);
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__inner">
+        <a href="00-landing.html" class="header__logo">kelkun</a>
+        <span class="header__link" style="font-size: var(--font-size-sm); color: var(--color-text-muted);">Derniere etape avant validation !</span>
+      </div>
+    </header>
+
+    <!-- Stepper -->
+    <nav class="stepper" style="padding: var(--space-6) var(--space-6) 0;">
+      <a href="01-creation-compte.html" class="stepper__step stepper__step--completed">
+        <span class="stepper__circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="stepper__label">Compte</span>
+      </a>
+      <div class="stepper__line stepper__line--completed"></div>
+      <a href="02-infos-entreprise.html" class="stepper__step stepper__step--completed">
+        <span class="stepper__circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="stepper__label">Entreprise</span>
+      </a>
+      <div class="stepper__line stepper__line--completed"></div>
+      <a href="03-documents.html" class="stepper__step stepper__step--completed">
+        <span class="stepper__circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="stepper__label">Documents</span>
+      </a>
+      <div class="stepper__line stepper__line--completed"></div>
+      <div class="stepper__step stepper__step--current">
+        <span class="stepper__circle">4</span>
+        <span class="stepper__label">Profil</span>
+      </div>
+      <div class="stepper__line"></div>
+      <div class="stepper__step stepper__step--upcoming">
+        <span class="stepper__circle">5</span>
+        <span class="stepper__label">Validation</span>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="container" style="max-width: var(--container-wide);">
+
+        <div class="split-layout">
+
+          <!-- Left — Form -->
+          <div>
+
+            <!-- 4.1 Photo et presentation -->
+            <div class="card card--lg">
+              <h1 class="card__title">Ton profil</h1>
+              <p class="card__subtitle">C'est ce que les clients verront. Soigne ta presentation !</p>
+
+              <div style="text-align: center; margin-bottom: var(--space-6);">
+                <div class="photo-upload">
+                  <div class="photo-upload__placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 4px;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                    <br>Photo
+                  </div>
+                  <input type="file" accept="image/*">
+                </div>
+                <p style="font-size: var(--font-size-sm); color: var(--color-text-muted);">Photo du dirigeant ou logo de l'entreprise (min 400x400px)</p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="bio">Presentation <span class="optional">(facultatif)</span></label>
+                <textarea id="bio" class="form-input" placeholder="Decris ton entreprise et ton savoir-faire en quelques mots..." maxlength="500">Plombier depuis plus de 10 ans sur Montpellier et ses environs. Specialiste en recherche de fuites et installation sanitaire. Intervention rapide et devis gratuit.</textarea>
+                <span class="form-hint"><span id="bio-count">156</span>/500 caracteres</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Photos de realisations <span class="optional">(facultatif, jusqu'a 6)</span></label>
+                <div class="gallery">
+                  <div class="gallery__item gallery__item--filled" style="background: #B0BEC5;">1</div>
+                  <div class="gallery__item gallery__item--filled" style="background: #90A4AE;">2</div>
+                  <div class="gallery__item gallery__item--filled" style="background: #78909C;">3</div>
+                  <div class="gallery__item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </div>
+                  <div class="gallery__item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </div>
+                  <div class="gallery__item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4.2 Zone et dispos -->
+            <div class="card card--lg" style="margin-top: var(--space-6);">
+              <h2 class="section-title">Zone d'intervention</h2>
+
+              <div class="form-group">
+                <label class="form-label" for="adresse-depart">Adresse de depart</label>
+                <input type="text" id="adresse-depart" class="form-input" value="15 rue des Artisans, 34000 Montpellier">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Rayon d'intervention</label>
+                <div class="range-slider">
+                  <input type="range" min="5" max="50" step="5" value="20" id="rayon-slider" oninput="updateRayon(this.value)">
+                  <p class="range-slider__value"><span id="rayon-value">20</span> km</p>
+                </div>
+              </div>
+
+              <div class="map-placeholder">
+                <div class="map-placeholder__circle" id="map-circle"></div>
+                <div class="map-placeholder__pin"></div>
+                <span style="position: absolute; bottom: var(--space-3); font-size: var(--font-size-xs);">Carte — Montpellier, 20 km</span>
+              </div>
+
+              <hr class="section-divider">
+
+              <h2 class="section-title">Disponibilites <span style="font-weight: var(--font-weight-regular); color: var(--color-text-muted); font-size: var(--font-size-sm);">(facultatif)</span></h2>
+
+              <div class="avail-grid">
+                <div class="avail-grid__header"></div>
+                <div class="avail-grid__header">Lun</div>
+                <div class="avail-grid__header">Mar</div>
+                <div class="avail-grid__header">Mer</div>
+                <div class="avail-grid__header">Jeu</div>
+                <div class="avail-grid__header">Ven</div>
+                <div class="avail-grid__header">Sam</div>
+                <div class="avail-grid__header">Dim</div>
+
+                <div class="avail-grid__row-label">Matin</div>
+                <div class="avail-grid__cell avail-grid__cell--active" onclick="this.classList.toggle('avail-grid__cell--active')">8-12h</div>
+                <div class="avail-grid__cell avail-grid__cell--active" onclick="this.classList.toggle('avail-grid__cell--active')">8-12h</div>
+                <div class="avail-grid__cell avail-grid__cell--active" onclick="this.classList.toggle('avail-grid__cell--active')">8-12h</div>
+                <div class="avail-grid__cell avail-grid__cell--active" onclick="this.classList.toggle('avail-grid__cell--active')">8-12h</div>
+                <div class="avail-grid__cell avail-grid__cell--active" onclick="this.classList.toggle('avail-grid__cell--active')">8-12h</div>
+                <div class="avail-grid__cell" onclick="this.classList.toggle('avail-grid__cell--active')">8-12h</div>
+                <div class="avail-grid__cell" onclick="this.classList.toggle('avail-grid__cell--active')">8-12h</div>
+
+                <div class="avail-grid__row-label">Apres-midi</div>
+                <div class="avail-grid__cell avail-grid__cell--active" onclick="this.classList.toggle('avail-grid__cell--active')">14-18h</div>
+                <div class="avail-grid__cell avail-grid__cell--active" onclick="this.classList.toggle('avail-grid__cell--active')">14-18h</div>
+                <div class="avail-grid__cell avail-grid__cell--active" onclick="this.classList.toggle('avail-grid__cell--active')">14-18h</div>
+                <div class="avail-grid__cell avail-grid__cell--active" onclick="this.classList.toggle('avail-grid__cell--active')">14-18h</div>
+                <div class="avail-grid__cell avail-grid__cell--active" onclick="this.classList.toggle('avail-grid__cell--active')">14-18h</div>
+                <div class="avail-grid__cell" onclick="this.classList.toggle('avail-grid__cell--active')">14-18h</div>
+                <div class="avail-grid__cell" onclick="this.classList.toggle('avail-grid__cell--active')">14-18h</div>
+
+                <div class="avail-grid__row-label">Soir</div>
+                <div class="avail-grid__cell" onclick="this.classList.toggle('avail-grid__cell--active')">18-21h</div>
+                <div class="avail-grid__cell" onclick="this.classList.toggle('avail-grid__cell--active')">18-21h</div>
+                <div class="avail-grid__cell" onclick="this.classList.toggle('avail-grid__cell--active')">18-21h</div>
+                <div class="avail-grid__cell" onclick="this.classList.toggle('avail-grid__cell--active')">18-21h</div>
+                <div class="avail-grid__cell" onclick="this.classList.toggle('avail-grid__cell--active')">18-21h</div>
+                <div class="avail-grid__cell" onclick="this.classList.toggle('avail-grid__cell--active')">18-21h</div>
+                <div class="avail-grid__cell" onclick="this.classList.toggle('avail-grid__cell--active')">18-21h</div>
+              </div>
+            </div>
+
+            <!-- 4.3 Tarification -->
+            <div class="card card--lg" style="margin-top: var(--space-6);">
+              <h2 class="section-title">Tarification</h2>
+
+              <div class="form-group">
+                <label class="form-label" for="taux-horaire">Taux horaire indicatif <span class="optional">(facultatif)</span></label>
+                <div style="position: relative;">
+                  <input type="number" id="taux-horaire" class="form-input" value="45" style="padding-right: 40px;">
+                  <span style="position: absolute; right: var(--space-4); top: 50%; transform: translateY(-50%); color: var(--color-text-muted);">EUR/h</span>
+                </div>
+                <span class="form-hint">Ce tarif est indicatif et sera ajuste dans chaque devis</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="frais-deplacement">Frais de deplacement <span class="optional">(facultatif)</span></label>
+                <select id="frais-deplacement" class="form-input">
+                  <option selected>Gratuit</option>
+                  <option>Forfait fixe</option>
+                  <option>Au kilometre</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="tva">TVA applicable</label>
+                <select id="tva" class="form-input">
+                  <option>20%</option>
+                  <option selected>10%</option>
+                  <option>5.5%</option>
+                </select>
+                <span class="form-hint">Le taux reduit de 10% s'applique aux travaux de renovation dans les logements de plus de 2 ans</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Moyens de paiement acceptes <span class="optional">(facultatif)</span></label>
+                <div class="checkbox-group">
+                  <label class="checkbox-label"><input type="checkbox" checked> Carte bancaire</label>
+                  <label class="checkbox-label"><input type="checkbox" checked> Especes</label>
+                  <label class="checkbox-label"><input type="checkbox" checked> Cheque</label>
+                  <label class="checkbox-label"><input type="checkbox"> Virement bancaire</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="btn-row btn-row--between" style="margin-top: var(--space-6);">
+              <a href="03-documents.html" class="btn btn--secondary">Retour</a>
+              <a href="05-recapitulatif.html" class="btn btn--primary">Continuer</a>
+            </div>
+
+          </div>
+
+          <!-- Right — Profile preview -->
+          <div class="profile-preview" style="display: block;">
+            <p style="font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; text-align: center; margin-bottom: var(--space-4);">Apercu du profil</p>
+
+            <div class="profile-preview__avatar">JD</div>
+            <p class="profile-preview__name">Jean Dupont</p>
+            <p class="profile-preview__meta">Dupont Plomberie</p>
+            <p class="profile-preview__meta" style="color: var(--color-primary); font-weight: var(--font-weight-semibold);">Plomberie</p>
+
+            <hr class="section-divider" style="margin: var(--space-4) 0;">
+
+            <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+              <p style="margin-bottom: var(--space-3);">Plombier depuis plus de 10 ans sur Montpellier et ses environs. Specialiste en recherche de fuites et installation sanitaire.</p>
+
+              <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
+                <span class="chip chip--active" style="font-size: var(--font-size-xs); padding: 2px 10px; cursor: default;">Debouchage</span>
+                <span class="chip chip--active" style="font-size: var(--font-size-xs); padding: 2px 10px; cursor: default;">Fuite</span>
+                <span class="chip chip--active" style="font-size: var(--font-size-xs); padding: 2px 10px; cursor: default;">Sanitaire</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Montpellier — 20 km
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Lun-Ven, 8h-18h
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                  45 EUR/h — Deplacement gratuit
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Range slider
+    function updateRayon(val) {
+      document.getElementById('rayon-value').textContent = val;
+      const circle = document.getElementById('map-circle');
+      const size = 80 + (val / 50 * 180);
+      circle.style.width = size + 'px';
+      circle.style.height = size + 'px';
+    }
+
+    // Bio character count
+    document.getElementById('bio').addEventListener('input', function() {
+      document.getElementById('bio-count').textContent = this.value.length;
+    });
+  </script>
+</body>
+</html>

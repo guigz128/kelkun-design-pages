@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelkun — Rejoindre en tant qu'artisan</title>
+  <link rel="stylesheet" href="shared/tokens.css">
+  <link rel="stylesheet" href="shared/components.css">
+  <style>
+    .hero {
+      text-align: center;
+      padding: var(--space-16) 0 var(--space-12);
+    }
+    .hero__badge {
+      display: inline-block;
+      background: var(--color-primary-light);
+      color: var(--color-primary-dark);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-6);
+    }
+    .hero__title {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+      max-width: 600px;
+      margin: 0 auto var(--space-4);
+    }
+    .hero__subtitle {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      max-width: 500px;
+      margin: 0 auto var(--space-8);
+    }
+    .hero__cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      padding: var(--space-12) 0;
+    }
+    .feature {
+      text-align: center;
+      padding: var(--space-6);
+    }
+    .feature__icon {
+      width: 56px;
+      height: 56px;
+      background: var(--color-primary-light);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-4);
+    }
+    .feature__icon svg {
+      width: 28px;
+      height: 28px;
+      color: var(--color-primary);
+    }
+    .feature__title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: var(--space-2);
+    }
+    .feature__text {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .trust-section {
+      text-align: center;
+      padding: var(--space-12) 0;
+      border-top: 1px solid var(--color-border);
+    }
+    .trust-section__title {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-6);
+    }
+    .trust-logos {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-8);
+      margin-bottom: var(--space-10);
+    }
+    .trust-logo {
+      padding: var(--space-3) var(--space-6);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+    }
+    .trust-stat {
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary);
+    }
+    .trust-stat-label {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+      margin-top: var(--space-1);
+    }
+
+    .testimonial-section {
+      padding: var(--space-12) 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .bottom-cta {
+      text-align: center;
+      padding: var(--space-12) 0;
+      background: var(--color-primary-light);
+      border-radius: var(--radius-xl);
+      margin: var(--space-8) 0;
+    }
+    .bottom-cta__title {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-2);
+    }
+    .bottom-cta__text {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-6);
+    }
+
+    @media (max-width: 768px) {
+      .hero__title { font-size: var(--font-size-3xl); }
+      .features { grid-template-columns: 1fr; gap: var(--space-4); }
+      .trust-logos { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__inner">
+        <a href="00-landing.html" class="header__logo">kelkun</a>
+        <a href="01-creation-compte.html" class="header__link">Deja inscrit ? Se connecter</a>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="container container--wide">
+
+        <!-- Hero -->
+        <section class="hero">
+          <div class="hero__badge">Soutenu par la FFB et la Capeb</div>
+          <h1 class="hero__title">Recois des demandes de clients pres de chez toi</h1>
+          <p class="hero__subtitle">Inscris-toi gratuitement et commence a recevoir des demandes d'intervention dans ta zone. Pas d'abonnement, pas de frais caches.</p>
+          <div class="hero__cta-group">
+            <a href="01-creation-compte.html" class="btn btn--primary" style="min-width: 260px; height: 56px; font-size: var(--font-size-lg);">Rejoindre Kelkun</a>
+            <span style="font-size: var(--font-size-sm); color: var(--color-text-muted);">Inscription en 5 minutes, c'est gratuit</span>
+          </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+          <div class="feature">
+            <div class="feature__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8m-4-4h8"/></svg>
+            </div>
+            <h3 class="feature__title">Inscription gratuite</h3>
+            <p class="feature__text">Pas d'abonnement, pas d'engagement. Tu paies uniquement quand tu acceptes une mission via notre systeme de Kredits.</p>
+          </div>
+          <div class="feature">
+            <div class="feature__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3 class="feature__title">Clients geolocalisés</h3>
+            <p class="feature__text">Recois uniquement des demandes dans ton rayon d'intervention. Plus besoin de prospecter, les clients viennent a toi.</p>
+          </div>
+          <div class="feature">
+            <div class="feature__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 class="feature__title">Paiements securises</h3>
+            <p class="feature__text">Les paiements transitent par Kelkun. Assurance juridique Allianz integree pour chaque intervention.</p>
+          </div>
+        </section>
+
+        <!-- Trust -->
+        <section class="trust-section">
+          <p class="trust-section__title">Ils nous font deja confiance</p>
+          <div class="trust-logos">
+            <div class="trust-logo">FFB</div>
+            <div class="trust-logo">Capeb</div>
+            <div class="trust-logo">Allianz</div>
+          </div>
+          <div class="trust-stat">3 300+</div>
+          <p class="trust-stat-label">artisans qualifies sur la plateforme</p>
+        </section>
+
+        <!-- Testimonial -->
+        <section class="testimonial-section">
+          <blockquote class="testimonial">
+            "Depuis que je suis sur Kelkun, je recois 3 a 4 demandes par semaine pres de chez moi. Plus besoin de faire de la pub, les clients me trouvent directement."
+            <p class="testimonial__author">Marc D. — Plombier a Montpellier, sur Kelkun depuis 6 mois</p>
+          </blockquote>
+        </section>
+
+        <!-- Bottom CTA -->
+        <section class="bottom-cta">
+          <h2 class="bottom-cta__title">Pret a recevoir tes premieres demandes ?</h2>
+          <p class="bottom-cta__text">L'inscription prend moins de 5 minutes.</p>
+          <a href="01-creation-compte.html" class="btn btn--primary" style="min-width: 260px;">Rejoindre Kelkun</a>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</body>
+</html>

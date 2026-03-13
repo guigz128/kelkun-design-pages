@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelkun — Recapitulatif</title>
+  <link rel="stylesheet" href="shared/tokens.css">
+  <link rel="stylesheet" href="shared/components.css">
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__inner">
+        <a href="00-landing.html" class="header__logo">kelkun</a>
+        <span class="header__link" style="font-size: var(--font-size-sm); color: var(--color-text-muted);">Presque termine !</span>
+      </div>
+    </header>
+
+    <!-- Stepper -->
+    <nav class="stepper" style="padding: var(--space-6) var(--space-6) 0;">
+      <a href="01-creation-compte.html" class="stepper__step stepper__step--completed">
+        <span class="stepper__circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="stepper__label">Compte</span>
+      </a>
+      <div class="stepper__line stepper__line--completed"></div>
+      <a href="02-infos-entreprise.html" class="stepper__step stepper__step--completed">
+        <span class="stepper__circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="stepper__label">Entreprise</span>
+      </a>
+      <div class="stepper__line stepper__line--completed"></div>
+      <a href="03-documents.html" class="stepper__step stepper__step--completed">
+        <span class="stepper__circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="stepper__label">Documents</span>
+      </a>
+      <div class="stepper__line stepper__line--completed"></div>
+      <a href="04-profil.html" class="stepper__step stepper__step--completed">
+        <span class="stepper__circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="stepper__label">Profil</span>
+      </a>
+      <div class="stepper__line stepper__line--completed"></div>
+      <div class="stepper__step stepper__step--current">
+        <span class="stepper__circle">5</span>
+        <span class="stepper__label">Validation</span>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="container">
+
+        <div class="card card--lg">
+          <h1 class="card__title">Recapitulatif de ton inscription</h1>
+          <p class="card__subtitle">Verifie que tout est correct avant de soumettre.</p>
+
+          <!-- Section Compte -->
+          <div class="recap-section">
+            <div class="recap-section__header">
+              <h3 class="recap-section__title">
+                <svg class="recap-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Compte
+              </h3>
+              <a href="01-creation-compte.html" class="btn btn--ghost btn--sm">Modifier</a>
+            </div>
+            <div class="recap-section__content">
+              Jean Dupont<br>
+              06 12 34 56 78<br>
+              jean.dupont@gmail.com
+            </div>
+          </div>
+
+          <!-- Section Entreprise -->
+          <div class="recap-section">
+            <div class="recap-section__header">
+              <h3 class="recap-section__title">
+                <svg class="recap-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Entreprise
+              </h3>
+              <a href="02-infos-entreprise.html" class="btn btn--ghost btn--sm">Modifier</a>
+            </div>
+            <div class="recap-section__content">
+              <strong>Dupont Plomberie</strong> (SARL)<br>
+              SIRET : 123 456 789 00012<br>
+              15 rue des Artisans, 34000 Montpellier<br>
+              <div style="margin-top: var(--space-2);">
+                Metier : <strong>Plomberie</strong> — Urgences, Travaux planifies<br>
+                Experience : 10+ ans
+              </div>
+              <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-2);">
+                <span class="chip chip--active" style="font-size: var(--font-size-xs); padding: 2px 10px; cursor: default;">Debouchage</span>
+                <span class="chip chip--active" style="font-size: var(--font-size-xs); padding: 2px 10px; cursor: default;">Recherche de fuite</span>
+                <span class="chip chip--active" style="font-size: var(--font-size-xs); padding: 2px 10px; cursor: default;">Installation sanitaire</span>
+                <span class="chip chip--active" style="font-size: var(--font-size-xs); padding: 2px 10px; cursor: default;">Chauffe-eau</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section Documents -->
+          <div class="recap-section">
+            <div class="recap-section__header">
+              <h3 class="recap-section__title">
+                <svg class="recap-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Documents
+              </h3>
+              <a href="03-documents.html" class="btn btn--ghost btn--sm">Modifier</a>
+            </div>
+            <div class="recap-section__content">
+              <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-2);">
+                <span style="display: inline-flex; align-items: center; gap: 6px; font-size: var(--font-size-sm);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  RC Pro
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 6px; font-size: var(--font-size-sm);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Decennale
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 6px; font-size: var(--font-size-sm);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Kbis
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 6px; font-size: var(--font-size-sm);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  CNI
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 6px; font-size: var(--font-size-sm); color: var(--color-text-muted);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                  Qualification (facultatif)
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section Profil -->
+          <div class="recap-section">
+            <div class="recap-section__header">
+              <h3 class="recap-section__title">
+                <svg class="recap-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                Profil
+              </h3>
+              <a href="04-profil.html" class="btn btn--ghost btn--sm">Modifier</a>
+            </div>
+            <div class="recap-section__content">
+              <div style="display: flex; gap: var(--space-4); align-items: start; flex-wrap: wrap;">
+                <div>
+                  Photo :
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><polyline points="20 6 9 17 4 12"/></svg>
+                  — Bio :
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><polyline points="20 6 9 17 4 12"/></svg>
+                  — 3 photos de realisations
+                </div>
+              </div>
+              <div style="margin-top: var(--space-2);">
+                Zone : Montpellier, 20 km — Dispo : Lun-Ven, 8h-18h
+              </div>
+            </div>
+          </div>
+
+          <!-- Section Tarifs -->
+          <div class="recap-section">
+            <div class="recap-section__header">
+              <h3 class="recap-section__title">
+                <svg class="recap-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Tarifs
+              </h3>
+              <a href="04-profil.html" class="btn btn--ghost btn--sm">Modifier</a>
+            </div>
+            <div class="recap-section__content">
+              45 EUR/h — Deplacement gratuit — TVA 10%<br>
+              Paiement : CB, especes, cheque
+            </div>
+          </div>
+
+          <!-- CGU -->
+          <div style="margin-top: var(--space-8); padding: var(--space-5); background: var(--color-bg-page); border-radius: var(--radius-lg);">
+            <label class="checkbox-label" style="align-items: flex-start;">
+              <input type="checkbox" id="cgu-checkbox" onchange="toggleSubmit()">
+              <span style="font-size: var(--font-size-sm); line-height: var(--line-height-relaxed);">
+                J'accepte les <a href="#" style="color: var(--color-primary);">Conditions Generales d'Utilisation</a> et la <a href="#" style="color: var(--color-primary);">Politique de Confidentialite</a> de Kelkun.
+              </span>
+            </label>
+          </div>
+
+          <!-- Actions -->
+          <div class="btn-row btn-row--between" style="margin-top: var(--space-6);">
+            <a href="04-profil.html" class="btn btn--secondary">Retour</a>
+            <a href="06-confirmation.html" class="btn btn--primary disabled" id="submit-btn" onclick="return !this.classList.contains('disabled')">Soumettre mon inscription</a>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleSubmit() {
+      const checked = document.getElementById('cgu-checkbox').checked;
+      const btn = document.getElementById('submit-btn');
+      if (checked) {
+        btn.classList.remove('disabled');
+      } else {
+        btn.classList.add('disabled');
+      }
+    }
+  </script>
+</body>
+</html>

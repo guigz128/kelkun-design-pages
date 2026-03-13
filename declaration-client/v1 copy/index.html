@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelkun — Décrivez votre projet</title>
+  <meta name="description" content="Trouvez gratuitement et rapidement des professionnels qualifiés près de chez vous.">
+  <link rel="icon" href="assets/icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ========== HEADER (from kelkun.com) ========== -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <!-- Logo -->
+      <a href="https://www.kelkun.com/" class="site-header__logo" title="Kelkun">
+        <img src="assets/logo-kelkun.svg" alt="Kelkun" width="120" height="36">
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a href="https://www.kelkun.com/trouver-un-artisan/" class="site-nav__link">Trouver un artisan</a></li>
+          <li class="site-nav__dropdown">
+            <button class="site-nav__link site-nav__trigger">
+              Comment ça marche
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="site-nav__panel">
+              <a href="https://www.kelkun.com/comment-ca-marche/">Vue d'ensemble</a>
+              <a href="https://www.kelkun.com/comment-ca-marche/urgences/">Urgences & dépannages</a>
+              <a href="https://www.kelkun.com/comment-ca-marche/travaux/">Travaux</a>
+              <a href="https://www.kelkun.com/comment-ca-marche/entretien/">Entretien</a>
+            </div>
+          </li>
+          <li class="site-nav__dropdown">
+            <button class="site-nav__link site-nav__trigger">
+              Nos solutions
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="site-nav__panel">
+              <a href="https://www.kelkun.com/protection-juridique-allianz/">Protection juridique</a>
+              <a href="https://www.kelkun.com/parrainage-clients/">Parrainage client</a>
+            </div>
+          </li>
+          <li class="site-nav__dropdown">
+            <button class="site-nav__link site-nav__trigger">
+              Qui est Kelkun ?
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="site-nav__panel">
+              <a href="https://www.kelkun.com/qui-est-kelkun/">À propos</a>
+              <a href="https://www.kelkun.com/qui-est-kelkun/presse/">Espace presse</a>
+              <a href="https://www.kelkun.com/qui-est-kelkun/nos-partenaires/">Nos partenaires</a>
+            </div>
+          </li>
+          <li><a href="https://www.kelkun.com/artisans/" class="site-nav__link">Espace Pro</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right actions -->
+      <div class="site-header__actions">
+        <!-- Mobile hamburger -->
+        <button class="site-header__burger" aria-label="Ouvrir le menu" id="burger-btn">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        </button>
+        <!-- Phone CTA -->
+        <a href="tel:0978452740" class="site-header__phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span>09 78 45 27 40</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <div class="mobile-drawer__header">
+        <img src="assets/logo-kelkun.svg" alt="Kelkun" width="100" height="30">
+        <button class="mobile-drawer__close" id="drawer-close" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <nav class="mobile-drawer__nav">
+        <a href="https://www.kelkun.com/trouver-un-artisan/">Trouver un artisan</a>
+        <a href="https://www.kelkun.com/comment-ca-marche/">Comment ça marche</a>
+        <a href="https://www.kelkun.com/comment-ca-marche/urgences/">Urgences & dépannages</a>
+        <a href="https://www.kelkun.com/comment-ca-marche/travaux/">Travaux</a>
+        <a href="https://www.kelkun.com/protection-juridique-allianz/">Protection juridique</a>
+        <a href="https://www.kelkun.com/qui-est-kelkun/">Qui est Kelkun ?</a>
+        <a href="https://www.kelkun.com/artisans/">Espace Pro</a>
+      </nav>
+      <a href="tel:0978452740" class="mobile-drawer__phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        09 78 45 27 40
+      </a>
+    </div>
+    <div class="mobile-drawer__overlay" id="drawer-overlay"></div>
+  </header>
+
+  <!-- ========== HOME / HERO ========== -->
+  <section class="home" id="home-section">
+    <div class="hero">
+      <div class="hero__content">
+        <a href="#" class="hero__app-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          Téléchargez l'app Kelkun
+        </a>
+
+        <h1 class="hero__title">
+          Des <span>professionnels qualifiés</span><br>près de chez vous
+        </h1>
+        <p class="hero__subtitle">Déclarez votre projet parmi + de 80 métiers</p>
+
+        <!-- Search bar amélioré -->
+        <div class="hero__search">
+          <div class="hero__search-field">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="hero-search" placeholder="Décrivez votre besoin (ex: plombier, électricien...)" autocomplete="off">
+          </div>
+          <button class="hero__search-btn" id="hero-cta">Publier ma demande</button>
+        </div>
+
+        <!-- Quick categories -->
+        <div class="hero__categories">
+          <span class="hero__categories-label">Recherches populaires :</span>
+          <button class="hero__cat-chip" data-cat="plomberie">Plomberie</button>
+          <button class="hero__cat-chip" data-cat="electricite">Électricité</button>
+          <button class="hero__cat-chip" data-cat="peinture">Peinture</button>
+          <button class="hero__cat-chip" data-cat="chauffage">Chauffage</button>
+          <button class="hero__cat-chip" data-cat="menuiserie">Menuiserie</button>
+        </div>
+
+        <p class="hero__trust">Devis gratuit &bull; +de 4000 professionnels &bull; Protection juridique*</p>
+
+        <!-- App stores -->
+        <div class="hero__stores">
+          <a href="https://apps.apple.com/fr/app/kelkun/id6478332228" target="_blank"><img src="assets/appstore-download.png" alt="Télécharger sur l'App Store" height="40"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.kelkun.app" target="_blank"><img src="assets/playstore-download.png" alt="Télécharger sur Google Play" height="40"></a>
+        </div>
+
+        <div class="hero__stats">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          + de 20 000 téléchargements
+          <span class="hero__rating">★★★★★ 4.8/5</span>
+        </div>
+      </div>
+
+      <!-- Hero illustration placeholder -->
+      <div class="hero__visual">
+        <div class="hero__phone-mockup">
+          <div class="hero__phone-screen">
+            <div class="hero__phone-header">
+              <img src="assets/logo-kelkun.svg" alt="" height="20">
+            </div>
+            <div class="hero__phone-card">
+              <div class="hero__phone-avatar"></div>
+              <div class="hero__phone-lines">
+                <div class="hero__phone-line hero__phone-line--w60"></div>
+                <div class="hero__phone-line hero__phone-line--w40"></div>
+              </div>
+              <div class="hero__phone-stars">★★★★★</div>
+            </div>
+            <div class="hero__phone-card">
+              <div class="hero__phone-avatar"></div>
+              <div class="hero__phone-lines">
+                <div class="hero__phone-line hero__phone-line--w50"></div>
+                <div class="hero__phone-line hero__phone-line--w70"></div>
+              </div>
+              <div class="hero__phone-stars">★★★★☆</div>
+            </div>
+            <div class="hero__phone-btn">Inviter à mon projet</div>
+          </div>
+        </div>
+        <!-- Floating badge -->
+        <div class="hero__badge hero__badge--verified">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Artisan vérifié
+        </div>
+        <div class="hero__badge hero__badge--pro">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Kelkun de PRO
+        </div>
+      </div>
+    </div>
+
+    <!-- Media logos -->
+    <div class="hero__media">
+      <img src="assets/media-le-parisien.png" alt="Le Parisien" height="22">
+      <img src="assets/media-logo-ici.png" alt="ICI" height="22">
+      <img src="assets/media-midi-libre.png" alt="Midi Libre" height="22">
+      <img src="assets/media-logo-bfmtv.png" alt="BFM TV" height="22">
+      <img src="assets/media-les-echos.png" alt="Les Echos" height="22">
+    </div>
+  </section>
+
+  <!-- ========== PROGRESS BAR (hidden initially) ========== -->
+  <div class="progress" id="progress-bar" style="display:none;">
+    <div class="progress__inner">
+      <div class="progress__step progress__step--active" data-step="1">
+        <div class="progress__dot">1</div>
+        <span class="progress__label">Projet</span>
+      </div>
+      <div class="progress__line"></div>
+      <div class="progress__step" data-step="2">
+        <div class="progress__dot">2</div>
+        <span class="progress__label">Localisation</span>
+      </div>
+      <div class="progress__line"></div>
+      <div class="progress__step" data-step="3">
+        <div class="progress__dot">3</div>
+        <span class="progress__label">Contact</span>
+      </div>
+      <div class="progress__line"></div>
+      <div class="progress__step" data-step="4">
+        <div class="progress__dot">4</div>
+        <span class="progress__label">Récapitulatif</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MAIN CONTENT (hidden initially) ========== -->
+  <main class="main" id="tunnel-main" style="display:none;">
+    <div class="container">
+
+      <!-- ==================== STEP 1: PROJET ==================== -->
+      <section class="step step--active" id="step-1">
+        <div class="step__content">
+          <div class="step__form">
+            <h1 class="step__title">Décrivez votre projet</h1>
+            <p class="step__subtitle">Expliquez vos besoins et entrez en contact avec les meilleurs artisans de votre région. C'est <strong>gratuit</strong> et <strong>sans obligation</strong>.</p>
+
+            <!-- Catégorie -->
+            <div class="field">
+              <label class="field__label">Quel type de professionnel recherchez-vous ?</label>
+              <div class="category-grid">
+                <button class="category-chip" data-value="plomberie">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 12H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><path d="M6 8h12"/><path d="M12 8v13"/><path d="M8 21h8"/></svg>
+                  Plomberie
+                </button>
+                <button class="category-chip" data-value="electricite">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  Électricité
+                </button>
+                <button class="category-chip" data-value="peinture">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 3H5a2 2 0 00-2 2v2a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2z"/><path d="M12 9v8"/><path d="M8 17h8"/></svg>
+                  Peinture
+                </button>
+                <button class="category-chip" data-value="maconnerie">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/><line x1="1" y1="16" x2="23" y2="16"/><line x1="8" y1="4" x2="8" y2="10"/><line x1="16" y1="4" x2="16" y2="10"/><line x1="12" y1="10" x2="12" y2="16"/><line x1="4" y1="16" x2="4" y2="20"/><line x1="20" y1="16" x2="20" y2="20"/></svg>
+                  Maçonnerie
+                </button>
+                <button class="category-chip" data-value="menuiserie">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  Menuiserie
+                </button>
+                <button class="category-chip" data-value="carrelage">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+                  Carrelage
+                </button>
+                <button class="category-chip" data-value="chauffage">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v10"/><path d="M18.5 9A6.5 6.5 0 1112 22a6.5 6.5 0 01-6.5-6.5"/><circle cx="12" cy="16" r="2"/></svg>
+                  Chauffage
+                </button>
+                <button class="category-chip category-chip--more" data-value="autre">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                  Autre métier
+                </button>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="field">
+              <label class="field__label" for="description">Décrivez votre besoin</label>
+              <textarea class="field__textarea" id="description" rows="4" placeholder="Ex : Je souhaite refaire la salle de bain de mon appartement (douche à l'italienne, double vasque)..."></textarea>
+              <span class="field__hint">Minimum 30 caractères — soyez précis pour recevoir des devis adaptés</span>
+            </div>
+
+            <!-- Photos -->
+            <div class="field">
+              <label class="field__label">Ajoutez des photos <span class="field__optional">(optionnel)</span></label>
+              <div class="photo-upload">
+                <div class="photo-upload__zone">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <span>Ajouter des photos</span>
+                </div>
+              </div>
+              <span class="field__hint field__hint--success">Les demandes avec photos sont résolues 25% plus rapidement</span>
+            </div>
+
+            <!-- Délai -->
+            <div class="field">
+              <label class="field__label">Sous quel délai ?</label>
+              <div class="delay-options">
+                <label class="delay-option">
+                  <input type="radio" name="delay" value="asap" checked>
+                  <span class="delay-option__card">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    Dès que possible
+                  </span>
+                </label>
+                <label class="delay-option">
+                  <input type="radio" name="delay" value="1month">
+                  <span class="delay-option__card">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Sous 1 mois
+                  </span>
+                </label>
+                <label class="delay-option">
+                  <input type="radio" name="delay" value="later">
+                  <span class="delay-option__card">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Plus d'un mois
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar réassurance -->
+          <aside class="reassurance">
+            <div class="reassurance__card">
+              <div class="reassurance__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <strong>Gratuit et sans engagement</strong>
+                <p>Recevez jusqu'à 5 devis personnalisés</p>
+              </div>
+            </div>
+            <div class="reassurance__card">
+              <div class="reassurance__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <strong>Réponse rapide</strong>
+                <p>Les artisans vous contactent en moyenne sous 2h</p>
+              </div>
+            </div>
+            <div class="reassurance__card">
+              <div class="reassurance__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div>
+                <strong>Artisans vérifiés</strong>
+                <p>+4 000 professionnels qualifiés</p>
+              </div>
+            </div>
+            <div class="reassurance__testimonial">
+              <div class="reassurance__stars">★★★★★</div>
+              <p>"J'ai trouvé un plombier en 1h, intervention le lendemain. Top !"</p>
+              <span class="reassurance__author">— Marie L., Montpellier</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ==================== STEP 2: LOCALISATION ==================== -->
+      <section class="step" id="step-2">
+        <div class="step__content step__content--centered">
+          <div class="step__form step__form--narrow">
+            <h1 class="step__title">Où se situe l'intervention ?</h1>
+            <p class="step__subtitle">Indiquez l'adresse pour que nous trouvions les artisans les plus proches.</p>
+
+            <div class="field">
+              <label class="field__label" for="address">Adresse de l'intervention *</label>
+              <div class="field__input-wrapper">
+                <svg class="field__input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <input class="field__input field__input--icon" type="text" id="address" placeholder="Saisissez votre adresse..." autocomplete="street-address">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="address-complement">Complément d'adresse <span class="field__optional">(optionnel)</span></label>
+              <input class="field__input" type="text" id="address-complement" placeholder="Étage, bâtiment, digicode...">
+            </div>
+
+            <div class="info-banner">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <span>Votre adresse reste confidentielle jusqu'à ce que vous acceptiez un devis</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== STEP 3: CONTACT ==================== -->
+      <section class="step" id="step-3">
+        <div class="step__content step__content--centered">
+          <div class="step__form step__form--narrow">
+            <h1 class="step__title">Comment vous contacter ?</h1>
+            <p class="step__subtitle">Juste votre email et téléphone pour recevoir les devis des artisans.</p>
+
+            <div class="field__row">
+              <div class="field">
+                <label class="field__label" for="firstname">Prénom *</label>
+                <input class="field__input" type="text" id="firstname" placeholder="Prénom" autocomplete="given-name">
+              </div>
+              <div class="field">
+                <label class="field__label" for="lastname">Nom *</label>
+                <input class="field__input" type="text" id="lastname" placeholder="Nom" autocomplete="family-name">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="email">Adresse e-mail *</label>
+              <input class="field__input" type="email" id="email" placeholder="votre@email.com" autocomplete="email">
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="phone">Numéro de téléphone *</label>
+              <div class="field__input-wrapper">
+                <span class="field__input-prefix">+33</span>
+                <input class="field__input field__input--prefix" type="tel" id="phone" placeholder="6 12 34 56 78" autocomplete="tel-national">
+              </div>
+            </div>
+
+            <div class="field__checkbox">
+              <input type="checkbox" id="create-account">
+              <label for="create-account">Créer un compte pour suivre ma demande <span class="field__optional">(optionnel)</span></label>
+            </div>
+
+            <div class="password-block" id="password-block" style="display:none;">
+              <div class="field">
+                <label class="field__label" for="password">Mot de passe</label>
+                <input class="field__input" type="password" id="password" placeholder="Minimum 8 caractères">
+              </div>
+            </div>
+
+            <p class="field__legal">En continuant, vous acceptez les <a href="https://www.kelkun.com/conditions-generales-d-utilisation/">conditions d'utilisation</a> et la <a href="https://www.kelkun.com/politique-de-confidentialite/">politique de confidentialité</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== STEP 4: RÉCAPITULATIF ==================== -->
+      <section class="step" id="step-4">
+        <div class="step__content step__content--centered">
+          <div class="step__form step__form--narrow">
+            <h1 class="step__title">Récapitulatif</h1>
+            <p class="step__subtitle">Vérifiez vos informations avant de publier votre demande.</p>
+
+            <div class="recap">
+              <div class="recap__section">
+                <div class="recap__header">
+                  <h3>Votre projet</h3>
+                  <button class="recap__edit" data-goto="1">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    Modifier
+                  </button>
+                </div>
+                <div class="recap__row">
+                  <span class="recap__label">Catégorie</span>
+                  <span class="recap__value" id="recap-category">—</span>
+                </div>
+                <div class="recap__row">
+                  <span class="recap__label">Description</span>
+                  <span class="recap__value" id="recap-description">—</span>
+                </div>
+                <div class="recap__row">
+                  <span class="recap__label">Délai</span>
+                  <span class="recap__value recap__badge" id="recap-delay">—</span>
+                </div>
+              </div>
+
+              <div class="recap__section">
+                <div class="recap__header">
+                  <h3>Localisation</h3>
+                  <button class="recap__edit" data-goto="2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    Modifier
+                  </button>
+                </div>
+                <div class="recap__row">
+                  <span class="recap__label">Adresse</span>
+                  <span class="recap__value" id="recap-address">—</span>
+                </div>
+              </div>
+
+              <div class="recap__section">
+                <div class="recap__header">
+                  <h3>Contact</h3>
+                  <button class="recap__edit" data-goto="3">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    Modifier
+                  </button>
+                </div>
+                <div class="recap__row">
+                  <span class="recap__label">Nom</span>
+                  <span class="recap__value" id="recap-name">—</span>
+                </div>
+                <div class="recap__row">
+                  <span class="recap__label">Email</span>
+                  <span class="recap__value" id="recap-email">—</span>
+                </div>
+                <div class="recap__row">
+                  <span class="recap__label">Téléphone</span>
+                  <span class="recap__value" id="recap-phone">—</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recap__cta-area">
+              <div class="info-banner info-banner--success">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span><strong>Gratuit et sans engagement</strong> — Les artisans vous contacteront pour établir des offres personnalisées.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SUCCESS STATE ==================== -->
+      <section class="step" id="step-success">
+        <div class="step__content step__content--centered">
+          <div class="success">
+            <div class="success__icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h1 class="success__title">Votre demande a été publiée !</h1>
+            <p class="success__text">Les artisans de votre région vont recevoir votre projet et vous contacter rapidement avec leurs devis.</p>
+            <div class="success__next">
+              <div class="success__step">
+                <div class="success__step-num">1</div>
+                <span>Les artisans reçoivent votre demande</span>
+              </div>
+              <div class="success__step">
+                <div class="success__step-num">2</div>
+                <span>Ils vous contactent avec un devis</span>
+              </div>
+              <div class="success__step">
+                <div class="success__step-num">3</div>
+                <span>Vous comparez et choisissez</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========== STICKY FOOTER BAR (hidden initially) ========== -->
+  <div class="footer-bar" id="footer-bar" style="display:none;">
+    <div class="footer-bar__inner">
+      <button class="btn btn--ghost" id="btn-back" style="visibility:hidden;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Retour
+      </button>
+      <button class="btn btn--primary" id="btn-next">
+        Continuer
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========== FOOTER (from kelkun.com) ========== -->
+  <footer class="site-footer" id="site-footer">
+    <div class="site-footer__glow site-footer__glow--1"></div>
+    <div class="site-footer__glow site-footer__glow--2"></div>
+    <div class="site-footer__glow site-footer__glow--3"></div>
+
+    <div class="site-footer__inner">
+      <div class="site-footer__grid">
+        <!-- Brand column -->
+        <div class="site-footer__brand">
+          <a href="https://www.kelkun.com/">
+            <img src="assets/logo_v2_blanc.jpeg" alt="Kelkun" class="site-footer__logo">
+          </a>
+          <p class="site-footer__tagline">La solution fiable pour trouver, suivre et sécuriser vos interventions avec les meilleurs pro.</p>
+          <h3 class="site-footer__social-title">Suivez-nous</h3>
+          <div class="site-footer__socials">
+            <a href="https://www.facebook.com/kelkunapp/" class="site-footer__social-link" aria-label="Facebook"><img src="assets/footer-facebook.png" alt="" width="20" height="20"></a>
+            <a href="https://www.instagram.com/kelkun.app/" class="site-footer__social-link" aria-label="Instagram"><img src="assets/footer-instagram.png" alt="" width="20" height="20"></a>
+            <a href="https://www.linkedin.com/company/kelkun/" class="site-footer__social-link" aria-label="LinkedIn"><img src="assets/footer-linkedin.png" alt="" width="20" height="20"></a>
+            <a href="https://www.youtube.com/@kelkun" class="site-footer__social-link" aria-label="YouTube"><img src="assets/footer-youtube.png" alt="" width="20" height="20"></a>
+            <a href="https://www.pinterest.fr/kelkunapp/" class="site-footer__social-link" aria-label="Pinterest"><img src="assets/footer-pinterest.png" alt="" width="20" height="20"></a>
+            <a href="https://www.tiktok.com/@kelkun.app" class="site-footer__social-link" aria-label="TikTok"><img src="assets/footer-tiktok.png" alt="" width="20" height="20"></a>
+          </div>
+        </div>
+
+        <!-- Link columns -->
+        <div class="site-footer__links">
+          <div class="site-footer__col">
+            <p class="site-footer__col-title">A propos</p>
+            <div class="site-footer__col-line"></div>
+            <ul>
+              <li><a href="https://www.kelkun.com/qui-est-kelkun/">Qui est Kelkun ?</a></li>
+              <li><a href="https://www.kelkun.com/qui-est-kelkun/presse/">Espace presse</a></li>
+              <li><a href="https://www.kelkun.com/qui-est-kelkun/kelkun-marque-responsable/">Démarche RSE</a></li>
+              <li><a href="https://www.kelkun.com/qui-est-kelkun/nos-partenaires/">Nos partenaires</a></li>
+              <li><a href="https://www.kelkun.com/qui-est-kelkun/nos-partenaires/devenir-partenaire/">Devenir partenaire</a></li>
+              <li><a href="https://www.kelkun.com/protection-juridique-allianz/">Protection juridique Allianz</a></li>
+            </ul>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__col-title">Espace client</p>
+            <div class="site-footer__col-line"></div>
+            <ul>
+              <li><a href="https://www.kelkun.com/comment-ca-marche/">Comment ça marche ?</a></li>
+              <li><a href="https://www.kelkun.com/comment-ca-marche/urgences/">Urgences & dépannages</a></li>
+              <li><a href="https://www.kelkun.com/comment-ca-marche/travaux/">Travaux</a></li>
+              <li><a href="https://www.kelkun.com/comment-ca-marche/entretien/">Entretien</a></li>
+              <li><a href="https://www.kelkun.com/parrainage-clients/">Parrainage client</a></li>
+              <li><a href="https://www.kelkun.com/trouver-un-artisan/">Artisan par métier</a></li>
+              <li><a href="https://www.kelkun.com/trouver-un-artisan/villes/">Artisan par ville</a></li>
+            </ul>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__col-title">Ressources</p>
+            <div class="site-footer__col-line"></div>
+            <ul>
+              <li><a href="https://www.kelkun.com/centre-d-aide/">Centre d'aide</a></li>
+              <li><a href="https://www.kelkun.com/centre-d-aide/tutos/">Le plein de tutos</a></li>
+              <li><a href="https://www.kelkun.com/centre-d-aide/blog/">Blog</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="site-footer__bottom">
+        <span>Kelkun &copy; 2025</span>
+        <a href="https://www.kelkun.com/mentions-legales/">Mentions légales</a>
+        <a href="https://www.kelkun.com/conditions-generales-d-utilisation/">CGU</a>
+        <a href="https://www.kelkun.com/conditions-particulieres-d-utilisation-client/">Conditions particulières client</a>
+        <a href="https://www.kelkun.com/politique-de-confidentialite/">Politique de confidentialité</a>
+        <a href="https://www.kelkun.com/contactez-nous/">Nous contacter</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

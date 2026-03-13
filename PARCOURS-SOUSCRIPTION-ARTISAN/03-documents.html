@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelkun — Documents justificatifs</title>
+  <link rel="stylesheet" href="shared/tokens.css">
+  <link rel="stylesheet" href="shared/components.css">
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__inner">
+        <a href="00-landing.html" class="header__logo">kelkun</a>
+        <span class="header__link" style="font-size: var(--font-size-sm); color: var(--color-text-muted);">Plus que 2 etapes !</span>
+      </div>
+    </header>
+
+    <!-- Stepper -->
+    <nav class="stepper" style="padding: var(--space-6) var(--space-6) 0;">
+      <a href="01-creation-compte.html" class="stepper__step stepper__step--completed">
+        <span class="stepper__circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="stepper__label">Compte</span>
+      </a>
+      <div class="stepper__line stepper__line--completed"></div>
+      <a href="02-infos-entreprise.html" class="stepper__step stepper__step--completed">
+        <span class="stepper__circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="stepper__label">Entreprise</span>
+      </a>
+      <div class="stepper__line stepper__line--completed"></div>
+      <div class="stepper__step stepper__step--current">
+        <span class="stepper__circle">3</span>
+        <span class="stepper__label">Documents</span>
+      </div>
+      <div class="stepper__line"></div>
+      <div class="stepper__step stepper__step--upcoming">
+        <span class="stepper__circle">4</span>
+        <span class="stepper__label">Profil</span>
+      </div>
+      <div class="stepper__line"></div>
+      <div class="stepper__step stepper__step--upcoming">
+        <span class="stepper__circle">5</span>
+        <span class="stepper__label">Validation</span>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="container">
+
+        <div class="card card--lg">
+          <h1 class="card__title">Tes documents</h1>
+          <p class="card__subtitle">Pour verifier ton eligibilite, nous avons besoin de quelques justificatifs.</p>
+
+          <!-- Progress -->
+          <div style="margin-bottom: var(--space-6);">
+            <p class="progress-bar__label"><strong>3</strong> sur <strong>5</strong> documents fournis</p>
+            <div class="progress-bar">
+              <div class="progress-bar__fill" style="width: 60%;"></div>
+            </div>
+          </div>
+
+          <!-- Reassurance -->
+          <div class="alert alert--info" style="margin-bottom: var(--space-8);">
+            <span class="alert__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            <span>Tes documents sont stockes de maniere securisee et ne sont utilises que pour verifier ton eligibilite. Ils ne seront jamais partages avec des tiers.</span>
+          </div>
+
+          <!-- Document list -->
+          <div id="doc-list">
+
+            <!-- RC Pro — uploaded -->
+            <div class="doc-item doc-item--uploaded">
+              <div class="doc-item__status">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div class="doc-item__info">
+                <p class="doc-item__title">Attestation d'assurance RC Pro</p>
+                <div class="upload-preview">
+                  <span class="upload-preview__name">rc-pro-dupont-2024.pdf</span>
+                  <button class="upload-preview__remove">Supprimer</button>
+                </div>
+              </div>
+              <span class="doc-item__badge doc-item__badge--required">Requis</span>
+            </div>
+
+            <!-- Decennale — uploaded -->
+            <div class="doc-item doc-item--uploaded">
+              <div class="doc-item__status">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div class="doc-item__info">
+                <p class="doc-item__title">Attestation d'assurance decennale</p>
+                <div class="upload-preview">
+                  <span class="upload-preview__name">decennale-dupont-2024.pdf</span>
+                  <button class="upload-preview__remove">Supprimer</button>
+                </div>
+              </div>
+              <span class="doc-item__badge doc-item__badge--required">Requis</span>
+            </div>
+
+            <!-- Kbis — uploaded -->
+            <div class="doc-item doc-item--uploaded">
+              <div class="doc-item__status">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div class="doc-item__info">
+                <p class="doc-item__title">Kbis ou certificat d'inscription</p>
+                <div class="upload-preview">
+                  <span class="upload-preview__name">kbis-dupont-plomberie.pdf</span>
+                  <button class="upload-preview__remove">Supprimer</button>
+                </div>
+              </div>
+              <span class="doc-item__badge doc-item__badge--required">Requis</span>
+            </div>
+
+            <!-- Qualification — not uploaded, optional -->
+            <div class="doc-item">
+              <div class="doc-item__status" style="color: var(--color-text-muted); font-size: 20px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+              </div>
+              <div class="doc-item__info">
+                <p class="doc-item__title">Qualification / certification</p>
+                <p class="doc-item__desc">Qualibat, RGE, etc. — un plus pour rassurer les clients</p>
+                <div class="upload-zone" style="padding: var(--space-4);">
+                  <p class="upload-zone__text"><strong>Clique pour parcourir</strong> ou glisse un fichier ici</p>
+                  <p class="upload-zone__hint">PDF, JPG, PNG — 5 Mo max</p>
+                  <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+              </div>
+              <span class="doc-item__badge doc-item__badge--optional">Facultatif</span>
+            </div>
+
+            <!-- CNI — not uploaded, required -->
+            <div class="doc-item">
+              <div class="doc-item__status" style="color: var(--color-text-muted); font-size: 20px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+              </div>
+              <div class="doc-item__info">
+                <p class="doc-item__title">Piece d'identite du dirigeant</p>
+                <p class="doc-item__desc">Carte nationale d'identite ou passeport</p>
+                <div class="upload-zone" style="padding: var(--space-4);">
+                  <p class="upload-zone__text"><strong>Clique pour parcourir</strong> ou glisse un fichier ici</p>
+                  <p class="upload-zone__hint">PDF, JPG, PNG — 5 Mo max</p>
+                  <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+              </div>
+              <span class="doc-item__badge doc-item__badge--required">Requis</span>
+            </div>
+
+          </div>
+
+          <!-- Actions -->
+          <div class="btn-row btn-row--between" style="margin-top: var(--space-8);">
+            <a href="02-infos-entreprise.html" class="btn btn--secondary">Retour</a>
+            <div style="display: flex; gap: var(--space-3); align-items: center;">
+              <button class="btn btn--ghost" style="font-size: var(--font-size-sm);">Completer plus tard</button>
+              <a href="04-profil.html" class="btn btn--primary">Continuer</a>
+            </div>
+          </div>
+
+          <div class="alert alert--warning" style="margin-top: var(--space-6);">
+            <span class="alert__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </span>
+            <span>Ton profil ne sera pas active tant que tous les documents requis ne seront pas fournis. Tu recevras un rappel par SMS.</span>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Drag & drop visual feedback
+    document.querySelectorAll('.upload-zone').forEach(zone => {
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        zone.classList.add('dragover');
+      });
+      zone.addEventListener('dragleave', () => {
+        zone.classList.remove('dragover');
+      });
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.classList.remove('dragover');
+      });
+    });
+  </script>
+</body>
+</html>

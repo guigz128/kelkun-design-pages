@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Résultats de recherche — Kelkun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Kelkun tokens */
+      --primary:      #03c5b8;
+      --primary-dark: #029284;
+      --secondary:    #0e2f58;
+      --accent:       #6778ed;
+      --success:      #3faf38;
+      --tertiary:     #ffc114;
+      --urgence:      #ff4e28;
+      --quaternary:   #ff7b1e;
+
+      --n50:  #fafafa;
+      --n100: #f5f5f5;
+      --n200: #e5e5e5;
+      --n300: #d4d4d4;
+      --n400: #a3a3a3;
+      --n600: #525252;
+      --white: #ffffff;
+
+      --radius-sm:  4px;
+      --radius-md:  8px;
+      --radius-lg:  12px;
+      --radius-xl:  16px;
+      --radius-2xl: 24px;
+      --radius-full: 9999px;
+
+      --shadow-card: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-hover: 0 10px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--n100);
+      color: var(--secondary);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO HEADER ─────────────────────────────────────────── */
+    .srp-header {
+      background: linear-gradient(135deg, #0c2753 0%, #2a3594 45%, #6778ed 100%);
+      padding: 20px 16px 28px;
+    }
+
+    .srp-header__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .srp-header__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(255,255,255,.7);
+      font-family: var(--font);
+      font-size: 13px;
+      padding: 0;
+      margin-bottom: 16px;
+      transition: color .15s;
+    }
+    .srp-header__back:hover { color: #fff; }
+    .srp-header__back svg { flex-shrink: 0; }
+
+    .srp-header__title {
+      font-size: clamp(26px, 5vw, 36px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .srp-header__title span { font-weight: 400; }
+
+    /* ── Search form ──────────────────────────────────────────── */
+    .srp-search {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .srp-search__field {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 0 14px;
+      height: 48px;
+      flex: 1;
+    }
+
+    .srp-search__field svg {
+      color: var(--n400);
+      flex-shrink: 0;
+    }
+
+    .srp-search__input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--secondary);
+      background: transparent;
+    }
+    .srp-search__input::placeholder { color: var(--n400); }
+
+    .srp-search__btn {
+      height: 48px;
+      padding: 0 20px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-lg);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+      white-space: nowrap;
+      width: 100%;
+    }
+    .srp-search__btn:hover { background: var(--primary-dark); }
+
+    @media (min-width: 520px) {
+      .srp-search { flex-direction: row; align-items: center; }
+      .srp-search__field--work     { flex: 3; }
+      .srp-search__field--location { flex: 2; }
+      .srp-search__btn { width: auto; flex-shrink: 0; }
+    }
+
+    /* ── FILTERS BAR ──────────────────────────────────────────── */
+    .srp-filters-wrap {
+      background: #fff;
+      border-bottom: 1px solid var(--n200);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .srp-filters {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 16px;
+      height: 52px;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .srp-filters__chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      flex: 1;
+      min-width: 0;
+    }
+    .srp-filters__chips::-webkit-scrollbar { display: none; }
+
+    .srp-filters__chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 500;
+      border: 1.5px solid var(--n200);
+      background: #fff;
+      color: var(--n600);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .15s;
+      user-select: none;
+    }
+    .srp-filters__chip:hover { border-color: var(--primary); color: var(--primary); }
+    .srp-filters__chip.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .srp-filters__chip-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #fff;
+      display: none;
+    }
+    .srp-filters__chip.active .srp-filters__chip-dot { display: inline-block; }
+
+    .srp-filters__right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .srp-filters__sort-label {
+      font-size: 12px;
+      color: var(--n600);
+      white-space: nowrap;
+      display: none;
+    }
+    @media (min-width: 480px) { .srp-filters__sort-label { display: block; } }
+
+    .srp-filters__sort-wrap { position: relative; display: flex; align-items: center; }
+
+    .srp-filters__sort-select {
+      appearance: none;
+      border: 1.5px solid var(--n200);
+      border-radius: var(--radius-md);
+      padding: 5px 28px 5px 10px;
+      font-family: var(--font);
+      font-size: 12px;
+      color: var(--secondary);
+      background: #fff;
+      cursor: pointer;
+      outline: none;
+    }
+    .srp-filters__sort-select:focus { border-color: var(--primary); }
+
+    .srp-filters__sort-chevron {
+      position: absolute;
+      right: 8px;
+      pointer-events: none;
+      color: var(--n400);
+    }
+
+    .srp-filters__view-toggle {
+      display: flex;
+      border: 1.5px solid var(--n200);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .srp-filters__view-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 30px;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+      color: var(--n400);
+      transition: background .15s, color .15s;
+    }
+    .srp-filters__view-btn:first-child { border-right: 1.5px solid var(--n200); }
+    .srp-filters__view-btn.active {
+      background: #e6faf9;
+      color: var(--primary);
+    }
+
+    /* ── MAIN ─────────────────────────────────────────────────── */
+    .srp-main {
+      padding: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ── GRID ─────────────────────────────────────────────────── */
+    .srp-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 600px)  { .srp-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 960px)  { .srp-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .srp-grid__sponsor-slot { grid-column: 1 / -1; }
+
+    /* ── ARTISAN CARD ─────────────────────────────────────────── */
+    .asc {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--n200);
+      overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow .18s, transform .18s;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .asc:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+    .asc:active { transform: translateY(0); }
+
+    /* Photo */
+    .asc__photo {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--n200);
+    }
+
+    .asc__photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .3s;
+    }
+    .asc:hover .asc__photo img { transform: scale(1.03); }
+
+    .asc__photo-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #e8eaec 0%, #d4d8dc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .asc__photo-placeholder svg { opacity: .25; }
+
+    /* Photo badges */
+    .asc__badge {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 9px;
+      border-radius: var(--radius-full);
+      font-family: var(--font);
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .asc__badge--urgence {
+      top: 8px; left: 8px;
+      background: var(--urgence);
+      color: #fff;
+    }
+
+    .asc__badge--available {
+      bottom: 8px; right: 8px;
+      background: var(--success);
+      color: #fff;
+    }
+
+    /* Body */
+    .asc__body {
+      padding: 12px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .asc__name-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .asc__name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--secondary);
+      line-height: 1.2;
+    }
+
+    .asc__verified {
+      width: 17px; height: 17px;
+      border-radius: 50%;
+      background: #00a99d;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .asc__trade {
+      font-size: 13px;
+      color: var(--n400);
+    }
+
+    .asc__meta {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--n400);
+    }
+
+    .asc__rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-weight: 500;
+      color: var(--secondary);
+    }
+
+    .asc__star { color: var(--tertiary); font-size: 12px; }
+    .asc__review { font-weight: 400; color: var(--n400); }
+    .asc__sep { color: var(--n300); }
+
+    /* Trust badges */
+    .asc__trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      font-family: var(--font);
+      font-size: 10px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      line-height: 1.4;
+    }
+
+    .trust-badge--verified  { background: #e6faf9; color: #00a99d; border-color: #9de8e4; }
+    .trust-badge--insured   { background: #fff8e1; color: #c08000; border-color: #ffe082; }
+    .trust-badge--certified { background: #fdf3e7; color: #c27b30; border-color: #ffb74d; }
+    .trust-badge--quick     { background: #e8f4fe; color: #1a82c4; border-color: #90caf9; }
+
+    /* Footer */
+    .asc__footer {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 4px;
+    }
+
+    .asc__price-label { font-size: 11px; color: var(--n400); }
+    .asc__price { font-size: 14px; font-weight: 600; color: var(--accent); }
+
+    /* ── SPONSORED BANNER ─────────────────────────────────────── */
+    .srp-sponsor {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: linear-gradient(120deg, #e85d04 0%, #f48c06 55%, #faa307 100%);
+      padding: 20px 80px 20px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 110px;
+    }
+
+    .srp-sponsor::before {
+      content: '';
+      position: absolute;
+      right: 110px; top: -30px;
+      width: 160px; height: 160px;
+      background: rgba(255,255,255,.07);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .srp-sponsor__close {
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 24px; height: 24px;
+      background: rgba(255,255,255,.25);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      line-height: 1;
+      transition: background .15s;
+    }
+    .srp-sponsor__close:hover { background: rgba(255,255,255,.4); }
+
+    .srp-sponsor__content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .srp-sponsor__label {
+      font-size: 9px;
+      font-weight: 600;
+      color: rgba(255,255,255,.65);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .srp-sponsor__brand {
+      font-size: 11px;
+      color: rgba(255,255,255,.8);
+      font-weight: 500;
+    }
+
+    .srp-sponsor__title {
+      font-size: clamp(17px, 3vw, 22px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .srp-sponsor__desc {
+      font-size: 11px;
+      color: rgba(255,255,255,.75);
+      margin: 4px 0 10px;
+    }
+
+    .srp-sponsor__cta {
+      display: inline-flex;
+      align-items: center;
+      height: 34px;
+      padding: 0 16px;
+      background: #fff;
+      color: #c05b03;
+      border: none;
+      border-radius: var(--radius-full);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: opacity .15s;
+    }
+    .srp-sponsor__cta:hover { opacity: .9; }
+
+    .srp-sponsor__discount {
+      flex-shrink: 0;
+      width: 64px; height: 64px;
+      background: rgba(255,255,255,.18);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,.35);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── EMPTY STATE ──────────────────────────────────────────── */
+    .srp-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 64px 16px;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .srp-empty__icon { font-size: 40px; opacity: .35; }
+    .srp-empty__text { font-size: 15px; color: var(--n600); }
+
+    /* ── UTILITY ──────────────────────────────────────────────── */
+    .hidden { display: none !important; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="srp-header">
+    <div class="srp-header__inner">
+      <button class="srp-header__back" onclick="history.back()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Retour
+      </button>
+
+      <h1 class="srp-header__title">
+        <span id="result-count">60</span> <span>artisans</span>
+      </h1>
+
+      <div class="srp-search">
+        <div class="srp-search__field srp-search__field--work">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input
+            id="search-input"
+            type="text"
+            class="srp-search__input"
+            placeholder="Plombier, électricien…"
+            value="plombier"
+          />
+        </div>
+        <div class="srp-search__field srp-search__field--location">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <input
+            id="location-input"
+            type="text"
+            class="srp-search__input"
+            placeholder="Ville ou code postal"
+            value="Montpellier 34000"
+          />
+        </div>
+        <button class="srp-search__btn" onclick="doSearch()">Rechercher</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Filters bar ─────────────────────────────────────────── -->
+  <div class="srp-filters-wrap">
+    <div class="srp-filters">
+      <div class="srp-filters__chips">
+        <button class="srp-filters__chip" data-filter="available" onclick="toggleFilter(this)">
+          <span class="srp-filters__chip-dot"></span>
+          Disponible aujourd'hui
+        </button>
+        <button class="srp-filters__chip" data-filter="certified" onclick="toggleFilter(this)">
+          <span class="srp-filters__chip-dot"></span>
+          Certifié
+        </button>
+      </div>
+
+      <div class="srp-filters__right">
+        <span class="srp-filters__sort-label">Trier :</span>
+        <div class="srp-filters__sort-wrap">
+          <select class="srp-filters__sort-select" id="sort-select" onchange="doSort()">
+            <option value="relevance">Pertinence</option>
+            <option value="rating">Note</option>
+            <option value="distance">Distance</option>
+            <option value="price_asc">Prix ↑</option>
+            <option value="price_desc">Prix ↓</option>
+          </select>
+          <svg class="srp-filters__sort-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+
+        <div class="srp-filters__view-toggle">
+          <button class="srp-filters__view-btn active" id="btn-grid" onclick="setView('grid')" title="Grille">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+            </svg>
+          </button>
+          <button class="srp-filters__view-btn" id="btn-list" onclick="setView('list')" title="Liste">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Main grid ───────────────────────────────────────────── -->
+  <main class="srp-main">
+    <div class="srp-grid" id="results-grid">
+      <!-- Cards injected by JS -->
+    </div>
+  </main>
+
+  <script>
+    // ── Data ──────────────────────────────────────────────────────
+    const ARTISANS = [
+      { id:1,  name:'Jean Dupont',       trade:'Plomberie générale',          rating:4.8, reviews:127, distance:'2,3 km', verified:true, insured:true, certified:true,  quickResponse:false, price:45, available:true,  urgence:true,  photo:'https://picsum.photos/seed/artisan01/400/225' },
+      { id:2,  name:'Marie Martin',      trade:'Électricité & Domotique',     rating:4.9, reviews:203, distance:'3,7 km', verified:true, insured:true, certified:true,  quickResponse:false, price:50, available:true,  urgence:true,  photo:'https://picsum.photos/seed/artisan02/400/225' },
+      { id:3,  name:'Pierre Lefebvre',   trade:'Plomberie sanitaire',         rating:4.7, reviews:89,  distance:'4,5 km', verified:true, insured:true, certified:false, quickResponse:false, price:42, available:false, urgence:false, photo:'https://picsum.photos/seed/artisan03/400/225' },
+      { id:4,  name:'Sophie Dubois',     trade:'Peinture & Décoration',       rating:4.9, reviews:164, distance:'1,6 km', verified:true, insured:true, certified:true,  quickResponse:false, price:46, available:false, urgence:false, photo:'https://picsum.photos/seed/artisan04/400/225' },
+      { id:5,  name:'Thomas Bernard',    trade:'Menuiserie bois',             rating:4.7, reviews:112, distance:'5,2 km', verified:true, insured:true, certified:false, quickResponse:true,  price:55, available:false, urgence:false, photo:'https://picsum.photos/seed/artisan05/400/225' },
+      { id:6,  name:'Lucie Moreau',      trade:'Électricité générale',        rating:4.8, reviews:134, distance:'2,9 km', verified:true, insured:true, certified:true,  quickResponse:false, price:48, available:false, urgence:false, photo:'https://picsum.photos/seed/artisan06/400/225' },
+      { id:7,  name:'Antoine Roux',      trade:'Maçonnerie & Rénovation',     rating:4.6, reviews:98,  distance:'6,1 km', verified:true, insured:true, certified:false, quickResponse:false, price:52, available:false, urgence:false, photo:'https://picsum.photos/seed/artisan07/400/225' },
+      { id:8,  name:'Émilie Garnier',    trade:'Plomberie chauffage',         rating:4.9, reviews:387, distance:'3,4 km', verified:true, insured:true, certified:true,  quickResponse:false, price:67, available:true,  urgence:true,  photo:'https://picsum.photos/seed/artisan08/400/225' },
+      { id:9,  name:'François Leclerc',  trade:'Couverture & Zinguerie',      rating:4.8, reviews:145, distance:'7,2 km', verified:true, insured:true, certified:true,  quickResponse:false, price:58, available:false, urgence:false, photo:'https://picsum.photos/seed/artisan09/400/225' },
+      { id:10, name:'Nathalie Rousseau', trade:'Carrelage & Faïence',         rating:4.7, reviews:92,  distance:'4,1 km', verified:true, insured:true, certified:false, quickResponse:true,  price:43, available:false, urgence:false, photo:'https://picsum.photos/seed/artisan10/400/225' },
+      { id:11, name:'David Lambert',     trade:'Chauffage & Climatisation',   rating:4.9, reviews:216, distance:'2,6 km', verified:true, insured:true, certified:true,  quickResponse:false, price:54, available:true,  urgence:true,  photo:'https://picsum.photos/seed/artisan11/400/225' },
+      { id:12, name:'Isabelle Bonnet',   trade:'Menuiserie PVC & Aluminium',  rating:4.6, reviews:78,  distance:'5,6 km', verified:true, insured:false, certified:false, quickResponse:false, price:49, available:false, urgence:false, photo:'https://picsum.photos/seed/artisan12/400/225' },
+    ];
+
+    const SPONSOR = {
+      brand: 'Maisons du Monde',
+      title: 'Transformez votre intérieur',
+      desc: "Jusqu'à -40% sur la déco — Meubles, luminaires, textiles",
+      cta: 'Je découvre',
+      discount: '-40%',
+    };
+
+    // ── State ──────────────────────────────────────────────────────
+    let activeFilters = new Set();
+    let currentView = 'grid';
+    let sponsorVisible = true;
+
+    // ── Render card ────────────────────────────────────────────────
+    function cardHTML(a) {
+      const badges = [
+        a.verified     ? `<span class="trust-badge trust-badge--verified">✓ Vérifié</span>` : '',
+        a.insured      ? `<span class="trust-badge trust-badge--insured">⬡ Assuré</span>` : '',
+        a.certified    ? `<span class="trust-badge trust-badge--certified">★ Certifié</span>`
+                       : (a.quickResponse ? `<span class="trust-badge trust-badge--quick">⚡ Réponse rapide</span>` : ''),
+      ].join('');
+
+      return `
+        <a class="asc" href="#artisan-${a.id}" onclick="return false">
+          <div class="asc__photo">
+            <img src="${a.photo}" alt="${a.name}" loading="lazy" />
+            ${a.urgence   ? `<span class="asc__badge asc__badge--urgence">⚡ Urgence 24/7</span>` : ''}
+            ${a.available ? `<span class="asc__badge asc__badge--available">Disponible</span>` : ''}
+          </div>
+          <div class="asc__body">
+            <div class="asc__name-row">
+              <span class="asc__name">${a.name}</span>
+              ${a.verified ? `<span class="asc__verified">✓</span>` : ''}
+            </div>
+            <div class="asc__trade">${a.trade}</div>
+            <div class="asc__meta">
+              <span class="asc__rating">
+                <span class="asc__star">★</span>
+                ${a.rating} <span class="asc__review">(${a.reviews})</span>
+              </span>
+              <span class="asc__sep">·</span>
+              <span>📍 ${a.distance}</span>
+            </div>
+            <div class="asc__trust">${badges}</div>
+            <div class="asc__footer">
+              <span class="asc__price-label">À partir de</span>
+              <span class="asc__price">${a.price}€/h</span>
+            </div>
+          </div>
+        </a>
+      `;
+    }
+
+    // ── Render sponsor ─────────────────────────────────────────────
+    function sponsorHTML() {
+      return `
+        <div class="srp-grid__sponsor-slot" id="sponsor-slot">
+          <div class="srp-sponsor">
+            <button class="srp-sponsor__close" onclick="closeSponsor()" aria-label="Fermer">✕</button>
+            <div class="srp-sponsor__content">
+              <span class="srp-sponsor__label">Sponsorisé</span>
+              <span class="srp-sponsor__brand">${SPONSOR.brand}</span>
+              <h2 class="srp-sponsor__title">${SPONSOR.title}</h2>
+              <p class="srp-sponsor__desc">${SPONSOR.desc}</p>
+              <button class="srp-sponsor__cta">${SPONSOR.cta}</button>
+            </div>
+            <div class="srp-sponsor__discount">${SPONSOR.discount}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ── Render grid ────────────────────────────────────────────────
+    function render() {
+      const grid = document.getElementById('results-grid');
+      const filtered = ARTISANS.filter(a => {
+        if (activeFilters.has('available') && !a.available) return false;
+        if (activeFilters.has('certified') && !a.certified) return false;
+        return true;
+      });
+
+      document.getElementById('result-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="srp-empty">
+          <div class="srp-empty__icon">🔍</div>
+          <p class="srp-empty__text">Aucun artisan trouvé pour ces critères.</p>
+        </div>`;
+        return;
+      }
+
+      let html = '';
+      filtered.forEach((a, i) => {
+        html += cardHTML(a);
+        if (i === 5 && sponsorVisible) html += sponsorHTML();
+      });
+      grid.innerHTML = html;
+
+      // Apply view mode
+      grid.style.gridTemplateColumns = currentView === 'list'
+        ? '1fr'
+        : '';  // CSS handles responsive via media queries
+    }
+
+    // ── Interactions ───────────────────────────────────────────────
+    function toggleFilter(btn) {
+      const key = btn.dataset.filter;
+      if (activeFilters.has(key)) {
+        activeFilters.delete(key);
+        btn.classList.remove('active');
+      } else {
+        activeFilters.add(key);
+        btn.classList.add('active');
+      }
+      render();
+    }
+
+    function setView(mode) {
+      currentView = mode;
+      document.getElementById('btn-grid').classList.toggle('active', mode === 'grid');
+      document.getElementById('btn-list').classList.toggle('active', mode === 'list');
+      const grid = document.getElementById('results-grid');
+      grid.style.gridTemplateColumns = mode === 'list' ? '1fr' : '';
+    }
+
+    function closeSponsor() {
+      sponsorVisible = false;
+      const slot = document.getElementById('sponsor-slot');
+      if (slot) slot.remove();
+    }
+
+    function doSearch() {
+      // prototype: just flash the count
+      const q = document.getElementById('search-input').value;
+      console.log('Search:', q);
+    }
+
+    function doSort() {
+      const val = document.getElementById('sort-select').value;
+      console.log('Sort by:', val);
+    }
+
+    // ── Init ───────────────────────────────────────────────────────
+    render();
+  </script>
+</body>
+</html>

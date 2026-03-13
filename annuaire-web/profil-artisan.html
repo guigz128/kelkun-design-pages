@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jean Dupont — Électricien à Montpellier | Kelkun</title>
+  <meta name="description" content="Jean Dupont, électricien certifié à Montpellier. Note 4.9/5 — 127 avis clients vérifiés. Devis gratuit, intervention urgence 24h/7j.">
+  <link rel="canonical" href="https://kelkun.com/artisans/jean-dupont-montpellier/">
+
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="shared.css?v=20260227c">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Jean Dupont — Électricien",
+    "url": "https://kelkun.com/artisans/jean-dupont-montpellier/",
+    "telephone": "Non communiqué (via Kelkun)",
+    "areaServed": [
+      { "@type": "City", "name": "Montpellier" },
+      { "@type": "City", "name": "Castelnau-le-Lez" },
+      { "@type": "City", "name": "Lattes" }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "127"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Isabelle M." },
+        "datePublished": "2026-01-15",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+        "reviewBody": "Jean a refait tout le tableau électrique de notre appartement. Travail soigné, propre et dans les délais. Je recommande vivement."
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ===== PAGE PROFIL ===== */
+    .profil-page { background: var(--bg-secondary); }
+
+    /* Hero */
+    .profil-hero {
+      background: #fff;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: var(--spacing-8) 0 0;
+    }
+    .profil-hero__inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-6);
+    }
+    .profil-hero__top {
+      display: flex;
+      gap: var(--spacing-6);
+      align-items: flex-start;
+      margin-bottom: var(--spacing-5);
+    }
+    .profil-hero__avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0e2f58 0%, #03c5b8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      color: rgba(255,255,255,.9);
+      flex-shrink: 0;
+      box-shadow: 0 0 0 4px var(--color-primary-25), var(--shadow-300);
+    }
+    .profil-hero__info { flex: 1; min-width: 0; }
+    .profil-hero__name {
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing-1);
+    }
+    .profil-hero__name svg { color: var(--color-primary); width: 24px; height: 24px; flex-shrink: 0; }
+    .profil-hero__trade {
+      font-size: var(--font-size-md);
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-3);
+    }
+    .profil-hero__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-4);
+      flex-wrap: wrap;
+      font-size: var(--font-size-sm);
+    }
+    .profil-hero__rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-primary);
+    }
+    .profil-hero__star { color: var(--color-tertiary); width: 18px; height: 18px; }
+    .profil-hero__review { color: var(--text-muted); font-weight: var(--font-weight-regular); }
+    .profil-hero__location {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-secondary);
+    }
+    .profil-hero__location svg { width: 15px; height: 15px; color: var(--text-muted); }
+    .profil-hero__member {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+    }
+    .profil-hero__member svg { width: 14px; height: 14px; }
+
+    /* Trust bar */
+    .profil-trust-bar {
+      display: flex;
+      gap: var(--spacing-3);
+      padding: var(--spacing-4) 0;
+      border-top: 1px solid var(--border-subtle);
+      flex-wrap: wrap;
+    }
+    .profil-trust-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      padding: 8px var(--spacing-4);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      border: 1.5px solid;
+      white-space: nowrap;
+    }
+    .profil-trust-item svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .profil-trust-item--interventions { background: #e6faf9; color: #00a99d; border-color: #9de8e4; }
+    .profil-trust-item--allianz { background: var(--color-accent-50); color: var(--color-accent); border-color: var(--color-accent-100); }
+    .profil-trust-item--certified { background: var(--color-warning-50); color: var(--color-warning); border-color: #ffb74d; }
+
+    /* Layout principal */
+    .profil-main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: var(--spacing-6) var(--spacing-6);
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: var(--spacing-6);
+      align-items: start;
+    }
+    .profil-content { min-width: 0; }
+    .profil-sidebar { position: sticky; top: 80px; }
+
+    /* Sections communes */
+    .profil-section {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      padding: var(--spacing-6);
+      margin-bottom: var(--spacing-4);
+    }
+    .profil-section__title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-4);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+    }
+    .profil-section__title svg { color: var(--color-primary); width: 20px; height: 20px; }
+
+    /* À propos */
+    .profil-about p {
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      line-height: var(--line-height-relaxed);
+    }
+    .profil-about p + p { margin-top: var(--spacing-3); }
+
+    /* Zone d'intervention */
+    .profil-zone__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-2);
+    }
+    .profil-zone__chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      color: var(--text-secondary);
+      font-weight: var(--font-weight-medium);
+    }
+
+    /* Spécialités */
+    .profil-skills__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-2);
+    }
+    .profil-skill-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+    }
+    .profil-skill-item::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Galerie chantiers */
+    .profil-gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-2);
+    }
+    .profil-gallery__item {
+      aspect-ratio: 1;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .profil-gallery__placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .profil-gallery__placeholder--1 { background: linear-gradient(135deg, #dee5ef 0%, #bdc3e0 100%); }
+    .profil-gallery__placeholder--2 { background: linear-gradient(135deg, #d5fbf6 0%, #93f6e9 100%); }
+    .profil-gallery__placeholder--3 { background: linear-gradient(135deg, #eeeff7 0%, #bdc3e0 100%); }
+    .profil-gallery__placeholder--4 { background: linear-gradient(135deg, #e2f8e0 0%, #99e194 100%); }
+    .profil-gallery__placeholder--5 { background: linear-gradient(135deg, #fff5c6 0%, #ffe9ad 100%); }
+    .profil-gallery__placeholder--6 { background: linear-gradient(135deg, #eff4fe 0%, #c9d8fc 100%); }
+    .profil-gallery__label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-2xs);
+      font-weight: var(--font-weight-semibold);
+      color: rgba(14,47,88,.5);
+      text-align: center;
+    }
+
+    /* Avis */
+    .profil-reviews__summary {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-5);
+      padding: var(--spacing-4);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-5);
+    }
+    .profil-reviews__score {
+      font-size: 48px;
+      font-weight: var(--font-weight-bold);
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .profil-reviews__stars { display: flex; gap: 2px; margin-bottom: 4px; }
+    .profil-reviews__star { color: var(--color-tertiary); width: 18px; height: 18px; }
+    .profil-reviews__star--empty { color: var(--color-neutral-300); }
+    .profil-reviews__count { font-size: var(--font-size-sm); color: var(--text-muted); }
+    .profil-review-item {
+      padding: var(--spacing-4) 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .profil-review-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .profil-review__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-2);
+    }
+    .profil-review__author {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+    }
+    .profil-review__avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-secondary-10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-secondary);
+    }
+    .profil-review__name { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--text-primary); }
+    .profil-review__date { font-size: var(--font-size-xs); color: var(--text-muted); }
+    .profil-review__stars { display: flex; gap: 2px; }
+    .profil-review__star { color: var(--color-tertiary); width: 13px; height: 13px; }
+    .profil-review__text { font-size: var(--font-size-sm); color: var(--text-secondary); line-height: var(--line-height-relaxed); }
+    .profil-review__service {
+      display: inline-flex;
+      align-items: center;
+      margin-top: var(--spacing-2);
+      font-size: var(--font-size-2xs);
+      color: var(--text-muted);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-full);
+      padding: 2px 8px;
+    }
+
+    /* Sidebar card */
+    .profil-cta-card {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      padding: var(--spacing-5);
+      margin-bottom: var(--spacing-4);
+      box-shadow: var(--shadow-200);
+    }
+    .profil-cta-card__price {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-accent);
+      margin-bottom: 2px;
+    }
+    .profil-cta-card__price-sub { font-size: var(--font-size-xs); color: var(--text-muted); margin-bottom: var(--spacing-4); }
+    .profil-cta-card__avail {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      font-size: var(--font-size-sm);
+      color: var(--color-success);
+      font-weight: var(--font-weight-medium);
+      margin-bottom: var(--spacing-4);
+    }
+    .profil-cta-card__avail-dot {
+      width: 8px; height: 8px;
+      background: var(--color-success);
+      border-radius: 50%;
+    }
+    .profil-cta-card .btn { width: 100%; margin-bottom: var(--spacing-2); }
+    .profil-cta-card__guarantee {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      font-size: var(--font-size-2xs);
+      color: var(--text-muted);
+      margin-top: var(--spacing-3);
+      padding-top: var(--spacing-3);
+      border-top: 1px solid var(--border-subtle);
+    }
+    .profil-cta-card__guarantee svg { color: var(--color-primary); width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* Sticky CTA mobile */
+    .profil-sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: #fff;
+      border-top: 1px solid var(--border-subtle);
+      padding: var(--spacing-3) var(--spacing-4);
+      gap: var(--spacing-2);
+      box-shadow: 0 -4px 16px rgba(0,0,0,.08);
+    }
+    .profil-sticky-cta .btn { flex: 1; }
+
+    @media (max-width: 768px) {
+      .profil-main { grid-template-columns: 1fr; padding: var(--spacing-4); }
+      .profil-sidebar { display: none; }
+      .profil-sticky-cta { display: flex; }
+      .profil-hero__top { flex-direction: column; }
+      .profil-hero__avatar { width: 72px; height: 72px; font-size: var(--font-size-2xl); }
+      .profil-hero__name { font-size: var(--font-size-2xl); }
+      .profil-gallery__grid { grid-template-columns: repeat(2, 1fr); }
+      .profil-skills__grid { grid-template-columns: 1fr; }
+      .profil-trust-bar { gap: var(--spacing-2); }
+    }
+
+    /* CTA Artisan section */
+    .profil-cta-section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-6) var(--spacing-10);
+    }
+  </style>
+</head>
+<body class="profil-page">
+
+  <!-- NAV -->
+  <nav class="k-nav">
+    <div class="k-nav__inner">
+      <a href="#" class="k-nav__logo">Kelkun<span class="k-nav__logo-dot"></span></a>
+      <div class="k-nav__links">
+        <a href="search-results.html" class="k-nav__link">← Résultats</a>
+        <a href="#" class="k-nav__link">Électriciens à Montpellier</a>
+      </div>
+      <div class="k-nav__actions">
+        <a href="#" class="k-nav__link-cta">Connexion</a>
+        <a href="#" class="btn btn-primary btn-sm">Publier ma demande</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="profil-hero">
+    <div class="profil-hero__inner">
+      <div class="profil-hero__top">
+        <div class="profil-hero__avatar">JD</div>
+        <div class="profil-hero__info">
+          <h1 class="profil-hero__name">
+            Jean Dupont
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" title="Artisan vérifié">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+          </h1>
+          <p class="profil-hero__trade">Électricien général — Montpellier</p>
+          <div class="profil-hero__meta">
+            <span class="profil-hero__rating">
+              <svg class="profil-hero__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              4,9
+              <span class="profil-hero__review">(127 avis)</span>
+            </span>
+            <span class="profil-hero__location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Montpellier (34)
+            </span>
+            <span class="profil-hero__member">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              Membre depuis 2022
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust bar -->
+      <div class="profil-trust-bar">
+        <span class="profil-trust-item profil-trust-item--interventions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          16 interventions via Kelkun
+        </span>
+        <span class="profil-trust-item profil-trust-item--allianz">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Protection Allianz — Urgences
+        </span>
+        <span class="profil-trust-item profil-trust-item--certified">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          Certifié RGE
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="profil-main">
+    <div class="profil-content">
+
+      <!-- À propos -->
+      <section class="profil-section profil-about">
+        <h2 class="profil-section__title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          À propos
+        </h2>
+        <p>Électricien depuis plus de 15 ans, j'interviens sur tous types de chantiers : logements, bureaux et locaux commerciaux. Spécialisé dans la mise aux normes NF C 15-100, les tableaux électriques et les installations photovoltaïques.</p>
+        <p>Je travaille avec des matériaux de qualité et dans le respect total des normes en vigueur. Devis gratuit, délais respectés, garantie décennale. N'hésitez pas à me contacter pour toute question.</p>
+      </section>
+
+      <!-- Zone d'intervention -->
+      <section class="profil-section">
+        <h2 class="profil-section__title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Zone d'intervention
+        </h2>
+        <div class="profil-zone__chips">
+          <span class="profil-zone__chip">Montpellier</span>
+          <span class="profil-zone__chip">Castelnau-le-Lez</span>
+          <span class="profil-zone__chip">Lattes</span>
+          <span class="profil-zone__chip">Pérols</span>
+          <span class="profil-zone__chip">Mauguio</span>
+          <span class="profil-zone__chip">Le Crès</span>
+          <span class="profil-zone__chip">Vendargues</span>
+          <span class="profil-zone__chip">Saint-Gély-du-Fesc</span>
+          <span class="profil-zone__chip">Grabels</span>
+        </div>
+      </section>
+
+      <!-- Spécialités -->
+      <section class="profil-section">
+        <h2 class="profil-section__title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          Spécialités
+        </h2>
+        <div class="profil-skills__grid">
+          <span class="profil-skill-item">Tableaux électriques</span>
+          <span class="profil-skill-item">Mise aux normes NF C 15-100</span>
+          <span class="profil-skill-item">Installations photovoltaïques</span>
+          <span class="profil-skill-item">Borne de recharge IRVE</span>
+          <span class="profil-skill-item">Câblage et prises</span>
+          <span class="profil-skill-item">Éclairage et domotique</span>
+          <span class="profil-skill-item">Alarme et sécurité</span>
+          <span class="profil-skill-item">Dépannage urgent</span>
+        </div>
+      </section>
+
+      <!-- Galerie chantiers -->
+      <section class="profil-section">
+        <h2 class="profil-section__title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+          Photos de chantiers
+        </h2>
+        <div class="profil-gallery__grid">
+          <div class="profil-gallery__item">
+            <div class="profil-gallery__placeholder profil-gallery__placeholder--1"></div>
+            <span class="profil-gallery__label">Tableau<br>électrique</span>
+          </div>
+          <div class="profil-gallery__item">
+            <div class="profil-gallery__placeholder profil-gallery__placeholder--2"></div>
+            <span class="profil-gallery__label">Borne<br>IRVE</span>
+          </div>
+          <div class="profil-gallery__item">
+            <div class="profil-gallery__placeholder profil-gallery__placeholder--3"></div>
+            <span class="profil-gallery__label">Mise aux<br>normes</span>
+          </div>
+          <div class="profil-gallery__item">
+            <div class="profil-gallery__placeholder profil-gallery__placeholder--4"></div>
+            <span class="profil-gallery__label">Panneaux<br>solaires</span>
+          </div>
+          <div class="profil-gallery__item">
+            <div class="profil-gallery__placeholder profil-gallery__placeholder--5"></div>
+            <span class="profil-gallery__label">Éclairage<br>LED</span>
+          </div>
+          <div class="profil-gallery__item">
+            <div class="profil-gallery__placeholder profil-gallery__placeholder--6"></div>
+            <span class="profil-gallery__label">Câblage<br>bureau</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Avis clients -->
+      <section class="profil-section">
+        <h2 class="profil-section__title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Avis clients
+        </h2>
+
+        <!-- Résumé note -->
+        <div class="profil-reviews__summary">
+          <span class="profil-reviews__score">4,9</span>
+          <div>
+            <div class="profil-reviews__stars">
+              <svg class="profil-reviews__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-reviews__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-reviews__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-reviews__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-reviews__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span class="profil-reviews__count">127 avis vérifiés</span>
+          </div>
+        </div>
+
+        <!-- Avis 1 -->
+        <div class="profil-review-item">
+          <div class="profil-review__header">
+            <div class="profil-review__author">
+              <div class="profil-review__avatar">IM</div>
+              <div>
+                <div class="profil-review__name">Isabelle M.</div>
+                <div class="profil-review__date">15 janvier 2026</div>
+              </div>
+            </div>
+            <div class="profil-review__stars">
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+          <p class="profil-review__text">Jean a refait tout le tableau électrique de notre appartement. Travail soigné, propre et dans les délais annoncés. Très professionnel et à l'écoute. Je recommande vivement !</p>
+          <span class="profil-review__service">Mise aux normes tableau électrique</span>
+        </div>
+
+        <!-- Avis 2 -->
+        <div class="profil-review-item">
+          <div class="profil-review__header">
+            <div class="profil-review__author">
+              <div class="profil-review__avatar">PV</div>
+              <div>
+                <div class="profil-review__name">Philippe V.</div>
+                <div class="profil-review__date">3 décembre 2025</div>
+              </div>
+            </div>
+            <div class="profil-review__stars">
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+          <p class="profil-review__text">Intervention rapide pour installation d'une borne IRVE dans mon garage. Très bon contact, explication claire du devis. Le travail a été fait en une journée, nickel.</p>
+          <span class="profil-review__service">Installation borne recharge IRVE</span>
+        </div>
+
+        <!-- Avis 3 -->
+        <div class="profil-review-item">
+          <div class="profil-review__header">
+            <div class="profil-review__author">
+              <div class="profil-review__avatar">SC</div>
+              <div>
+                <div class="profil-review__name">Sophie C.</div>
+                <div class="profil-review__date">18 novembre 2025</div>
+              </div>
+            </div>
+            <div class="profil-review__stars">
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="profil-review__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+          <p class="profil-review__text">Bon travail dans l'ensemble, ponctuel et soigneux. Un léger dépassement de délai mais Jean nous a bien informés à l'avance. Le résultat final est parfait.</p>
+          <span class="profil-review__service">Rénovation électrique complète</span>
+        </div>
+
+        <button class="btn btn-outline" style="margin-top: var(--spacing-4); width: 100%;">
+          Voir les 127 avis
+        </button>
+      </section>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="profil-sidebar">
+      <div class="profil-cta-card">
+        <div class="profil-cta-card__avail">
+          <span class="profil-cta-card__avail-dot"></span>
+          Disponible cette semaine
+        </div>
+        <a href="#" class="btn btn-primary btn-lg">Envoyer ma demande</a>
+        <a href="#" class="btn btn-outline">Appeler directement</a>
+        <div class="profil-cta-card__guarantee">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          Devis gratuit · Sans engagement · Réponse sous 2h
+        </div>
+      </div>
+
+      <!-- Trust info -->
+      <div class="profil-section" style="font-size: var(--font-size-xs); color: var(--text-secondary);">
+        <div style="display:flex;flex-direction:column;gap:var(--spacing-3)">
+          <div style="display:flex;align-items:center;gap:var(--spacing-2)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--color-primary);flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            Identité vérifiée par Kelkun
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--spacing-2)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--color-primary);flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            Assurance RC pro vérifiée
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--spacing-2)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--color-primary);flex-shrink:0"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            Certification RGE active
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--spacing-2)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--color-primary);flex-shrink:0"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Répond en moins de 2h
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- CTA Artisan Join -->
+  <div class="profil-cta-section">
+    <div class="cta-artisan-join">
+      <span class="cta-artisan-join__eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M12 5v14m7-7H5"/></svg>
+        Rejoindre Kelkun
+      </span>
+      <h2 class="cta-artisan-join__title">Vous êtes artisan ?</h2>
+      <p class="cta-artisan-join__sub">Rejoignez 4 000+ professionnels sur Kelkun. Inscription gratuite, premiers clients dès la semaine 1.</p>
+      <div class="cta-artisan-join__args">
+        <span class="cta-artisan-join__arg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          Vérification artisan incluse
+        </span>
+        <span class="cta-artisan-join__arg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Protection Allianz urgences
+        </span>
+        <span class="cta-artisan-join__arg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m7-7H5"/></svg>
+          Devis gratuit · Sans engagement
+        </span>
+      </div>
+      <a href="#" class="btn">Créer mon profil gratuitement</a>
+    </div>
+  </div>
+
+  <!-- STICKY CTA MOBILE -->
+  <div class="profil-sticky-cta">
+    <a href="#" class="btn btn-outline">Appeler</a>
+    <a href="#" class="btn btn-primary">Envoyer ma demande</a>
+  </div>
+
+</body>
+</html>

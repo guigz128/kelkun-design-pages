@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demande Directe Travaux — Parcours Client | Kelkun</title>
+  <link rel="stylesheet" href="shared.css?v=20260227c">
+
+  <style>
+    /* ===== FLOW PROTOTYPE ===== */
+    body { background: var(--bg-secondary); }
+
+    /* Nav flow */
+    .flow-nav {
+      position: sticky; top: 64px; z-index: 90;
+      background: var(--color-secondary);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      padding: var(--spacing-3) var(--spacing-6);
+    }
+    .flow-nav__inner {
+      max-width: 800px; margin: 0 auto;
+      display: flex; align-items: center; gap: var(--spacing-2);
+    }
+    .flow-nav__step {
+      display: flex; align-items: center; gap: var(--spacing-2);
+      padding: 6px 14px; border-radius: var(--radius-full);
+      font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold);
+      color: rgba(255,255,255,.4); background: transparent;
+      cursor: pointer; transition: all .2s; white-space: nowrap;
+      border: 1.5px solid transparent;
+    }
+    .flow-nav__step:hover { color: rgba(255,255,255,.7); }
+    .flow-nav__step--active {
+      background: var(--color-primary);
+      color: #fff;
+      border-color: var(--color-primary);
+    }
+    .flow-nav__step--done {
+      background: rgba(3,197,184,.15);
+      color: var(--color-primary-100);
+      border-color: rgba(3,197,184,.3);
+    }
+    .flow-nav__arrow {
+      color: rgba(255,255,255,.2); font-size: var(--font-size-xs);
+      flex-shrink: 0;
+    }
+    .flow-nav__step-num {
+      width: 18px; height: 18px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; background: rgba(255,255,255,.15);
+    }
+    .flow-nav__step--active .flow-nav__step-num { background: rgba(255,255,255,.25); }
+    .flow-nav__step--done .flow-nav__step-num { background: var(--color-primary); color: #fff; }
+
+    /* Screens container */
+    .flow-screen { display: none; animation: fadeIn .3s ease; }
+    .flow-screen--active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .screen-container {
+      max-width: 680px; margin: 0 auto;
+      padding: var(--spacing-8) var(--spacing-6) var(--spacing-16);
+    }
+
+    /* Annotation bar */
+    .annotation {
+      max-width: 680px; margin: 0 auto;
+      padding: 0 var(--spacing-6) var(--spacing-6);
+    }
+    .annotation__card {
+      padding: var(--spacing-4);
+      background: var(--color-accent-50);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--color-accent);
+      font-size: var(--font-size-xs);
+      color: var(--text-secondary);
+      line-height: var(--line-height-relaxed);
+    }
+    .annotation__card strong { color: var(--text-primary); }
+    .annotation__card code {
+      background: rgba(103,120,237,.1); padding: 1px 5px;
+      border-radius: 3px; font-size: var(--font-size-2xs);
+    }
+
+    /* ===== ECRAN 1 — PROFIL CTA ===== */
+    .profil-mini {
+      background: #fff; border-radius: var(--radius-xl);
+      border: 1px solid var(--border-default);
+      box-shadow: var(--shadow-200); overflow: hidden;
+    }
+    .profil-mini__hero {
+      padding: var(--spacing-6);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .profil-mini__top {
+      display: flex; gap: var(--spacing-4); align-items: center;
+      margin-bottom: var(--spacing-4);
+    }
+    .profil-mini__avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, #0e2f58 0%, #03c5b8 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: var(--font-size-xl); font-weight: var(--font-weight-bold);
+      color: rgba(255,255,255,.9); flex-shrink: 0;
+      box-shadow: 0 0 0 3px var(--color-primary-25);
+    }
+    .profil-mini__name {
+      font-size: var(--font-size-xl); font-weight: var(--font-weight-bold);
+      color: var(--text-primary); display: flex; align-items: center; gap: var(--spacing-2);
+    }
+    .profil-mini__name svg { color: var(--color-primary); width: 20px; height: 20px; }
+    .profil-mini__trade { font-size: var(--font-size-sm); color: var(--text-secondary); margin-top: 2px; }
+    .profil-mini__meta {
+      display: flex; align-items: center; gap: var(--spacing-3); flex-wrap: wrap;
+      font-size: var(--font-size-xs); color: var(--text-secondary); margin-top: var(--spacing-2);
+    }
+    .profil-mini__star { color: var(--color-tertiary); width: 14px; height: 14px; }
+    .profil-mini__trust {
+      display: flex; gap: var(--spacing-2); flex-wrap: wrap;
+      padding: var(--spacing-4) var(--spacing-6);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .profil-mini__trust-item {
+      display: flex; align-items: center; gap: 5px;
+      padding: 6px 12px; border-radius: var(--radius-full);
+      font-size: var(--font-size-2xs); font-weight: var(--font-weight-medium);
+      border: 1.5px solid;
+    }
+    .profil-mini__trust-item svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .profil-mini__trust-item--verified { background: #e6faf9; color: #00a99d; border-color: #9de8e4; }
+    .profil-mini__trust-item--insured { background: var(--color-accent-50); color: var(--color-accent); border-color: var(--color-accent-100); }
+    .profil-mini__trust-item--certified { background: var(--color-warning-50); color: var(--color-warning); border-color: #ffb74d; }
+
+    /* CTA Card */
+    .cta-card {
+      padding: var(--spacing-6);
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .cta-card__avail {
+      display: flex; align-items: center; gap: var(--spacing-2);
+      font-size: var(--font-size-sm); color: var(--color-success); font-weight: var(--font-weight-medium);
+      margin-bottom: var(--spacing-5);
+    }
+    .cta-card__avail-dot { width: 8px; height: 8px; background: var(--color-success); border-radius: 50%; }
+    .cta-card__btns { display: flex; flex-direction: column; gap: var(--spacing-2); width: 100%; max-width: 340px; }
+    .cta-card__btns .btn { width: 100%; }
+    .cta-card__guarantee {
+      display: flex; align-items: center; gap: var(--spacing-2);
+      font-size: var(--font-size-2xs); color: var(--text-muted);
+      margin-top: var(--spacing-4); text-align: center;
+    }
+    .cta-card__guarantee svg { color: var(--color-primary); width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* Highlight pulse */
+    .cta-pulse { position: relative; }
+    .cta-pulse::before {
+      content: ''; position: absolute; inset: -4px;
+      border: 2.5px dashed var(--color-primary); border-radius: var(--radius-full);
+      animation: pulseBorder 2s ease-in-out infinite;
+    }
+    @keyframes pulseBorder { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+
+    /* ===== FORM SHARED ===== */
+    .form-back {
+      display: inline-flex; align-items: center; gap: var(--spacing-2);
+      font-size: var(--font-size-sm); color: var(--text-secondary); font-weight: var(--font-weight-medium);
+      margin-bottom: var(--spacing-6); cursor: pointer;
+    }
+    .form-back svg { width: 16px; height: 16px; }
+    .form-back:hover { color: var(--color-primary); }
+
+    /* Pro recap banner */
+    .pro-banner {
+      display: flex; align-items: center; gap: var(--spacing-3);
+      padding: var(--spacing-4);
+      background: var(--bg-brand-subtle); border: 1px solid var(--color-primary-100);
+      border-radius: var(--radius-lg); margin-bottom: var(--spacing-6);
+    }
+    .pro-banner__avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, #0e2f58 0%, #03c5b8 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: var(--font-size-md); font-weight: var(--font-weight-bold);
+      color: rgba(255,255,255,.9); flex-shrink: 0;
+    }
+    .pro-banner__info { flex: 1; }
+    .pro-banner__label {
+      font-size: var(--font-size-2xs); color: var(--color-primary-600);
+      font-weight: var(--font-weight-medium); text-transform: uppercase; letter-spacing: .5px;
+    }
+    .pro-banner__name { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--text-primary); }
+    .pro-banner__trade { font-size: var(--font-size-xs); color: var(--text-secondary); }
+    .pro-banner__badge {
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 3px 10px; border-radius: var(--radius-full);
+      font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold);
+      background: #e6faf9; color: #00a99d;
+    }
+    .pro-banner__badge svg { width: 12px; height: 12px; }
+
+    /* Steps bar */
+    .steps-bar {
+      display: flex; align-items: center; gap: var(--spacing-2);
+      margin-bottom: var(--spacing-6);
+    }
+    .steps-bar__step {
+      flex: 1; height: 4px; border-radius: 2px;
+      background: var(--border-default); transition: background .3s;
+    }
+    .steps-bar__step--active, .steps-bar__step--done { background: var(--color-primary); }
+
+    .form-title {
+      font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold);
+      color: var(--text-primary); margin-bottom: var(--spacing-1);
+    }
+    .form-subtitle {
+      font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--spacing-6);
+    }
+
+    /* Form fields */
+    .form-group { margin-bottom: var(--spacing-5); }
+    .form-group__label {
+      display: block; font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);
+      color: var(--text-primary); margin-bottom: var(--spacing-2);
+    }
+    .form-group__hint { font-size: var(--font-size-xs); color: var(--text-muted); margin-bottom: var(--spacing-2); }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: 12px var(--spacing-4);
+      border: 1.5px solid var(--border-default); border-radius: var(--radius-lg);
+      font-family: var(--font-family); font-size: var(--font-size-sm);
+      color: var(--text-primary); background: #fff; outline: none;
+      transition: border-color .15s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--color-primary); }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a3a3a3' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center; padding-right: 40px;
+    }
+
+    /* Photo upload */
+    .photo-upload { display: flex; gap: var(--spacing-2); flex-wrap: wrap; }
+    .photo-upload__slot {
+      width: 80px; height: 80px;
+      border: 2px dashed var(--border-default); border-radius: var(--radius-md);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 4px; cursor: pointer; font-size: var(--font-size-2xs); color: var(--text-muted);
+      transition: border-color .15s;
+    }
+    .photo-upload__slot:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    .photo-upload__slot svg { width: 20px; height: 20px; }
+    .photo-upload__filled {
+      width: 80px; height: 80px; border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #dee5ef 0%, #bdc3e0 100%);
+      position: relative;
+    }
+    .photo-upload__filled-x {
+      position: absolute; top: 4px; right: 4px;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(0,0,0,.5); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; cursor: pointer;
+    }
+
+    .form-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: var(--spacing-6); border-top: 1px solid var(--border-subtle);
+      margin-top: var(--spacing-6);
+    }
+    .form-footer__back {
+      font-size: var(--font-size-sm); color: var(--text-secondary);
+      font-weight: var(--font-weight-medium); cursor: pointer;
+    }
+    .form-footer__back:hover { color: var(--text-primary); }
+
+    /* ===== RECAP ===== */
+    .recap-block { margin-bottom: var(--spacing-5); }
+    .recap-block__title {
+      font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);
+      color: var(--text-primary); margin-bottom: var(--spacing-3);
+      display: flex; align-items: center; gap: var(--spacing-2);
+    }
+    .recap-block__title svg { width: 16px; height: 16px; color: var(--color-primary); }
+    .recap-row {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: var(--spacing-2) 0; font-size: var(--font-size-sm);
+    }
+    .recap-row__label { color: var(--text-muted); }
+    .recap-row__value { color: var(--text-primary); font-weight: var(--font-weight-medium); text-align: right; max-width: 60%; }
+    .recap-desc {
+      padding: var(--spacing-4); background: var(--bg-secondary); border-radius: var(--radius-lg);
+      font-size: var(--font-size-sm); color: var(--text-secondary); line-height: var(--line-height-relaxed);
+      margin-bottom: var(--spacing-5);
+    }
+
+    /* Opt-in card */
+    .optin {
+      background: var(--color-info-50); border: 1.5px solid #90caf9;
+      border-radius: var(--radius-lg); padding: var(--spacing-5); margin-bottom: var(--spacing-6);
+    }
+    .optin__header {
+      display: flex; align-items: flex-start; gap: var(--spacing-3); margin-bottom: var(--spacing-4);
+    }
+    .optin__icon {
+      width: 36px; height: 36px; border-radius: 50%; background: #e8f4fe;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .optin__icon svg { width: 18px; height: 18px; color: #1a82c4; }
+    .optin__title { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--text-primary); }
+    .optin__desc { font-size: var(--font-size-xs); color: var(--text-secondary); line-height: var(--line-height-relaxed); margin-top: 4px; }
+    .optin__toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--spacing-3) var(--spacing-4); background: #fff;
+      border-radius: var(--radius-md); border: 1px solid #c8e1f8;
+    }
+    .optin__toggle-label { font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); color: var(--text-primary); }
+    .optin__toggle-hint { font-size: var(--font-size-2xs); color: var(--text-muted); margin-top: 2px; }
+    .toggle { position: relative; width: 44px; height: 24px; flex-shrink: 0; cursor: pointer; }
+    .toggle__track {
+      width: 100%; height: 100%; border-radius: 12px;
+      background: var(--color-primary); transition: background .2s;
+    }
+    .toggle--off .toggle__track { background: var(--border-strong); }
+    .toggle__thumb {
+      position: absolute; top: 2px; right: 2px;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #fff; box-shadow: var(--shadow-200); transition: transform .2s;
+    }
+    .toggle--off .toggle__thumb { transform: translateX(-20px); }
+
+    /* ===== CONFIRMATION ===== */
+    .confirm { text-align: center; padding: var(--spacing-12) 0; }
+    .confirm__icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--color-success-100); color: var(--color-success);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto var(--spacing-6);
+    }
+    .confirm__icon svg { width: 40px; height: 40px; }
+    .confirm__title {
+      font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold);
+      color: var(--text-primary); margin-bottom: var(--spacing-2);
+    }
+    .confirm__sub {
+      font-size: var(--font-size-sm); color: var(--text-secondary);
+      max-width: 440px; margin: 0 auto var(--spacing-8); line-height: var(--line-height-relaxed);
+    }
+    .confirm__sub strong { color: var(--text-primary); }
+
+    /* Timeline */
+    .timeline { max-width: 380px; margin: 0 auto var(--spacing-8); text-align: left; }
+    .timeline__item {
+      display: flex; gap: var(--spacing-3); padding-bottom: var(--spacing-4);
+      position: relative;
+    }
+    .timeline__item:not(:last-child)::after {
+      content: ''; position: absolute; left: 15px; top: 34px; bottom: 0;
+      width: 2px; background: var(--border-default);
+    }
+    .timeline__dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold);
+      position: relative; z-index: 1;
+    }
+    .timeline__dot--done { background: var(--color-primary); color: #fff; }
+    .timeline__dot--pending { background: var(--bg-tertiary); color: var(--text-muted); }
+    .timeline__label { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--text-primary); padding-top: 5px; }
+    .timeline__hint { font-size: var(--font-size-xs); color: var(--text-muted); margin-top: 2px; }
+    .confirm__actions { display: flex; gap: var(--spacing-3); justify-content: center; flex-wrap: wrap; }
+
+    /* ===== SUIVI ===== */
+    .suivi-title {
+      font-size: var(--font-size-xl); font-weight: var(--font-weight-bold);
+      color: var(--text-primary); margin-bottom: var(--spacing-6);
+    }
+    .demande {
+      border: 1px solid var(--border-default); border-radius: var(--radius-xl);
+      background: #fff; overflow: hidden;
+    }
+    .demande__header {
+      padding: var(--spacing-4) var(--spacing-5);
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .demande__type {
+      display: inline-flex; align-items: center; gap: var(--spacing-2);
+      padding: 4px 12px; border-radius: var(--radius-full);
+      font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold);
+      text-transform: uppercase; letter-spacing: .5px;
+      background: var(--color-accent-50); color: var(--color-accent);
+    }
+    .demande__type svg { width: 12px; height: 12px; }
+    .demande__status {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: var(--font-size-xs); font-weight: var(--font-weight-medium);
+    }
+    .demande__status--pending { color: var(--color-warning); }
+    .demande__status--pending::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--color-warning); display: inline-block;
+    }
+    .demande__body { padding: var(--spacing-5); }
+    .demande__pro {
+      display: flex; align-items: center; gap: var(--spacing-3); margin-bottom: var(--spacing-4);
+    }
+    .demande__pro-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #0e2f58 0%, #03c5b8 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: var(--font-size-sm); font-weight: var(--font-weight-bold);
+      color: rgba(255,255,255,.9); flex-shrink: 0;
+    }
+    .demande__pro-name { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--text-primary); }
+    .demande__pro-trade { font-size: var(--font-size-xs); color: var(--text-secondary); }
+    .demande__grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-3);
+      margin-bottom: var(--spacing-4);
+    }
+    .demande__detail-label { font-size: var(--font-size-2xs); color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px; }
+    .demande__detail-value { font-size: var(--font-size-sm); color: var(--text-primary); font-weight: var(--font-weight-medium); }
+
+    /* Timer */
+    .timer {
+      display: flex; align-items: center; gap: var(--spacing-3);
+      padding: var(--spacing-3) var(--spacing-4);
+      background: var(--color-warning-50); border: 1px solid #ffe082;
+      border-radius: var(--radius-md); margin-bottom: var(--spacing-4);
+    }
+    .timer svg { width: 18px; height: 18px; color: var(--color-warning); flex-shrink: 0; }
+    .timer__text { font-size: var(--font-size-xs); color: var(--text-secondary); }
+    .timer__text strong { color: var(--text-primary); }
+
+    .demande__actions {
+      display: flex; gap: var(--spacing-2);
+      padding-top: var(--spacing-4); border-top: 1px solid var(--border-subtle);
+    }
+    .demande__actions .btn { flex: 1; }
+
+    /* ===== VARIANTES ===== */
+    .variants-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-4);
+      margin-top: var(--spacing-6);
+    }
+    @media (max-width: 640px) { .variants-grid { grid-template-columns: 1fr; } }
+    .variant-card {
+      border: 1px solid var(--border-default); border-radius: var(--radius-lg);
+      padding: var(--spacing-4); background: #fff;
+    }
+    .variant-card__label {
+      font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold);
+      color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px;
+      margin-bottom: var(--spacing-3);
+    }
+    .variant-card__row {
+      display: flex; align-items: center; gap: var(--spacing-3); margin-bottom: var(--spacing-3);
+    }
+    .variant-card__icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .variant-card__status { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); }
+    .variant-card__hint { font-size: var(--font-size-xs); color: var(--text-muted); }
+    .variant-card__msg {
+      font-size: var(--font-size-xs); color: var(--text-secondary);
+      line-height: var(--line-height-relaxed);
+      padding: var(--spacing-3); border-radius: var(--radius-md);
+    }
+
+    @media (max-width: 640px) {
+      .flow-nav__inner { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .flow-nav__step { font-size: 10px; padding: 5px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV KELKUN -->
+  <nav class="k-nav">
+    <div class="k-nav__inner">
+      <a href="#" class="k-nav__logo">Kelkun<span class="k-nav__logo-dot"></span></a>
+      <div class="k-nav__links">
+        <a href="search-results.html" class="k-nav__link">Annuaire</a>
+        <a href="profil-artisan.html" class="k-nav__link">Profil artisan</a>
+      </div>
+      <div class="k-nav__actions">
+        <a href="#" class="k-nav__link-cta">Sophie M.</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- FLOW NAV -->
+  <div class="flow-nav">
+    <div class="flow-nav__inner">
+      <button class="flow-nav__step flow-nav__step--active" onclick="goTo(0)">
+        <span class="flow-nav__step-num">1</span> Profil artisan
+      </button>
+      <span class="flow-nav__arrow">›</span>
+      <button class="flow-nav__step" onclick="goTo(1)">
+        <span class="flow-nav__step-num">2</span> Description projet
+      </button>
+      <span class="flow-nav__arrow">›</span>
+      <button class="flow-nav__step" onclick="goTo(2)">
+        <span class="flow-nav__step-num">3</span> Recap + Opt-in
+      </button>
+      <span class="flow-nav__arrow">›</span>
+      <button class="flow-nav__step" onclick="goTo(3)">
+        <span class="flow-nav__step-num">4</span> Confirmation
+      </button>
+      <span class="flow-nav__arrow">›</span>
+      <button class="flow-nav__step" onclick="goTo(4)">
+        <span class="flow-nav__step-num">5</span> Mon suivi
+      </button>
+    </div>
+  </div>
+
+  <!-- ==============================================
+       ECRAN 1 — PROFIL ARTISAN (CTA)
+       ============================================== -->
+  <div class="flow-screen flow-screen--active" data-screen="0">
+    <div class="screen-container">
+      <div class="profil-mini">
+        <div class="profil-mini__hero">
+          <div class="profil-mini__top">
+            <div class="profil-mini__avatar">JD</div>
+            <div>
+              <div class="profil-mini__name">
+                Jean Dupont
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              </div>
+              <div class="profil-mini__trade">Electricien general — Montpellier</div>
+              <div class="profil-mini__meta">
+                <span style="display:flex;align-items:center;gap:3px;font-weight:600;color:var(--text-primary)">
+                  <svg class="profil-mini__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  4,9 <span style="color:var(--text-muted);font-weight:400">(127 avis)</span>
+                </span>
+                <span style="color:var(--border-strong)">|</span>
+                <span>Montpellier (34)</span>
+                <span style="color:var(--border-strong)">|</span>
+                <span style="color:var(--text-muted)">Membre depuis 2022</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profil-mini__trust">
+          <span class="profil-mini__trust-item profil-mini__trust-item--verified">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            Verifie Kelkun
+          </span>
+          <span class="profil-mini__trust-item profil-mini__trust-item--insured">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Protection Allianz
+          </span>
+          <span class="profil-mini__trust-item profil-mini__trust-item--certified">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            Certifie RGE
+          </span>
+        </div>
+
+        <div class="cta-card">
+          <div class="cta-card__avail">
+            <span class="cta-card__avail-dot"></span>
+            Disponible cette semaine
+          </div>
+          <div class="cta-card__btns">
+            <a href="#" class="btn btn-primary btn-lg cta-pulse" onclick="event.preventDefault();goTo(1)">Envoyer ma demande directe</a>
+            <a href="#" class="btn btn-outline">Appeler directement</a>
+          </div>
+          <div class="cta-card__guarantee">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            Devis gratuit · Sans engagement · Reponse sous 2h
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation"><div class="annotation__card">
+      <strong>Brief &sect;14.2</strong> — Le CTA "Envoyer ma demande directe" lance le flow DIRECT. Le formulaire reutilise les templates existants du flow Travaux. La distribution est la seule difference : DIRECT notifie uniquement le pro cible.
+    </div></div>
+  </div>
+
+  <!-- ==============================================
+       ECRAN 2 — FORMULAIRE (Step 1/2)
+       ============================================== -->
+  <div class="flow-screen" data-screen="1">
+    <div class="screen-container">
+
+      <div class="form-back" onclick="goTo(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Retour au profil
+      </div>
+
+      <div class="pro-banner">
+        <div class="pro-banner__avatar">JD</div>
+        <div class="pro-banner__info">
+          <div class="pro-banner__label">Demande directe a</div>
+          <div class="pro-banner__name">Jean Dupont</div>
+          <div class="pro-banner__trade">Electricien — Montpellier</div>
+        </div>
+        <span class="pro-banner__badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          Verifie
+        </span>
+      </div>
+
+      <div class="steps-bar">
+        <div class="steps-bar__step steps-bar__step--active"></div>
+        <div class="steps-bar__step"></div>
+      </div>
+
+      <h2 class="form-title">Decrivez votre projet</h2>
+      <p class="form-subtitle">Etape 1 sur 2 — Plus votre description est precise, meilleur sera le devis</p>
+
+      <div class="form-group">
+        <label class="form-group__label">Type de travaux</label>
+        <select class="form-select">
+          <option>Electricite generale</option>
+          <option selected>Installation borne IRVE</option>
+          <option>Mise aux normes</option>
+          <option>Tableau electrique</option>
+          <option>Autre</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-group__label">Description des travaux</label>
+        <p class="form-group__hint">Decrivez le plus precisement possible ce dont vous avez besoin</p>
+        <textarea class="form-textarea">Je souhaite installer une borne de recharge dans mon garage pour un vehicule electrique. Le tableau electrique est situe au sous-sol, a environ 10m du garage.</textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-group__label">Photos (optionnel)</label>
+        <p class="form-group__hint">Ajoutez des photos pour aider l'artisan a comprendre votre besoin</p>
+        <div class="photo-upload">
+          <div class="photo-upload__filled">
+            <span class="photo-upload__filled-x">&times;</span>
+          </div>
+          <div class="photo-upload__slot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m7-7H5"/></svg>
+            Ajouter
+          </div>
+          <div class="photo-upload__slot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m7-7H5"/></svg>
+            Ajouter
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-group__label">Quand souhaitez-vous commencer ?</label>
+        <select class="form-select">
+          <option selected>Des que possible</option>
+          <option>Dans les 2 semaines</option>
+          <option>Dans le mois</option>
+          <option>Dans les 3 mois</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-group__label">Adresse des travaux</label>
+        <input class="form-input" type="text" value="12 rue de la Republique, 34000 Montpellier">
+      </div>
+
+      <div class="form-footer">
+        <span class="form-footer__back" onclick="goTo(0)">Annuler</span>
+        <a href="#" class="btn btn-primary btn-lg" onclick="event.preventDefault();goTo(2)">Continuer</a>
+      </div>
+
+    </div>
+
+    <div class="annotation"><div class="annotation__card">
+      <strong>Brief &sect;14.2</strong> — Le formulaire reutilise les templates/ecrans existants du flow Travaux. Le bandeau turquoise en haut rappelle au client qu'il s'adresse directement a Jean Dupont (pas au reseau).
+    </div></div>
+  </div>
+
+  <!-- ==============================================
+       ECRAN 3 — RECAP + OPT-IN (Step 2/2)
+       ============================================== -->
+  <div class="flow-screen" data-screen="2">
+    <div class="screen-container">
+
+      <div class="form-back" onclick="goTo(1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Retour
+      </div>
+
+      <div class="pro-banner">
+        <div class="pro-banner__avatar">JD</div>
+        <div class="pro-banner__info">
+          <div class="pro-banner__label">Demande directe a</div>
+          <div class="pro-banner__name">Jean Dupont</div>
+          <div class="pro-banner__trade">Electricien — Montpellier</div>
+        </div>
+        <span class="pro-banner__badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          Verifie
+        </span>
+      </div>
+
+      <div class="steps-bar">
+        <div class="steps-bar__step steps-bar__step--done"></div>
+        <div class="steps-bar__step steps-bar__step--active"></div>
+      </div>
+
+      <h2 class="form-title">Verifiez votre demande</h2>
+      <p class="form-subtitle">Etape 2 sur 2 — Relisez et confirmez avant envoi</p>
+
+      <!-- Recap projet -->
+      <div class="recap-block">
+        <h3 class="recap-block__title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          Votre projet
+        </h3>
+        <div class="recap-row"><span class="recap-row__label">Type de travaux</span><span class="recap-row__value">Installation borne IRVE</span></div>
+        <div class="recap-row"><span class="recap-row__label">Adresse</span><span class="recap-row__value">12 rue de la Republique, 34000 Montpellier</span></div>
+        <div class="recap-row"><span class="recap-row__label">Delai souhaite</span><span class="recap-row__value">Des que possible</span></div>
+        <div class="recap-row"><span class="recap-row__label">Photos</span><span class="recap-row__value">1 photo jointe</span></div>
+      </div>
+
+      <!-- Description -->
+      <div class="recap-desc">
+        <strong style="display:block;margin-bottom:var(--spacing-2);color:var(--text-primary);font-size:var(--font-size-sm)">Description</strong>
+        Je souhaite installer une borne de recharge dans mon garage pour un vehicule electrique. Le tableau electrique est situe au sous-sol, a environ 10m du garage.
+      </div>
+
+      <!-- OPT-IN -->
+      <div class="optin">
+        <div class="optin__header">
+          <div class="optin__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="optin__title">Si le pro ne repond pas, on vous trouve un artisan</div>
+            <div class="optin__desc">Si Jean Dupont ne repond pas sous 24h, votre demande sera automatiquement envoyee aux autres electriciens disponibles dans votre secteur.</div>
+          </div>
+        </div>
+        <div class="optin__toggle-row">
+          <div>
+            <div class="optin__toggle-label">Autoriser la recherche automatique</div>
+            <div class="optin__toggle-hint">Recommande — maximisez vos chances d'obtenir un devis</div>
+          </div>
+          <div class="toggle" onclick="this.classList.toggle('toggle--off')">
+            <div class="toggle__track"></div>
+            <div class="toggle__thumb"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <span class="form-footer__back" onclick="goTo(1)">Modifier ma demande</span>
+        <a href="#" class="btn btn-primary btn-lg" onclick="event.preventDefault();goTo(3)">Envoyer ma demande</a>
+      </div>
+
+    </div>
+
+    <div class="annotation"><div class="annotation__card">
+      <strong>Brief &sect;14.3 &amp; &sect;14.4</strong> — L'opt-in "republication" est <strong>coche par defaut</strong> (interet business). Si active : timer 24h, bascule auto DIRECT &rarr; NETWORK. Si desactive : pas de timer, la demande reste en attente tant que le client ne bascule pas manuellement.
+    </div></div>
+  </div>
+
+  <!-- ==============================================
+       ECRAN 4 — CONFIRMATION
+       ============================================== -->
+  <div class="flow-screen" data-screen="3">
+    <div class="screen-container">
+      <div class="confirm">
+        <div class="confirm__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2 class="confirm__title">Demande envoyee !</h2>
+        <p class="confirm__sub">Votre demande a ete envoyee directement a <strong>Jean Dupont</strong>. Il sera notifie immediatement et pourra vous repondre.</p>
+
+        <div class="timeline">
+          <div class="timeline__item">
+            <div class="timeline__dot timeline__dot--done">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="timeline__label">Demande envoyee</div>
+              <div class="timeline__hint">Jean Dupont recoit votre demande maintenant</div>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__dot timeline__dot--pending">2</div>
+            <div>
+              <div class="timeline__label">Reponse de l'artisan</div>
+              <div class="timeline__hint">Jean a 24h pour accepter ou decliner</div>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__dot timeline__dot--pending">3</div>
+            <div>
+              <div class="timeline__label">Devis ou recherche elargie</div>
+              <div class="timeline__hint">S'il ne repond pas, d'autres artisans prendront le relais</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="confirm__actions">
+          <a href="#" class="btn btn-primary" onclick="event.preventDefault();goTo(4)">Suivre ma demande</a>
+          <a href="search-results.html" class="btn btn-outline">Retour a l'annuaire</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation"><div class="annotation__card">
+      <strong>Brief &sect;17.1</strong> — A la creation DIRECT, une notification push est envoyee au pro cible. La timeline informe le client du mecanisme 24h (si opt-in active). L'etape 3 ne s'affiche que si opt-in = oui.
+    </div></div>
+  </div>
+
+  <!-- ==============================================
+       ECRAN 5 — MON SUIVI + VARIANTES
+       ============================================== -->
+  <div class="flow-screen" data-screen="4">
+    <div class="screen-container">
+
+      <h2 class="suivi-title">Mon suivi</h2>
+
+      <!-- Demande DIRECT en attente -->
+      <div class="demande">
+        <div class="demande__header">
+          <span class="demande__type">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+            Demande directe
+          </span>
+          <span class="demande__status demande__status--pending">En attente de reponse</span>
+        </div>
+        <div class="demande__body">
+          <div class="demande__pro">
+            <div class="demande__pro-avatar">JD</div>
+            <div>
+              <div class="demande__pro-name">Jean Dupont</div>
+              <div class="demande__pro-trade">Electricien — Montpellier</div>
+            </div>
+          </div>
+          <div class="demande__grid">
+            <div>
+              <div class="demande__detail-label">Type</div>
+              <div class="demande__detail-value">Installation borne IRVE</div>
+            </div>
+            <div>
+              <div class="demande__detail-label">Adresse</div>
+              <div class="demande__detail-value">Montpellier (34)</div>
+            </div>
+            <div>
+              <div class="demande__detail-label">Envoyee le</div>
+              <div class="demande__detail-value">12 mars 2026, 14h30</div>
+            </div>
+            <div>
+              <div class="demande__detail-label">Delai</div>
+              <div class="demande__detail-value">Des que possible</div>
+            </div>
+          </div>
+
+          <!-- Timer 24h -->
+          <div class="timer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="timer__text"><strong>18h restantes</strong> — Si Jean ne repond pas, votre demande sera envoyee aux autres artisans disponibles</span>
+          </div>
+
+          <!-- Actions client -->
+          <div class="demande__actions">
+            <a href="#" class="btn btn-outline" style="color:var(--text-secondary);border-color:var(--border-default)">Annuler ma demande</a>
+            <a href="#" class="btn btn-primary">Publier a d'autres artisans</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variantes d'etats -->
+      <div style="margin-top:var(--spacing-10)">
+        <h3 style="font-size:var(--font-size-lg);font-weight:var(--font-weight-semibold);color:var(--text-primary);margin-bottom:var(--spacing-2)">Variantes d'etats possibles</h3>
+        <p style="font-size:var(--font-size-xs);color:var(--text-muted);margin-bottom:var(--spacing-4)">Les differents etats que le client peut voir dans "Mon suivi"</p>
+
+        <div class="variants-grid">
+          <!-- ACCEPTED -->
+          <div class="variant-card">
+            <div class="variant-card__label">Acceptee</div>
+            <div class="variant-card__row">
+              <div class="variant-card__icon" style="background:var(--color-success-100)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="2.5" style="width:20px;height:20px"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <div class="variant-card__status" style="color:var(--color-success)">Demande acceptee</div>
+                <div class="variant-card__hint">Jean Dupont a accepte votre demande</div>
+              </div>
+            </div>
+            <div class="variant-card__msg" style="background:var(--color-success-50)">L'artisan va prendre contact avec vous pour convenir d'un rendez-vous et etablir un devis.</div>
+          </div>
+
+          <!-- REFUSED -->
+          <div class="variant-card">
+            <div class="variant-card__label">Refusee par le pro</div>
+            <div class="variant-card__row">
+              <div class="variant-card__icon" style="background:var(--color-error-50)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-error)" stroke-width="2.5" style="width:20px;height:20px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </div>
+              <div>
+                <div class="variant-card__status" style="color:var(--color-error)">Demande declinee</div>
+                <div class="variant-card__hint">Jean Dupont ne peut pas prendre ce chantier</div>
+              </div>
+            </div>
+            <a href="#" class="btn btn-primary" style="width:100%;font-size:var(--font-size-xs);margin-top:var(--spacing-2)">Publier a d'autres artisans</a>
+          </div>
+
+          <!-- BASCULEE NETWORK -->
+          <div class="variant-card">
+            <div class="variant-card__label">Basculee au reseau (auto 24h)</div>
+            <div class="variant-card__row">
+              <div class="variant-card__icon" style="background:var(--color-info-50)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-info)" stroke-width="2" style="width:20px;height:20px"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <div class="variant-card__status" style="color:var(--color-info)">Recherche elargie</div>
+                <div class="variant-card__hint">Delai 24h depasse — envoyee au reseau</div>
+              </div>
+            </div>
+            <div class="variant-card__msg" style="background:var(--color-info-50)">Jusqu'a 3 artisans electriciens peuvent maintenant se positionner sur votre demande.</div>
+          </div>
+
+          <!-- ANNULEE -->
+          <div class="variant-card">
+            <div class="variant-card__label">Annulee par le client</div>
+            <div class="variant-card__row">
+              <div class="variant-card__icon" style="background:var(--bg-tertiary)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="width:20px;height:20px"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+              </div>
+              <div>
+                <div class="variant-card__status" style="color:var(--text-muted)">Demande annulee</div>
+                <div class="variant-card__hint">Vous avez annule cette demande</div>
+              </div>
+            </div>
+            <a href="#" class="btn btn-outline" style="width:100%;font-size:var(--font-size-xs);margin-top:var(--spacing-2)">Creer une nouvelle demande</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="annotation"><div class="annotation__card">
+      <strong>Brief &sect;15</strong> — Le badge "Demande directe" + nom/photo du pro identifient la demande DIRECT. Actions : <strong>"Annuler"</strong> (notifie le pro, statut <code>CANCELED_BY_CLIENT</code>) et <strong>"Publier a d'autres artisans"</strong> (bascule immediate DIRECT &rarr; NETWORK).<br>
+      <strong>Brief &sect;14.7</strong> — Statuts V1 : <code>PENDING</code>, <code>ACCEPTED</code>, <code>REFUSED_MANUAL</code>, <code>REFUSED_AUTO</code>, <code>CANCELED_BY_CLIENT</code>.
+    </div></div>
+  </div>
+
+  <!-- ===== JS NAVIGATION ===== -->
+  <script>
+    const screens = document.querySelectorAll('.flow-screen');
+    const navSteps = document.querySelectorAll('.flow-nav__step');
+
+    function goTo(index) {
+      screens.forEach(s => s.classList.remove('flow-screen--active'));
+      navSteps.forEach((s, i) => {
+        s.classList.remove('flow-nav__step--active', 'flow-nav__step--done');
+        if (i < index) s.classList.add('flow-nav__step--done');
+        if (i === index) s.classList.add('flow-nav__step--active');
+      });
+      screens[index].classList.add('flow-screen--active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>

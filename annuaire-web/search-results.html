@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Électriciens à Montpellier — Kelkun</title>
+  <meta name="description" content="Trouvez un électricien certifié à Montpellier. 60 professionnels vérifiés, devis gratuit, intervention urgence 24h/7j.">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="shared.css?v=20260303">
+
+  <style>
+    /* ===== LAYOUT SPLIT ===== */
+    .srp-wrapper {
+      display: flex;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    /* --- PANEL LISTE --- */
+    .srp-list-panel {
+      width: 50%;
+      min-width: 360px;
+      max-width: 640px;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-secondary);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* Search bar */
+    .srp-search {
+      background: #fff;
+      padding: var(--spacing-4);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      gap: var(--spacing-2);
+      flex-shrink: 0;
+    }
+    .srp-search__field {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      padding: 8px var(--spacing-3);
+      border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-full);
+      background: var(--bg-secondary);
+      font-size: var(--font-size-sm);
+      color: var(--text-primary);
+      cursor: text;
+    }
+    .srp-search__field svg { color: var(--text-muted); width: 16px; height: 16px; flex-shrink: 0; }
+    .srp-search__input {
+      border: none;
+      background: transparent;
+      font-family: var(--font-family);
+      font-size: var(--font-size-sm);
+      color: var(--text-primary);
+      outline: none;
+      width: 100%;
+      min-width: 0;
+    }
+    .srp-search__input::placeholder { color: var(--text-muted); }
+    .srp-search__sep {
+      width: 1px;
+      height: 20px;
+      background: var(--border-default);
+      flex-shrink: 0;
+    }
+    .srp-search__btn { flex-shrink: 0; }
+
+    /* Filters bar */
+    .srp-filters {
+      background: #fff;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0 var(--spacing-4);
+      flex-shrink: 0;
+    }
+    .srp-filters__row {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      height: 52px;
+      overflow: visible;
+      scrollbar-width: none;
+    }
+    .srp-filters__row::-webkit-scrollbar { display: none; }
+    .srp-filters__sep {
+      width: 1px;
+      height: 20px;
+      background: var(--border-default);
+      flex-shrink: 0;
+      margin: 0 var(--spacing-1);
+    }
+    .srp-sort {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .srp-sort svg { width: 14px; height: 14px; color: var(--text-muted); }
+
+    /* Results count + scrollable list */
+    .srp-list-header {
+      padding: var(--spacing-3) var(--spacing-4) var(--spacing-2);
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      flex-shrink: 0;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .srp-list-header strong { color: var(--text-primary); }
+    .srp-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 var(--spacing-4) var(--spacing-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-3);
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-neutral-300) transparent;
+    }
+    .srp-list::-webkit-scrollbar { width: 4px; }
+    .srp-list::-webkit-scrollbar-track { background: transparent; }
+    .srp-list::-webkit-scrollbar-thumb { background: var(--color-neutral-300); border-radius: 4px; }
+
+    /* Empty state in list */
+    .srp-empty { padding: var(--spacing-4); }
+
+    /* --- PANEL CARTE --- */
+    .srp-map-panel {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    #map { width: 100%; height: 100%; }
+
+    /* Overlay "zone en déploiement" */
+    .map-empty-overlay {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-5) var(--spacing-6);
+      text-align: center;
+      box-shadow: var(--shadow-400);
+      max-width: 260px;
+      z-index: 500;
+      display: none;
+    }
+    .map-empty-overlay svg { color: var(--color-primary); width: 28px; height: 28px; margin-bottom: var(--spacing-2); }
+    .map-empty-overlay p { font-size: var(--font-size-xs); color: var(--text-secondary); line-height: var(--line-height-relaxed); }
+    .map-empty-overlay strong { display: block; font-size: var(--font-size-sm); color: var(--text-primary); margin-bottom: 4px; }
+
+    /* ===== COMPACT CARD — vue liste SRP ===== */
+    .srp-list .asc {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 10px 12px;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .srp-list .asc__photo {
+      aspect-ratio: unset;
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-lg);
+      flex-shrink: 0;
+    }
+    .srp-list .asc__photo-initials { font-size: var(--font-size-lg); }
+    .srp-list .asc__photo-badge {
+      font-size: 8px;
+      padding: 2px 4px;
+      top: auto; left: 0; right: 0; bottom: 0;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      text-align: center;
+      letter-spacing: 0;
+    }
+    .srp-list .asc__body { flex: 1; min-width: 0; padding: 0; }
+    .srp-list .asc__trade { margin-bottom: 4px; }
+    .srp-list .asc__meta { margin-bottom: 4px; }
+    .srp-list .asc__trust { margin-bottom: 4px; }
+
+    .asc__profil-link {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      color: var(--text-secondary);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color .15s;
+    }
+    .asc__profil-link:hover { color: var(--color-primary); text-decoration: underline; }
+
+    /* ===== CERTIFICATIONS DROPDOWN ===== */
+    .cert-filter { position: relative; flex-shrink: 0; }
+    .cert-filter__btn { gap: 5px; }
+    .cert-filter__btn[aria-expanded="true"] { background: var(--color-secondary); color: #fff; border-color: var(--color-secondary); }
+    .cert-filter__count {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px;
+      background: var(--color-primary); color: #fff;
+      border-radius: 50%; font-size: 10px; font-weight: 700;
+    }
+    .cert-filter__caret { width: 12px; height: 12px; transition: transform .15s; }
+    .cert-filter__btn[aria-expanded="true"] .cert-filter__caret { transform: rotate(180deg); }
+    .cert-filter__panel {
+      position: absolute;
+      top: calc(100% + 6px); left: 0;
+      width: 280px;
+      background: #fff;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-400);
+      z-index: 300;
+      overflow: hidden;
+    }
+    .cert-filter__search-wrap {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .cert-filter__search-wrap svg { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
+    .cert-filter__search {
+      flex: 1; border: none; outline: none; background: transparent;
+      font-family: var(--font-family); font-size: var(--font-size-sm); color: var(--text-primary);
+    }
+    .cert-filter__search::placeholder { color: var(--text-muted); }
+    .cert-filter__list {
+      list-style: none; margin: 0; padding: 6px 0;
+      max-height: 240px; overflow-y: auto;
+      scrollbar-width: thin; scrollbar-color: var(--color-neutral-300) transparent;
+    }
+    .cert-filter__item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 14px; cursor: pointer;
+      font-size: var(--font-size-sm); color: var(--text-primary);
+      transition: background .12s;
+    }
+    .cert-filter__item:hover { background: var(--bg-secondary); }
+    .cert-filter__item input[type="checkbox"] {
+      width: 15px; height: 15px; flex-shrink: 0;
+      accent-color: var(--color-primary); cursor: pointer;
+    }
+    .cert-filter__item span { line-height: 1.3; }
+    .cert-filter__empty { padding: 12px 14px; font-size: var(--font-size-sm); color: var(--text-muted); text-align: center; }
+
+    /* ===== RANK BADGE ===== */
+    .asc__rank {
+      position: absolute;
+      top: 5px; left: 5px;
+      width: 20px; height: 20px;
+      background: var(--color-secondary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700;
+      z-index: 3;
+      box-shadow: 0 1px 4px rgba(0,0,0,.3);
+      border: 1.5px solid rgba(255,255,255,.65);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* ===== THUMBNAIL RÉALISATION ===== */
+    .asc__thumb {
+      position: absolute;
+      bottom: 4px; right: 4px;
+      width: 34px; height: 34px;
+      border-radius: 6px;
+      border: 1.5px solid #fff;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,.2);
+      z-index: 2;
+    }
+    .asc__thumb-bg { width: 100%; height: 100%; display: block; }
+
+    /* ===== FOOTER CTAs ===== */
+    .asc__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 28px;
+      gap: 6px;
+    }
+    .asc__footer-left { display: flex; align-items: center; min-width: 0; }
+    .asc__footer-ctas {
+      display: flex; align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+    .asc__footer-ctas .btn { padding: 5px 10px; font-size: 11px; }
+
+    /* ===== HOVER BIDIRECTIONNEL ===== */
+    .k-marker--hover .k-marker__dot {
+      transform: scale(1.15);
+      box-shadow: 0 3px 12px rgba(3,197,184,.4);
+      border-color: var(--color-primary-600);
+    }
+    .asc--hovered {
+      box-shadow: var(--shadow-300) !important;
+      border-color: var(--border-strong) !important;
+    }
+
+    /* ===== RESIZE HANDLE ===== */
+    .srp-resize-handle {
+      width: 5px;
+      cursor: col-resize;
+      background: var(--border-subtle);
+      flex-shrink: 0;
+      transition: background .15s;
+      position: relative;
+      z-index: 10;
+    }
+    .srp-resize-handle:hover,
+    .srp-resize-handle.is-resizing { background: var(--color-primary); }
+
+    /* ===== VIEW TOGGLE ===== */
+    .srp-view-toggle { display: flex; align-items: center; gap: 2px; }
+    .srp-view-btn {
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      transition: background .15s, color .15s;
+      cursor: pointer;
+    }
+    .srp-view-btn:hover { background: var(--bg-tertiary); color: var(--text-secondary); }
+    .srp-view-btn--active { background: var(--color-primary) !important; color: #fff !important; }
+    .srp-view-btn svg { width: 15px; height: 15px; }
+
+    /* Grid view */
+    .srp-list.view-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-3);
+    }
+    .srp-list.view-grid .asc {
+      flex-direction: column;
+      padding: 0;
+      align-items: stretch;
+    }
+    .srp-list.view-grid .asc__photo {
+      width: 100%; height: 90px;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .srp-list.view-grid .asc__photo-initials { font-size: var(--font-size-xl); }
+    .srp-list.view-grid .asc__body { padding: 8px 10px 10px; }
+    .srp-list.view-grid .asc__footer { flex-wrap: wrap; gap: 4px; }
+    .srp-list.view-grid .asc__footer-ctas { margin-left: 0; width: 100%; justify-content: flex-end; }
+    .srp-list.view-grid .asc__footer-ctas .btn { flex: 1; justify-content: center; }
+
+    /* Map-only view */
+    .srp-wrapper.view-map-only .srp-list-panel { display: none; }
+    .srp-wrapper.view-map-only .srp-map-panel { flex: 1; }
+    .srp-wrapper.view-map-only .srp-resize-handle { display: none; }
+
+    /* ===== MOBILE ===== */
+    .mobile-toggle {
+      display: none;
+      position: fixed;
+      bottom: var(--spacing-5);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      background: var(--color-secondary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 10px var(--spacing-6);
+      font-family: var(--font-family);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      box-shadow: var(--shadow-500);
+      cursor: pointer;
+      align-items: center;
+      gap: var(--spacing-2);
+    }
+    .mobile-toggle svg { width: 16px; height: 16px; }
+    .mobile-map-close { display: none; }
+
+    @media (max-width: 768px) {
+      .srp-wrapper { height: calc(100vh - 56px); }
+      .srp-list-panel { width: 100%; max-width: 100%; display: flex; }
+      .srp-map-panel { display: none; }
+      .srp-list-panel.view-map { display: none; }
+      .srp-map-panel.view-map {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 56px; left: 0; right: 0; bottom: 60px;
+        z-index: 150;
+        flex: unset;
+      }
+      .srp-map-panel.view-map #map { flex: 1; height: auto; }
+      .mobile-toggle { display: flex; }
+      .srp-view-toggle { display: none; }
+      .srp-resize-handle { display: none; }
+      .mobile-map-close {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        position: absolute;
+        top: 12px; left: 12px;
+        z-index: 200;
+        background: #fff;
+        border: none;
+        border-radius: var(--radius-full);
+        padding: 6px 14px 6px 10px;
+        font-family: var(--font-family);
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-semibold);
+        color: var(--text-primary);
+        box-shadow: var(--shadow-300);
+        cursor: pointer;
+      }
+      .mobile-map-close svg { width: 14px; height: 14px; }
+    }
+  </style>
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="k-nav">
+    <div class="k-nav__inner">
+      <a href="#" class="k-nav__logo">
+        Kelkun<span class="k-nav__logo-dot"></span>
+      </a>
+      <div class="k-nav__links">
+        <a href="#" class="k-nav__link k-nav__link--active">Trouver un artisan</a>
+        <a href="#" class="k-nav__link">Comment ça marche</a>
+        <a href="#" class="k-nav__link">Espace Pro</a>
+      </div>
+      <div class="k-nav__actions">
+        <a href="#" class="k-nav__link-cta">Connexion</a>
+        <a href="#" class="btn btn-primary btn-sm">Publier ma demande</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- LAYOUT SPLIT -->
+  <div class="srp-wrapper" id="srpWrapper">
+
+    <!-- PANEL GAUCHE : liste -->
+    <div class="srp-list-panel" id="listPanel">
+
+      <!-- Search bar -->
+      <div class="srp-search">
+        <label class="srp-search__field" for="search-metier">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="srp-search__input" id="search-metier" type="text" placeholder="Métier (ex. Électricien)" value="Électricien">
+          <span class="srp-search__sep"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--text-muted);flex-shrink:0"><path d="M20 10c0 6-8 12-8 12a8 8 0 0 1-16 0"/><circle cx="12" cy="10" r="3"/></svg>
+          <input class="srp-search__input" type="text" placeholder="Ville ou code postal" value="Montpellier">
+        </label>
+        <button class="btn btn-primary btn-sm srp-search__btn" style="padding:8px 16px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:15px;height:15px"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+      </div>
+
+      <!-- Filtres -->
+      <div class="srp-filters">
+        <div class="srp-filters__row">
+          <button class="chip chip--active" onclick="toggleChip(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Disponible
+          </button>
+          <button class="chip" onclick="toggleChip(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            Vérifié
+          </button>
+          <button class="chip" onclick="toggleChip(this)">Courtois</button>
+          <button class="chip" onclick="toggleChip(this)">Propre</button>
+          <button class="chip" onclick="toggleChip(this)">Ponctuel</button>
+          <!-- Certifications dropdown -->
+          <div class="cert-filter" id="certFilter">
+            <button class="chip cert-filter__btn" id="certBtn" onclick="toggleCertFilter(event)" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              Certifications
+              <span class="cert-filter__count" id="certCount" hidden>0</span>
+              <svg class="cert-filter__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="cert-filter__panel" id="certPanel" hidden>
+              <div class="cert-filter__search-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input class="cert-filter__search" id="certSearch" type="text" placeholder="Rechercher…" oninput="filterCerts(this.value)" autocomplete="off">
+              </div>
+              <ul class="cert-filter__list" id="certList">
+                <li><label class="cert-filter__item"><input type="checkbox" value="rge" onchange="updateCertCount()"><span>RGE — Reconnu Garant de l'Environnement</span></label></li>
+                <li><label class="cert-filter__item"><input type="checkbox" value="irve" onchange="updateCertCount()"><span>IRVE — Borne de recharge</span></label></li>
+                <li><label class="cert-filter__item"><input type="checkbox" value="qualifelec" onchange="updateCertCount()"><span>Qualifelec</span></label></li>
+                <li><label class="cert-filter__item"><input type="checkbox" value="qualibat" onchange="updateCertCount()"><span>Qualibat</span></label></li>
+                <li><label class="cert-filter__item"><input type="checkbox" value="qualipac" onchange="updateCertCount()"><span>Qualipac — Pompe à chaleur</span></label></li>
+                <li><label class="cert-filter__item"><input type="checkbox" value="qualipv" onchange="updateCertCount()"><span>QualiPV — Panneaux solaires</span></label></li>
+                <li><label class="cert-filter__item"><input type="checkbox" value="qualibois" onchange="updateCertCount()"><span>Qualibois — Poêle & chaudière bois</span></label></li>
+                <li><label class="cert-filter__item"><input type="checkbox" value="handibat" onchange="updateCertCount()"><span>HandiBat — Accessibilité</span></label></li>
+                <li><label class="cert-filter__item"><input type="checkbox" value="qualiaero" onchange="updateCertCount()"><span>QualiAir — Ventilation & aération</span></label></li>
+              </ul>
+              <div class="cert-filter__empty" id="certEmpty" hidden>Aucun résultat</div>
+            </div>
+          </div>
+          <button class="chip" onclick="toggleChip(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8.5 14.5 5-5"/><circle cx="9" cy="9" r="2"/><circle cx="15" cy="15" r="2"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Urgence 24/7
+          </button>
+          <span class="srp-filters__sep"></span>
+          <button class="srp-sort">
+            Trier
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Header count + view toggle -->
+      <div class="srp-list-header" id="listHeader">
+        <span><strong id="resultCount">8</strong> électriciens à Montpellier</span>
+        <div class="srp-view-toggle" id="viewToggle">
+          <button class="srp-view-btn srp-view-btn--active" title="Vue liste" onclick="setViewMode('list')" id="btnViewList">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </button>
+          <button class="srp-view-btn" title="Vue grille" onclick="setViewMode('grid')" id="btnViewGrid">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </button>
+          <button class="srp-view-btn" title="Carte seule" onclick="setViewMode('map')" id="btnViewMap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Liste des cards -->
+      <div class="srp-list" id="artisanList">
+
+        <!-- 1. Jean Dupont — premium -->
+        <article class="asc" data-id="1" tabindex="0" role="button" aria-label="Jean Dupont, Électricien général">
+          <div class="asc__photo">
+            <div class="asc__photo-placeholder asc__photo-placeholder--1">
+              <span class="asc__photo-initials">JD</span>
+            </div>
+            <span class="asc__rank">1</span>
+            <div class="asc__thumb"><div class="asc__thumb-bg" style="background:linear-gradient(135deg,#3cb0f5 0%,#6778ed 100%)"></div></div>
+          </div>
+          <div class="asc__body">
+            <div class="asc__name-row">
+              <span class="asc__name">Jean Dupont</span>
+              <svg class="asc__verified-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <p class="asc__trade">Électricien général</p>
+            <div class="asc__meta">
+              <span class="asc__rating">
+                <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                4,9 <span class="asc__review-count">(127)</span>
+              </span>
+              <span class="asc__meta-sep">·</span>
+              <span class="asc__distance">1,2 km</span>
+              <span class="asc__meta-sep">·</span>
+              <span style="color:var(--text-tertiary);font-size:var(--font-size-xs)">🔧 16 missions</span>
+            </div>
+            <div class="asc__trust">
+              <span class="asc__trust-badge asc__trust-badge--verified">Vérifié</span>
+              <span class="asc__trust-badge asc__trust-badge--insured">Assuré</span>
+              <span class="asc__trust-badge asc__trust-badge--certified">QUALIBAT-RGE</span>
+            </div>
+            <div class="asc__footer">
+              <div class="asc__footer-left">
+                <span class="asc__premium-badge">★ Kelkun Pro</span>
+              </div>
+              <div class="asc__footer-ctas">
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Demander un devis</button>
+                <a href="profil-artisan.html" class="asc__profil-link" onclick="event.stopPropagation()">Voir le profil</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Marie Leclerc — urgence -->
+        <article class="asc" data-id="2" tabindex="0" role="button" aria-label="Marie Leclerc, Électricienne Borne IRVE">
+          <div class="asc__photo">
+            <div class="asc__photo-placeholder asc__photo-placeholder--2">
+              <span class="asc__photo-initials">ML</span>
+            </div>
+            <span class="asc__photo-badge asc__photo-badge--urgence">Urgence 24/7</span>
+            <span class="asc__rank">2</span>
+            <div class="asc__thumb"><div class="asc__thumb-bg" style="background:linear-gradient(135deg,#3faf38 0%,#03c5b8 100%)"></div></div>
+          </div>
+          <div class="asc__body">
+            <div class="asc__name-row">
+              <span class="asc__name">Marie Leclerc</span>
+              <svg class="asc__verified-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <p class="asc__trade">Électricienne — Borne IRVE</p>
+            <div class="asc__meta">
+              <span class="asc__rating">
+                <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                4,8 <span class="asc__review-count">(89)</span>
+              </span>
+              <span class="asc__meta-sep">·</span>
+              <span class="asc__distance">2,3 km</span>
+              <span class="asc__meta-sep">·</span>
+              <span style="color:var(--text-tertiary);font-size:var(--font-size-xs)">🔧 9 missions</span>
+            </div>
+            <div class="asc__trust">
+              <span class="asc__trust-badge asc__trust-badge--verified">Vérifié</span>
+              <span class="asc__trust-badge asc__trust-badge--insured">Assuré</span>
+              <span class="asc__trust-badge asc__trust-badge--quick">Réponse rapide</span>
+            </div>
+            <div class="asc__footer">
+              <div class="asc__footer-left">
+                <span class="asc__avail"><span class="asc__avail-dot"></span>Disponible aujourd'hui</span>
+              </div>
+              <div class="asc__footer-ctas">
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Demander un devis</button>
+                <a href="profil-artisan.html" class="asc__profil-link" onclick="event.stopPropagation()">Voir le profil</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Thomas Bernard — urgence + disponible -->
+        <article class="asc" data-id="3" tabindex="0" role="button" aria-label="Thomas Bernard, Électricien dépannage">
+          <div class="asc__photo">
+            <div class="asc__photo-placeholder asc__photo-placeholder--3">
+              <span class="asc__photo-initials">TB</span>
+            </div>
+            <span class="asc__photo-badge asc__photo-badge--urgence">Urgence 24/7</span>
+            <span class="asc__rank">3</span>
+            <div class="asc__thumb"><div class="asc__thumb-bg" style="background:linear-gradient(135deg,#ff7b1e 0%,#ffc114 100%)"></div></div>
+          </div>
+          <div class="asc__body">
+            <div class="asc__name-row">
+              <span class="asc__name">Thomas Bernard</span>
+              <svg class="asc__verified-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <p class="asc__trade">Électricien dépannage</p>
+            <div class="asc__meta">
+              <span class="asc__rating">
+                <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                4,7 <span class="asc__review-count">(214)</span>
+              </span>
+              <span class="asc__meta-sep">·</span>
+              <span class="asc__distance">3,1 km</span>
+              <span class="asc__meta-sep">·</span>
+              <span style="color:var(--text-tertiary);font-size:var(--font-size-xs)">🔧 22 missions</span>
+            </div>
+            <div class="asc__trust">
+              <span class="asc__trust-badge asc__trust-badge--verified">Vérifié</span>
+              <span class="asc__trust-badge asc__trust-badge--quick">Réponse rapide</span>
+            </div>
+            <div class="asc__footer">
+              <div class="asc__footer-left">
+                <span class="asc__avail"><span class="asc__avail-dot"></span>Disponible cette semaine</span>
+              </div>
+              <div class="asc__footer-ctas">
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Demander un devis</button>
+                <a href="profil-artisan.html" class="asc__profil-link" onclick="event.stopPropagation()">Voir le profil</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Sophie Garnier — premium -->
+        <article class="asc" data-id="4" tabindex="0" role="button" aria-label="Sophie Garnier, Électricienne RGE">
+          <div class="asc__photo">
+            <div class="asc__photo-placeholder asc__photo-placeholder--4">
+              <span class="asc__photo-initials">SG</span>
+            </div>
+            <span class="asc__rank">4</span>
+            <div class="asc__thumb"><div class="asc__thumb-bg" style="background:linear-gradient(135deg,#0e2f58 0%,#6778ed 100%)"></div></div>
+          </div>
+          <div class="asc__body">
+            <div class="asc__name-row">
+              <span class="asc__name">Sophie Garnier</span>
+              <svg class="asc__verified-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <p class="asc__trade">Électricienne RGE</p>
+            <div class="asc__meta">
+              <span class="asc__rating">
+                <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                5,0 <span class="asc__review-count">(43)</span>
+              </span>
+              <span class="asc__meta-sep">·</span>
+              <span class="asc__distance">4,0 km</span>
+              <span class="asc__meta-sep">·</span>
+              <span style="color:var(--text-tertiary);font-size:var(--font-size-xs)">🔧 8 missions</span>
+            </div>
+            <div class="asc__trust">
+              <span class="asc__trust-badge asc__trust-badge--verified">Vérifié</span>
+              <span class="asc__trust-badge asc__trust-badge--insured">Assuré</span>
+              <span class="asc__trust-badge asc__trust-badge--certified">Certifié</span>
+            </div>
+            <div class="asc__footer">
+              <div class="asc__footer-left">
+                <span class="asc__premium-badge">★ Kelkun Pro</span>
+              </div>
+              <div class="asc__footer-ctas">
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Demander un devis</button>
+                <a href="profil-artisan.html" class="asc__profil-link" onclick="event.stopPropagation()">Voir le profil</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Pierre Lefebvre -->
+        <article class="asc" data-id="5" tabindex="0" role="button" aria-label="Pierre Lefebvre, Électricien industriel">
+          <div class="asc__photo">
+            <div class="asc__photo-placeholder asc__photo-placeholder--5">
+              <span class="asc__photo-initials">PL</span>
+            </div>
+            <span class="asc__rank">5</span>
+            <div class="asc__thumb"><div class="asc__thumb-bg" style="background:linear-gradient(135deg,#ff634d 0%,#c27b30 100%)"></div></div>
+          </div>
+          <div class="asc__body">
+            <div class="asc__name-row">
+              <span class="asc__name">Pierre Lefebvre</span>
+              <svg class="asc__verified-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <p class="asc__trade">Électricien industriel</p>
+            <div class="asc__meta">
+              <span class="asc__rating">
+                <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                4,6 <span class="asc__review-count">(67)</span>
+              </span>
+              <span class="asc__meta-sep">·</span>
+              <span class="asc__distance">5,2 km</span>
+              <span class="asc__meta-sep">·</span>
+              <span style="color:var(--text-tertiary);font-size:var(--font-size-xs)">🔧 5 missions</span>
+            </div>
+            <div class="asc__trust">
+              <span class="asc__trust-badge asc__trust-badge--verified">Vérifié</span>
+              <span class="asc__trust-badge asc__trust-badge--insured">Assuré</span>
+            </div>
+            <div class="asc__footer">
+              <div class="asc__footer-left"></div>
+              <div class="asc__footer-ctas">
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Demander un devis</button>
+                <a href="profil-artisan.html" class="asc__profil-link" onclick="event.stopPropagation()">Voir le profil</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Antoine Roux — premium -->
+        <article class="asc" data-id="6" tabindex="0" role="button" aria-label="Antoine Roux, Électricien Domotique">
+          <div class="asc__photo">
+            <div class="asc__photo-placeholder asc__photo-placeholder--6">
+              <span class="asc__photo-initials">AR</span>
+            </div>
+            <span class="asc__rank">6</span>
+            <div class="asc__thumb"><div class="asc__thumb-bg" style="background:linear-gradient(135deg,#1c61c5 0%,#3cb0f5 100%)"></div></div>
+          </div>
+          <div class="asc__body">
+            <div class="asc__name-row">
+              <span class="asc__name">Antoine Roux</span>
+              <svg class="asc__verified-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <p class="asc__trade">Électricien — Domotique</p>
+            <div class="asc__meta">
+              <span class="asc__rating">
+                <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                4,9 <span class="asc__review-count">(31)</span>
+              </span>
+              <span class="asc__meta-sep">·</span>
+              <span class="asc__distance">1,8 km</span>
+              <span class="asc__meta-sep">·</span>
+              <span style="color:var(--text-tertiary);font-size:var(--font-size-xs)">🔧 11 missions</span>
+            </div>
+            <div class="asc__trust">
+              <span class="asc__trust-badge asc__trust-badge--verified">Vérifié</span>
+              <span class="asc__trust-badge asc__trust-badge--insured">Assuré</span>
+              <span class="asc__trust-badge asc__trust-badge--certified">Certifié</span>
+            </div>
+            <div class="asc__footer">
+              <div class="asc__footer-left">
+                <span class="asc__premium-badge">★ Kelkun Pro</span>
+              </div>
+              <div class="asc__footer-ctas">
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Demander un devis</button>
+                <a href="profil-artisan.html" class="asc__profil-link" onclick="event.stopPropagation()">Voir le profil</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7. Émilie Martin -->
+        <article class="asc" data-id="7" tabindex="0" role="button" aria-label="Émilie Martin, Électricienne polyvalente">
+          <div class="asc__photo">
+            <div class="asc__photo-placeholder asc__photo-placeholder--7">
+              <span class="asc__photo-initials">EM</span>
+            </div>
+            <span class="asc__rank">7</span>
+            <div class="asc__thumb"><div class="asc__thumb-bg" style="background:linear-gradient(135deg,#6778ed 0%,#3cb0f5 100%)"></div></div>
+          </div>
+          <div class="asc__body">
+            <div class="asc__name-row">
+              <span class="asc__name">Émilie Martin</span>
+            </div>
+            <p class="asc__trade">Électricienne polyvalente</p>
+            <div class="asc__meta">
+              <span class="asc__rating">
+                <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                4,5 <span class="asc__review-count">(156)</span>
+              </span>
+              <span class="asc__meta-sep">·</span>
+              <span class="asc__distance">6,0 km</span>
+              <span class="asc__meta-sep">·</span>
+              <span style="color:var(--text-tertiary);font-size:var(--font-size-xs)">🔧 4 missions</span>
+            </div>
+            <div class="asc__trust">
+              <span class="asc__trust-badge asc__trust-badge--insured">Assuré</span>
+            </div>
+            <div class="asc__footer">
+              <div class="asc__footer-left">
+                <span class="asc__avail"><span class="asc__avail-dot"></span>Disponible cette semaine</span>
+              </div>
+              <div class="asc__footer-ctas">
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Demander un devis</button>
+                <a href="profil-artisan.html" class="asc__profil-link" onclick="event.stopPropagation()">Voir le profil</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8. Nicolas Caron — urgence -->
+        <article class="asc" data-id="8" tabindex="0" role="button" aria-label="Nicolas Caron, Électricien urgences">
+          <div class="asc__photo">
+            <div class="asc__photo-placeholder asc__photo-placeholder--8">
+              <span class="asc__photo-initials">NC</span>
+            </div>
+            <span class="asc__photo-badge asc__photo-badge--urgence">Urgence 24/7</span>
+            <span class="asc__rank">8</span>
+            <div class="asc__thumb"><div class="asc__thumb-bg" style="background:linear-gradient(135deg,#c27b30 0%,#ffc114 100%)"></div></div>
+          </div>
+          <div class="asc__body">
+            <div class="asc__name-row">
+              <span class="asc__name">Nicolas Caron</span>
+              <svg class="asc__verified-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <p class="asc__trade">Électricien urgences</p>
+            <div class="asc__meta">
+              <span class="asc__rating">
+                <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                4,7 <span class="asc__review-count">(98)</span>
+              </span>
+              <span class="asc__meta-sep">·</span>
+              <span class="asc__distance">2,9 km</span>
+              <span class="asc__meta-sep">·</span>
+              <span style="color:var(--text-tertiary);font-size:var(--font-size-xs)">🔧 7 missions</span>
+            </div>
+            <div class="asc__trust">
+              <span class="asc__trust-badge asc__trust-badge--verified">Vérifié</span>
+              <span class="asc__trust-badge asc__trust-badge--insured">Assuré</span>
+              <span class="asc__trust-badge asc__trust-badge--quick">Réponse rapide</span>
+            </div>
+            <div class="asc__footer">
+              <div class="asc__footer-left">
+                <span class="asc__avail"><span class="asc__avail-dot"></span>Disponible cette semaine</span>
+              </div>
+              <div class="asc__footer-ctas">
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Demander un devis</button>
+                <a href="profil-artisan.html" class="asc__profil-link" onclick="event.stopPropagation()">Voir le profil</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- RESIZE HANDLE -->
+    <div class="srp-resize-handle" id="resizeHandle"></div>
+
+    <!-- PANEL DROIT : carte -->
+    <div class="srp-map-panel" id="mapPanel">
+      <div id="map"></div>
+      <!-- Bouton retour liste (mobile uniquement) -->
+      <button class="mobile-map-close" onclick="toggleMobileView()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        Voir la liste
+      </button>
+      <!-- Overlay empty state carte -->
+      <div class="map-empty-overlay" id="mapEmptyOverlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <strong>Zone en cours de déploiement</strong>
+        <p>Aucun artisan n'a encore été référencé dans cette zone.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toggle mobile carte/liste -->
+  <button class="mobile-toggle" id="mobileToggle" onclick="toggleMobileView()">
+    <svg id="mobileToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span id="mobileToggleLabel">Voir sur la carte</span>
+  </button>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    /* ============================================
+       DONNÉES ARTISANS (mock)
+    ============================================ */
+    var artisans = [
+      {
+        id: 1, rank: 1, initials: 'JD',
+        name: 'Jean Dupont', trade: 'Électricien général',
+        rating: 4.9, reviewCount: 127, distance: '1,2 km', missionCount: 16,
+        premium: true,
+        isVerified: true, isInsured: true, isCertified: true,
+        hasQuickResponse: false, isUrgence: false,
+        photoVariant: 1,
+        thumbGradient: 'linear-gradient(135deg,#3cb0f5 0%,#6778ed 100%)',
+        lat: 43.6108, lng: 3.8767,
+        badges: ['verified', 'insured', 'certified'],
+        availText: null
+      },
+      {
+        id: 2, rank: 2, initials: 'ML',
+        name: 'Marie Leclerc', trade: 'Électricienne — Borne IRVE',
+        rating: 4.8, reviewCount: 89, distance: '2,3 km', missionCount: 9,
+        premium: false,
+        isVerified: true, isInsured: true, isCertified: false,
+        hasQuickResponse: true, isUrgence: true,
+        photoVariant: 2,
+        thumbGradient: 'linear-gradient(135deg,#3faf38 0%,#03c5b8 100%)',
+        lat: 43.618, lng: 3.871,
+        badges: ['verified', 'insured', 'quick'],
+        availText: "Disponible aujourd'hui"
+      },
+      {
+        id: 3, rank: 3, initials: 'TB',
+        name: 'Thomas Bernard', trade: 'Électricien dépannage',
+        rating: 4.7, reviewCount: 214, distance: '3,1 km', missionCount: 22,
+        premium: false,
+        isVerified: true, isInsured: false, isCertified: false,
+        hasQuickResponse: true, isUrgence: true,
+        photoVariant: 3,
+        thumbGradient: 'linear-gradient(135deg,#ff7b1e 0%,#ffc114 100%)',
+        lat: 43.605, lng: 3.882,
+        badges: ['verified', 'quick'],
+        availText: 'Disponible cette semaine'
+      },
+      {
+        id: 4, rank: 4, initials: 'SG',
+        name: 'Sophie Garnier', trade: 'Électricienne RGE',
+        rating: 5.0, reviewCount: 43, distance: '4,0 km', missionCount: 8,
+        premium: true,
+        isVerified: true, isInsured: true, isCertified: true,
+        hasQuickResponse: false, isUrgence: false,
+        photoVariant: 4,
+        thumbGradient: 'linear-gradient(135deg,#0e2f58 0%,#6778ed 100%)',
+        lat: 43.622, lng: 3.860,
+        badges: ['verified', 'insured', 'certified'],
+        availText: null
+      },
+      {
+        id: 5, rank: 5, initials: 'PL',
+        name: 'Pierre Lefebvre', trade: 'Électricien industriel',
+        rating: 4.6, reviewCount: 67, distance: '5,2 km', missionCount: 5,
+        premium: false,
+        isVerified: true, isInsured: true, isCertified: false,
+        hasQuickResponse: false, isUrgence: false,
+        photoVariant: 5,
+        thumbGradient: 'linear-gradient(135deg,#ff634d 0%,#c27b30 100%)',
+        lat: 43.600, lng: 3.868,
+        badges: ['verified', 'insured'],
+        availText: null
+      },
+      {
+        id: 6, rank: 6, initials: 'AR',
+        name: 'Antoine Roux', trade: 'Électricien — Domotique',
+        rating: 4.9, reviewCount: 31, distance: '1,8 km', missionCount: 11,
+        premium: true,
+        isVerified: true, isInsured: true, isCertified: true,
+        hasQuickResponse: true, isUrgence: false,
+        photoVariant: 6,
+        thumbGradient: 'linear-gradient(135deg,#1c61c5 0%,#3cb0f5 100%)',
+        lat: 43.614, lng: 3.863,
+        badges: ['verified', 'insured', 'certified'],
+        availText: null
+      },
+      {
+        id: 7, rank: 7, initials: 'EM',
+        name: 'Émilie Martin', trade: 'Électricienne polyvalente',
+        rating: 4.5, reviewCount: 156, distance: '6,0 km', missionCount: 4,
+        premium: false,
+        isVerified: false, isInsured: true, isCertified: false,
+        hasQuickResponse: false, isUrgence: false,
+        photoVariant: 7,
+        thumbGradient: 'linear-gradient(135deg,#6778ed 0%,#3cb0f5 100%)',
+        lat: 43.628, lng: 3.875,
+        badges: ['insured'],
+        availText: 'Disponible cette semaine'
+      },
+      {
+        id: 8, rank: 8, initials: 'NC',
+        name: 'Nicolas Caron', trade: 'Électricien urgences',
+        rating: 4.7, reviewCount: 98, distance: '2,9 km', missionCount: 7,
+        premium: false,
+        isVerified: true, isInsured: true, isCertified: false,
+        hasQuickResponse: true, isUrgence: true,
+        photoVariant: 8,
+        thumbGradient: 'linear-gradient(135deg,#c27b30 0%,#ffc114 100%)',
+        lat: 43.607, lng: 3.855,
+        badges: ['verified', 'insured', 'quick'],
+        availText: 'Disponible cette semaine'
+      }
+    ];
+
+    /* ============================================
+       GÉNÉRATION HTML DES CARDS
+    ============================================ */
+    var badgeLabels = {
+      verified:  { cls: 'verified',  label: 'Vérifié' },
+      insured:   { cls: 'insured',   label: 'Assuré' },
+      certified: { cls: 'certified', label: 'Certifié' },
+      quick:     { cls: 'quick',     label: 'Réponse rapide' }
+    };
+
+    function buildCard(a) {
+      var urgenceBadge = a.isUrgence
+        ? '<span class="asc__photo-badge asc__photo-badge--urgence">Urgence 24/7</span>' : '';
+      var verifiedIcon = a.isVerified
+        ? '<svg class="asc__verified-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>' : '';
+      var trustBadges = a.badges.map(function(b) {
+        return '<span class="asc__trust-badge asc__trust-badge--' + badgeLabels[b].cls + '">' + badgeLabels[b].label + '</span>';
+      }).join('');
+      var footerLeft = '';
+      if (a.premium) {
+        footerLeft = '<span class="asc__premium-badge"><svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Kelkun Pro</span>';
+      } else if (a.availText) {
+        footerLeft = '<span class="asc__avail"><span class="asc__avail-dot"></span>' + a.availText + '</span>';
+      }
+      var thumb = '<div class="asc__thumb"><div class="asc__thumb-bg" style="background:' + a.thumbGradient + '"></div></div>';
+      var missionInfo = '<span style="color:var(--text-tertiary);font-size:var(--font-size-xs)">🔧 ' + a.missionCount + ' missions</span>';
+
+      return '<article class="asc" data-id="' + a.id + '" tabindex="0" role="button" aria-label="' + a.name + ', ' + a.trade + '">'
+        + '<div class="asc__photo">'
+          + '<div class="asc__photo-placeholder asc__photo-placeholder--' + a.photoVariant + '">'
+            + '<span class="asc__photo-initials">' + a.initials + '</span>'
+          + '</div>'
+          + urgenceBadge
+          + '<span class="asc__rank">' + a.rank + '</span>'
+          + thumb
+        + '</div>'
+        + '<div class="asc__body">'
+          + '<div class="asc__name-row"><span class="asc__name">' + a.name + '</span>' + verifiedIcon + '</div>'
+          + '<p class="asc__trade">' + a.trade + '</p>'
+          + '<div class="asc__meta">'
+            + '<span class="asc__rating">'
+              + '<svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
+              + a.rating + ' <span class="asc__review-count">(' + a.reviewCount + ')</span>'
+            + '</span>'
+            + '<span class="asc__meta-sep">·</span>'
+            + '<span class="asc__distance">' + a.distance + '</span>'
+            + '<span class="asc__meta-sep">·</span>'
+            + missionInfo
+          + '</div>'
+          + '<div class="asc__trust">' + trustBadges + '</div>'
+          + '<div class="asc__footer">'
+            + '<div class="asc__footer-left">' + footerLeft + '</div>'
+            + '<div class="asc__footer-ctas">'
+              + '<button class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Demander un devis</button>'
+              + '<a href="profil-artisan.html" class="asc__profil-link" onclick="event.stopPropagation()">Voir le profil</a>'
+            + '</div>'
+          + '</div>'
+        + '</div>'
+        + '</article>';
+    }
+
+    /* ============================================
+       EMPTY STATE HTML
+    ============================================ */
+    function buildEmptyState() {
+      return '<div class="srp-empty">'
+        + '<div class="empty-state">'
+          + '<div class="empty-state__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>'
+          + '<h3 class="empty-state__title">Pas encore d\'artisans dans cette zone</h3>'
+          + '<p class="empty-state__desc">Kelkun arrive bientôt à <strong>Montpellier</strong>. Laissez votre contact et soyez notifié.</p>'
+          + '<form class="empty-state__form" onsubmit="return false">'
+            + '<input class="empty-state__input" type="email" placeholder="votre@email.fr">'
+            + '<button class="btn btn-primary btn-sm" type="submit">Me prévenir</button>'
+          + '</form>'
+          + '<div class="empty-state__divider">ou</div>'
+          + '<p class="empty-state__artisan-cta">Vous êtes artisan ? <a href="#">Rejoignez Kelkun gratuitement →</a></p>'
+        + '</div></div>';
+    }
+
+    /* ============================================
+       TOGGLE CHIPS
+    ============================================ */
+    function toggleChip(btn) { btn.classList.toggle('chip--active'); }
+
+    /* ============================================
+       VIEW MODE TOGGLE
+    ============================================ */
+    function setViewMode(mode) {
+      var wrapper = document.getElementById('srpWrapper');
+      var listEl  = document.getElementById('artisanList');
+      document.querySelectorAll('.srp-view-btn').forEach(function(b) { b.classList.remove('srp-view-btn--active'); });
+
+      if (mode === 'list') {
+        document.getElementById('btnViewList').classList.add('srp-view-btn--active');
+        wrapper.classList.remove('view-map-only');
+        listEl.classList.remove('view-grid');
+      } else if (mode === 'grid') {
+        document.getElementById('btnViewGrid').classList.add('srp-view-btn--active');
+        wrapper.classList.remove('view-map-only');
+        listEl.classList.add('view-grid');
+      } else if (mode === 'map') {
+        document.getElementById('btnViewMap').classList.add('srp-view-btn--active');
+        wrapper.classList.add('view-map-only');
+        listEl.classList.remove('view-grid');
+        if (window._mapInstance) window._mapInstance.invalidateSize();
+      }
+    }
+
+    /* ============================================
+       CARTE LEAFLET
+    ============================================ */
+    (function() {
+      if (typeof L === 'undefined') { console.warn('Leaflet non disponible'); return; }
+
+      var map, markers = {}, selectedId = null, hoveredId = null;
+      window._mapInstance = null;
+
+      try {
+        map = L.map('map', { zoomControl: true }).setView([43.6108, 3.8767], 13);
+        window._mapInstance = map;
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          maxZoom: 19
+        }).addTo(map);
+
+        function markerIcon(rank, selected, hovered) {
+          var cls = 'k-marker';
+          if (selected) cls += ' k-marker--selected';
+          else if (hovered) cls += ' k-marker--hover';
+          return L.divIcon({
+            className: cls,
+            html: '<div class="k-marker__dot">' + rank + '</div>',
+            iconSize: [36, 36], iconAnchor: [18, 18], popupAnchor: [0, -20]
+          });
+        }
+
+        function popupHTML(a) {
+          var star = '<svg class="k-popup__star" viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+          var premium = a.premium ? '<span class="asc__premium-badge" style="margin-top:4px;font-size:10px;padding:2px 8px">Kelkun Pro</span>' : '';
+          return '<div class="k-popup">'
+            + '<p class="k-popup__name">#' + a.rank + ' — ' + a.name + '</p>'
+            + '<p class="k-popup__trade">' + a.trade + '</p>'
+            + '<div class="k-popup__rating">' + star + ' ' + a.rating + ' (' + a.reviewCount + ' avis)</div>'
+            + premium
+            + '<a href="profil-artisan.html" class="k-popup__profil-link">Voir le profil →</a>'
+            + '</div>';
+        }
+
+        function artisanById(id) { return artisans.filter(function(a) { return a.id === id; })[0]; }
+
+        function selectArtisan(id, source) {
+          if (selectedId !== null) {
+            var prev = document.querySelector('.asc[data-id="' + selectedId + '"]');
+            if (prev) prev.classList.remove('asc--selected');
+            var prevA = artisanById(selectedId);
+            if (prevA && markers[selectedId]) markers[selectedId].setIcon(markerIcon(prevA.rank, false, hoveredId === selectedId));
+          }
+          selectedId = id;
+          var card = document.querySelector('.asc[data-id="' + id + '"]');
+          if (card) {
+            card.classList.add('asc--selected');
+            if (source !== 'card') card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+          var a = artisanById(id);
+          if (a && markers[id]) {
+            markers[id].setIcon(markerIcon(a.rank, true, false));
+            markers[id].openPopup();
+            if (source !== 'map') map.setView([a.lat, a.lng], 14, { animate: true });
+          }
+        }
+
+        function hoverArtisan(id) {
+          if (id === hoveredId) return;
+          /* Clear previous hover */
+          if (hoveredId !== null && hoveredId !== selectedId) {
+            var prevA = artisanById(hoveredId);
+            if (prevA && markers[hoveredId]) markers[hoveredId].setIcon(markerIcon(prevA.rank, false, false));
+            var prevCard = document.querySelector('.asc[data-id="' + hoveredId + '"]');
+            if (prevCard) prevCard.classList.remove('asc--hovered');
+          }
+          hoveredId = id;
+          if (id === null) return;
+          /* Apply hover */
+          if (id !== selectedId) {
+            var a = artisanById(id);
+            if (a && markers[id]) markers[id].setIcon(markerIcon(a.rank, false, true));
+            var card = document.querySelector('.asc[data-id="' + id + '"]');
+            if (card) card.classList.add('asc--hovered');
+          }
+        }
+
+        artisans.forEach(function(a) {
+          var marker = L.marker([a.lat, a.lng], { icon: markerIcon(a.rank, false, false) })
+            .bindPopup(popupHTML(a), { maxWidth: 220, minWidth: 180 })
+            .addTo(map);
+          marker.on('click',     function() { selectArtisan(a.id, 'map'); });
+          marker.on('mouseover', function() { hoverArtisan(a.id); });
+          marker.on('mouseout',  function() { hoverArtisan(null); });
+          markers[a.id] = marker;
+        });
+
+        var listEl = document.getElementById('artisanList');
+        if (listEl) {
+          listEl.addEventListener('click', function(e) {
+            if (e.target.closest('button, a')) return;
+            var card = e.target.closest('.asc[data-id]');
+            if (card) selectArtisan(parseInt(card.dataset.id), 'card');
+          });
+          listEl.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              var card = e.target.closest('.asc[data-id]');
+              if (card) { e.preventDefault(); selectArtisan(parseInt(card.dataset.id), 'card'); }
+            }
+          });
+          /* Hover card → marker */
+          listEl.addEventListener('mouseover', function(e) {
+            var card = e.target.closest('.asc[data-id]');
+            if (card) hoverArtisan(parseInt(card.dataset.id));
+          });
+          listEl.addEventListener('mouseout', function(e) {
+            var card = e.target.closest('.asc[data-id]');
+            if (card) {
+              var related = e.relatedTarget && e.relatedTarget.closest('.asc[data-id]');
+              if (!related || related !== card) hoverArtisan(null);
+            }
+          });
+        }
+
+        window.addEventListener('resize', function() { map.invalidateSize(); });
+
+        /* Mobile toggle */
+        window.toggleMobileView = function() {
+          var lp    = document.getElementById('listPanel');
+          var mp    = document.getElementById('mapPanel');
+          var label = document.getElementById('mobileToggleLabel');
+          var icon  = document.getElementById('mobileToggleIcon');
+          if (label.textContent === 'Voir sur la carte') {
+            lp.classList.add('view-map');
+            mp.classList.add('view-map');
+            label.textContent = 'Voir la liste';
+            icon.innerHTML = '<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>';
+            map.invalidateSize();
+          } else {
+            lp.classList.remove('view-map');
+            mp.classList.remove('view-map');
+            label.textContent = 'Voir sur la carte';
+            icon.innerHTML = '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>';
+          }
+        };
+
+      } catch(e) { console.error('Kelkun — map init error:', e); }
+    })();
+
+    /* ============================================
+       RESIZE HANDLE
+    ============================================ */
+    (function() {
+      var handle    = document.getElementById('resizeHandle');
+      var listPanel = document.getElementById('listPanel');
+      var wrapper   = document.getElementById('srpWrapper');
+      if (!handle || !listPanel) return;
+      var isResizing = false, startX, startWidth;
+
+      handle.addEventListener('mousedown', function(e) {
+        isResizing = true;
+        startX = e.clientX;
+        startWidth = listPanel.offsetWidth;
+        handle.classList.add('is-resizing');
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        e.preventDefault();
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (!isResizing) return;
+        var newW = Math.max(320, Math.min(Math.floor(wrapper.offsetWidth * 0.65), startWidth + (e.clientX - startX)));
+        listPanel.style.width = newW + 'px';
+        if (window._mapInstance) window._mapInstance.invalidateSize();
+      });
+
+      document.addEventListener('mouseup', function() {
+        if (!isResizing) return;
+        isResizing = false;
+        handle.classList.remove('is-resizing');
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+        if (window._mapInstance) window._mapInstance.invalidateSize();
+      });
+    })();
+
+    /* ============================================
+       CERTIFICATIONS DROPDOWN
+    ============================================ */
+    function toggleCertFilter(e) {
+      e.stopPropagation();
+      var btn   = document.getElementById('certBtn');
+      var panel = document.getElementById('certPanel');
+      var open  = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      if (!open) { panel.removeAttribute('hidden'); document.getElementById('certSearch').focus(); }
+      else { panel.setAttribute('hidden', ''); }
+    }
+
+    function filterCerts(query) {
+      var items = document.querySelectorAll('#certList li');
+      var empty = document.getElementById('certEmpty');
+      var q = query.trim().toLowerCase();
+      var visible = 0;
+      items.forEach(function(li) {
+        var match = li.textContent.toLowerCase().includes(q);
+        li.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      empty.hidden = visible > 0;
+    }
+
+    function updateCertCount() {
+      var count = document.querySelectorAll('#certList input:checked').length;
+      var el = document.getElementById('certCount');
+      el.textContent = count;
+      el.hidden = count === 0;
+    }
+
+    document.addEventListener('click', function(e) {
+      var filter = document.getElementById('certFilter');
+      if (filter && !filter.contains(e.target)) {
+        document.getElementById('certPanel').setAttribute('hidden', '');
+        document.getElementById('certBtn').setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
+</body>
+</html>

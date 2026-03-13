@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Électricien à Montpellier — Artisans certifiés | Kelkun</title>
+  <meta name="description" content="Trouvez un électricien certifié à Montpellier. 60 professionnels vérifiés, devis gratuit. Protection Allianz pour les urgences. Intervention 24h.">
+  <link rel="canonical" href="https://kelkun.com/trouver-un-artisan/electricien/montpellier/">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="shared.css?v=20260227c">
+
+  <!-- Schema FAQPage + BreadcrumbList + Service -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kelkun.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Électricien", "item": "https://kelkun.com/trouver-un-artisan/electricien/" },
+        { "@type": "ListItem", "position": 3, "name": "Montpellier", "item": "https://kelkun.com/trouver-un-artisan/electricien/montpellier/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quel est le prix d'un électricien à Montpellier ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le tarif horaire d'un électricien à Montpellier varie entre 45€ et 90€/heure selon le type de prestation. Comptez environ 55–70€/h pour une mise aux normes ou un tableau, et jusqu'à 90€/h pour une intervention d'urgence la nuit ou le week-end. Le devis est gratuit sur Kelkun."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Peut-on trouver un électricien disponible en urgence à Montpellier ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Kelkun propose des électriciens disponibles 24h/7j à Montpellier pour les urgences (panne, disjoncteur, coupure). Plusieurs artisans du réseau s'engagent sur une intervention en moins d'1 heure sur la ville."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment sont vérifiés les électriciens sur Kelkun ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tous les artisans Kelkun passent une vérification en 3 étapes : contrôle de l'identité et du SIRET, vérification de l'assurance RC pro en cours de validité, et contrôle des certifications (RGE, Qualifelec…). Le badge 'Vérifié' est attribué après validation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quels travaux d'électricité peut-on réaliser à Montpellier avec Kelkun ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sur Kelkun Montpellier, vous pouvez faire appel à un électricien pour : mise aux normes NF C 15-100, remplacement de tableau électrique, installation de borne de recharge IRVE, installation photovoltaïque, dépannage urgent, câblage et prises, éclairage, domotique."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment se passe la mise en relation avec un électricien sur Kelkun ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Après avoir publié votre demande sur Kelkun, vous recevez des propositions d'artisans vérifiés disponibles dans votre zone. Vous choisissez librement l'artisan, échangez directement avec lui, et convenez des modalités. Kelkun assure la mise en relation et le suivi, pour que vous ne soyez jamais seul face à un inconnu."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kelkun couvre-t-il les communes autour de Montpellier ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Le réseau Kelkun couvre l'ensemble de la métropole de Montpellier : Castelnau-le-Lez, Lattes, Pérols, Mauguio, Le Crès, Vendargues, Saint-Gély-du-Fesc, Grabels, Clapiers, Jacou et toutes les communes environnantes."
+          }
+        }
+      ]
+    }
+  ]
+  </script>
+
+  <style>
+    /* ===== HERO ===== */
+    .vm-hero {
+      background: linear-gradient(135deg, var(--color-secondary) 0%, #1a3f70 55%, var(--color-primary-600) 100%);
+      padding: var(--spacing-12) 0;
+      color: #fff;
+    }
+    .vm-hero__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-6);
+    }
+    .vm-hero__breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--font-size-xs);
+      color: rgba(255,255,255,.6);
+      margin-bottom: var(--spacing-5);
+    }
+    .vm-hero__breadcrumb a { color: rgba(255,255,255,.6); transition: color .15s; }
+    .vm-hero__breadcrumb a:hover { color: rgba(255,255,255,.9); }
+    .vm-hero__breadcrumb svg { width: 12px; height: 12px; }
+    .vm-hero__breadcrumb span { color: rgba(255,255,255,.9); }
+    .vm-hero__title {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+      margin-bottom: var(--spacing-3);
+    }
+    .vm-hero__subtitle {
+      font-size: var(--font-size-md);
+      color: rgba(255,255,255,.8);
+      margin-bottom: var(--spacing-6);
+      max-width: 560px;
+    }
+    .vm-hero__stats {
+      display: flex;
+      gap: var(--spacing-8);
+      margin-bottom: var(--spacing-8);
+      flex-wrap: wrap;
+    }
+    .vm-hero__stat { text-align: left; }
+    .vm-hero__stat-value {
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      line-height: 1;
+      color: var(--color-primary);
+    }
+    .vm-hero__stat-label { font-size: var(--font-size-xs); color: rgba(255,255,255,.7); margin-top: 2px; }
+
+    /* Search bar dans hero */
+    .vm-hero__search {
+      display: flex;
+      gap: var(--spacing-2);
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: var(--radius-full);
+      padding: 6px 6px 6px var(--spacing-5);
+      max-width: 560px;
+      backdrop-filter: blur(8px);
+    }
+    .vm-hero__search-field {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      min-width: 0;
+    }
+    .vm-hero__search-field svg { color: rgba(255,255,255,.5); width: 16px; height: 16px; flex-shrink: 0; }
+    .vm-hero__search-input {
+      border: none;
+      background: transparent;
+      font-family: var(--font-family);
+      font-size: var(--font-size-sm);
+      color: #fff;
+      outline: none;
+      width: 100%;
+      min-width: 0;
+    }
+    .vm-hero__search-input::placeholder { color: rgba(255,255,255,.5); }
+
+    @media (max-width: 640px) {
+      .vm-hero__title { font-size: var(--font-size-2xl); }
+      .vm-hero__search { flex-direction: column; border-radius: var(--radius-xl); padding: var(--spacing-4); }
+      .vm-hero__search .btn { border-radius: var(--radius-full); }
+      .vm-hero__stats { gap: var(--spacing-5); }
+    }
+
+    /* ===== LAYOUT PRINCIPAL ===== */
+    .vm-page { background: var(--bg-secondary); }
+    .vm-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: var(--spacing-10) var(--spacing-6);
+    }
+    .vm-section--tight { padding-top: var(--spacing-6); padding-bottom: var(--spacing-6); }
+    .vm-section__title {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-2);
+    }
+    .vm-section__sub {
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-6);
+    }
+    .vm-section-divider {
+      height: 1px;
+      background: var(--border-subtle);
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ===== TOP ARTISANS ===== */
+    .vm-top-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-4);
+    }
+    @media (max-width: 900px) { .vm-top-grid { grid-template-columns: 1fr; } }
+    @media (min-width: 600px) and (max-width: 900px) { .vm-top-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* Badge TOP artisan (overlay sur card) */
+    .asc-top-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--color-tertiary);
+      color: var(--color-secondary);
+      border-radius: var(--radius-full);
+      padding: 3px 10px;
+      font-size: var(--font-size-2xs);
+      font-weight: var(--font-weight-bold);
+      z-index: 1;
+    }
+
+    /* ===== SECTION CARTE + LISTE ===== */
+    .vm-map-section {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: var(--spacing-4);
+      align-items: start;
+    }
+    .vm-map-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-3);
+    }
+    .vm-map-list .asc { max-width: 100%; }
+    .vm-mini-map {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-300);
+      position: sticky;
+      top: 80px;
+      height: 480px;
+    }
+    #miniMap { width: 100%; height: 100%; }
+    @media (max-width: 900px) {
+      .vm-map-section { grid-template-columns: 1fr; }
+      .vm-mini-map { position: static; height: 280px; }
+    }
+
+    /* ===== EMPTY STATE dans VM ===== */
+    .vm-empty-banner {
+      background: var(--bg-brand-subtle);
+      border: 1.5px solid var(--color-primary-25);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-8) var(--spacing-6);
+      display: flex;
+      gap: var(--spacing-6);
+      align-items: center;
+    }
+    .vm-empty-banner__icon {
+      width: 56px;
+      height: 56px;
+      background: var(--color-primary-25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary-600);
+      flex-shrink: 0;
+    }
+    .vm-empty-banner__icon svg { width: 24px; height: 24px; }
+    .vm-empty-banner__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: var(--radius-full);
+      padding: 2px 10px;
+      font-size: var(--font-size-2xs);
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: var(--spacing-2);
+    }
+    .vm-empty-banner__title { font-weight: var(--font-weight-semibold); color: var(--text-primary); margin-bottom: 4px; }
+    .vm-empty-banner__desc { font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--spacing-4); }
+    .vm-empty-banner__form { display: flex; gap: var(--spacing-2); max-width: 360px; }
+    .vm-empty-banner__input {
+      flex: 1;
+      padding: 8px var(--spacing-4);
+      border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-full);
+      font-family: var(--font-family);
+      font-size: var(--font-size-sm);
+      outline: none;
+    }
+    .vm-empty-banner__input:focus { border-color: var(--color-primary); }
+    @media (max-width: 640px) {
+      .vm-empty-banner { flex-direction: column; }
+      .vm-empty-banner__form { flex-direction: column; }
+    }
+
+    /* ===== TRUST SECTION ===== */
+    .vm-trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-5);
+    }
+    .vm-trust-item {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      padding: var(--spacing-6);
+    }
+    .vm-trust-item__icon {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-brand-subtle);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-4);
+    }
+    .vm-trust-item__icon svg { width: 24px; height: 24px; }
+    .vm-trust-item__title { font-weight: var(--font-weight-semibold); color: var(--text-primary); margin-bottom: var(--spacing-2); }
+    .vm-trust-item__desc { font-size: var(--font-size-sm); color: var(--text-secondary); line-height: var(--line-height-relaxed); }
+    @media (max-width: 768px) { .vm-trust-grid { grid-template-columns: 1fr; } }
+    @media (min-width: 600px) and (max-width: 768px) { .vm-trust-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ===== FAQ ===== */
+    .vm-faq { max-width: 760px; margin: 0 auto; }
+    .faq-item {
+      background: #fff;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-2);
+      overflow: hidden;
+    }
+    .faq-item__q {
+      width: 100%;
+      padding: var(--spacing-4) var(--spacing-5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--spacing-4);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-primary);
+      text-align: left;
+      cursor: pointer;
+      background: #fff;
+      transition: background .15s;
+    }
+    .faq-item__q:hover { background: var(--bg-secondary); }
+    .faq-item__q svg { width: 18px; height: 18px; color: var(--text-muted); flex-shrink: 0; transition: transform .2s; }
+    .faq-item.open .faq-item__q svg { transform: rotate(180deg); }
+    .faq-item__a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+    }
+    .faq-item.open .faq-item__a { max-height: 300px; }
+    .faq-item__a-inner {
+      padding: 0 var(--spacing-5) var(--spacing-4);
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      line-height: var(--line-height-relaxed);
+    }
+  </style>
+</head>
+<body class="vm-page">
+
+  <!-- NAV -->
+  <nav class="k-nav">
+    <div class="k-nav__inner">
+      <a href="#" class="k-nav__logo">Kelkun<span class="k-nav__logo-dot"></span></a>
+      <div class="k-nav__links">
+        <a href="#" class="k-nav__link k-nav__link--active">Trouver un artisan</a>
+        <a href="#" class="k-nav__link">Comment ça marche</a>
+        <a href="#" class="k-nav__link">Espace Pro</a>
+      </div>
+      <div class="k-nav__actions">
+        <a href="#" class="k-nav__link-cta">Connexion</a>
+        <a href="#" class="btn btn-primary btn-sm">Publier ma demande</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="vm-hero">
+    <div class="vm-hero__inner">
+      <!-- Breadcrumb -->
+      <nav class="vm-hero__breadcrumb" aria-label="Fil d'Ariane">
+        <a href="#">Accueil</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <a href="#">Électricien</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <span>Montpellier</span>
+      </nav>
+
+      <h1 class="vm-hero__title">Électriciens<br>à Montpellier</h1>
+      <p class="vm-hero__subtitle">Trouvez un électricien certifié à Montpellier. Artisans vérifiés, devis gratuit, protection Allianz pour les urgences.</p>
+
+      <div class="vm-hero__stats">
+        <div class="vm-hero__stat">
+          <div class="vm-hero__stat-value">60</div>
+          <div class="vm-hero__stat-label">artisans actifs</div>
+        </div>
+        <div class="vm-hero__stat">
+          <div class="vm-hero__stat-value">4,8</div>
+          <div class="vm-hero__stat-label">note moyenne</div>
+        </div>
+        <div class="vm-hero__stat">
+          <div class="vm-hero__stat-value">100%</div>
+          <div class="vm-hero__stat-label">artisans vérifiés</div>
+        </div>
+      </div>
+
+      <div class="vm-hero__search">
+        <div class="vm-hero__search-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="vm-hero__search-input" type="text" placeholder="Type de prestation…">
+        </div>
+        <a href="search-results.html" class="btn btn-primary" style="padding:8px 20px">Rechercher</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- TOP ARTISANS -->
+  <section class="vm-section">
+    <h2 class="vm-section__title">Top artisans à Montpellier</h2>
+    <p class="vm-section__sub">Les mieux notés de la semaine · Disponibles rapidement</p>
+
+    <div class="vm-top-grid">
+
+      <!-- Card 1 -->
+      <article class="asc" style="position:relative;" onclick="window.location='profil-artisan.html'">
+        <span class="asc-top-badge">#1 cette semaine</span>
+        <div class="asc__photo">
+          <div class="asc__photo-placeholder asc__photo-placeholder--1"><span class="asc__photo-initials">JD</span></div>
+          <span class="asc__photo-badge asc__photo-badge--available">Disponible</span>
+        </div>
+        <div class="asc__body">
+          <div class="asc__name-row">
+            <span class="asc__name">Jean Dupont</span>
+            <svg class="asc__verified-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <p class="asc__trade">Électricien général — RGE</p>
+          <div class="asc__meta">
+            <span class="asc__rating">
+              <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              4,9 <span class="asc__review-count">(127)</span>
+            </span>
+            <span class="asc__meta-sep">·</span>
+            <span class="asc__distance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;color:var(--text-muted)"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>1,2 km</span>
+          </div>
+          <div class="asc__trust">
+            <span class="asc__trust-badge asc__trust-badge--verified">Vérifié</span>
+            <span class="asc__trust-badge asc__trust-badge--insured">Assuré</span>
+            <span class="asc__trust-badge asc__trust-badge--certified">Certifié</span>
+          </div>
+          <div class="asc__footer">
+            <span class="asc__premium-badge"><svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Kelkun Pro</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="asc" onclick="window.location='profil-artisan.html'">
+        <div class="asc__photo">
+          <div class="asc__photo-placeholder asc__photo-placeholder--4"><span class="asc__photo-initials">SG</span></div>
+          <span class="asc__photo-badge asc__photo-badge--available">Disponible</span>
+        </div>
+        <div class="asc__body">
+          <div class="asc__name-row">
+            <span class="asc__name">Sophie Garnier</span>
+            <svg class="asc__verified-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <p class="asc__trade">Électricienne — Photovoltaïque</p>
+          <div class="asc__meta">
+            <span class="asc__rating">
+              <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              5,0 <span class="asc__review-count">(43)</span>
+            </span>
+            <span class="asc__meta-sep">·</span>
+            <span class="asc__distance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;color:var(--text-muted)"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>4,0 km</span>
+          </div>
+          <div class="asc__trust">
+            <span class="asc__trust-badge asc__trust-badge--verified">Vérifié</span>
+            <span class="asc__trust-badge asc__trust-badge--insured">Assuré</span>
+            <span class="asc__trust-badge asc__trust-badge--certified">Certifié RGE</span>
+          </div>
+          <div class="asc__footer">
+            <span class="asc__premium-badge"><svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Kelkun Pro</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="asc" onclick="window.location='profil-artisan.html'">
+        <div class="asc__photo">
+          <div class="asc__photo-placeholder asc__photo-placeholder--6"><span class="asc__photo-initials">AR</span></div>
+          <span class="asc__photo-badge asc__photo-badge--available">Disponible</span>
+        </div>
+        <div class="asc__body">
+          <div class="asc__name-row">
+            <span class="asc__name">Antoine Roux</span>
+            <svg class="asc__verified-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <p class="asc__trade">Électricien — Domotique KNX</p>
+          <div class="asc__meta">
+            <span class="asc__rating">
+              <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              4,9 <span class="asc__review-count">(31)</span>
+            </span>
+            <span class="asc__meta-sep">·</span>
+            <span class="asc__distance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;color:var(--text-muted)"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>1,8 km</span>
+          </div>
+          <div class="asc__trust">
+            <span class="asc__trust-badge asc__trust-badge--verified">Vérifié</span>
+            <span class="asc__trust-badge asc__trust-badge--certified">Certifié</span>
+            <span class="asc__trust-badge asc__trust-badge--quick">Réponse rapide</span>
+          </div>
+          <div class="asc__footer">
+            <span class="asc__avail"><span class="asc__avail-dot"></span>Disponible cette semaine</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div style="text-align:center;margin-top:var(--spacing-5)">
+      <a href="search-results.html" class="btn btn-outline">
+        Voir les 60 électriciens à Montpellier →
+      </a>
+    </div>
+  </section>
+
+  <div class="vm-section-divider"></div>
+
+  <!-- SECTION CARTE + LISTE -->
+  <section class="vm-section vm-section--tight">
+    <h2 class="vm-section__title">Électriciens disponibles près de vous</h2>
+    <p class="vm-section__sub">Cliquez sur un artisan ou un marqueur pour en savoir plus</p>
+
+    <div class="vm-map-section">
+      <!-- Liste -->
+      <div class="vm-map-list" id="vmList">
+        <!-- Cards injectées par JS -->
+      </div>
+
+      <!-- Mini carte -->
+      <div class="vm-mini-map">
+        <div id="miniMap"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="vm-section-divider"></div>
+
+  <!-- POURQUOI KELKUN -->
+  <section class="vm-section">
+    <h2 class="vm-section__title" style="text-align:center">Pourquoi choisir Kelkun ?</h2>
+    <p class="vm-section__sub" style="text-align:center;max-width:560px;margin-left:auto;margin-right:auto;margin-bottom:var(--spacing-8)">Des garanties uniques sur le marché, pour travailler avec des professionnels en toute sérénité.</p>
+    <div class="vm-trust-grid">
+      <div class="vm-trust-item">
+        <div class="vm-trust-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <h3 class="vm-trust-item__title">Mise en relation vérifiée</h3>
+        <p class="vm-trust-item__desc">Kelkun vérifie chaque artisan (identité, SIRET, assurance RC pro) et assure la mise en relation directe avec un professionnel qualifié. Vous n'êtes jamais seul face à un inconnu.</p>
+      </div>
+      <div class="vm-trust-item">
+        <div class="vm-trust-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="vm-trust-item__title">Protection Allianz — Urgences & dépannages</h3>
+        <p class="vm-trust-item__desc">Pour toute intervention urgente ou dépannage, la protection Allianz couvre les dommages jusqu'à 10 000€. Une garantie unique sur le marché, active automatiquement via Kelkun.</p>
+      </div>
+      <div class="vm-trust-item">
+        <div class="vm-trust-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <h3 class="vm-trust-item__title">Artisans vérifiés & assurés</h3>
+        <p class="vm-trust-item__desc">Chaque artisan est vérifié : identité, SIRET, assurance RC pro et certifications. Le badge "Vérifié" est attribué après contrôle complet.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="vm-section-divider"></div>
+
+  <!-- FAQ -->
+  <section class="vm-section">
+    <div class="vm-faq">
+      <h2 class="vm-section__title" style="text-align:center">Questions fréquentes</h2>
+      <p class="vm-section__sub" style="text-align:center;margin-bottom:var(--spacing-8)">Tout ce qu'il faut savoir avant de réserver un électricien à Montpellier</p>
+
+      <div class="faq-item open">
+        <button class="faq-item__q" onclick="toggleFaq(this)">
+          Quel est le prix d'un électricien à Montpellier ?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-item__a">
+          <div class="faq-item__a-inner">Le tarif horaire d'un électricien à Montpellier varie entre 45€ et 90€/heure selon le type de prestation. Comptez environ 55–70€/h pour une mise aux normes ou un tableau, et jusqu'à 90€/h pour une intervention d'urgence la nuit ou le week-end. Le devis est gratuit sur Kelkun.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__q" onclick="toggleFaq(this)">
+          Peut-on trouver un électricien disponible en urgence à Montpellier ?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-item__a">
+          <div class="faq-item__a-inner">Oui. Kelkun propose des électriciens disponibles 24h/7j à Montpellier pour les urgences (panne, disjoncteur, coupure). Plusieurs artisans du réseau s'engagent sur une intervention en moins d'1 heure sur la ville.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__q" onclick="toggleFaq(this)">
+          Comment sont vérifiés les électriciens sur Kelkun ?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-item__a">
+          <div class="faq-item__a-inner">Tous les artisans Kelkun passent une vérification en 3 étapes : contrôle de l'identité et du SIRET, vérification de l'assurance RC pro en cours de validité, et contrôle des certifications (RGE, Qualifelec…). Le badge "Vérifié" est attribué après validation.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__q" onclick="toggleFaq(this)">
+          Quels travaux d'électricité peut-on réaliser à Montpellier avec Kelkun ?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-item__a">
+          <div class="faq-item__a-inner">Sur Kelkun Montpellier, vous pouvez faire appel à un électricien pour : mise aux normes NF C 15-100, remplacement de tableau électrique, installation de borne de recharge IRVE, installation photovoltaïque, dépannage urgent, câblage et prises, éclairage et domotique.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__q" onclick="toggleFaq(this)">
+          Comment se passe la mise en relation avec un électricien sur Kelkun ?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-item__a">
+          <div class="faq-item__a-inner">Après avoir publié votre demande sur Kelkun, vous recevez des propositions d'artisans vérifiés disponibles dans votre zone. Vous choisissez librement l'artisan, échangez directement avec lui, et convenez des modalités. Kelkun assure la mise en relation et le suivi, pour que vous ne soyez jamais seul face à un inconnu.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__q" onclick="toggleFaq(this)">
+          Kelkun couvre-t-il les communes autour de Montpellier ?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-item__a">
+          <div class="faq-item__a-inner">Oui. Le réseau Kelkun couvre l'ensemble de la métropole de Montpellier : Castelnau-le-Lez, Lattes, Pérols, Mauguio, Le Crès, Vendargues, Saint-Gély-du-Fesc, Grabels, Clapiers, Jacou et toutes les communes environnantes.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="vm-section-divider"></div>
+
+  <!-- CTA ARTISAN JOIN -->
+  <section class="vm-section">
+    <div class="cta-artisan-join">
+      <span class="cta-artisan-join__eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M12 5v14m7-7H5"/></svg>
+        Vous intervenez à Montpellier ?
+      </span>
+      <h2 class="cta-artisan-join__title">Inscrivez-vous gratuitement</h2>
+      <p class="cta-artisan-join__sub">Rejoignez les électriciens Kelkun à Montpellier. Premiers clients dès la semaine 1. 0 commission sur les 3 premiers mois.</p>
+      <div class="cta-artisan-join__args">
+        <span class="cta-artisan-join__arg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Devis gratuit · Sans engagement
+        </span>
+        <span class="cta-artisan-join__arg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Protection Allianz urgences
+        </span>
+        <span class="cta-artisan-join__arg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Profil en ligne en 10 min
+        </span>
+      </div>
+      <a href="#" class="btn">Créer mon profil gratuitement</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="k-footer">
+    <div class="k-footer__inner">
+      <div class="k-footer__grid">
+        <div>
+          <div class="k-footer__logo">Kelkun<span style="width:6px;height:6px;background:var(--color-primary);border-radius:50%;display:inline-block;margin-left:3px;margin-bottom:3px"></span></div>
+          <p class="k-footer__tagline">La plateforme de mise en relation artisans · particuliers. Artisans vérifiés, protection Allianz urgences, devis gratuit.</p>
+        </div>
+        <div>
+          <p class="k-footer__col-title">Artisans</p>
+          <ul class="k-footer__links">
+            <li><a href="#" class="k-footer__link">Électriciens à Montpellier</a></li>
+            <li><a href="#" class="k-footer__link">Plombiers à Montpellier</a></li>
+            <li><a href="#" class="k-footer__link">Menuisiers à Montpellier</a></li>
+            <li><a href="#" class="k-footer__link">Peintres à Montpellier</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="k-footer__col-title">Kelkun</p>
+          <ul class="k-footer__links">
+            <li><a href="#" class="k-footer__link">Comment ça marche</a></li>
+            <li><a href="#" class="k-footer__link">Rejoindre le réseau</a></li>
+            <li><a href="#" class="k-footer__link">Blog</a></li>
+            <li><a href="#" class="k-footer__link">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="k-footer__bottom">
+        <span>© 2026 Kelkun — Tous droits réservés</span>
+        <div class="k-footer__badges">
+          <span class="k-footer__badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Protection Allianz
+          </span>
+          <span class="k-footer__badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            Artisans vérifiés
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    /* Mini-map Leaflet */
+    const miniMap = L.map('miniMap', { zoomControl: true, scrollWheelZoom: false }).setView([43.6108, 3.8767], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(miniMap);
+
+    const artisans = [
+      { id:1, initials:'JD', name:'Jean Dupont', trade:'Électricien général', rating:4.9, premium:true, lat:43.6108, lng:3.8767 },
+      { id:2, initials:'ML', name:'Marie Leclerc', trade:'Électricienne — Borne IRVE', rating:4.8, premium:false, lat:43.618, lng:3.871 },
+      { id:3, initials:'TB', name:'Thomas Bernard', trade:'Électricien dépannage', rating:4.7, premium:false, lat:43.605, lng:3.882 },
+      { id:4, initials:'SG', name:'Sophie Garnier', trade:'Électricienne RGE', rating:5.0, premium:true, lat:43.622, lng:3.860 },
+      { id:5, initials:'NC', name:'Nicolas Caron', trade:'Électricien urgences', rating:4.7, premium:false, lat:43.607, lng:3.855 }
+    ];
+
+    function markerIcon(initials, selected = false) {
+      return L.divIcon({
+        className: 'k-marker' + (selected ? ' k-marker--selected' : ''),
+        html: `<div class="k-marker__dot">${initials}</div>`,
+        iconSize: [36, 36], iconAnchor: [18, 18], popupAnchor: [0, -20]
+      });
+    }
+
+    const markers = {};
+    artisans.forEach(a => {
+      const m = L.marker([a.lat, a.lng], { icon: markerIcon(a.initials) })
+        .bindPopup(`<div class="k-popup">
+          <p class="k-popup__name">${a.name}</p>
+          <p class="k-popup__trade">${a.trade}</p>
+          <div class="k-popup__rating"><span class="k-popup__star">★</span> ${a.rating}</div>
+        </div>`, { maxWidth: 200 })
+        .addTo(miniMap);
+      m.on('click', () => selectVM(a.id, 'map'));
+      markers[a.id] = m;
+    });
+
+    /* Génération des cards liste */
+    const vmList = document.getElementById('vmList');
+    vmList.innerHTML = artisans.map(a => {
+      const footerContent = a.premium
+        ? '<span class="asc__premium-badge"><svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Kelkun Pro</span>'
+        : '<span class="asc__avail"><span class="asc__avail-dot"></span>Disponible cette semaine</span>';
+      return `<article class="asc" data-id="${a.id}" tabindex="0" onclick="selectVM(${a.id},'card')" style="cursor:pointer">
+        <div class="asc__photo">
+          <div class="asc__photo-placeholder asc__photo-placeholder--${a.id}"><span class="asc__photo-initials">${a.initials}</span></div>
+        </div>
+        <div class="asc__body">
+          <div class="asc__name-row"><span class="asc__name">${a.name}</span></div>
+          <p class="asc__trade">${a.trade}</p>
+          <div class="asc__meta">
+            <span class="asc__rating">
+              <svg class="asc__star" viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              ${a.rating}
+            </span>
+          </div>
+          <div class="asc__footer">${footerContent}</div>
+        </div>
+      </article>`;
+    }).join('');
+
+    let selectedVM = null;
+    function selectVM(id, source) {
+      if (selectedVM !== null) {
+        document.querySelector(`.asc[data-id="${selectedVM}"]`)?.classList.remove('asc--selected');
+        const prevA = artisans.find(a => a.id === selectedVM);
+        if (prevA) markers[selectedVM]?.setIcon(markerIcon(prevA.initials, false));
+      }
+      selectedVM = id;
+      const card = document.querySelector(`.asc[data-id="${id}"]`);
+      if (card) { card.classList.add('asc--selected'); if (source !== 'card') card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+      const a = artisans.find(x => x.id === id);
+      if (a && markers[id]) {
+        markers[id].setIcon(markerIcon(a.initials, true));
+        markers[id].openPopup();
+        if (source !== 'map') miniMap.setView([a.lat, a.lng], 14, { animate: true });
+      }
+    }
+
+    /* FAQ accordion */
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+
+</body>
+</html>

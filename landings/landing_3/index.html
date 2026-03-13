@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Kelkun Pro — Des clients locaux sans prospection</title>
+  <meta name="description" content="Rejoignez les artisans et professionnels du bâtiment sur Kelkun Pro. Clients directs, sans concurrence, commission réduite à 15%. Essai gratuit 14 jours.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================
+       KELKUN PRO — LANDING 3
+       Layout style kelkun.com + contenu landing_1
+       Palette : jaune (tertiary) accent dominant
+       ======================================== */
+
+    :root {
+      --c-primary:       #03c5b8;
+      --c-primary-600:   #029284;
+      --c-secondary:     #0e2f58;
+      --c-secondary-600: #0a2342;
+      --c-tertiary:      #ffc114;
+      --c-tertiary-50:   #fffbeb;
+      --c-tertiary-100:  #fff5c6;
+      --c-tertiary-200:  #ffe580;
+      --c-tertiary-600:  #e0a500;
+      --c-success:       #3faf38;
+      --c-sky:           #f0f6fb;
+      --c-neutral-50:    #fafafa;
+      --c-neutral-100:   #f5f5f5;
+      --c-neutral-200:   #e5e5e5;
+      --c-neutral-300:   #d4d4d4;
+      --c-neutral-400:   #a3a3a3;
+      --c-neutral-500:   #737373;
+      --c-neutral-600:   #525252;
+      --c-white:         #ffffff;
+
+      --font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      --r-sm: 4px; --r-md: 8px; --r-lg: 12px; --r-xl: 16px; --r-2xl: 24px; --r-full: 9999px;
+      --sh-sm: 0 1px 3px rgba(0,0,0,.07);
+      --sh-md: 0 4px 14px rgba(0,0,0,.09);
+      --sh-lg: 0 10px 32px rgba(0,0,0,.1);
+      --sh-xl: 0 20px 54px rgba(0,0,0,.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--c-secondary);
+      background: var(--c-white);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { font-family: var(--font); cursor: pointer; }
+
+    /* --- LAYOUT --- */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .text-center { text-align: center; }
+
+    /* --- SECTION --- */
+    .section { padding: 80px 0; }
+    .section--sky { background: var(--c-sky); }
+    .section--warm { background: var(--c-tertiary-50); }
+
+    .section__eyebrow {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--c-tertiary-600);
+      margin-bottom: 10px;
+    }
+    .section__title {
+      font-size: clamp(26px, 3.5vw, 42px);
+      font-weight: 700; line-height: 1.2;
+      color: var(--c-secondary);
+      margin-bottom: 16px;
+    }
+    .section__sub {
+      font-size: 17px; color: var(--c-neutral-600);
+      line-height: 1.65; max-width: 580px;
+    }
+    .text-center .section__sub { margin-left: auto; margin-right: auto; }
+    .section__header { margin-bottom: 48px; }
+
+    /* --- BUTTONS --- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 28px; border-radius: var(--r-full);
+      font-family: var(--font); font-size: 15px; font-weight: 600; line-height: 1;
+      cursor: pointer; border: 2px solid transparent;
+      transition: all .2s ease; white-space: nowrap;
+    }
+    .btn--yellow {
+      background: var(--c-tertiary); color: var(--c-secondary);
+      box-shadow: 0 4px 16px rgba(255,193,20,.35);
+    }
+    .btn--yellow:hover {
+      background: var(--c-tertiary-200); color: var(--c-secondary);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(255,193,20,.45);
+    }
+    .btn--dark {
+      background: var(--c-secondary); color: var(--c-white);
+    }
+    .btn--dark:hover {
+      background: var(--c-secondary-600); transform: translateY(-1px);
+    }
+    .btn--outline {
+      background: transparent; border-color: var(--c-secondary); color: var(--c-secondary);
+    }
+    .btn--outline:hover { background: var(--c-secondary); color: var(--c-white); }
+    .btn--ghost { background: transparent; color: var(--c-neutral-600); padding: 14px 12px; }
+    .btn--ghost:hover { color: var(--c-secondary); text-decoration: underline; }
+    .btn--lg { padding: 16px 36px; font-size: 16px; }
+    .btn--full { width: 100%; }
+
+    /* --- BADGE --- */
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: var(--r-full);
+      font-size: 12px; font-weight: 700;
+    }
+    .badge--yellow { background: var(--c-tertiary-100); color: #7a5a00; }
+    .badge--teal   { background: rgba(3,197,184,.12); color: var(--c-primary-600); }
+    .badge--hot    { background: var(--c-tertiary); color: #3a2800; font-size: 11px; }
+    .badge--outline {
+      background: rgba(255,255,255,.9); border: 1.5px solid var(--c-neutral-200);
+      color: var(--c-secondary); box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    /* ================================================
+       NAV — style kelkun.com
+       ================================================ */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--c-neutral-200);
+      padding: 0;
+      transition: box-shadow .25s;
+    }
+    .nav.scrolled { box-shadow: var(--sh-md); }
+    .nav__inner {
+      display: flex; align-items: center;
+      gap: 32px; height: 64px;
+    }
+    .nav__logo { height: 30px; width: auto; flex-shrink: 0; }
+    .nav__links {
+      display: flex; align-items: center; justify-content: center;
+      gap: 4px; flex: 1;
+    }
+    .nav__link {
+      font-size: 14px; font-weight: 600;
+      color: var(--c-secondary); opacity: .7;
+      padding: 8px 16px; border-radius: var(--r-full);
+      transition: all .15s;
+    }
+    .nav__link:hover { opacity: 1; background: var(--c-sky); }
+    .nav__cta { flex-shrink: 0; margin-left: auto; }
+    .nav__phone {
+      font-size: 13px; font-weight: 600; color: var(--c-secondary);
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    @media (max-width: 800px) {
+      .nav__links { display: none; }
+      .nav__phone { display: none; }
+    }
+
+    /* ================================================
+       HERO — style kelkun.com (fond sky + grande typo)
+       ================================================ */
+    .hero {
+      background: linear-gradient(180deg, var(--c-tertiary-50) 0%, var(--c-white) 100%);
+      padding: 64px 0 56px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,193,20,.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(3,197,184,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero__layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: center;
+      position: relative; z-index: 1;
+    }
+
+    .hero__badge { margin-bottom: 20px; }
+
+    .hero__title {
+      font-size: clamp(32px, 4.2vw, 52px);
+      font-weight: 700; line-height: 1.12;
+      color: var(--c-secondary); margin-bottom: 20px;
+    }
+    .hero__title .accent {
+      position: relative; display: inline;
+    }
+    .hero__title .accent::after {
+      content: ''; position: absolute;
+      left: 0; bottom: 2px;
+      width: 100%; height: 6px;
+      background: var(--c-tertiary);
+      border-radius: 3px;
+    }
+
+    .hero__sub {
+      font-size: 17px; color: var(--c-neutral-600);
+      line-height: 1.65; max-width: 480px;
+      margin-bottom: 32px;
+    }
+
+    .hero__actions {
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 12px; margin-bottom: 16px;
+    }
+    .hero__features {
+      display: flex; flex-direction: column; gap: 20px;
+      margin-bottom: 36px;
+    }
+    .hero__feature {
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .hero__feature-icon {
+      width: 44px; height: 44px; border-radius: var(--r-lg);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .hero__feature-icon--teal { background: rgba(3,197,184,.12); }
+    .hero__feature-icon--yellow { background: var(--c-tertiary-100); }
+    .hero__feature-icon--green { background: rgba(63,175,56,.1); }
+    .hero__feature-title {
+      font-size: 15px; font-weight: 700; color: var(--c-secondary);
+      margin-bottom: 2px;
+    }
+    .hero__feature-text {
+      font-size: 14px; color: var(--c-neutral-500); line-height: 1.5;
+    }
+
+    .hero__download {
+      margin-top: 28px; padding-top: 24px;
+      border-top: 1px solid rgba(14,47,88,.08);
+    }
+    .hero__download-label {
+      font-size: 13px; font-weight: 600; color: var(--c-neutral-400);
+      margin-bottom: 12px;
+    }
+    .hero__stores {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    }
+    .hero__stores a {
+      display: inline-flex;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .hero__stores a:hover {
+      transform: translateY(-2px); opacity: .85;
+    }
+    .hero__stores img {
+      height: 42px; width: auto;
+    }
+
+    /* Hero visual */
+    .hero__visual {
+      position: relative; display: flex;
+      justify-content: center; align-items: center;
+    }
+    .hero__visual-blob {
+      position: absolute; inset: -16px;
+      background: var(--c-tertiary-50);
+      border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+      z-index: 0;
+    }
+    .hero__visual img {
+      position: relative; z-index: 1;
+      max-height: 460px; object-fit: contain;
+      border-radius: var(--r-2xl);
+    }
+    .hero__chip {
+      position: absolute;
+      background: var(--c-white); border-radius: var(--r-lg);
+      padding: 10px 14px; box-shadow: var(--sh-lg);
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 600; z-index: 2;
+      animation: chip-float 3.5s ease-in-out infinite;
+    }
+    .hero__chip--top { top: 32px; right: -8px; color: var(--c-success); }
+    .hero__chip--bottom { bottom: 52px; left: -8px; color: var(--c-secondary); animation-delay: 1.8s; }
+    .hero__chip-icon {
+      width: 34px; height: 34px; border-radius: var(--r-md);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .hero__chip--top .hero__chip-icon { background: rgba(63,175,56,.12); }
+    .hero__chip--bottom .hero__chip-icon { background: var(--c-tertiary-100); }
+
+    @keyframes chip-float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+
+    @media (max-width: 900px) {
+      .hero__layout { grid-template-columns: 1fr; gap: 40px; }
+      .hero__visual { display: none; }
+    }
+
+    /* ================================================
+       TRUST BAR — logos / stats (style kelkun.com)
+       ================================================ */
+    /* --- MEDIA BAR (carrousel logos presse) --- */
+    .media-bar {
+      background: var(--c-white);
+      border-top: 1px solid var(--c-neutral-200);
+      border-bottom: 1px solid var(--c-neutral-200);
+      padding: 20px 0;
+      overflow: hidden;
+    }
+    .media-bar__label {
+      font-size: 12px; font-weight: 600; color: var(--c-neutral-400);
+      text-transform: uppercase; letter-spacing: .08em;
+      text-align: center; margin-bottom: 16px;
+    }
+    .media-bar__track {
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .media-bar__track img {
+      height: 28px; width: auto; object-fit: contain;
+      opacity: .45; filter: grayscale(100%);
+      transition: opacity .3s, filter .3s;
+    }
+    .media-bar__track img:hover {
+      opacity: .85; filter: grayscale(0%);
+    }
+    @media (max-width: 640px) {
+      .media-bar__track { gap: 24px; }
+      .media-bar__track img { height: 22px; }
+    }
+
+    /* ================================================
+       PAIN POINTS — style kelkun.com cards
+       ================================================ */
+    .pain-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .pain-card {
+      background: var(--c-white);
+      border: 1px solid var(--c-neutral-200);
+      border-radius: var(--r-2xl);
+      padding: 28px;
+      transition: box-shadow .25s;
+    }
+    .pain-card:hover { box-shadow: var(--sh-md); }
+    .pain-card__img {
+      position: relative;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      margin-bottom: 20px;
+      aspect-ratio: 16 / 10;
+    }
+    .pain-card__img img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .pain-card__badge {
+      position: absolute; top: 12px; left: 12px;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: var(--r-full);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--c-secondary);
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,.5);
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .pain-card__badge svg {
+      width: 16px; height: 16px; flex-shrink: 0;
+    }
+    .pain-card__title {
+      font-size: 18px; font-weight: 700;
+      color: var(--c-secondary); margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .pain-card__subtitle {
+      font-size: 15px; font-weight: 600;
+      color: var(--c-primary); line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .pain-card__text {
+      font-size: 14px; color: var(--c-neutral-600); line-height: 1.65;
+    }
+    @media (max-width: 700px) { .pain-grid { grid-template-columns: 1fr; } }
+
+    /* ================================================
+       BENEFITS — style kelkun.com (list with icons)
+       ================================================ */
+    .benefits-list {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 32px 48px;
+      max-width: 900px; margin: 0 auto;
+    }
+    .benefit-item {
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .benefit-item__icon {
+      width: 48px; height: 48px; border-radius: var(--r-xl);
+      background: var(--c-tertiary-100);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .benefit-item__title {
+      font-size: 16px; font-weight: 700;
+      color: var(--c-secondary); margin-bottom: 4px;
+    }
+    .benefit-item__text {
+      font-size: 14px; color: var(--c-neutral-600); line-height: 1.6;
+    }
+    .benefit-item__text strong { color: var(--c-secondary); font-weight: 600; }
+
+    @media (max-width: 640px) { .benefits-list { grid-template-columns: 1fr; gap: 24px; } }
+
+    /* ================================================
+       HOW IT WORKS — style kelkun.com (steps + line)
+       ================================================ */
+    .how-steps {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 40px; position: relative;
+    }
+    .how-steps::before {
+      content: ''; position: absolute;
+      top: 32px; left: calc(100%/6); right: calc(100%/6);
+      height: 3px;
+      background: linear-gradient(90deg, var(--c-tertiary) 0%, var(--c-tertiary-600) 100%);
+      border-radius: 2px; z-index: 0;
+    }
+    .how-step { text-align: center; position: relative; z-index: 1; }
+    .how-step__num {
+      width: 64px; height: 64px; border-radius: var(--r-full);
+      background: var(--c-white);
+      border: 3px solid var(--c-tertiary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--c-tertiary-600);
+      margin: 0 auto 18px;
+      box-shadow: 0 4px 16px rgba(255,193,20,.2);
+    }
+    .how-step__title {
+      font-size: 16px; font-weight: 700;
+      color: var(--c-secondary); margin-bottom: 8px;
+    }
+    .how-step__text { font-size: 14px; color: var(--c-neutral-600); line-height: 1.65; }
+
+    @media (max-width: 700px) {
+      .how-steps { grid-template-columns: 1fr; gap: 28px; }
+      .how-steps::before { display: none; }
+    }
+
+    /* ================================================
+       PRICING — style kelkun.com cards
+       ================================================ */
+    .pricing-plans {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; max-width: 1080px; margin: 0 auto;
+    }
+    .pricing-card {
+      background: var(--c-white);
+      border: 2px solid var(--c-neutral-200);
+      border-radius: var(--r-2xl);
+      padding: 36px 32px;
+      position: relative;
+    }
+    .pricing-card--featured {
+      border-color: var(--c-tertiary);
+      box-shadow: 0 0 0 4px rgba(255,193,20,.2), var(--sh-lg);
+    }
+    .pricing-card__name {
+      font-size: 22px; font-weight: 700;
+      color: var(--c-secondary); margin-bottom: 4px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 8px;
+    }
+    .pricing-card--featured .pricing-card__name { color: var(--c-tertiary-600); }
+    .pricing-card__price {
+      display: flex; align-items: baseline; gap: 4px;
+      margin-bottom: 24px;
+    }
+    .pricing-card__amount {
+      font-size: 42px; font-weight: 700;
+      color: var(--c-secondary); line-height: 1;
+    }
+    .pricing-card__currency { font-size: 20px; font-weight: 700; color: var(--c-secondary); }
+    .pricing-card__period { font-size: 14px; color: var(--c-neutral-500); }
+    .pricing-card__hr {
+      border: none; border-top: 1px solid var(--c-neutral-200);
+      margin: 0 0 24px;
+    }
+    .pricing-features { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+    .pricing-feature {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: var(--c-neutral-600); line-height: 1.5;
+    }
+    .pricing-feature strong { color: var(--c-secondary); font-weight: 600; }
+    .pricing-feature__check {
+      width: 22px; height: 22px; border-radius: var(--r-full);
+      background: rgba(63,175,56,.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .pricing-card__cta { margin-bottom: 12px; }
+    .pricing-card__guarantee {
+      font-size: 12px; color: var(--c-neutral-500);
+      display: flex; align-items: center; justify-content: center;
+      gap: 5px; text-align: center;
+    }
+
+    .trust-row {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 16px 32px; margin-top: 40px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; color: var(--c-neutral-500);
+    }
+
+    @media (max-width: 900px) {
+      .pricing-plans { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .trust-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    }
+
+    /* ================================================
+       TESTIMONIALS — style kelkun.com card grid
+       ================================================ */
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .testimonial-card {
+      background: var(--c-white);
+      border: 1px solid var(--c-neutral-200);
+      border-radius: var(--r-2xl);
+      padding: 28px;
+      transition: box-shadow .25s;
+    }
+    .testimonial-card:hover { box-shadow: var(--sh-md); }
+    .testimonial-card__stars {
+      color: var(--c-tertiary); font-size: 16px;
+      letter-spacing: 2px; margin-bottom: 14px;
+    }
+    .testimonial-card__quote {
+      font-size: 14px; line-height: 1.7;
+      color: var(--c-neutral-600); margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-card__author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-card__avatar {
+      width: 44px; height: 44px; border-radius: var(--r-full);
+      background: var(--c-tertiary-100);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; color: var(--c-tertiary-600);
+      flex-shrink: 0;
+    }
+    .testimonial-card__name { font-size: 14px; font-weight: 600; color: var(--c-secondary); }
+    .testimonial-card__job { font-size: 12px; color: var(--c-neutral-500); }
+
+    @media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+    /* ================================================
+       FAQ — style kelkun.com accordion
+       ================================================ */
+    .faq-list {
+      display: flex; flex-direction: column;
+      gap: 10px; max-width: 740px; margin: 0 auto;
+    }
+    details.faq-item {
+      border: 1px solid var(--c-neutral-200);
+      border-radius: var(--r-xl); overflow: hidden;
+      background: var(--c-white);
+      transition: border-color .2s;
+    }
+    details.faq-item[open] { border-color: var(--c-tertiary); }
+    summary.faq-q {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+      padding: 20px 24px;
+      font-size: 15px; font-weight: 600; color: var(--c-secondary);
+      cursor: pointer; list-style: none;
+      transition: background .15s;
+    }
+    summary.faq-q:hover { background: var(--c-tertiary-50); }
+    summary.faq-q::-webkit-details-marker { display: none; }
+    .faq-q__icon {
+      width: 28px; height: 28px;
+      border: 2px solid var(--c-neutral-300);
+      border-radius: var(--r-full);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 16px; font-weight: 400;
+      color: var(--c-neutral-500); line-height: 1;
+      transition: all .25s;
+    }
+    details[open] .faq-q__icon {
+      border-color: var(--c-tertiary); color: var(--c-tertiary-600);
+      transform: rotate(45deg);
+    }
+    .faq-a {
+      padding: 4px 24px 22px;
+      font-size: 14px; color: var(--c-neutral-600);
+      line-height: 1.75;
+    }
+    .faq-a a { color: var(--c-tertiary-600); text-decoration: underline; }
+
+    /* ================================================
+       FINAL CTA — style kelkun.com (navy bg)
+       ================================================ */
+    .final-cta {
+      background: var(--c-secondary);
+      padding: 80px 24px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .final-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 65% 50%, rgba(255,193,20,.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .final-cta__eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--c-tertiary);
+      margin-bottom: 14px; position: relative;
+    }
+    .final-cta__title {
+      font-size: clamp(26px, 3.5vw, 44px);
+      font-weight: 700; color: var(--c-white);
+      line-height: 1.2; margin-bottom: 16px;
+      max-width: 600px; margin-left: auto; margin-right: auto;
+      position: relative;
+    }
+    .final-cta__sub {
+      font-size: 17px; color: rgba(255,255,255,.6);
+      margin-bottom: 36px; max-width: 480px;
+      margin-left: auto; margin-right: auto; position: relative;
+    }
+    .final-cta__actions {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 14px; position: relative;
+    }
+    .final-cta__guarantee {
+      font-size: 13px; color: rgba(255,255,255,.4);
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ================================================
+       FOOTER — style kelkun.com
+       ================================================ */
+    .footer { background: #030c16; padding: 36px 0 28px; }
+    .footer__inner {
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 20px;
+      margin-bottom: 20px;
+    }
+    .footer__logo { height: 26px; opacity: .55; filter: brightness(10); }
+    .footer__links { display: flex; flex-wrap: wrap; gap: 20px; }
+    .footer__link {
+      font-size: 13px; color: rgba(255,255,255,.4);
+      transition: color .15s;
+    }
+    .footer__link:hover { color: rgba(255,255,255,.75); }
+    .footer__copy {
+      font-size: 12px; color: rgba(255,255,255,.25);
+      text-align: center; padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    /* ================================================
+       MOBILE STICKY CTA
+       ================================================ */
+    .mobile-cta {
+      display: none; position: fixed;
+      bottom: 0; left: 0; right: 0; z-index: 90;
+      background: var(--c-white);
+      border-top: 1px solid var(--c-neutral-200);
+      padding: 12px 16px;
+      box-shadow: 0 -6px 24px rgba(0,0,0,.08);
+    }
+    .mobile-cta__inner {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px;
+    }
+    .mobile-cta__label { font-size: 14px; font-weight: 600; color: var(--c-secondary); }
+    .mobile-cta__sub { font-size: 11px; color: var(--c-neutral-500); }
+    @media (max-width: 768px) {
+      .mobile-cta { display: block; }
+      body { padding-bottom: 76px; }
+    }
+
+    /* --- SVG helpers --- */
+    .icon-check { display: block; }
+    .text-yellow { color: var(--c-tertiary-600); }
+
+    /* --- Video embed --- */
+    .video-section { background: var(--c-white); padding: 48px 0 60px; }
+    .video-wrapper { max-width: 800px; margin: 0 auto; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--r-xl); box-shadow: 0 4px 24px rgba(14,47,88,.10); }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: var(--r-xl); }
+
+    /* ================================================
+       TIMELINE — "Energy Flow" scroll animation
+       ================================================ */
+    .timeline {
+      position: relative;
+      padding: 0 0 40px;
+    }
+    .timeline__track {
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 3px;
+      background: var(--c-neutral-200);
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    .timeline__fill {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 3px;
+      height: 0%;
+      background: linear-gradient(180deg, var(--c-secondary) 0%, var(--c-tertiary) 100%);
+      transform: translateX(-50%);
+      border-radius: 2px;
+      transition: height .1s linear;
+    }
+    .timeline__fill::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translate(-50%, 50%);
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--c-tertiary);
+      box-shadow: 0 0 16px 6px rgba(255,193,20,.5), 0 0 32px 12px rgba(255,193,20,.2);
+      animation: tl-pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes tl-pulse {
+      0%, 100% { box-shadow: 0 0 16px 6px rgba(255,193,20,.5), 0 0 32px 12px rgba(255,193,20,.2); }
+      50% { box-shadow: 0 0 24px 10px rgba(255,193,20,.7), 0 0 48px 18px rgba(255,193,20,.3); }
+    }
+
+    .timeline__step {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+      position: relative;
+      margin-bottom: 64px;
+    }
+    .timeline__step:last-child { margin-bottom: 0; }
+
+    /* Alternating layout */
+    .timeline__step:nth-child(odd) { flex-direction: row; }
+    .timeline__step:nth-child(even) { flex-direction: row-reverse; }
+    .timeline__step:nth-child(odd) .timeline__card { margin-right: calc(50% + 40px); }
+    .timeline__step:nth-child(even) .timeline__card { margin-left: calc(50% + 40px); }
+
+    .timeline__dot {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      border: 3px solid var(--c-neutral-300);
+      background: var(--c-white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700;
+      color: var(--c-neutral-400);
+      z-index: 2;
+      transition: all .4s cubic-bezier(.34,1.56,.64,1);
+    }
+    .timeline__dot--active {
+      border-color: var(--c-tertiary);
+      background: var(--c-tertiary);
+      color: var(--c-secondary);
+      box-shadow: 0 0 0 6px rgba(255,193,20,.25), 0 4px 16px rgba(255,193,20,.35);
+    }
+    .timeline__dot--active.timeline__dot--just-activated {
+      animation: tl-ripple .6s ease-out;
+    }
+    @keyframes tl-ripple {
+      0% { box-shadow: 0 0 0 0 rgba(255,193,20,.6), 0 4px 16px rgba(255,193,20,.35); }
+      70% { box-shadow: 0 0 0 18px rgba(255,193,20,0), 0 4px 16px rgba(255,193,20,.35); }
+      100% { box-shadow: 0 0 0 6px rgba(255,193,20,.25), 0 4px 16px rgba(255,193,20,.35); }
+    }
+
+    .timeline__card {
+      flex: 1;
+      max-width: calc(50% - 66px);
+      background: var(--c-white);
+      border: 1px solid var(--c-neutral-200);
+      border-radius: var(--r-2xl);
+      padding: 32px;
+      opacity: .35;
+      transform: scale(.97);
+      transition: all .5s cubic-bezier(.34,1.56,.64,1);
+    }
+    .timeline__card--active {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: var(--sh-md);
+    }
+    .timeline__card-eyebrow {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--c-tertiary-600);
+      margin-bottom: 8px;
+    }
+    .timeline__card h3 {
+      font-size: 20px; font-weight: 700;
+      color: var(--c-secondary);
+      margin-bottom: 10px; line-height: 1.3;
+    }
+    .timeline__card p { font-size: 15px; color: var(--c-neutral-600); line-height: 1.65; }
+    .timeline__card-img {
+      margin-top: 20px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+    .timeline__card-img img {
+      width: 100%; height: auto; display: block;
+      border-radius: var(--r-xl);
+      object-fit: cover;
+    }
+
+    /* ================================================
+       UGC — Video testimonials (style kelkun.com)
+       ================================================ */
+    .ugc { background: var(--c-sky); padding: 80px 0; }
+    .ugc__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .ugc__card {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 18px 40px -32px rgba(14,47,88,.28);
+      border: 1px solid rgba(232,241,243,.6);
+      cursor: pointer;
+    }
+    .ugc__card video,
+    .ugc__card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .ugc__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.1) 40%, transparent);
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .ugc__card.playing .ugc__overlay,
+    .ugc__card.playing .ugc__play { opacity: 0; pointer-events: none; }
+    .ugc__play {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2;
+      transition: opacity .3s;
+    }
+    .ugc__play-btn {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--c-tertiary);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(255,193,20,.4);
+      transition: transform .2s;
+    }
+    .ugc__card:hover .ugc__play-btn { transform: scale(1.08); }
+    .ugc__play-btn svg { margin-left: 3px; }
+    .ugc__caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 16px 18px;
+      z-index: 2;
+    }
+    .ugc__caption-name {
+      font-size: 14px; font-weight: 700;
+      color: #fff;
+    }
+    .ugc__caption-job {
+      font-size: 12px; color: rgba(255,255,255,.7);
+    }
+
+    @media (max-width: 700px) {
+      .ugc__grid { grid-template-columns: 1fr; max-width: 280px; }
+    }
+    @media (min-width: 701px) and (max-width: 900px) {
+      .ugc__grid { max-width: 600px; }
+    }
+
+    /* Timeline responsive */
+    @media (max-width: 900px) {
+      .timeline__track,
+      .timeline__fill { left: 26px; }
+      .timeline__step,
+      .timeline__step:nth-child(odd),
+      .timeline__step:nth-child(even) {
+        flex-direction: row !important;
+        padding-left: 76px;
+        gap: 0;
+      }
+      .timeline__step:nth-child(odd) .timeline__card,
+      .timeline__step:nth-child(even) .timeline__card {
+        margin-left: 0; margin-right: 0;
+        max-width: 100%;
+      }
+      .timeline__dot {
+        left: 26px;
+        width: 44px; height: 44px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========== NAV ========== -->
+  <header class="nav" id="js-nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#" aria-label="Kelkun">
+          <img src="../landing_1/assets/logo-kelkun.svg" alt="Kelkun" class="nav__logo">
+        </a>
+        <nav class="nav__links" aria-label="Menu">
+          <a href="#avantages" class="nav__link">Avantages</a>
+          <a href="#process" class="nav__link">Comment ça marche</a>
+          <a href="#tarifs" class="nav__link">Tarifs</a>
+          <a href="#faq" class="nav__link">FAQ</a>
+        </nav>
+        <span class="nav__phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          09 78 45 27 40
+        </span>
+        <a href="#tarifs" class="btn btn--yellow nav__cta">Commencer gratuitement</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__layout">
+
+          <!-- Content -->
+          <div class="hero__content">
+            <div class="hero__badge">
+              <span class="badge" style="background:var(--c-secondary);color:var(--c-white);">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="#3faf38" aria-hidden="true"><circle cx="4" cy="4" r="4"/></svg>
+                FINI LA PROSPECTION
+              </span>
+            </div>
+
+            <h1 class="hero__title">
+              Vos clients viennent<br>à <span class="accent">vous.</span>
+            </h1>
+
+            <p class="hero__sub">
+              Recevez des demandes de chantiers qualifiés près de chez vous.<br>
+              Un abonnement simple qui se rembourse dès le premier chantier.
+            </p>
+
+            <div class="hero__features">
+              <div class="hero__feature">
+                <div class="hero__feature-icon hero__feature-icon--teal">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div>
+                  <p class="hero__feature-title">Pas de concurrence entre pros</p>
+                  <p class="hero__feature-text">Les clients vous choisissent, pas un algorithme</p>
+                </div>
+              </div>
+              <div class="hero__feature">
+                <div class="hero__feature-icon hero__feature-icon--yellow">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-tertiary-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+                </div>
+                <div>
+                  <p class="hero__feature-title">Commission à 15 % seulement</p>
+                  <p class="hero__feature-text">Plus vous travaillez, plus vous économisez</p>
+                </div>
+              </div>
+              <div class="hero__feature">
+                <div class="hero__feature-icon hero__feature-icon--green">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
+                </div>
+                <div>
+                  <p class="hero__feature-title">5 crédits inclus chaque mois</p>
+                  <p class="hero__feature-text">L'abonnement se rembourse tout seul</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero__actions">
+              <a href="#tarifs" class="btn btn--yellow btn--lg">
+                Commencer gratuitement — 0 €
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/>
+                </svg>
+              </a>
+              <a href="#process" class="btn btn--ghost">Voir comment ça marche</a>
+            </div>
+
+            <div class="hero__download">
+              <p class="hero__download-label">Disponible sur mobile, inscrivez-vous en 5 min</p>
+              <div class="hero__stores">
+                <a href="https://apps.apple.com/fr/app/kelkun/id6478332228?utm_source=kelkun&utm_medium=App%20Store&utm_campaign=landing-pro" target="_blank" rel="noopener noreferrer" title="Télécharger Kelkun sur l'App Store" aria-label="Télécharger Kelkun sur l'App Store">
+                  <img src="../landing_1/assets/appstore-download-light.png" alt="Télécharger sur App Store">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.kelkun.kelkun&referrer=utm_source%3Dkelkun%26utm_medium%3DGoogle%2520Play%26utm_campaign%3Dlanding-pro" target="_blank" rel="noopener noreferrer" title="Télécharger Kelkun sur Google Play" aria-label="Télécharger Kelkun sur Google Play">
+                  <img src="../landing_1/assets/playstore-download-light.png" alt="Télécharger sur Google Play">
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual -->
+          <div class="hero__visual" aria-hidden="true">
+            <div class="hero__visual-blob"></div>
+            <img src="../landing_1/assets/homepage-kelkun-app-mobile.webp" alt="Application Kelkun Pro sur mobile">
+            <div class="hero__chip hero__chip--top">
+              <div class="hero__chip-icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="#3faf38"><path d="M9 0a9 9 0 100 18A9 9 0 009 0zm3.94 7.06l-4.5 4.5a.84.84 0 01-1.19 0l-2.19-2.19a.843.843 0 011.19-1.19L8.84 9.78l3.91-3.9a.843.843 0 011.19 1.18z"/></svg>
+              </div>
+              Nouveau chantier reçu
+            </div>
+            <div class="hero__chip hero__chip--bottom">
+              <div class="hero__chip-icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="#e0a500"><path d="M9 0C5.69 0 3 2.69 3 6c0 4.22 5.4 10.8 5.64 11.08a.45.45 0 00.72 0C9.6 16.8 15 10.22 15 6c0-3.31-2.69-6-6-6zm0 8.25A2.25 2.25 0 119 3.75 2.25 2.25 0 019 8.25z"/></svg>
+              </div>
+              Visible dans votre zone
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== MEDIA BAR ========== -->
+    <section class="media-bar">
+      <p class="media-bar__label">Ils parlent de nous</p>
+      <div class="container">
+        <div class="media-bar__track">
+          <img src="../landing_1/assets/media-france-3.png" alt="France 3" title="France 3">
+          <img src="../landing_1/assets/media-logo-bfmtv.png" alt="BFMTV" title="BFMTV">
+          <img src="../landing_1/assets/media-les-echos.png" alt="Les Echos" title="Les Echos">
+          <img src="../landing_1/assets/media-le-parisien.png" alt="Le Parisien" title="Le Parisien">
+          <img src="../landing_1/assets/media-midi-libre.png" alt="Midi Libre" title="Midi Libre">
+          <img src="../landing_1/assets/media-ouest-france.png" alt="Ouest-France" title="Ouest-France">
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== VIDEO ========== -->
+    <section class="video-section">
+      <div class="container">
+        <div class="video-wrapper">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/edhIyTZVjuk?si=ESLTneCRw_5TMkWq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PAIN POINTS ========== -->
+    <section class="section section--sky">
+      <div class="container">
+        <div class="section__header text-center">
+          <p class="section__eyebrow">Vous vous reconnaissez ?</p>
+          <h2 class="section__title">La prospection, ça dévore votre temps. Et vos marges.</h2>
+          <p class="section__sub">La plupart des artisans perdent <b>5 à 10 h par semaine</b> à chercher des clients — sans garantie de résultat.</p>
+        </div>
+        <div class="pain-grid">
+          <div class="pain-card">
+            <div class="pain-card__img">
+              <img src="../../img/trop-de-temps.webp" alt="Trop de temps à prospecter">
+            </div>
+            <h3 class="pain-card__title">Trop de temps à prospecter</h3>
+            <p class="pain-card__subtitle">Vous appelez, vous relancez… et ça n'avance pas.</p>
+            <p class="pain-card__text">Les appels à froid, les devis perdus, les plateformes à gérer… Vous êtes un pro du bâtiment, pas commercial à plein temps.</p>
+          </div>
+          <div class="pain-card">
+            <div class="pain-card__img">
+              <img src="../../img/mise-en-concurrence.webp" alt="Mis en concurrence">
+            </div>
+            <h3 class="pain-card__title">Mis en concurrence à chaque devis</h3>
+            <p class="pain-card__subtitle">Vous ne savez jamais si le client va vous choisir.</p>
+            <p class="pain-card__text">Sur les autres plateformes, la même demande est envoyée à 3, 5, voire 10 professionnels. Vous êtes le plan B.</p>
+          </div>
+          <div class="pain-card">
+            <div class="pain-card__img">
+              <img src="../../img/commissions-qui-plombent.webp" alt="Commissions élevées">
+            </div>
+            <h3 class="pain-card__title">Des commissions qui plombent les marges</h3>
+            <p class="pain-card__subtitle">20 % sur chaque urgence, ça s'accumule vite.</p>
+            <p class="pain-card__text">20 % sur chaque urgence ou dépannage, ça s'accumule. Surtout quand le client ne revient pas directement vers vous.</p>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top: 48px;">
+          <p style="font-size: 18px; font-weight: 600; color: var(--c-secondary); margin-bottom: 6px;">
+            Ça vous parle ? On a exactement ce qu'il vous faut.
+          </p>
+          <p style="font-size: 14px; color: var(--c-neutral-500); margin-bottom: 20px;">
+            Un abonnement simple ou une offre gratuite pour démarrer.
+          </p>
+          <a href="signup.html" class="btn btn--yellow btn--lg">
+            Commencer gratuitement
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== HOW IT WORKS — Timeline "Energy Flow" ========== -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section__header text-center">
+          <p class="section__eyebrow">Comment ça se passe</p>
+          <h2 class="section__title">Opérationnel en 3 étapes. Premiers chantiers rapidement.</h2>
+          <p class="section__sub">Votre profil est prêt en 5 minutes, les demandes arrivent toutes seules. Pas de prise de tête.</p>
+        </div>
+
+        <div class="timeline" id="js-timeline">
+          <!-- Track background -->
+          <div class="timeline__track"></div>
+          <!-- Animated fill -->
+          <div class="timeline__fill" id="js-timeline-fill"></div>
+
+          <!-- Step 1 -->
+          <div class="timeline__step" data-step="0">
+            <div class="timeline__dot">1</div>
+            <div class="timeline__card">
+              <p class="timeline__card-eyebrow">Étape 1</p>
+              <h3>Créez votre profil pro</h3>
+              <p>Ajoutez vos photos de réalisations, certifications et zone d'intervention. En 5 minutes, vous êtes visible pour tous les clients de votre secteur.</p>
+              <div class="timeline__card-img">
+                <img src="../../img/pic 1.webp" alt="Artisan créant son profil pro Kelkun">
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="timeline__step" data-step="1">
+            <div class="timeline__dot">2</div>
+            <div class="timeline__card">
+              <p class="timeline__card-eyebrow">Étape 2</p>
+              <h3>Recevez les demandes en direct</h3>
+              <p>Les clients de votre zone trouvent votre profil sur la carte Kelkun et vous contactent directement. Pas de concurrence, pas d'intermédiaire.</p>
+              <div class="timeline__card-img">
+                <img src="../../img/pic 2.webp" alt="Professionnel recevant une demande client">
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="timeline__step" data-step="2">
+            <div class="timeline__dot">3</div>
+            <div class="timeline__card">
+              <p class="timeline__card-eyebrow">Étape 3</p>
+              <h3>Décrochez vos chantiers</h3>
+              <p>Échangez avec le client, confirmez la mission, gardez la relation. Vous développez votre activité sans effort de prospection.</p>
+              <div class="timeline__card-img">
+                <img src="../../img/pic 3.webp" alt="Artisan confirmant un chantier avec un client">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="text-align:center; margin-top: 44px;">
+          <a href="signup.html" class="btn btn--yellow btn--lg">
+            Créer mon profil gratuitement
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/>
+            </svg>
+          </a>
+          <p style="margin-top:12px; font-size:13px; color:var(--c-neutral-500);">
+            Profil créé en 5 min · Premiers clients dès aujourd'hui
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== UGC — Témoignages vidéo ========== -->
+    <section class="ugc" aria-label="Témoignages vidéo clients">
+      <div class="container">
+        <div class="section__header text-center">
+          <p class="section__eyebrow">Avis clients</p>
+          <h2 class="section__title">Ils ont testé Kelkun et ils vous en parlent</h2>
+          <p class="section__sub">Des professionnels comme vous racontent leur expérience.</p>
+        </div>
+
+        <div class="ugc__grid">
+
+          <div class="ugc__card" data-video>
+            <video src="../../img/Jun-18-2025 11-08-31.mp4" preload="metadata" playsinline muted loop></video>
+            <div class="ugc__overlay"></div>
+            <div class="ugc__play">
+              <div class="ugc__play-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#0e2f58"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+              </div>
+            </div>
+            <div class="ugc__caption">
+              <p class="ugc__caption-name">Témoignage 1</p>
+              <p class="ugc__caption-job">Professionnel Kelkun</p>
+            </div>
+          </div>
+
+          <div class="ugc__card" data-video>
+            <video src="../../img/Jun-18-2025 11-15-00.mp4" preload="metadata" playsinline muted loop></video>
+            <div class="ugc__overlay"></div>
+            <div class="ugc__play">
+              <div class="ugc__play-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#0e2f58"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+              </div>
+            </div>
+            <div class="ugc__caption">
+              <p class="ugc__caption-name">Témoignage 2</p>
+              <p class="ugc__caption-job">Professionnel Kelkun</p>
+            </div>
+          </div>
+
+          <div class="ugc__card" data-video>
+            <video src="../../img/Jun-18-2025 11-24-25.mp4" preload="metadata" playsinline muted loop></video>
+            <div class="ugc__overlay"></div>
+            <div class="ugc__play">
+              <div class="ugc__play-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#0e2f58"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+              </div>
+            </div>
+            <div class="ugc__caption">
+              <p class="ugc__caption-name">Témoignage 3</p>
+              <p class="ugc__caption-job">Professionnel Kelkun</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BENEFITS / USPs ========== -->
+    <section class="section" id="avantages">
+      <div class="container">
+        <div class="section__header text-center">
+          <p class="section__eyebrow">La solution Kelkun Pro</p>
+          <h2 class="section__title">Tout ce qui change avec votre abonnement</h2>
+          <p class="section__sub">Un seul abonnement pour <b>remplir votre carnet de commandes</b>, sans effort de prospection.</p>
+        </div>
+
+        <div class="benefits-list">
+
+          <div class="benefit-item">
+            <div class="benefit-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0e2f58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <h3 class="benefit-item__title">Les clients viennent à vous</h3>
+              <p class="benefit-item__text">Votre profil s'affiche sur la carte Kelkun pour tous les clients de votre zone. Ils vous trouvent, ils vous contactent. <strong>Plus besoin de prospecter.</strong></p>
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0e2f58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h3 class="benefit-item__title">Ils vous choisissent. Sans concurrence.</h3>
+              <p class="benefit-item__text">Les clients envoient leur demande <strong>sur votre profil uniquement.</strong> Vous êtes leur choix, pas leur plan B.</p>
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0e2f58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div>
+              <h3 class="benefit-item__title">L'abonnement se rembourse tout seul</h3>
+              <p class="benefit-item__text"><strong>5 Kredits inclus chaque mois</strong>, soit 35 € de valeur offerte. L'abonnement Master se rembourse dès le premier chantier décroché.</p>
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0e2f58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+            </div>
+            <div>
+              <h3 class="benefit-item__title">Commission réduite à 15 %</h3>
+              <p class="benefit-item__text">La commission passe <strong>de 20 % à 15 %</strong> sur chaque Urgence ou Dépannage. Plus vous travaillez, plus vous économisez.</p>
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-item__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0e2f58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <h3 class="benefit-item__title">Premiers résultats locaux. Toujours.</h3>
+              <p class="benefit-item__text">Votre profil s'affiche en tête des résultats pour votre zone. <strong>Impossible pour vos clients de vous rater.</strong></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="section section--sky">
+      <div class="container">
+        <div class="section__header text-center">
+          <p class="section__eyebrow">Ils ont testé, ils ont adopté</p>
+          <h2 class="section__title">Ce que les pros disent de Kelkun Pro</h2>
+        </div>
+        <div class="testimonials-grid">
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p class="testimonial-card__quote">
+              "J'ai décroché 3 chantiers dès la première semaine. L'abonnement s'est remboursé en 48 h.
+              La différence avec les autres plateformes ? Personne ne me met en concurrence."
+            </p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar">B</div>
+              <div>
+                <p class="testimonial-card__name">Benoit M.</p>
+                <p class="testimonial-card__job">Électricien · Toulouse</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p class="testimonial-card__quote">
+              "En tant qu'architecte d'intérieur, j'avais du mal à me démarquer localement.
+              Avec Kelkun, mon profil est en tête et les demandes arrivent directement — exactement ce qu'il me fallait."
+            </p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar">S</div>
+              <div>
+                <p class="testimonial-card__name">Sophie L.</p>
+                <p class="testimonial-card__job">Architecte d'intérieur · Lyon</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p class="testimonial-card__quote">
+              "La commission à 12 % sur le Premium, c'est vraiment un plus sur les urgences.
+              Sur le mois, ça représente 200–300 € d'économies. L'abonnement est largement rentabilisé."
+            </p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar">K</div>
+              <div>
+                <p class="testimonial-card__name">Karim D.</p>
+                <p class="testimonial-card__job">Plombier chauffagiste · Bordeaux</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PRICING ========== -->
+    <section class="section" id="tarifs">
+      <div class="container">
+        <div class="section__header text-center">
+          <p class="section__eyebrow">Choisissez votre formule</p>
+          <h2 class="section__title">Une offre gratuite, deux formules pour aller plus loin</h2>
+          <p class="section__sub">
+            Commencez gratuitement. Passez à Master ou Premium quand vous êtes prêt — <strong>14 jours offerts sur les deux.</strong>
+          </p>
+        </div>
+
+        <div class="pricing-plans">
+
+          <!-- GRATUIT -->
+          <div class="pricing-card">
+            <h3 class="pricing-card__name">
+              <span style="display:flex;align-items:center;gap:8px">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0e2f58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Gratuit
+              </span>
+            </h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">0</span>
+              <span class="pricing-card__currency">€</span>
+              <span class="pricing-card__period">/ mois</span>
+            </div>
+            <p style="font-size:12px; color:var(--c-neutral-500); margin-top:-16px; margin-bottom:24px;">Pour toujours · Sans engagement</p>
+            <hr class="pricing-card__hr">
+            <ul class="pricing-features">
+              <li class="pricing-feature">
+                <span class="pricing-feature__check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span>Profil <strong>basique</strong> dans l'annuaire Kelkun</span>
+              </li>
+              <li class="pricing-feature">
+                <span class="pricing-feature__check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span>Demandes clients via la plateforme</span>
+              </li>
+              <li class="pricing-feature">
+                <span class="pricing-feature__check" style="background:var(--c-neutral-100);"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="var(--c-neutral-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span>Commission standard à <strong>20 %</strong></span>
+              </li>
+              <li class="pricing-feature">
+                <span class="pricing-feature__check" style="background:var(--c-neutral-100);"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="var(--c-neutral-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span style="color:var(--c-neutral-400);">Pas de Kredits inclus</span>
+              </li>
+            </ul>
+            <div class="pricing-card__cta">
+              <a href="signup.html?plan=gratuit" class="btn btn--outline btn--full">Créer mon profil gratuit</a>
+            </div>
+          </div>
+
+          <!-- MASTER -->
+          <div class="pricing-card">
+            <h3 class="pricing-card__name">
+              <span style="display:flex;align-items:center;gap:8px">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="#ffc114" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                Master
+              </span>
+              <span class="badge badge--teal">✦ Populaire</span>
+            </h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__currency">29 €</span>
+              <span class="pricing-card__period">/ mois</span>
+            </div>
+            <hr class="pricing-card__hr">
+            <ul class="pricing-features">
+              <li class="pricing-feature">
+                <span class="pricing-feature__check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span>Profil <strong>mis en avant</strong> dans l'annuaire Kelkun</span>
+              </li>
+              <li class="pricing-feature">
+                <span class="pricing-feature__check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span>Demandes clients <strong>en direct</strong> — sans concurrence</span>
+              </li>
+              <li class="pricing-feature">
+                <span class="pricing-feature__check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span><strong>+5 Kredits offerts / mois</strong> — valeur 35 €</span>
+              </li>
+              <li class="pricing-feature">
+                <span class="pricing-feature__check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span>Commission réduite à <strong>15 %</strong> (vs 20 % standard)</span>
+              </li>
+            </ul>
+            <div class="pricing-card__cta">
+              <a href="signup.html?plan=master" class="btn btn--yellow btn--full">Essayer Master gratuitement</a>
+            </div>
+            <p class="pricing-card__guarantee">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="#3faf38"><path d="M6.5 0a6.5 6.5 0 100 13A6.5 6.5 0 006.5 0zm2.85 5.28l-3.25 3.25a.65.65 0 01-.92 0l-1.63-1.63a.65.65 0 01.92-.92l1.17 1.17 2.79-2.79a.65.65 0 01.92.92z"/></svg>
+              Résiliez avant 14 jours = 0 € débité. Garanti.
+            </p>
+          </div>
+
+          <!-- PREMIUM -->
+          <div class="pricing-card pricing-card--featured">
+            <h3 class="pricing-card__name">
+              <span style="display:flex;align-items:center;gap:8px">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#e0a500" aria-hidden="true"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 3h14v2H5v-2z"/></svg>
+                Premium
+              </span>
+              <span class="badge badge--hot">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/></svg>
+                Tout en un
+              </span>
+            </h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__currency" style="color:var(--c-tertiary-600)">79 €</span>
+              <span class="pricing-card__period">/ mois</span>
+            </div>
+            <hr class="pricing-card__hr">
+            <ul class="pricing-features">
+              <li class="pricing-feature">
+                <span class="pricing-feature__check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span><strong>Tout Master</strong>, plus :</span>
+              </li>
+              <li class="pricing-feature">
+                <span class="pricing-feature__check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span><strong>+10 Kredits offerts / mois</strong></span>
+              </li>
+              <li class="pricing-feature">
+                <span class="pricing-feature__check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span>Commission réduite à <strong>12 %</strong></span>
+              </li>
+              <li class="pricing-feature">
+                <span class="pricing-feature__check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span>Visibilité <strong>maximale</strong> dans votre zone</span>
+              </li>
+              <li class="pricing-feature">
+                <span class="pricing-feature__check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#3faf38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.5 2.5L9 1"/></svg></span>
+                <span><strong>E-secrétariat</strong> : gestion des demandes Kelkun</span>
+              </li>
+            </ul>
+            <div class="pricing-card__cta">
+              <a href="signup.html?plan=premium" class="btn btn--yellow btn--full">Essayer Premium gratuitement</a>
+            </div>
+            <p class="pricing-card__guarantee">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="#3faf38"><path d="M6.5 0a6.5 6.5 0 100 13A6.5 6.5 0 006.5 0zm2.85 5.28l-3.25 3.25a.65.65 0 01-.92 0l-1.63-1.63a.65.65 0 01.92-.92l1.17 1.17 2.79-2.79a.65.65 0 01.92.92z"/></svg>
+              Résiliez avant 14 jours = 0 € débité. Garanti.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="trust-row">
+          <div class="trust-item">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="#3faf38"><path d="M7.5 0a7.5 7.5 0 100 15A7.5 7.5 0 007.5 0zm3.28 6.1l-3.75 3.75a.7.7 0 01-.99 0l-1.82-1.82a.703.703 0 01.99-.99l1.32 1.32 3.26-3.26a.703.703 0 01.99.99z"/></svg>
+            Sans engagement de durée
+          </div>
+          <div class="trust-item">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="#3faf38"><path d="M7.5 0a7.5 7.5 0 100 15A7.5 7.5 0 007.5 0zm3.28 6.1l-3.75 3.75a.7.7 0 01-.99 0l-1.82-1.82a.703.703 0 01.99-.99l1.32 1.32 3.26-3.26a.703.703 0 01.99.99z"/></svg>
+            Résiliation en 1 clic
+          </div>
+          <div class="trust-item">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="#3faf38"><path d="M7.5 0a7.5 7.5 0 100 15A7.5 7.5 0 007.5 0zm3.28 6.1l-3.75 3.75a.7.7 0 01-.99 0l-1.82-1.82a.703.703 0 01.99-.99l1.32 1.32 3.26-3.26a.703.703 0 01.99.99z"/></svg>
+            Support 7j/7
+          </div>
+          <div class="trust-item">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="#3faf38"><path d="M7.5 0a7.5 7.5 0 100 15A7.5 7.5 0 007.5 0zm3.28 6.1l-3.75 3.75a.7.7 0 01-.99 0l-1.82-1.82a.703.703 0 01.99-.99l1.32 1.32 3.26-3.26a.703.703 0 01.99.99z"/></svg>
+            Paiement 100 % sécurisé
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section class="section section--warm" id="faq">
+      <div class="container">
+        <div class="section__header text-center">
+          <p class="section__eyebrow">Vos questions</p>
+          <h2 class="section__title">Tout ce que vous voulez savoir</h2>
+        </div>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary class="faq-q">Qu'est-ce qui est inclus dans l'offre gratuite ?<span class="faq-q__icon">+</span></summary>
+            <div class="faq-a">
+              L'offre gratuite vous permet de créer votre profil professionnel dans l'annuaire Kelkun et de recevoir des demandes de clients. La commission est de 20 % sur les Urgences/Dépannages. Vous n'avez pas de Kredits inclus, mais vous pouvez en acheter à l'unité (7 € pièce). Pour débloquer la visibilité prioritaire et réduire votre commission, passez à Master ou Premium.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Comment fonctionne l'essai gratuit 14 jours ?<span class="faq-q__icon">+</span></summary>
+            <div class="faq-a">
+              Vous activez votre formule Master ou Premium et profitez de tous les avantages pendant 14 jours.
+              Si vous résiliez avant le 14<sup>e</sup> jour, rien n'est prélevé — garanti.
+              L'offre gratuite, elle, est accessible sans essai et sans limite de durée.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Qu'est-ce qu'un Kredit Kelkun et à quoi ça sert ?<span class="faq-q__icon">+</span></summary>
+            <div class="faq-a">
+              Un Kredit permet de déverrouiller les coordonnées d'un client pour une demande Travaux.
+              Chaque Kredit vaut 7 €. Avec Master, vous recevez 5 Kredits / mois (35 € offerts).
+              Avec Premium, 10 Kredits / mois (70 € offerts). Ils se renouvellent chaque mois sans report.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Suis-je vraiment le seul à recevoir la demande d'un client ?<span class="faq-q__icon">+</span></summary>
+            <div class="faq-a">
+              Oui, c'est l'un des piliers de Kelkun. Quand un client vous envoie sa demande depuis votre profil,
+              cette demande vous est adressée exclusivement. Aucune mise en concurrence avec d'autres professionnels.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Dans quelle zone géographique suis-je visible ?<span class="faq-q__icon">+</span></summary>
+            <div class="faq-a">
+              Vous définissez votre zone lors de la création de votre profil (par rayon en km ou par communes).
+              Votre profil s'affiche pour les clients situés dans cette zone.
+              Vous pouvez modifier votre zone à tout moment depuis votre espace pro.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Quelle est la différence concrète entre Master et Premium ?<span class="faq-q__icon">+</span></summary>
+            <div class="faq-a">
+              Le plan Gratuit (0 €) vous donne un profil basique et une commission à 20 %.
+              Le Master (29 €/mois) inclut votre profil mis en avant, 5 Kredits/mois et une commission à 15 %.
+              Le Premium (79 €/mois) ajoute 10 Kredits/mois, une commission encore plus basse à 12 %, une visibilité maximale
+              et le service e-secrétariat qui gère vos demandes Kelkun à votre place.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Kelkun fonctionne-t-il pour les architectes et maîtres d'œuvre ?<span class="faq-q__icon">+</span></summary>
+            <div class="faq-a">
+              Absolument. Kelkun est ouvert à tous les professionnels du bâtiment : artisans (plombiers, électriciens, maçons, peintres…)
+              mais aussi architectes, maîtres d'œuvre, décorateurs d'intérieur, bureaux d'études et bien d'autres.
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FINAL CTA ========== -->
+    <section class="final-cta">
+      <p class="final-cta__eyebrow">Prêt à changer de méthode ?</p>
+      <h2 class="final-cta__title">Commencez gratuitement. Évoluez quand vous êtes prêt.</h2>
+      <p class="final-cta__sub">Offre gratuite sans limite de durée. Passez à Master ou Premium avec 14 jours d'essai.</p>
+      <div class="final-cta__actions">
+        <a href="#tarifs" class="btn btn--yellow btn--lg">
+          Créer mon profil gratuit
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/>
+          </svg>
+        </a>
+        <p class="final-cta__guarantee">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="rgba(255,255,255,.4)"><path d="M6.5 0a6.5 6.5 0 100 13A6.5 6.5 0 006.5 0zm2.85 5.28l-3.25 3.25a.65.65 0 01-.92 0l-1.63-1.63a.65.65 0 01.92-.92l1.17 1.17 2.79-2.79a.65.65 0 01.92.92z"/></svg>
+          Résiliez avant 14 jours = 0 € débité. Garanti.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <img src="../landing_1/assets/logo-kelkun.svg" alt="Kelkun" class="footer__logo">
+        <nav class="footer__links" aria-label="Pied de page">
+          <a href="#" class="footer__link">Mentions légales</a>
+          <a href="#" class="footer__link">CGU</a>
+          <a href="#" class="footer__link">Confidentialité</a>
+          <a href="#" class="footer__link">Contact</a>
+        </nav>
+      </div>
+      <p class="footer__copy">© 2025 Kelkun · Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <!-- ========== MOBILE STICKY CTA ========== -->
+  <div class="mobile-cta" id="js-mobile-cta" aria-hidden="true">
+    <div class="mobile-cta__inner">
+      <div>
+        <p class="mobile-cta__label">Commencez gratuitement</p>
+        <p class="mobile-cta__sub">Offre gratuite disponible</p>
+      </div>
+      <a href="#tarifs" class="btn btn--yellow">Activer →</a>
+    </div>
+  </div>
+
+  <script>
+    const nav = document.getElementById('js-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 12);
+    }, { passive: true });
+
+    const pricing = document.getElementById('tarifs');
+    const mobileCta = document.getElementById('js-mobile-cta');
+    if (pricing && mobileCta) {
+      const obs = new IntersectionObserver(([entry]) => {
+        mobileCta.style.display = entry.isIntersecting ? 'none' : 'block';
+        mobileCta.setAttribute('aria-hidden', entry.isIntersecting ? 'true' : 'false');
+      }, { threshold: 0.1 });
+      obs.observe(pricing);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // UGC video play/pause
+    document.querySelectorAll('.ugc__card[data-video]').forEach(function(card) {
+      var video = card.querySelector('video');
+      card.addEventListener('click', function() {
+        if (video.paused) {
+          // Pause all others
+          document.querySelectorAll('.ugc__card video').forEach(function(v) {
+            v.pause(); v.closest('.ugc__card').classList.remove('playing');
+          });
+          video.muted = false;
+          video.play();
+          card.classList.add('playing');
+        } else {
+          video.pause();
+          card.classList.remove('playing');
+        }
+      });
+    });
+
+    // Timeline "Energy Flow" scroll animation
+    (function() {
+      const timeline = document.getElementById('js-timeline');
+      const fill = document.getElementById('js-timeline-fill');
+      if (!timeline || !fill) return;
+
+      const steps = timeline.querySelectorAll('.timeline__step');
+      const dots = timeline.querySelectorAll('.timeline__dot');
+      const cards = timeline.querySelectorAll('.timeline__card');
+      const prevActive = new Array(steps.length).fill(false);
+
+      function updateTimeline() {
+        const rect = timeline.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const triggerTop = 0.25 * vh;
+        const effectiveHeight = rect.height - 0.35 * vh;
+        const scrollOffset = triggerTop - rect.top;
+        const progress = Math.min(Math.max(scrollOffset / effectiveHeight, 0), 1);
+
+        fill.style.height = (progress * 100) + '%';
+
+        steps.forEach(function(step, i) {
+          const threshold = i / Math.max(steps.length - 1, 1) * 0.85;
+          const isActive = progress >= threshold;
+          const dot = dots[i];
+          const card = cards[i];
+
+          dot.classList.toggle('timeline__dot--active', isActive);
+          card.classList.toggle('timeline__card--active', isActive);
+
+          // Ripple effect on first activation
+          if (isActive && !prevActive[i]) {
+            dot.classList.add('timeline__dot--just-activated');
+            setTimeout(function() {
+              dot.classList.remove('timeline__dot--just-activated');
+            }, 600);
+          }
+          prevActive[i] = isActive;
+        });
+      }
+
+      window.addEventListener('scroll', updateTimeline, { passive: true });
+      window.addEventListener('resize', updateTimeline, { passive: true });
+      updateTimeline();
+    })();
+  </script>
+
+</body>
+</html>

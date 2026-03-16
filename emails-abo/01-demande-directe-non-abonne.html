@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Un client vous a contacté — Kelkun</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .email-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 32px 16px;
+    }
+
+    .email-container {
+      background-color: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #0e2f58 0%, #0a2342 100%);
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #03c5b8;
+    }
+
+    .alert-badge {
+      display: inline-block;
+      background-color: #ffc114;
+      color: #0e2f58;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      margin-top: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .greeting {
+      font-size: 14px;
+      color: #737373;
+      margin: 0 0 8px 0;
+    }
+
+    .headline {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0e2f58;
+      margin: 0 0 24px 0;
+      line-height: 1.2;
+    }
+
+    .message {
+      font-size: 16px;
+      line-height: 1.75;
+      color: #525252;
+      margin: 0 0 24px 0;
+    }
+
+    .client-request {
+      background-color: #fafafa;
+      border-left: 4px solid #ffc114;
+      border-radius: 0 12px 12px 0;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .client-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #a3a3a3;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 12px 0;
+    }
+
+    .client-info {
+      margin: 0;
+    }
+
+    .client-info li {
+      font-size: 14px;
+      color: #404040;
+      margin-bottom: 8px;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .client-info li:last-child {
+      margin-bottom: 0;
+    }
+
+    .client-info strong {
+      color: #0e2f58;
+      font-weight: 600;
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #e5e5e5;
+      margin: 32px 0;
+    }
+
+    .upgrade-section {
+      background: linear-gradient(135deg, #fffbeb 0%, #fff5c6 100%);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+
+    .upgrade-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0e2f58;
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .upgrade-title::before {
+      content: "⚡";
+    }
+
+    .upgrade-text {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #525252;
+      margin: 0 0 20px 0;
+    }
+
+    .benefits-list {
+      margin: 0 0 20px 0;
+      padding: 0;
+    }
+
+    .benefits-list li {
+      font-size: 14px;
+      color: #404040;
+      margin-bottom: 10px;
+      list-style: none;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .benefits-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #3faf38;
+      font-weight: 700;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #03c5b8 0%, #029284 100%);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(3, 197, 184, 0.4);
+    }
+
+    .secondary-link {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      font-size: 14px;
+      color: #737373;
+    }
+
+    .secondary-link a {
+      color: #029284;
+      text-decoration: underline;
+    }
+
+    .footer {
+      background-color: #fafafa;
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: #a3a3a3;
+      margin: 0 0 16px 0;
+      line-height: 1.75;
+    }
+
+    .footer-links {
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: #737373;
+      text-decoration: none;
+      margin: 0 12px;
+    }
+
+    .footer-links a:hover {
+      color: #0e2f58;
+      text-decoration: underline;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .email-wrapper {
+        padding: 16px;
+      }
+
+      .header, .content, .footer {
+        padding: 24px;
+      }
+
+      .headline {
+        font-size: 20px;
+      }
+
+      .upgrade-section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="email-container">
+
+      <!-- Header -->
+      <div class="header">
+        <div class="logo">Kel<span>kun</span></div>
+        <div class="alert-badge">🔔 Nouvelle demande</div>
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+        <p class="greeting">Bonjour {{prenom}},</p>
+        <h1 class="headline">Un client vous a contacté directement</h1>
+
+        <p class="message">
+          Bonne nouvelle : quelqu'un a vu votre profil sur Kelkun et souhaite vous contacter pour une mission. Voici les détails de sa demande :
+        </p>
+
+        <!-- Client Request Box -->
+        <div class="client-request">
+          <p class="client-label">Demande reçue</p>
+          <ul class="client-info">
+            <li><strong>Type de travaux :</strong> {{type_travaux}}</li>
+            <li><strong>Localisation :</strong> {{ville}}</li>
+            <li><strong>Description :</strong> {{description}}</li>
+          </ul>
+        </div>
+
+        <p class="message">
+          Pour consulter les coordonnées de ce client et le recontacter, vous devez utiliser des Krédits ou activer un abonnement.
+        </p>
+
+        <div class="divider"></div>
+
+        <!-- Upgrade Section -->
+        <div class="upgrade-section">
+          <h2 class="upgrade-title">Passez à l'abonnement Pro</h2>
+          <p class="upgrade-text">
+            Arrêtez de jongler avec les Krédits. Avec l'abonnement, vous accédez à toutes les demandes sans limite — et vous choisissez celles qui vous intéressent.
+          </p>
+          <ul class="benefits-list">
+            <li>Accès illimité aux coordonnées clients</li>
+            <li>Alertes en temps réel sur les nouvelles missions</li>
+            <li>Fiche pro mise en avant dans les recherches</li>
+            <li>Statistiques détaillées de votre profil</li>
+          </ul>
+          <a href="{{lien_abonnement}}" class="cta-button">Découvrir l'abonnement →</a>
+          <p class="secondary-link">
+            Ou <a href="{{lien_kredits}}">achetez des Krédits</a> pour cette demande uniquement.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p class="footer-text">
+          Vous recevez cet email car vous êtes inscrit sur Kelkun.<br>
+          Des questions ? Répondez directement à cet email.
+        </p>
+        <p class="footer-links">
+          <a href="{{lien_profil}}">Mon profil</a>
+          <a href="{{lien_preferences}}">Préférences</a>
+          <a href="{{lien_desabonnement}}">Se désabonner</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

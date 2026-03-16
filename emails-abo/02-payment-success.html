@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenue dans l'abonnement Pro — Kelkun</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .email-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 32px 16px;
+    }
+
+    .email-container {
+      background-color: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #3faf38 0%, #2f9029 100%);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+
+    .logo span {
+      color: #d5fbf6;
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 36px;
+    }
+
+    .header-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .greeting {
+      font-size: 14px;
+      color: #737373;
+      margin: 0 0 8px 0;
+    }
+
+    .headline {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0e2f58;
+      margin: 0 0 24px 0;
+      line-height: 1.2;
+    }
+
+    .message {
+      font-size: 16px;
+      line-height: 1.75;
+      color: #525252;
+      margin: 0 0 24px 0;
+    }
+
+    .receipt-box {
+      background-color: #fafafa;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .receipt-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #a3a3a3;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 16px 0;
+    }
+
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .receipt-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .receipt-row.total {
+      border-top: 2px solid #0e2f58;
+      margin-top: 8px;
+      padding-top: 16px;
+    }
+
+    .receipt-key {
+      font-size: 14px;
+      color: #737373;
+    }
+
+    .receipt-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0e2f58;
+    }
+
+    .receipt-row.total .receipt-key,
+    .receipt-row.total .receipt-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0e2f58;
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #e5e5e5;
+      margin: 32px 0;
+    }
+
+    .next-steps {
+      margin: 24px 0;
+    }
+
+    .next-steps-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0e2f58;
+      margin: 0 0 20px 0;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #ffc114 0%, #e0a500 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0e2f58;
+    }
+
+    .step-content h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0e2f58;
+      margin: 0 0 4px 0;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      color: #737373;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #03c5b8 0%, #029284 100%);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .help-box {
+      background-color: #f1fefc;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 32px 0 0 0;
+      text-align: center;
+    }
+
+    .help-box p {
+      font-size: 14px;
+      color: #525252;
+      margin: 0;
+    }
+
+    .help-box a {
+      color: #029284;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .footer {
+      background-color: #fafafa;
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: #a3a3a3;
+      margin: 0 0 16px 0;
+      line-height: 1.75;
+    }
+
+    .footer-links {
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: #737373;
+      text-decoration: none;
+      margin: 0 12px;
+    }
+
+    .footer-links a:hover {
+      color: #0e2f58;
+      text-decoration: underline;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .email-wrapper {
+        padding: 16px;
+      }
+
+      .header, .content, .footer {
+        padding: 24px;
+      }
+
+      .headline {
+        font-size: 20px;
+      }
+
+      .receipt-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="email-container">
+
+      <!-- Header -->
+      <div class="header">
+        <div class="logo">Kel<span>kun</span></div>
+        <div class="success-icon">✓</div>
+        <h1 class="header-title">Paiement confirmé</h1>
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+        <p class="greeting">Bonjour {{prenom}},</p>
+        <h2 class="headline">Bienvenue dans l'abonnement Pro !</h2>
+
+        <p class="message">
+          C'est fait. Votre abonnement est actif — vous avez maintenant accès à toutes les fonctionnalités Pro. Plus besoin de jongler avec les Krédits : toutes les demandes clients sont accessibles sans limite.
+        </p>
+
+        <!-- Receipt Box -->
+        <div class="receipt-box">
+          <p class="receipt-label">Récapitulatif</p>
+          <div class="receipt-row">
+            <span class="receipt-key">Formule</span>
+            <span class="receipt-value">Abonnement Pro — {{frequence}}</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-key">Date d'activation</span>
+            <span class="receipt-value">{{date_activation}}</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-key">Prochaine facturation</span>
+            <span class="receipt-value">{{date_prochaine_facture}}</span>
+          </div>
+          <div class="receipt-row total">
+            <span class="receipt-key">Montant</span>
+            <span class="receipt-value">{{montant}} €/mois</span>
+          </div>
+        </div>
+
+        <p class="message" style="font-size: 14px; color: #737373;">
+          Votre facture est disponible dans votre espace. Vous pouvez la télécharger à tout moment.
+        </p>
+
+        <div class="divider"></div>
+
+        <!-- Next Steps -->
+        <div class="next-steps">
+          <h3 class="next-steps-title">Et maintenant ?</h3>
+
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Complétez votre fiche pro</h4>
+              <p>Plus votre profil est complet, plus vous remontez dans les recherches. Ajoutez vos réalisations et vos certifications.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Activez les alertes mission</h4>
+              <p>Recevez une notification dès qu'un client cherche un pro dans votre zone et votre métier.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Répondez vite aux demandes</h4>
+              <p>Les pros qui répondent dans l'heure ont 3x plus de chances de décrocher la mission.</p>
+            </div>
+          </div>
+
+          <a href="{{lien_tableau_bord}}" class="cta-button">Accéder à mon tableau de bord →</a>
+        </div>
+
+        <div class="help-box">
+          <p>Une question sur votre abonnement ? <a href="{{lien_aide}}">Consultez notre FAQ</a> ou répondez à cet email.</p>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p class="footer-text">
+          Merci de faire confiance à Kelkun.<br>
+          On est là pour vous aider à trouver plus de missions.
+        </p>
+        <p class="footer-links">
+          <a href="{{lien_profil}}">Mon profil</a>
+          <a href="{{lien_facturation}}">Facturation</a>
+          <a href="{{lien_preferences}}">Préférences</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

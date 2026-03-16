@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Votre abonnement a été renouvelé — Kelkun</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .email-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 32px 16px;
+    }
+
+    .email-container {
+      background-color: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #0e2f58 0%, #0a2342 100%);
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #03c5b8;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .greeting {
+      font-size: 14px;
+      color: #737373;
+      margin: 0 0 8px 0;
+    }
+
+    .headline {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0e2f58;
+      margin: 0 0 24px 0;
+      line-height: 1.2;
+    }
+
+    .message {
+      font-size: 16px;
+      line-height: 1.75;
+      color: #525252;
+      margin: 0 0 24px 0;
+    }
+
+    .receipt-box {
+      background-color: #fafafa;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .receipt-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #a3a3a3;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 16px 0;
+    }
+
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .receipt-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .receipt-row.total {
+      border-top: 2px solid #0e2f58;
+      margin-top: 8px;
+      padding-top: 16px;
+    }
+
+    .receipt-key {
+      font-size: 14px;
+      color: #737373;
+    }
+
+    .receipt-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0e2f58;
+    }
+
+    .receipt-row.total .receipt-key,
+    .receipt-row.total .receipt-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0e2f58;
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #e5e5e5;
+      margin: 32px 0;
+    }
+
+    .stats-section {
+      margin: 24px 0;
+    }
+
+    .stats-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0e2f58;
+      margin: 0 0 20px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #f1fefc 0%, #d5fbf6 100%);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 30px;
+      font-weight: 700;
+      color: #0e2f58;
+      margin: 0;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #737373;
+      margin: 4px 0 0 0;
+    }
+
+    .info-box {
+      background-color: #fafafa;
+      border-left: 4px solid #03c5b8;
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .info-box p {
+      font-size: 14px;
+      color: #525252;
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    .info-box a {
+      color: #029284;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .cta-section {
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #03c5b8 0%, #029284 100%);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .footer {
+      background-color: #fafafa;
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: #a3a3a3;
+      margin: 0 0 16px 0;
+      line-height: 1.75;
+    }
+
+    .footer-links {
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: #737373;
+      text-decoration: none;
+      margin: 0 12px;
+    }
+
+    .footer-links a:hover {
+      color: #0e2f58;
+      text-decoration: underline;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .email-wrapper {
+        padding: 16px;
+      }
+
+      .header, .content, .footer {
+        padding: 24px;
+      }
+
+      .headline {
+        font-size: 20px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .receipt-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="email-container">
+
+      <!-- Header -->
+      <div class="header">
+        <div class="logo">Kel<span>kun</span></div>
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+        <p class="greeting">Bonjour {{prenom}},</p>
+        <h1 class="headline">Votre abonnement Pro a été renouvelé</h1>
+
+        <p class="message">
+          C'est automatique — vous n'avez rien à faire. Votre abonnement continue sans interruption. Voici le récapitulatif de ce renouvellement :
+        </p>
+
+        <!-- Receipt Box -->
+        <div class="receipt-box">
+          <p class="receipt-label">Facturation</p>
+          <div class="receipt-row">
+            <span class="receipt-key">Formule</span>
+            <span class="receipt-value">Abonnement Pro — {{frequence}}</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-key">Période</span>
+            <span class="receipt-value">{{date_debut}} → {{date_fin}}</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-key">Moyen de paiement</span>
+            <span class="receipt-value">{{moyen_paiement}}</span>
+          </div>
+          <div class="receipt-row total">
+            <span class="receipt-key">Montant prélevé</span>
+            <span class="receipt-value">{{montant}} €</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+          <h2 class="stats-title">Ce mois-ci sur votre profil</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <p class="stat-value">{{nb_vues}}</p>
+              <p class="stat-label">Vues du profil</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">{{nb_demandes}}</p>
+              <p class="stat-label">Demandes reçues</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">{{nb_contacts}}</p>
+              <p class="stat-label">Contacts obtenus</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <p>
+            <strong>Votre facture est disponible.</strong><br>
+            Retrouvez-la dans votre espace <a href="{{lien_facturation}}">Facturation</a> — vous pouvez la télécharger à tout moment pour votre comptabilité.
+          </p>
+        </div>
+
+        <div class="cta-section">
+          <a href="{{lien_tableau_bord}}" class="cta-button">Voir mon tableau de bord →</a>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p class="footer-text">
+          Des questions ? Répondez directement à cet email.<br>
+          Pour modifier votre abonnement, rendez-vous dans les <a href="{{lien_abonnement}}" style="color: #737373;">paramètres de facturation</a>.
+        </p>
+        <p class="footer-links">
+          <a href="{{lien_profil}}">Mon profil</a>
+          <a href="{{lien_facturation}}">Facturation</a>
+          <a href="{{lien_preferences}}">Préférences</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kelkun — Carousel Client (Mobile App)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* =============================================
+       TOKENS
+       ============================================= */
+    :root {
+      --color-primary: #03c5b8;
+      --color-primary-50: #c2faf3;
+      --color-secondary: #0e2f58;
+      --color-secondary-200: #7e8cb8;
+      --color-secondary-400: #465d88;
+      --color-tertiary: #ffc114;
+      --color-white: #ffffff;
+      --color-urgence: #ff634d;
+      --color-success: #3faf38;
+      --color-travaux: #1c61c5;
+      --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* =============================================
+       RESET & BASE
+       ============================================= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-family);
+      background: #4a5a8a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* =============================================
+       PHONE FRAME (preview container)
+       ============================================= */
+    .phone-frame {
+      width: 376px;
+      height: 812px;
+      position: relative;
+      overflow: hidden;
+      background: var(--color-white);
+      border-radius: 16px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    }
+
+    /* =============================================
+       CAROUSEL ENGINE
+       ============================================= */
+    .carousel {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      touch-action: pan-y;
+    }
+
+    .carousel__track {
+      display: flex;
+      width: 500%; /* 5 slides */
+      height: 100%;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .carousel__slide {
+      width: 376px;
+      height: 812px;
+      flex-shrink: 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--color-white);
+    }
+
+    /* =============================================
+       SLIDE LAYOUT
+       ============================================= */
+
+    /* Skip / Non merci — only on last slide */
+    .slide__skip {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-secondary-200);
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    /* Title */
+    .slide__title {
+      padding: 67px 22px 0;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--color-secondary);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Illustration zone */
+    .slide__visual {
+      position: absolute;
+      top: 114px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 380px;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide__visual svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Description */
+    .slide__desc {
+      position: absolute;
+      top: 512px;
+      left: 26px;
+      width: 324px;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--color-secondary-400);
+    }
+
+    .slide__desc strong {
+      font-weight: 600;
+    }
+
+    .slide__desc .punchline {
+      display: block;
+      margin-top: 12px;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-secondary-400);
+    }
+
+    /* Pagination dots */
+    .carousel__dots {
+      position: absolute;
+      top: 652px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .carousel__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 99px;
+      background: #d9d9d9;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel__dot.active {
+      width: 23px;
+      background: var(--color-tertiary);
+    }
+
+    /* CTA Button */
+    .slide__cta {
+      position: absolute;
+      top: 687px;
+      left: 26px;
+      width: 324px;
+      height: 60px;
+      border-radius: 999px;
+      background: var(--color-primary);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-family);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-white);
+      line-height: 1.2;
+      transition: background 0.2s;
+    }
+
+    .slide__cta:hover { background: #029284; }
+
+    /* Reassurance */
+    .slide__reassurance {
+      position: absolute;
+      top: 762px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 278px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--color-secondary-200);
+      text-align: center;
+    }
+
+    /* =============================================
+       SVG ILLUSTRATIONS
+       ============================================= */
+
+    .illus-shadow {
+      filter: drop-shadow(0px 4px 14px rgba(14, 47, 88, 0.1));
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone-frame">
+  <div class="carousel" id="carousel">
+    <div class="carousel__track" id="carouselTrack">
+
+      <!-- ==========================================
+           SLIDE 1 — Hook / Découverte
+           "Votre artisan en 2 minutes."
+           Anxiété : "C'est toujours compliqué de trouver un artisan"
+           ========================================== -->
+      <div class="carousel__slide">
+        <h1 class="slide__title">Votre artisan en 2&nbsp;minutes.</h1>
+
+        <div class="slide__visual">
+          <svg viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Search bar at top -->
+            <g class="illus-shadow" transform="translate(40, 30)">
+              <rect x="0" y="0" width="300" height="50" rx="25" fill="white" stroke="#e0e2f0" stroke-width="1.5"/>
+              <!-- Search icon -->
+              <circle cx="30" cy="25" r="9" stroke="#03c5b8" stroke-width="2" fill="none"/>
+              <line x1="36" y1="31" x2="42" y2="37" stroke="#03c5b8" stroke-width="2" stroke-linecap="round"/>
+              <!-- Placeholder text -->
+              <rect x="54" y="18" width="140" height="7" rx="3.5" fill="#bdc3e0"/>
+              <rect x="54" y="29" width="80" height="5" rx="2.5" fill="#e0e2f0"/>
+              <!-- Location pin -->
+              <g transform="translate(260, 15)">
+                <path d="M8 18 C8 18 1 10 1 6.5 C1 3 4 0 8 0 C12 0 15 3 15 6.5 C15 10 8 18 8 18Z" fill="#03c5b8" opacity="0.3"/>
+                <circle cx="8" cy="6.5" r="2.5" fill="#03c5b8"/>
+              </g>
+            </g>
+
+            <!-- 3 Category cards -->
+            <!-- Urgence -->
+            <g class="illus-shadow" transform="translate(22, 110)">
+              <rect x="0" y="0" width="100" height="120" rx="14" fill="white"/>
+              <circle cx="50" cy="40" r="22" fill="#fff1f1"/>
+              <text x="50" y="47" text-anchor="middle" font-size="22">🔧</text>
+              <rect x="18" y="72" width="64" height="8" rx="4" fill="#ff634d"/>
+              <text x="50" y="79" text-anchor="middle" font-family="Poppins, sans-serif" font-size="7" font-weight="600" fill="white">URGENCE</text>
+              <rect x="22" y="90" width="56" height="5" rx="2.5" fill="#bdc3e0"/>
+              <rect x="30" y="100" width="40" height="5" rx="2.5" fill="#e0e2f0"/>
+            </g>
+
+            <!-- Travaux -->
+            <g class="illus-shadow" transform="translate(140, 95)">
+              <rect x="0" y="0" width="100" height="120" rx="14" fill="white"/>
+              <circle cx="50" cy="40" r="22" fill="#eff4fe"/>
+              <text x="50" y="47" text-anchor="middle" font-size="22">🏠</text>
+              <rect x="18" y="72" width="64" height="8" rx="4" fill="#1c61c5"/>
+              <text x="50" y="79" text-anchor="middle" font-family="Poppins, sans-serif" font-size="7" font-weight="600" fill="white">TRAVAUX</text>
+              <rect x="22" y="90" width="56" height="5" rx="2.5" fill="#bdc3e0"/>
+              <rect x="30" y="100" width="40" height="5" rx="2.5" fill="#e0e2f0"/>
+            </g>
+
+            <!-- Entretien -->
+            <g class="illus-shadow" transform="translate(258, 110)">
+              <rect x="0" y="0" width="100" height="120" rx="14" fill="white"/>
+              <circle cx="50" cy="40" r="22" fill="#f3fbf2"/>
+              <text x="50" y="47" text-anchor="middle" font-size="22">🌿</text>
+              <rect x="14" y="72" width="72" height="8" rx="4" fill="#3faf38"/>
+              <text x="50" y="79" text-anchor="middle" font-family="Poppins, sans-serif" font-size="7" font-weight="600" fill="white">ENTRETIEN</text>
+              <rect x="22" y="90" width="56" height="5" rx="2.5" fill="#bdc3e0"/>
+              <rect x="30" y="100" width="40" height="5" rx="2.5" fill="#e0e2f0"/>
+            </g>
+
+            <!-- Map preview below -->
+            <g transform="translate(30, 255)">
+              <rect x="0" y="0" width="320" height="110" rx="14" fill="#f4f6fa" stroke="#e0e2f0" stroke-width="1"/>
+              <!-- Map grid -->
+              <line x1="60" y1="10" x2="60" y2="100" stroke="#e0e2f0" stroke-width="0.6"/>
+              <line x1="160" y1="10" x2="160" y2="100" stroke="#e0e2f0" stroke-width="0.6"/>
+              <line x1="260" y1="10" x2="260" y2="100" stroke="#e0e2f0" stroke-width="0.6"/>
+              <line x1="10" y1="40" x2="310" y2="40" stroke="#e0e2f0" stroke-width="0.6"/>
+              <line x1="10" y1="75" x2="310" y2="75" stroke="#e0e2f0" stroke-width="0.6"/>
+              <!-- Streets -->
+              <path d="M20 30 Q120 50 230 25" stroke="#bdc3e0" stroke-width="2" fill="none"/>
+              <path d="M40 80 Q150 60 280 85" stroke="#bdc3e0" stroke-width="1.5" fill="none"/>
+              <!-- Pins -->
+              <g transform="translate(80, 20)">
+                <path d="M5 14 C5 14 0 8 0 5 C0 2.2 2.2 0 5 0 C7.8 0 10 2.2 10 5 C10 8 5 14 5 14Z" fill="#03c5b8"/>
+              </g>
+              <g transform="translate(160, 35)">
+                <path d="M5 14 C5 14 0 8 0 5 C0 2.2 2.2 0 5 0 C7.8 0 10 2.2 10 5 C10 8 5 14 5 14Z" fill="#03c5b8"/>
+              </g>
+              <g transform="translate(230, 50)">
+                <path d="M5 14 C5 14 0 8 0 5 C0 2.2 2.2 0 5 0 C7.8 0 10 2.2 10 5 C10 8 5 14 5 14Z" fill="#03c5b8"/>
+              </g>
+              <circle cx="120" cy="65" r="4" fill="#bdc3e0"/>
+              <circle cx="200" cy="80" r="4" fill="#bdc3e0"/>
+              <!-- "Votre position" -->
+              <circle cx="160" cy="60" r="8" fill="#03c5b8" opacity="0.15"/>
+              <circle cx="160" cy="60" r="4" fill="#03c5b8"/>
+            </g>
+
+            <!-- "0€" badge floating -->
+            <g transform="translate(290, 60)">
+              <rect x="0" y="0" width="60" height="30" rx="15" fill="#03c5b8"/>
+              <text x="30" y="20" text-anchor="middle" font-family="Poppins, sans-serif" font-size="14" font-weight="700" fill="white">0 €</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="slide__desc">
+          Urgence, travaux ou entretien : décrivez votre besoin et Kelkun trouve <strong>l'artisan qu'il vous faut</strong>. Pas de formulaire à rallonge. Pas de mauvaise surprise.
+          <span class="punchline">Et c'est 100% gratuit pour vous.</span>
+        </div>
+
+        <div class="carousel__dots">
+          <button class="carousel__dot active" data-index="0"></button>
+          <button class="carousel__dot" data-index="1"></button>
+          <button class="carousel__dot" data-index="2"></button>
+          <button class="carousel__dot" data-index="3"></button>
+          <button class="carousel__dot" data-index="4"></button>
+        </div>
+
+        <button class="slide__cta">Trouver mon artisan</button>
+        <p class="slide__reassurance">Aucun paiement requis. Jamais.</p>
+      </div>
+
+      <!-- ==========================================
+           SLIDE 2 — Confiance
+           "Que des artisans vérifiés."
+           Anxiété : "Comment savoir s'il est sérieux ?"
+           ========================================== -->
+      <div class="carousel__slide">
+        <h1 class="slide__title">Que des artisans vérifiés.</h1>
+
+        <div class="slide__visual">
+          <svg viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Shield -->
+            <g transform="translate(190, 170)">
+              <!-- Shield shape -->
+              <path d="M0 -100 C-70 -90 -90 -60 -90 -20 C-90 40 -50 90 0 110 C50 90 90 40 90 -20 C90 -60 70 -90 0 -100Z" fill="#f4f6fa" stroke="#e0e2f0" stroke-width="1.5"/>
+              <path d="M0 -80 C-55 -72 -72 -48 -72 -16 C-72 32 -40 72 0 88 C40 72 72 32 72 -16 C72 -48 55 -72 0 -80Z" fill="white"/>
+
+              <!-- Big checkmark -->
+              <path d="M-25 5 L-8 22 L30 -15" stroke="#03c5b8" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+
+            <!-- Floating verification badges -->
+            <!-- SIRET -->
+            <g class="illus-shadow" transform="translate(25, 100)">
+              <rect x="0" y="0" width="90" height="36" rx="18" fill="white"/>
+              <circle cx="18" cy="18" r="10" fill="#c2faf3"/>
+              <path d="M13 18 L16 21 L23 14" stroke="#03c5b8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <text x="58" y="22" text-anchor="middle" font-family="Poppins, sans-serif" font-size="11" font-weight="600" fill="#0e2f58">SIRET</text>
+            </g>
+
+            <!-- Assurance -->
+            <g class="illus-shadow" transform="translate(265, 90)">
+              <rect x="0" y="0" width="100" height="36" rx="18" fill="white"/>
+              <circle cx="18" cy="18" r="10" fill="#c2faf3"/>
+              <path d="M13 18 L16 21 L23 14" stroke="#03c5b8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <text x="62" y="22" text-anchor="middle" font-family="Poppins, sans-serif" font-size="11" font-weight="600" fill="#0e2f58">Assurance</text>
+            </g>
+
+            <!-- Kbis -->
+            <g class="illus-shadow" transform="translate(40, 270)">
+              <rect x="0" y="0" width="80" height="36" rx="18" fill="white"/>
+              <circle cx="18" cy="18" r="10" fill="#c2faf3"/>
+              <path d="M13 18 L16 21 L23 14" stroke="#03c5b8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <text x="52" y="22" text-anchor="middle" font-family="Poppins, sans-serif" font-size="11" font-weight="600" fill="#0e2f58">Kbis</text>
+            </g>
+
+            <!-- Qualifications -->
+            <g class="illus-shadow" transform="translate(250, 280)">
+              <rect x="0" y="0" width="115" height="36" rx="18" fill="white"/>
+              <circle cx="18" cy="18" r="10" fill="#c2faf3"/>
+              <path d="M13 18 L16 21 L23 14" stroke="#03c5b8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <text x="70" y="22" text-anchor="middle" font-family="Poppins, sans-serif" font-size="11" font-weight="600" fill="#0e2f58">Qualifications</text>
+            </g>
+
+            <!-- "Pas de profils fantômes" crossed-out ghost -->
+            <g transform="translate(148, 330)">
+              <rect x="0" y="0" width="84" height="28" rx="6" fill="#fff1f1"/>
+              <text x="42" y="18" text-anchor="middle" font-family="Poppins, sans-serif" font-size="9" font-weight="500" fill="#fa4a57">Profils fantômes</text>
+              <line x1="8" y1="14" x2="76" y2="14" stroke="#fa4a57" stroke-width="1.5"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="slide__desc">
+          Chaque artisan sur Kelkun a été contrôlé avant d'être accepté : <strong>numéro SIRET, assurance professionnelle, extrait Kbis</strong>. Pas de profils fantômes.
+          <span class="punchline">Vous ne cherchez plus au hasard.</span>
+        </div>
+
+        <div class="carousel__dots">
+          <button class="carousel__dot" data-index="0"></button>
+          <button class="carousel__dot active" data-index="1"></button>
+          <button class="carousel__dot" data-index="2"></button>
+          <button class="carousel__dot" data-index="3"></button>
+          <button class="carousel__dot" data-index="4"></button>
+        </div>
+
+        <button class="slide__cta">Trouver mon artisan</button>
+        <p class="slide__reassurance">Tous les artisans sont vérifiés manuellement.</p>
+      </div>
+
+      <!-- ==========================================
+           SLIDE 3 — Contrôle
+           "Vous choisissez. Point."
+           Anxiété : "Je vais être harcelé par 10 artisans"
+           ========================================== -->
+      <div class="carousel__slide">
+        <h1 class="slide__title">Vous choisissez. Point.</h1>
+
+        <div class="slide__visual">
+          <svg viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Phone frame -->
+            <g class="illus-shadow" transform="translate(80, 20)">
+              <rect x="0" y="0" width="220" height="340" rx="24" fill="white" stroke="#e0e2f0" stroke-width="1.5"/>
+              <!-- Status bar -->
+              <rect x="70" y="8" width="80" height="4" rx="2" fill="#e0e2f0"/>
+
+              <!-- Profile header inside phone -->
+              <circle cx="110" cy="70" r="32" fill="#f4f6fa"/>
+              <circle cx="110" cy="62" r="12" fill="#bdc3e0"/>
+              <path d="M92 85 Q110 72 128 85" fill="#bdc3e0"/>
+              <!-- Name -->
+              <rect x="60" y="112" width="100" height="10" rx="5" fill="#0e2f58"/>
+              <!-- Métier -->
+              <rect x="70" y="128" width="80" height="7" rx="3.5" fill="#bdc3e0"/>
+              <!-- Stars -->
+              <g transform="translate(75, 142)">
+                <polygon points="5,0 6.5,3.5 10,3.5 7,5.5 8,9 5,7 2,9 3,5.5 0,3.5 3.5,3.5" fill="#ffc114" transform="scale(0.8)"/>
+                <polygon points="5,0 6.5,3.5 10,3.5 7,5.5 8,9 5,7 2,9 3,5.5 0,3.5 3.5,3.5" fill="#ffc114" transform="translate(10,0) scale(0.8)"/>
+                <polygon points="5,0 6.5,3.5 10,3.5 7,5.5 8,9 5,7 2,9 3,5.5 0,3.5 3.5,3.5" fill="#ffc114" transform="translate(20,0) scale(0.8)"/>
+                <polygon points="5,0 6.5,3.5 10,3.5 7,5.5 8,9 5,7 2,9 3,5.5 0,3.5 3.5,3.5" fill="#ffc114" transform="translate(30,0) scale(0.8)"/>
+                <polygon points="5,0 6.5,3.5 10,3.5 7,5.5 8,9 5,7 2,9 3,5.5 0,3.5 3.5,3.5" fill="#ffc114" transform="translate(40,0) scale(0.8)"/>
+              </g>
+
+              <!-- Badge verified -->
+              <g transform="translate(133, 55)">
+                <circle r="10" fill="#3faf38"/>
+                <path d="M-4 0 L-1 3 L5 -3" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </g>
+
+              <!-- Divider -->
+              <line x1="20" y1="165" x2="200" y2="165" stroke="#e0e2f0" stroke-width="1"/>
+
+              <!-- Textarea placeholder -->
+              <rect x="20" y="178" width="180" height="80" rx="10" fill="#f4f6fa" stroke="#e0e2f0" stroke-width="1"/>
+              <rect x="32" y="192" width="120" height="6" rx="3" fill="#bdc3e0"/>
+              <rect x="32" y="204" width="90" height="6" rx="3" fill="#bdc3e0"/>
+              <rect x="32" y="216" width="100" height="6" rx="3" fill="#bdc3e0"/>
+
+              <!-- CTA button inside phone -->
+              <rect x="20" y="278" width="180" height="44" rx="22" fill="#03c5b8"/>
+              <text x="110" y="304" text-anchor="middle" font-family="Poppins, sans-serif" font-size="13" font-weight="600" fill="white">Envoyer ma demande</text>
+            </g>
+
+            <!-- Arrow "direct" from user to artisan -->
+            <g transform="translate(30, 170)">
+              <path d="M0 30 Q30 0 60 15" stroke="#ffc114" stroke-width="3" fill="none" stroke-dasharray="6 4"/>
+              <polygon points="58,10 65,17 55,18" fill="#ffc114"/>
+            </g>
+
+            <!-- "DIRECT" badge -->
+            <g transform="translate(20, 215)">
+              <rect x="0" y="0" width="70" height="26" rx="13" fill="#1c61c5"/>
+              <text x="35" y="17" text-anchor="middle" font-family="Poppins, sans-serif" font-size="10" font-weight="700" fill="white" letter-spacing="1">DIRECT</text>
+            </g>
+
+            <!-- Crossed-out "15 numéros" -->
+            <g transform="translate(10, 290)">
+              <rect x="0" y="0" width="60" height="50" rx="8" fill="#fff1f1" opacity="0.9"/>
+              <text x="30" y="18" text-anchor="middle" font-family="Poppins, sans-serif" font-size="8" fill="#fa4a57">15 appels</text>
+              <text x="30" y="30" text-anchor="middle" font-family="Poppins, sans-serif" font-size="8" fill="#fa4a57">inconnus</text>
+              <line x1="6" y1="24" x2="54" y2="24" stroke="#fa4a57" stroke-width="1.5"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="slide__desc">
+          Envoyez votre demande <strong>directement à l'artisan que vous voulez</strong>. Pas de mise en concurrence, pas de 15 numéros inconnus qui vous rappellent.
+          <span class="punchline">Un seul artisan. Celui que vous avez choisi.</span>
+        </div>
+
+        <div class="carousel__dots">
+          <button class="carousel__dot" data-index="0"></button>
+          <button class="carousel__dot" data-index="1"></button>
+          <button class="carousel__dot active" data-index="2"></button>
+          <button class="carousel__dot" data-index="3"></button>
+          <button class="carousel__dot" data-index="4"></button>
+        </div>
+
+        <button class="slide__cta">Trouver mon artisan</button>
+        <p class="slide__reassurance">Votre numéro n'est jamais partagé sans votre accord.</p>
+      </div>
+
+      <!-- ==========================================
+           SLIDE 4 — Sécurité / Anti-ghosting
+           "Jamais sans réponse."
+           Anxiété : "Et s'il ne répond pas ?"
+           ========================================== -->
+      <div class="carousel__slide">
+        <h1 class="slide__title">Jamais sans réponse.</h1>
+
+        <div class="slide__visual">
+          <svg viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Central clock / timer -->
+            <g transform="translate(190, 175)">
+              <!-- Glow circle -->
+              <circle r="100" fill="#f4f6fa"/>
+              <circle r="80" fill="white" stroke="#e0e2f0" stroke-width="1.5"/>
+
+              <!-- Clock face — Hour markers -->
+              <line x1="0" y1="-68" x2="0" y2="-60" stroke="#0e2f58" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="34" y1="-59" x2="30" y2="-52" stroke="#bdc3e0" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="59" y1="-34" x2="52" y2="-30" stroke="#bdc3e0" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="68" y1="0" x2="60" y2="0" stroke="#0e2f58" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="59" y1="34" x2="52" y2="30" stroke="#bdc3e0" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="34" y1="59" x2="30" y2="52" stroke="#bdc3e0" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="0" y1="68" x2="0" y2="60" stroke="#0e2f58" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="-34" y1="59" x2="-30" y2="52" stroke="#bdc3e0" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="-59" y1="34" x2="-52" y2="30" stroke="#bdc3e0" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="-68" y1="0" x2="-60" y2="0" stroke="#0e2f58" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="-59" y1="-34" x2="-52" y2="-30" stroke="#bdc3e0" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="-34" y1="-59" x2="-30" y2="-52" stroke="#bdc3e0" stroke-width="1.5" stroke-linecap="round"/>
+
+              <!-- Progress arc (teal) -->
+              <circle r="74" fill="none" stroke="#c2faf3" stroke-width="6"/>
+              <path d="M0 -74 A74 74 0 1 1 -52 52" stroke="#03c5b8" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+              <!-- 24h text -->
+              <text x="0" y="-8" text-anchor="middle" font-family="Poppins, sans-serif" font-size="38" font-weight="700" fill="#0e2f58">24h</text>
+              <text x="0" y="14" text-anchor="middle" font-family="Poppins, sans-serif" font-size="12" font-weight="500" fill="#465d88">max</text>
+
+              <!-- Center dot -->
+              <circle r="4" fill="#03c5b8"/>
+            </g>
+
+            <!-- Notification: "Demande envoyée" -->
+            <g class="illus-shadow" transform="translate(40, 60)">
+              <rect x="0" y="0" width="130" height="50" rx="12" fill="white"/>
+              <circle cx="22" cy="25" r="12" fill="#c2faf3"/>
+              <path d="M17 25 L20 28 L27 21" stroke="#03c5b8" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <text x="78" y="21" text-anchor="middle" font-family="Poppins, sans-serif" font-size="8" font-weight="600" fill="#0e2f58">Demande envoyée</text>
+              <text x="78" y="33" text-anchor="middle" font-family="Poppins, sans-serif" font-size="7" fill="#bdc3e0">Il y a 2 min</text>
+            </g>
+
+            <!-- Notification: "Réponse reçue" -->
+            <g class="illus-shadow" transform="translate(215, 290)">
+              <rect x="0" y="0" width="130" height="50" rx="12" fill="white"/>
+              <circle cx="22" cy="25" r="12" fill="#e2f8e0"/>
+              <path d="M17 25 L20 28 L27 21" stroke="#3faf38" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <text x="78" y="21" text-anchor="middle" font-family="Poppins, sans-serif" font-size="8" font-weight="600" fill="#3faf38">Réponse reçue !</text>
+              <text x="78" y="33" text-anchor="middle" font-family="Poppins, sans-serif" font-size="7" fill="#bdc3e0">Jean D. a accepté</text>
+            </g>
+
+            <!-- Fallback arrow: "bascule réseau" -->
+            <g transform="translate(290, 75)">
+              <path d="M10 40 Q10 10 35 10" stroke="#ffc114" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <polygon points="33,5 40,10 33,15" fill="#ffc114"/>
+              <text x="5" y="55" font-family="Poppins, sans-serif" font-size="7" font-weight="500" fill="#7e8cb8">Sinon :</text>
+              <text x="5" y="65" font-family="Poppins, sans-serif" font-size="7" font-weight="600" fill="#ffc114">Réseau</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="slide__desc">
+          Si l'artisan ne répond pas sous 24h, votre demande <strong>bascule automatiquement vers le réseau</strong>. D'autres artisans qualifiés prennent le relais.
+          <span class="punchline">24h max. Toujours une solution.</span>
+        </div>
+
+        <div class="carousel__dots">
+          <button class="carousel__dot" data-index="0"></button>
+          <button class="carousel__dot" data-index="1"></button>
+          <button class="carousel__dot" data-index="2"></button>
+          <button class="carousel__dot active" data-index="3"></button>
+          <button class="carousel__dot" data-index="4"></button>
+        </div>
+
+        <button class="slide__cta">Trouver mon artisan</button>
+        <p class="slide__reassurance">Vous êtes notifié à chaque étape.</p>
+      </div>
+
+      <!-- ==========================================
+           SLIDE 5 — Action / Protection
+           "Protégé par Allianz."
+           Anxiété : "Et si les travaux se passent mal ?"
+           ========================================== -->
+      <div class="carousel__slide">
+        <button class="slide__skip" id="skipBtn">Non merci</button>
+        <h1 class="slide__title">Protégé par Allianz.</h1>
+
+        <div class="slide__visual">
+          <svg viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Big Allianz-style shield -->
+            <g transform="translate(190, 155)">
+              <!-- Outer glow -->
+              <circle r="120" fill="#f4f6fa" opacity="0.5"/>
+              <!-- Shield shape -->
+              <path d="M0 -95 C-65 -85 -85 -55 -85 -18 C-85 38 -48 85 0 105 C48 85 85 38 85 -18 C85 -55 65 -85 0 -95Z" fill="#0e2f58"/>
+              <path d="M0 -78 C-52 -70 -70 -45 -70 -14 C-70 32 -38 70 0 87 C38 70 70 32 70 -14 C70 -45 52 -70 0 -78Z" fill="#1c3a6b"/>
+
+              <!-- Inner white shield -->
+              <path d="M0 -60 C-40 -54 -54 -35 -54 -10 C-54 24 -30 54 0 68 C30 54 54 24 54 -10 C54 -35 40 -54 0 -60Z" fill="white"/>
+
+              <!-- Allianz-inspired eagle/lines -->
+              <g transform="translate(-20, -25)">
+                <rect x="0" y="0" width="40" height="5" rx="2.5" fill="#0e2f58"/>
+                <rect x="5" y="10" width="30" height="5" rx="2.5" fill="#0e2f58"/>
+                <rect x="10" y="20" width="20" height="5" rx="2.5" fill="#03c5b8"/>
+                <rect x="5" y="30" width="30" height="5" rx="2.5" fill="#0e2f58"/>
+                <rect x="0" y="40" width="40" height="5" rx="2.5" fill="#0e2f58"/>
+              </g>
+            </g>
+
+            <!-- "Allianz" text below shield -->
+            <g transform="translate(140, 275)">
+              <text x="50" y="15" text-anchor="middle" font-family="Poppins, sans-serif" font-size="14" font-weight="700" fill="#0e2f58" letter-spacing="2">ALLIANZ</text>
+              <text x="50" y="30" text-anchor="middle" font-family="Poppins, sans-serif" font-size="9" font-weight="500" fill="#7e8cb8">Protection juridique incluse</text>
+            </g>
+
+            <!-- Floating benefit badges -->
+            <!-- Litige couvert -->
+            <g class="illus-shadow" transform="translate(15, 85)">
+              <rect x="0" y="0" width="110" height="36" rx="18" fill="white"/>
+              <circle cx="18" cy="18" r="10" fill="#c2faf3"/>
+              <path d="M13 18 L16 21 L23 14" stroke="#03c5b8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <text x="66" y="22" text-anchor="middle" font-family="Poppins, sans-serif" font-size="10" font-weight="600" fill="#0e2f58">Litige couvert</text>
+            </g>
+
+            <!-- Assistance -->
+            <g class="illus-shadow" transform="translate(260, 95)">
+              <rect x="0" y="0" width="105" height="36" rx="18" fill="white"/>
+              <circle cx="18" cy="18" r="10" fill="#c2faf3"/>
+              <path d="M13 18 L16 21 L23 14" stroke="#03c5b8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <text x="64" y="22" text-anchor="middle" font-family="Poppins, sans-serif" font-size="10" font-weight="600" fill="#0e2f58">Assistance</text>
+            </g>
+
+            <!-- 0€ pour vous -->
+            <g class="illus-shadow" transform="translate(30, 280)">
+              <rect x="0" y="0" width="100" height="36" rx="18" fill="white"/>
+              <circle cx="18" cy="18" r="10" fill="#c2faf3"/>
+              <path d="M13 18 L16 21 L23 14" stroke="#03c5b8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <text x="62" y="22" text-anchor="middle" font-family="Poppins, sans-serif" font-size="10" font-weight="600" fill="#0e2f58">0 € pour vous</text>
+            </g>
+
+            <!-- Médiation -->
+            <g class="illus-shadow" transform="translate(255, 268)">
+              <rect x="0" y="0" width="100" height="36" rx="18" fill="white"/>
+              <circle cx="18" cy="18" r="10" fill="#c2faf3"/>
+              <path d="M13 18 L16 21 L23 14" stroke="#03c5b8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <text x="62" y="22" text-anchor="middle" font-family="Poppins, sans-serif" font-size="10" font-weight="600" fill="#0e2f58">Médiation</text>
+            </g>
+
+            <!-- Decorative circles -->
+            <circle cx="50" cy="200" r="6" fill="#ffc114" opacity="0.3"/>
+            <circle cx="340" cy="180" r="8" fill="#ffc114" opacity="0.2"/>
+            <circle cx="320" cy="330" r="5" fill="#03c5b8" opacity="0.2"/>
+          </svg>
+        </div>
+
+        <div class="slide__desc">
+          Chaque demande sur Kelkun bénéficie d'une <strong>protection juridique incluse avec Allianz</strong>. En cas de litige, vous n'êtes jamais seul.
+          <span class="punchline">Zéro frais. Zéro risque. On y va ?</span>
+        </div>
+
+        <div class="carousel__dots">
+          <button class="carousel__dot" data-index="0"></button>
+          <button class="carousel__dot" data-index="1"></button>
+          <button class="carousel__dot" data-index="2"></button>
+          <button class="carousel__dot" data-index="3"></button>
+          <button class="carousel__dot active" data-index="4"></button>
+        </div>
+
+        <button class="slide__cta">Trouver mon artisan</button>
+        <p class="slide__reassurance">Protection juridique activée automatiquement.</p>
+      </div>
+
+    </div><!-- /carousel__track -->
+  </div><!-- /carousel -->
+</div><!-- /phone-frame -->
+
+<script>
+  (() => {
+    const track = document.getElementById('carouselTrack');
+    const slides = document.querySelectorAll('.carousel__slide');
+    const totalSlides = slides.length;
+    let current = 0;
+
+    const allDotGroups = document.querySelectorAll('.carousel__dots');
+
+    function goTo(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      current = index;
+      track.style.transform = `translateX(-${current * 376}px)`;
+      updateDots();
+    }
+
+    function updateDots() {
+      allDotGroups.forEach(group => {
+        group.querySelectorAll('.carousel__dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === current);
+        });
+      });
+    }
+
+    // Dot clicks
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('carousel__dot')) {
+        const i = parseInt(e.target.dataset.index);
+        if (!isNaN(i)) goTo(i);
+      }
+    });
+
+    // Touch swipe
+    let startX = 0;
+    let isDragging = false;
+
+    track.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+      track.style.transition = 'none';
+    }, { passive: true });
+
+    track.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const diff = e.touches[0].clientX - startX;
+      const offset = -(current * 376) + diff;
+      track.style.transform = `translateX(${offset}px)`;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      const diff = e.changedTouches[0].clientX - startX;
+      if (Math.abs(diff) > 50) {
+        if (diff < 0) goTo(current + 1);
+        else goTo(current - 1);
+      } else {
+        goTo(current);
+      }
+    });
+
+    // Mouse drag (for desktop testing)
+    let mouseStart = 0;
+    let mouseDown = false;
+
+    track.addEventListener('mousedown', (e) => {
+      mouseStart = e.clientX;
+      mouseDown = true;
+      track.style.transition = 'none';
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!mouseDown) return;
+      const diff = e.clientX - mouseStart;
+      const offset = -(current * 376) + diff;
+      track.style.transform = `translateX(${offset}px)`;
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      if (!mouseDown) return;
+      mouseDown = false;
+      track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      const diff = e.clientX - mouseStart;
+      if (Math.abs(diff) > 50) {
+        if (diff < 0) goTo(current + 1);
+        else goTo(current - 1);
+      } else {
+        goTo(current);
+      }
+    });
+
+    // Keyboard arrows
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') goTo(current + 1);
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+    });
+
+    // Skip button
+    const skipBtn = document.getElementById('skipBtn');
+    if (skipBtn) {
+      skipBtn.addEventListener('click', () => {
+        alert('Fermeture du carousel — redirection vers l\'app');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

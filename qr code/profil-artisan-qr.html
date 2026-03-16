@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil Artisan — Kelkun</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Kelkun Design System Tokens */
+    --color-white: #ffffff;
+    --color-black: #000000;
+
+    --color-primary: #03c5b8;
+    --color-primary-10: #f1fefc;
+    --color-primary-25: #d5fbf6;
+    --color-primary-50: #c2faf3;
+    --color-primary-100: #93f6e9;
+    --color-primary-400: #3cdacc;
+    --color-primary-500: #03c5b8;
+    --color-primary-600: #029284;
+    --color-primary-700: #015f56;
+
+    --color-secondary: #0e2f58;
+    --color-secondary-1: #f8f9fc;
+    --color-secondary-2: #f4f6fa;
+    --color-secondary-10: #eeeff7;
+    --color-secondary-25: #e0e2f0;
+    --color-secondary-50: #bdc3e0;
+    --color-secondary-100: #9aa3d0;
+    --color-secondary-200: #7e8cb8;
+    --color-secondary-300: #6274a0;
+    --color-secondary-400: #465d88;
+    --color-secondary-500: #0e2f58;
+    --color-secondary-600: #0a2342;
+
+    --color-neutral-50: #fafafa;
+    --color-neutral-100: #f5f5f5;
+    --color-neutral-200: #e5e5e5;
+    --color-neutral-300: #d4d4d4;
+    --color-neutral-400: #a3a3a3;
+    --color-neutral-500: #737373;
+    --color-neutral-600: #525252;
+    --color-neutral-800: #262626;
+
+    --color-tertiary: #ffc114;
+    --color-tertiary-50: #fffbeb;
+
+    --color-info: #3cb0f5;
+    --color-info-50: #effaff;
+
+    --color-success: #3faf38;
+    --color-success-50: #f3fbf2;
+
+    /* Font */
+    --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Spacing (4px base) */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-7: 28px;
+    --space-8: 32px;
+
+    /* Border Radius */
+    --rounded-sm: 4px;
+    --rounded-md: 6px;
+    --rounded-lg: 8px;
+    --rounded-xl: 12px;
+    --rounded-2xl: 16px;
+    --rounded-3xl: 24px;
+    --rounded-full: 9999px;
+
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.10);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+
+    /* Transitions */
+    --duration-fast: 100ms;
+    --duration-base: 150ms;
+    --duration-slow: 200ms;
+    --ease-default: ease;
+
+    /* Focus */
+    --focus-ring-width: 2px;
+    --focus-ring-color: var(--color-primary);
+    --focus-ring-offset: 2px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-family);
+    background: var(--color-neutral-100);
+    color: var(--color-secondary);
+    min-height: 100vh;
+    max-width: 430px;
+    margin: 0 auto;
+  }
+
+  /* Hero header */
+  .hero {
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-400) 100%);
+    padding: 0 0 48px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 32px;
+    background: var(--color-neutral-100);
+    border-radius: var(--rounded-3xl) var(--rounded-3xl) 0 0;
+  }
+
+  .hero-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-5) 0;
+  }
+
+  .kelkun-logo {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: -0.4px;
+  }
+
+  .verified-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: rgba(3, 197, 184, 0.15);
+    color: var(--color-primary);
+    font-size: 12px;
+    font-weight: 500;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--rounded-full);
+  }
+
+  .verified-badge svg { flex-shrink: 0; }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-7) var(--space-5) 0;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: var(--rounded-md);
+    background: linear-gradient(-70deg, var(--color-primary-600) 0%, var(--color-primary-400) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--color-white);
+    border: 3px solid rgba(255,255,255,0.2);
+    margin-bottom: var(--space-4);
+  }
+
+  .artisan-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: var(--space-1);
+  }
+
+  .artisan-trade {
+    font-size: 14px;
+    color: var(--color-secondary-100);
+    margin-bottom: var(--space-3);
+    font-weight: 400;
+  }
+
+  .rating-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .stars {
+    display: flex;
+    gap: 2px;
+    color: var(--color-tertiary);
+  }
+
+  .rating-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-white);
+  }
+
+  .rating-count {
+    font-size: 13px;
+    color: var(--color-secondary-100);
+    font-weight: 400;
+  }
+
+  /* Info cards */
+  .content {
+    padding: 0 var(--space-4) 120px;
+    margin-top: -8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .stat-card {
+    background: var(--color-white);
+    border-radius: var(--rounded-xl);
+    padding: var(--space-4) var(--space-3);
+    text-align: center;
+    box-shadow: var(--shadow-xs);
+  }
+
+  .stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    line-height: 1;
+    margin-bottom: var(--space-1);
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: var(--color-neutral-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+  }
+
+  .card {
+    background: var(--color-white);
+    border-radius: var(--rounded-2xl);
+    padding: var(--space-5);
+    margin-bottom: var(--space-3);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .card-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--color-neutral-400);
+    margin-bottom: var(--space-3);
+  }
+
+  /* Garanties */
+  .garantie-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .garantie-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .garantie-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--rounded-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .garantie-icon.green { background: var(--color-primary-10); color: var(--color-primary); }
+  .garantie-icon.blue { background: var(--color-info-50); color: var(--color-info); }
+
+  .garantie-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: var(--color-secondary);
+  }
+
+  .garantie-text span {
+    font-size: 12px;
+    color: var(--color-neutral-500);
+    font-weight: 400;
+  }
+
+  /* Spécialités tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tag {
+    background: var(--color-secondary-10);
+    color: var(--color-secondary-300);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--rounded-full);
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  /* Zone intervention */
+  .zone-text {
+    font-size: 14px;
+    color: var(--color-secondary-400);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .zone-text strong {
+    color: var(--color-primary-700);
+    font-weight: 600;
+  }
+
+  /* Avis */
+  .avis-item {
+    padding-bottom: var(--space-4);
+    margin-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-neutral-200);
+  }
+
+  .avis-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .avis-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-2);
+  }
+
+  .avis-author {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-secondary);
+  }
+
+  .avis-date {
+    font-size: 12px;
+    color: var(--color-neutral-400);
+    font-weight: 400;
+  }
+
+  .avis-stars {
+    display: flex;
+    gap: 2px;
+    color: var(--color-tertiary);
+    margin-bottom: var(--space-2);
+  }
+
+  .avis-text {
+    font-size: 14px;
+    color: var(--color-neutral-500);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  /* Bottom CTA */
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    background: var(--color-white);
+    padding: var(--space-3) var(--space-4);
+    padding-bottom: max(var(--space-3), env(safe-area-inset-bottom));
+    border-top: 1px solid var(--color-neutral-200);
+    display: flex;
+    gap: var(--space-3);
+    z-index: 100;
+  }
+
+  .btn {
+    flex: 1;
+    padding: var(--space-3);
+    border-radius: var(--rounded-sm);
+    border: none;
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    transition: box-shadow var(--duration-base) var(--ease-default), transform var(--duration-fast) var(--ease-default);
+  }
+
+  .btn:active { transform: scale(0.97); }
+
+  .btn:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .btn-primary:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-secondary {
+    background: var(--color-secondary);
+    color: var(--color-white);
+  }
+
+  .btn-secondary:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Micro-animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .stats-row { animation: fadeUp 0.5s ease 0.1s both; }
+  .card:nth-child(2) { animation: fadeUp 0.5s ease 0.2s both; }
+  .card:nth-child(3) { animation: fadeUp 0.5s ease 0.3s both; }
+  .card:nth-child(4) { animation: fadeUp 0.5s ease 0.35s both; }
+  .card:nth-child(5) { animation: fadeUp 0.5s ease 0.4s both; }
+
+  /* Proto label */
+  .proto-label {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-tertiary);
+    color: var(--color-secondary);
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    padding: var(--space-1);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    z-index: 999;
+    max-width: 430px;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-label">Proto — QR → Profil Artisan Kelkun</div>
+
+<div class="hero">
+  <div class="hero-top" style="margin-top: 24px;">
+    <div class="kelkun-logo">kelkun</div>
+    <div class="verified-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Profil vérifié
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="avatar">MP</div>
+    <div class="artisan-name">Marc Pereira</div>
+    <div class="artisan-trade">Plombier · Montpellier (34)</div>
+    <div class="rating-row">
+      <div class="stars">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <span class="rating-text">4.8</span>
+      <span class="rating-count">(47 avis)</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-value">12</div>
+      <div class="stat-label">Ans exp.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">183</div>
+      <div class="stat-label">Chantiers</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">98%</div>
+      <div class="stat-label">Réponse</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Garanties & assurances</div>
+    <div class="garantie-list">
+      <div class="garantie-item">
+        <div class="garantie-icon green">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="garantie-text">
+          <strong>Décennale vérifiée</strong>
+          <span>AXA France · Valide jusqu'au 31/12/2026</span>
+        </div>
+      </div>
+      <div class="garantie-item">
+        <div class="garantie-icon blue">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div class="garantie-text">
+          <strong>RC Professionnelle</strong>
+          <span>MAAF · Valide jusqu'au 31/03/2027</span>
+        </div>
+      </div>
+      <div class="garantie-item">
+        <div class="garantie-icon green">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="garantie-text">
+          <strong>SIRET vérifié</strong>
+          <span>N° 823 456 789 00012 · Actif</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Spécialités</div>
+    <div class="tags">
+      <span class="tag">Plomberie générale</span>
+      <span class="tag">Salle de bain</span>
+      <span class="tag">Chauffage</span>
+      <span class="tag">Dépannage</span>
+      <span class="tag">Rénovation</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Zone d'intervention</div>
+    <p class="zone-text">Montpellier et alentours · <strong>30 km</strong> autour du centre-ville (34000)</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Derniers avis</div>
+    <div class="avis-item">
+      <div class="avis-header">
+        <span class="avis-author">Sophie L.</span>
+        <span class="avis-date">Fév. 2026</span>
+      </div>
+      <div class="avis-stars">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <p class="avis-text">Intervention rapide pour une fuite sous évier. Très professionnel, propre et prix correct. Je recommande !</p>
+    </div>
+    <div class="avis-item">
+      <div class="avis-header">
+        <span class="avis-author">Thomas R.</span>
+        <span class="avis-date">Jan. 2026</span>
+      </div>
+      <div class="avis-stars">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" opacity="0.3"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <p class="avis-text">Rénovation complète salle de bain. Bon travail dans l'ensemble, délai respecté. Un petit retard le premier jour mais rien de grave.</p>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-bar">
+  <button class="btn btn-primary">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    Demander un devis
+  </button>
+  <button class="btn btn-secondary">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Appeler
+  </button>
+</div>
+
+</body>
+</html>

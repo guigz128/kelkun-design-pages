@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propositions icônes travaux — Kelkun</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-white: #ffffff;
+    --color-primary: #03c5b8;
+    --color-primary-10: #f1fefc;
+    --color-primary-50: #c2faf3;
+    --color-secondary: #0e2f58;
+    --color-secondary-10: #eeeff7;
+    --color-secondary-50: #bdc3e0;
+    --color-secondary-100: #9aa3d0;
+    --color-secondary-300: #6274a0;
+    --color-secondary-400: #465d88;
+    --color-neutral-50: #fafafa;
+    --color-neutral-100: #f5f5f5;
+    --color-neutral-200: #e5e5e5;
+    --color-neutral-400: #a3a3a3;
+    --color-neutral-500: #737373;
+    --color-quarternary: #ff7b1e;
+    --color-quarternary-50: #fff7ed;
+    --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-family);
+    background: var(--color-neutral-100);
+    color: var(--color-secondary);
+    padding: 24px 16px;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--color-secondary);
+  }
+
+  .intro {
+    font-size: 14px;
+    color: var(--color-neutral-500);
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-neutral-400);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-neutral-200);
+  }
+
+  .section-desc {
+    font-size: 12px;
+    color: var(--color-neutral-500);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    max-width: 430px;
+  }
+
+  .card {
+    background: var(--color-white);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 16px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .card:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-10);
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-secondary);
+    margin-bottom: 2px;
+  }
+
+  .card-sub {
+    font-size: 10px;
+    color: var(--color-neutral-400);
+    font-weight: 400;
+  }
+
+  /* ---- OPTION A : Outline Lucide (stroke only) ---- */
+  .opt-a .card-icon {
+    color: var(--color-secondary-300);
+  }
+
+  /* ---- OPTION B : Filled circle bg + stroke icon ---- */
+  .opt-b .card-icon {
+    background: var(--color-primary-10);
+    border-radius: 12px;
+    color: var(--color-primary);
+  }
+
+  /* ---- OPTION C : Duotone (filled bg + secondary stroke) ---- */
+  .opt-c .card-icon {
+    background: var(--color-secondary-10);
+    border-radius: 12px;
+    color: var(--color-secondary-400);
+  }
+
+  /* ---- OPTION D : Rounded square bg + orange accent ---- */
+  .opt-d .card-icon {
+    background: var(--color-quarternary-50);
+    border-radius: 10px;
+    color: var(--color-quarternary);
+  }
+
+  /* ---- OPTION E : Circle bg primary + white icon ---- */
+  .opt-e .card-icon {
+    background: var(--color-primary);
+    border-radius: 50%;
+    color: var(--color-white);
+    width: 40px;
+    height: 40px;
+  }
+
+  /* ---- OPTION F : No bg, thick stroke, primary color ---- */
+  .opt-f .card-icon {
+    color: var(--color-primary);
+  }
+
+  .winner {
+    background: var(--color-primary-10);
+    border: 2px solid var(--color-primary);
+    border-radius: 16px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-primary);
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<h1>Icônes catégories travaux</h1>
+<p class="intro">6 propositions pour remplacer les emojis. Toutes les icônes sont des SVG Lucide inline, cohérentes avec le design system Kelkun.</p>
+
+<!-- ==================== OPTION A ==================== -->
+<div class="section">
+  <div class="section-title">Option A — Outline neutre</div>
+  <div class="section-desc">Icônes stroke fines, couleur secondary-300. Sobre, pro, laisse la place au texte.</div>
+  <div class="grid opt-a">
+    <div class="card">
+      <div class="card-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      </div>
+      <div class="card-label">Peinture</div>
+      <div class="card-sub">Intérieur & extérieur</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="card-label">Plomberie</div>
+      <div class="card-sub">Réparation & install.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="card-label">Électricité</div>
+      <div class="card-sub">Mise aux normes</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/><path d="M10 14 2.3 6.3"/><path d="m14 6 7.7 7.7"/><path d="M8 6h8"/></svg>
+      </div>
+      <div class="card-label">Rénovation</div>
+      <div class="card-sub">Sols, murs, cuisine…</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M4 12h16"/><path d="M12 2v20"/></svg>
+      </div>
+      <div class="card-label">Menuiserie</div>
+      <div class="card-sub">Portes, fenêtres</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="card-label">Autre</div>
+      <div class="card-sub">Décrivez votre besoin</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== OPTION B ==================== -->
+<div class="section">
+  <div class="section-title">Option B — Primary soft <span class="winner">Recommandé</span></div>
+  <div class="section-desc">Fond primary-10 + icône primary. Doux, accessible, cohérent avec le DS Kelkun. Bonne lisibilité.</div>
+  <div class="grid opt-b">
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 6 10.5-3L23 6"/><path d="M6 4v16"/><path d="M18 4v16"/><path d="M2 6v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6"/><path d="M6 12h4"/></svg>
+      </div>
+      <div class="card-label">Peinture</div>
+      <div class="card-sub">Intérieur & extérieur</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="card-label">Plomberie</div>
+      <div class="card-sub">Réparation & install.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="card-label">Électricité</div>
+      <div class="card-sub">Mise aux normes</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/><path d="M10 14 2.3 6.3"/><path d="m14 6 7.7 7.7"/><path d="M8 6h8"/></svg>
+      </div>
+      <div class="card-label">Rénovation</div>
+      <div class="card-sub">Sols, murs, cuisine…</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M4 12h16"/><path d="M12 2v20"/></svg>
+      </div>
+      <div class="card-label">Menuiserie</div>
+      <div class="card-sub">Portes, fenêtres</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </div>
+      <div class="card-label">Autre</div>
+      <div class="card-sub">Décrivez votre besoin</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== OPTION C ==================== -->
+<div class="section">
+  <div class="section-title">Option C — Secondary soft</div>
+  <div class="section-desc">Fond secondary-10 + icône secondary-400. Plus corporate, tonalité sérieuse.</div>
+  <div class="grid opt-c">
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 6 10.5-3L23 6"/><path d="M6 4v16"/><path d="M18 4v16"/><path d="M2 6v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6"/><path d="M6 12h4"/></svg>
+      </div>
+      <div class="card-label">Peinture</div>
+      <div class="card-sub">Intérieur & extérieur</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="card-label">Plomberie</div>
+      <div class="card-sub">Réparation & install.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="card-label">Électricité</div>
+      <div class="card-sub">Mise aux normes</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/><path d="M10 14 2.3 6.3"/><path d="m14 6 7.7 7.7"/><path d="M8 6h8"/></svg>
+      </div>
+      <div class="card-label">Rénovation</div>
+      <div class="card-sub">Sols, murs, cuisine…</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M4 12h16"/><path d="M12 2v20"/></svg>
+      </div>
+      <div class="card-label">Menuiserie</div>
+      <div class="card-sub">Portes, fenêtres</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </div>
+      <div class="card-label">Autre</div>
+      <div class="card-sub">Décrivez votre besoin</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== OPTION D ==================== -->
+<div class="section">
+  <div class="section-title">Option D — Orange accent</div>
+  <div class="section-desc">Fond quarternary-50 + icône orange. Dynamique, chaud, attire l'attention. Rappel couleur partenaire.</div>
+  <div class="grid opt-d">
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 6 10.5-3L23 6"/><path d="M6 4v16"/><path d="M18 4v16"/><path d="M2 6v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6"/><path d="M6 12h4"/></svg>
+      </div>
+      <div class="card-label">Peinture</div>
+      <div class="card-sub">Intérieur & extérieur</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="card-label">Plomberie</div>
+      <div class="card-sub">Réparation & install.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="card-label">Électricité</div>
+      <div class="card-sub">Mise aux normes</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/><path d="M10 14 2.3 6.3"/><path d="m14 6 7.7 7.7"/><path d="M8 6h8"/></svg>
+      </div>
+      <div class="card-label">Rénovation</div>
+      <div class="card-sub">Sols, murs, cuisine…</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M4 12h16"/><path d="M12 2v20"/></svg>
+      </div>
+      <div class="card-label">Menuiserie</div>
+      <div class="card-sub">Portes, fenêtres</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </div>
+      <div class="card-label">Autre</div>
+      <div class="card-sub">Décrivez votre besoin</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== OPTION E ==================== -->
+<div class="section">
+  <div class="section-title">Option E — Circle filled primary</div>
+  <div class="section-desc">Cercle primary plein + icône blanche. Bold, affirmatif, très visible. Peut être trop lourd sur 6 cartes.</div>
+  <div class="grid opt-e">
+    <div class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 6 10.5-3L23 6"/><path d="M6 4v16"/><path d="M18 4v16"/><path d="M2 6v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6"/><path d="M6 12h4"/></svg>
+      </div>
+      <div class="card-label">Peinture</div>
+      <div class="card-sub">Intérieur & extérieur</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="card-label">Plomberie</div>
+      <div class="card-sub">Réparation & install.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="card-label">Électricité</div>
+      <div class="card-sub">Mise aux normes</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/><path d="M10 14 2.3 6.3"/><path d="m14 6 7.7 7.7"/><path d="M8 6h8"/></svg>
+      </div>
+      <div class="card-label">Rénovation</div>
+      <div class="card-sub">Sols, murs, cuisine…</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M4 12h16"/><path d="M12 2v20"/></svg>
+      </div>
+      <div class="card-label">Menuiserie</div>
+      <div class="card-sub">Portes, fenêtres</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </div>
+      <div class="card-label">Autre</div>
+      <div class="card-sub">Décrivez votre besoin</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== OPTION F ==================== -->
+<div class="section">
+  <div class="section-title">Option F — Stroke primary, sans fond</div>
+  <div class="section-desc">Icônes primary sans fond. Minimaliste, aéré. Bien si les cartes ont déjà un fond.</div>
+  <div class="grid opt-f">
+    <div class="card">
+      <div class="card-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2 6 10.5-3L23 6"/><path d="M6 4v16"/><path d="M18 4v16"/><path d="M2 6v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6"/><path d="M6 12h4"/></svg>
+      </div>
+      <div class="card-label">Peinture</div>
+      <div class="card-sub">Intérieur & extérieur</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="card-label">Plomberie</div>
+      <div class="card-sub">Réparation & install.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="card-label">Électricité</div>
+      <div class="card-sub">Mise aux normes</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/><path d="M10 14 2.3 6.3"/><path d="m14 6 7.7 7.7"/><path d="M8 6h8"/></svg>
+      </div>
+      <div class="card-label">Rénovation</div>
+      <div class="card-sub">Sols, murs, cuisine…</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M4 12h16"/><path d="M12 2v20"/></svg>
+      </div>
+      <div class="card-label">Menuiserie</div>
+      <div class="card-sub">Portes, fenêtres</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </div>
+      <div class="card-label">Autre</div>
+      <div class="card-sub">Décrivez votre besoin</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -165,17 +165,8 @@ ul { list-style: none; }
 .k-nav__logo {
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-secondary);
   flex-shrink: 0;
-}
-.k-nav__logo-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--color-primary);
-  border-radius: 50%;
+  text-decoration: none;
 }
 .k-nav__links {
   display: flex;

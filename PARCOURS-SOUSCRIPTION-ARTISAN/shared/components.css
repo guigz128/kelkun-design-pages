@@ -65,11 +65,9 @@ body {
 }
 
 .header__logo {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  letter-spacing: var(--tracking-tight);
 }
 
 .header__link {

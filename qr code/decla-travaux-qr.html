@@ -257,9 +257,15 @@
   }
 
   .travaux-icon {
-    font-size: 28px;
-    margin-bottom: var(--space-2);
-    display: block;
+    width: 44px;
+    height: 44px;
+    margin: 0 auto var(--space-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary-10);
+    border-radius: var(--rounded-xl);
+    color: var(--color-primary);
   }
 
   .travaux-label {
@@ -459,32 +465,32 @@
 
   <div class="travaux-grid">
     <div class="travaux-card" onclick="selectCard(this)">
-      <span class="travaux-icon">🎨</span>
+      <div class="travaux-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 6 10.5-3L23 6"/><path d="M6 4v16"/><path d="M18 4v16"/><path d="M2 6v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6"/><path d="M6 12h4"/></svg></div>
       <div class="travaux-label">Peinture</div>
       <div class="travaux-sub">Intérieur & extérieur</div>
     </div>
     <div class="travaux-card" onclick="selectCard(this)">
-      <span class="travaux-icon">🔧</span>
+      <div class="travaux-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
       <div class="travaux-label">Plomberie</div>
       <div class="travaux-sub">Réparation & install.</div>
     </div>
     <div class="travaux-card" onclick="selectCard(this)">
-      <span class="travaux-icon">⚡</span>
+      <div class="travaux-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
       <div class="travaux-label">Électricité</div>
       <div class="travaux-sub">Mise aux normes</div>
     </div>
     <div class="travaux-card" onclick="selectCard(this)">
-      <span class="travaux-icon">🏗️</span>
+      <div class="travaux-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/><path d="M10 14 2.3 6.3"/><path d="m14 6 7.7 7.7"/><path d="M8 6h8"/></svg></div>
       <div class="travaux-label">Rénovation</div>
       <div class="travaux-sub">Sols, murs, cuisine…</div>
     </div>
     <div class="travaux-card" onclick="selectCard(this)">
-      <span class="travaux-icon">🪟</span>
+      <div class="travaux-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M4 12h16"/><path d="M12 2v20"/></svg></div>
       <div class="travaux-label">Menuiserie</div>
       <div class="travaux-sub">Portes, fenêtres</div>
     </div>
     <div class="travaux-card" onclick="selectCard(this)">
-      <span class="travaux-icon">🏠</span>
+      <div class="travaux-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></div>
       <div class="travaux-label">Autre</div>
       <div class="travaux-sub">Décrivez votre besoin</div>
     </div>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=2160">
+  <title>Kelkun — Store Visual 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 2160px;
+      height: 3840px;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: #0E2F58;
+      position: relative;
+    }
+
+    .slide {
+      width: 2160px;
+      height: 3840px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Background gradient ---- */
+    .bg-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 140% 60% at 50% 100%, rgba(3, 197, 184, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 50% at 80% 30%, rgba(3, 197, 184, 0.08) 0%, transparent 60%),
+        linear-gradient(180deg, #0a2340 0%, #0E2F58 40%, #112d50 100%);
+      z-index: 0;
+    }
+
+    /* ---- Subtle pattern overlay ---- */
+    .bg-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0);
+      background-size: 48px 48px;
+      z-index: 1;
+    }
+
+    /* ---- Top headline section ---- */
+    .headline-section {
+      position: relative;
+      z-index: 10;
+      padding: 240px 140px 0;
+      flex-shrink: 0;
+    }
+
+    .headline {
+      font-size: 180px;
+      font-weight: 900;
+      line-height: 1.05;
+      color: #ffffff;
+      letter-spacing: -3px;
+      max-width: 1900px;
+    }
+
+    .headline .accent {
+      color: #03C5B8;
+    }
+
+    .headline .line2 {
+      font-style: italic;
+    }
+
+    /* ---- Artisan photo area ---- */
+    .artisan-section {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2200px;
+      z-index: 5;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .artisan-container {
+      position: relative;
+      width: 1800px;
+      height: 2100px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    /* Artisan silhouette placeholder - stylized illustration */
+    .artisan-visual {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .artisan-figure {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1500px;
+      height: 2000px;
+    }
+
+    /* SVG artisan illustration */
+    .artisan-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ---- Glow behind artisan ---- */
+    .artisan-glow {
+      position: absolute;
+      bottom: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1400px;
+      height: 1400px;
+      background: radial-gradient(ellipse, rgba(3, 197, 184, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    /* ---- Floating trust badges ---- */
+    .badge {
+      position: absolute;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 32px;
+      padding: 36px 52px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 44px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+
+    .badge-icon {
+      width: 72px;
+      height: 72px;
+      background: rgba(3, 197, 184, 0.25);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .badge-icon svg {
+      width: 40px;
+      height: 40px;
+      fill: #03C5B8;
+    }
+
+    .badge-1 {
+      left: 100px;
+      bottom: 980px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .badge-2 {
+      right: 100px;
+      bottom: 1300px;
+      animation: float 6s ease-in-out infinite 2s;
+    }
+
+    .badge-3 {
+      left: 160px;
+      bottom: 1620px;
+      animation: float 6s ease-in-out infinite 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+
+    /* ---- Bottom CTA area ---- */
+    .bottom-section {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 15;
+      padding: 0 140px 200px;
+      background: linear-gradient(0deg,
+        rgba(14, 47, 88, 1) 0%,
+        rgba(14, 47, 88, 0.95) 30%,
+        rgba(14, 47, 88, 0.7) 60%,
+        transparent 100%
+      );
+      height: 600px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .logo-bottom {
+      opacity: 0.95;
+    }
+
+    /* ---- Decorative elements ---- */
+    .deco-circle {
+      position: absolute;
+      border-radius: 50%;
+      border: 3px solid rgba(3, 197, 184, 0.15);
+      z-index: 2;
+    }
+
+    .deco-circle-1 {
+      width: 600px;
+      height: 600px;
+      top: -100px;
+      right: -200px;
+    }
+
+    .deco-circle-2 {
+      width: 400px;
+      height: 400px;
+      top: 800px;
+      left: -150px;
+    }
+
+    .deco-circle-3 {
+      width: 200px;
+      height: 200px;
+      bottom: 1400px;
+      right: 200px;
+    }
+
+    /* Stars / rating visual */
+    .stars {
+      display: flex;
+      gap: 12px;
+    }
+
+    .star {
+      width: 40px;
+      height: 40px;
+      fill: #FFC114;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <!-- Background -->
+    <div class="bg-gradient"></div>
+    <div class="bg-pattern"></div>
+
+    <!-- Decorative circles -->
+    <div class="deco-circle deco-circle-1"></div>
+    <div class="deco-circle deco-circle-2"></div>
+    <div class="deco-circle deco-circle-3"></div>
+
+    <!-- Headline -->
+    <div class="headline-section">
+      <h1 class="headline">
+        Le <span class="accent">bon pro</span>,<br>
+        <span class="line2">au bon endroit,</span><br>
+        <span class="line2">au bon</span><br>
+        <span class="accent line2">moment</span>
+      </h1>
+    </div>
+
+    <!-- Artisan visual area -->
+    <div class="artisan-section">
+      <div class="artisan-container">
+        <div class="artisan-glow"></div>
+        <div class="artisan-figure">
+          <svg class="artisan-svg" viewBox="0 0 1500 2000" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Artisan body - stylized silhouette -->
+            <!-- Overall shadow -->
+            <ellipse cx="750" cy="1960" rx="500" ry="40" fill="rgba(0,0,0,0.15)"/>
+
+            <!-- Legs -->
+            <path d="M580 1400 L560 1920 Q560 1960 600 1960 L680 1960 Q700 1960 700 1940 L700 1400" fill="#4a5568"/>
+            <path d="M800 1400 L800 1940 Q800 1960 820 1960 L900 1960 Q940 1960 940 1920 L920 1400" fill="#4a5568"/>
+
+            <!-- Work pants -->
+            <path d="M520 900 Q500 1100 560 1420 L700 1420 L750 1050 L800 1420 L940 1420 Q1000 1100 980 900 Z" fill="#5a6a7a"/>
+
+            <!-- Tool belt -->
+            <rect x="510" y="880" width="480" height="50" rx="10" fill="#8B6914"/>
+            <rect x="620" y="870" width="40" height="70" rx="5" fill="#6B5210"/>
+            <rect x="840" y="870" width="40" height="70" rx="5" fill="#6B5210"/>
+
+            <!-- Torso / T-shirt -->
+            <path d="M550 420 Q520 500 510 900 L990 900 Q980 500 950 420 Q880 380 750 380 Q620 380 550 420Z" fill="#03C5B8"/>
+
+            <!-- T-shirt collar -->
+            <path d="M660 400 Q750 440 840 400 Q830 380 750 370 Q670 380 660 400Z" fill="#02a89d"/>
+
+            <!-- T-shirt sleeves -->
+            <path d="M550 420 Q480 440 430 530 Q420 560 440 570 L520 600 Q540 550 550 500Z" fill="#03C5B8"/>
+            <path d="M950 420 Q1020 440 1070 530 Q1080 560 1060 570 L980 600 Q960 550 950 500Z" fill="#03C5B8"/>
+
+            <!-- Arms -->
+            <path d="M440 570 Q420 650 400 750 Q390 790 410 800" fill="none" stroke="#D4A574" stroke-width="55" stroke-linecap="round"/>
+            <!-- Right arm pointing up -->
+            <path d="M1060 570 Q1100 500 1120 400 Q1130 340 1110 300" fill="none" stroke="#D4A574" stroke-width="55" stroke-linecap="round"/>
+
+            <!-- Right hand pointing up -->
+            <path d="M1110 300 Q1108 260 1105 220" fill="none" stroke="#D4A574" stroke-width="36" stroke-linecap="round"/>
+            <!-- Index finger -->
+            <path d="M1105 220 Q1103 180 1100 150" fill="none" stroke="#D4A574" stroke-width="24" stroke-linecap="round"/>
+
+            <!-- Left hand -->
+            <circle cx="410" cy="810" r="40" fill="#D4A574"/>
+
+            <!-- Head -->
+            <ellipse cx="750" cy="260" rx="150" ry="170" fill="#D4A574"/>
+
+            <!-- Hair -->
+            <path d="M600 240 Q600 100 750 80 Q900 100 900 240 Q900 160 830 140 Q750 130 670 140 Q600 160 600 240Z" fill="#5a3825"/>
+
+            <!-- Hair curls -->
+            <circle cx="620" cy="200" r="30" fill="#5a3825"/>
+            <circle cx="650" cy="150" r="25" fill="#5a3825"/>
+            <circle cx="700" cy="120" r="25" fill="#5a3825"/>
+            <circle cx="800" cy="120" r="25" fill="#5a3825"/>
+            <circle cx="850" cy="150" r="25" fill="#5a3825"/>
+            <circle cx="880" cy="200" r="30" fill="#5a3825"/>
+
+            <!-- Cap -->
+            <path d="M580 210 Q580 120 750 100 Q920 120 920 210 Q920 190 750 180 Q580 190 580 210Z" fill="#E8E8E8"/>
+            <path d="M580 210 Q560 210 540 220 L960 220 Q940 210 920 210 Z" fill="#E8E8E8"/>
+            <path d="M540 220 Q530 215 480 225 Q540 240 600 230 Z" fill="#E8E8E8"/>
+
+            <!-- Face -->
+            <!-- Eyes -->
+            <ellipse cx="690" cy="270" rx="20" ry="22" fill="#2d1810"/>
+            <ellipse cx="810" cy="270" rx="20" ry="22" fill="#2d1810"/>
+            <circle cx="696" cy="264" r="8" fill="white"/>
+            <circle cx="816" cy="264" r="8" fill="white"/>
+
+            <!-- Eyebrows -->
+            <path d="M660 240 Q690 228 720 238" fill="none" stroke="#3d2415" stroke-width="8" stroke-linecap="round"/>
+            <path d="M780 238 Q810 228 840 240" fill="none" stroke="#3d2415" stroke-width="8" stroke-linecap="round"/>
+
+            <!-- Nose -->
+            <path d="M750 280 Q740 310 730 320 Q745 330 755 330 Q765 320 760 310 Z" fill="#c4956a"/>
+
+            <!-- Smile -->
+            <path d="M700 350 Q750 390 800 350" fill="none" stroke="#2d1810" stroke-width="8" stroke-linecap="round"/>
+
+            <!-- Beard -->
+            <path d="M650 340 Q650 420 750 440 Q850 420 850 340 Q820 370 750 380 Q680 370 650 340Z" fill="#4a2c17" opacity="0.7"/>
+
+            <!-- Beard stubble effect -->
+            <path d="M660 350 Q660 400 750 420 Q840 400 840 350" fill="none" stroke="#3d2415" stroke-width="3" stroke-dasharray="4 6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating badges -->
+    <div class="badge badge-1">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      </div>
+      <div>
+        <div>Artisans certifies</div>
+        <div class="stars" style="margin-top: 8px;">
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="badge badge-2">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+      </div>
+      <span>Pres de chez vous</span>
+    </div>
+
+    <div class="badge badge-3">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+      </div>
+      <span>Devis gratuit</span>
+    </div>
+
+    <!-- Bottom logo -->
+    <div class="bottom-section">
+      <svg class="logo-bottom" width="480" height="177" viewBox="0 0 160 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Wordmark -->
+        <path d="M67.8352 44.2517H59.8718V0H67.8352V44.2517Z" fill="#03C5B8"/>
+        <path d="M102.15 33.6234V15.2906H110.175V32.1062C110.175 36.0889 112.768 37.6693 115.608 37.6693C118.447 37.6693 121.04 36.0889 121.04 32.1062V15.2906H129.003V33.6234C129.003 39.6922 124.312 45.0024 115.608 45.0024C106.903 45.0024 102.15 39.6922 102.15 33.6234Z" fill="#03C5B8"/>
+        <path d="M160 25.9189V44.2517H151.975V27.4361C151.975 23.4535 149.382 21.873 146.542 21.873C143.703 21.873 141.11 23.4535 141.11 27.4361V44.2517H133.147V25.9189C133.147 19.8501 137.838 14.5399 146.542 14.5399C155.247 14.5399 160 19.8501 160 25.9189Z" fill="#03C5B8"/>
+        <path d="M80.0193 44.2517H72.0559V0H80.0193V44.2517Z" fill="#03C5B8"/>
+        <path d="M82.5196 25.3737L89.395 16.4917C89.9814 15.7331 90.8688 15.2906 91.8102 15.2906H100.013L90.2592 27.1437C89.5725 27.9813 89.5339 29.1904 90.1666 30.0754L100.321 44.2517H92.3041C91.2932 44.2517 90.3518 43.746 89.7731 42.9005L82.3267 31.9798C80.9609 29.9727 81.0381 27.2939 82.5196 25.3737Z" fill="#03C5B8"/>
+        <path d="M7.96336 44.2517H0V0H7.96336V44.2517Z" fill="#03C5B8"/>
+        <path d="M10.4635 25.3737L17.3388 16.4917C17.9253 15.7331 18.8127 15.2906 19.7541 15.2906H27.9566L18.2031 27.1437C17.5163 27.9813 17.4777 29.1904 18.1105 30.0754L28.2653 44.2517H20.2479C19.2371 44.2517 18.2957 43.746 17.7169 42.9005L10.2706 31.9798C8.90477 29.9727 8.98194 27.2939 10.4635 25.3737Z" fill="#03C5B8"/>
+        <path d="M55.8902 31.8613C55.8902 19.7237 48.8528 14.5399 41.0747 14.5399C32.6174 14.5399 26.3826 20.9248 26.3826 29.7751C26.3826 38.6255 32.7409 45.0103 41.1981 45.0103C47.4947 45.0103 52.8036 42.1024 55.3346 35.9071C55.4504 35.6148 55.5584 35.3224 55.6587 35.0221H47.0009C45.8897 36.9818 43.6674 37.9933 41.3216 37.9933C37.7412 37.9933 35.2719 35.4014 34.8398 32.1774H55.8902V31.8613ZM34.6546 26.6775C35.2719 23.5799 37.6794 21.3673 41.0747 21.3673C44.4699 21.3673 46.8774 23.7695 47.3095 26.6775H34.6546Z" fill="#03C5B8"/>
+        <!-- Tagline -->
+        <path d="M1.50934 57.113H4.6207V58.3311H0V49.1294H1.50934V57.113Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M7.39228 50.3475V53.0484H10.5698V54.2797H7.39228V57.0998H10.967V58.3311H5.88293V49.1162H10.967V50.3475H7.39228Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M21.6804 49.1294V50.3607H17.7747V53.0749H20.8198V54.3062H17.7747V58.3311H16.2653V49.1294H21.6804Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M24.5753 49.1294V54.9947C24.5753 55.692 24.7563 56.2172 25.1181 56.5702C25.4889 56.9233 26.0008 57.0998 26.654 57.0998C27.316 57.0998 27.8279 56.9233 28.1898 56.5702C28.5605 56.2172 28.7459 55.692 28.7459 54.9947V49.1294H30.2552V54.9682C30.2552 55.7185 30.0919 56.354 29.7653 56.8747C29.4387 57.3955 29.0018 57.7839 28.4546 58.0398C27.9073 58.2958 27.3027 58.4238 26.6407 58.4238C25.9787 58.4238 25.3741 58.2958 24.8269 58.0398C24.2884 57.7839 23.8604 57.3955 23.5426 56.8747C23.2248 56.354 23.066 55.7185 23.066 54.9682V49.1294H24.5753Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M38.1651 49.1294V50.3607H35.7157V58.3311H34.2064V50.3607H31.7437V49.1294H38.1651Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M41.1897 49.1294V54.9947C41.1897 55.692 41.3707 56.2172 41.7326 56.5702C42.1033 56.9233 42.6152 57.0998 43.2684 57.0998C43.9304 57.0998 44.4423 56.9233 44.8042 56.5702C45.1749 56.2172 45.3603 55.692 45.3603 54.9947V49.1294H46.8696V54.9682C46.8696 55.7185 46.7063 56.354 46.3798 56.8747C46.0532 57.3955 45.6163 57.7839 45.069 58.0398C44.5218 58.2958 43.9172 58.4238 43.2552 58.4238C42.5932 58.4238 41.9886 58.2958 41.4413 58.0398C40.9029 57.7839 40.4748 57.3955 40.157 56.8747C39.8393 56.354 39.6804 55.7185 39.6804 54.9682V49.1294H41.1897Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M53.6144 58.3311L51.496 54.6504H50.3442V58.3311H48.8348V49.1294H52.0124C52.7185 49.1294 53.3143 49.253 53.7998 49.5001C54.294 49.7473 54.6603 50.0783 54.8987 50.4931C55.1458 50.908 55.2694 51.3714 55.2694 51.8833C55.2694 52.4835 55.0928 53.0308 54.7398 53.5251C54.3956 54.0105 53.8615 54.3415 53.1378 54.518L55.415 58.3311H53.6144ZM50.3442 53.4456H52.0124C52.5773 53.4456 53.001 53.3044 53.2834 53.0219C53.5747 52.7395 53.7203 52.3599 53.7203 51.8833C53.7203 51.4067 53.5791 51.036 53.2966 50.7712C53.0142 50.4975 52.5861 50.3607 52.0124 50.3607H50.3442V53.4456Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M63.6449 49.1294C64.6247 49.1294 65.4808 49.3192 66.2135 49.6987C66.9549 50.0695 67.5242 50.6079 67.9214 51.314C68.3274 52.0113 68.5304 52.8278 68.5304 53.7634C68.5304 54.699 68.3274 55.511 67.9214 56.1995C67.5242 56.888 66.9549 57.4176 66.2135 57.7883C65.4808 58.1502 64.6247 58.3311 63.6449 58.3311H60.6395V49.1294H63.6449ZM63.6449 57.0998C64.7218 57.0998 65.547 56.8085 66.1208 56.226C66.6945 55.6434 66.9814 54.8226 66.9814 53.7634C66.9814 52.6954 66.6945 51.8612 66.1208 51.261C65.547 50.6608 64.7218 50.3607 63.6449 50.3607H62.1488V57.0998H63.6449Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M71.5357 50.3475V53.0484H74.7132V54.2797H71.5357V57.0998H75.1104V58.3311H70.0263V49.1162H75.1104V50.3475H71.5357Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M81.9181 57.113H85.0294V58.3311H80.4087V49.1294H81.9181V57.113Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M86.53 49.1294H88.1717L86.7815 52.2805H85.7224L86.53 49.1294Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M95.0457 56.4511H91.1929L90.5309 58.3311H88.9554L92.2521 49.1162H93.9997L97.2964 58.3311H95.7077L95.0457 56.4511ZM94.622 55.2198L93.1259 50.9433L91.6166 55.2198H94.622Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M103.509 58.3311L101.391 54.6504H100.239V58.3311H98.7299V49.1294H101.907C102.614 49.1294 103.209 49.253 103.695 49.5001C104.189 49.7473 104.555 50.0783 104.794 50.4931C105.041 50.908 105.164 51.3714 105.164 51.8833C105.164 52.4835 104.988 53.0308 104.635 53.5251C104.291 54.0105 103.757 54.3415 103.033 54.518L105.31 58.3311H103.509ZM100.239 53.4456H101.907C102.472 53.4456 102.896 53.3044 103.178 53.0219C103.47 52.7395 103.615 52.3599 103.615 51.8833C103.615 51.4067 103.474 51.036 103.192 50.7712C102.909 50.4975 102.481 50.3607 101.907 50.3607H100.239V53.4456Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M113.04 49.1294V50.3607H110.591V58.3311H109.081V50.3607H106.619V49.1294H113.04Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M116.078 49.1294V58.3311H114.569V49.1294H116.078Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M121.091 58.4238C120.474 58.4238 119.917 58.3179 119.423 58.106C118.929 57.8854 118.541 57.5764 118.258 57.1792C117.976 56.7821 117.834 56.3187 117.834 55.7891H119.45C119.485 56.1863 119.639 56.5128 119.913 56.7688C120.196 57.0248 120.588 57.1528 121.091 57.1528C121.612 57.1528 122.018 57.0292 122.309 56.7821C122.601 56.5261 122.746 56.1995 122.746 55.8023C122.746 55.4934 122.654 55.2418 122.468 55.0476C122.292 54.8535 122.067 54.7034 121.793 54.5975C121.528 54.4916 121.158 54.3768 120.681 54.2532C120.081 54.0944 119.591 53.9355 119.211 53.7766C118.841 53.6089 118.523 53.3529 118.258 53.0087C117.993 52.6645 117.861 52.2055 117.861 51.6318C117.861 51.1022 117.993 50.6388 118.258 50.2416C118.523 49.8444 118.894 49.5399 119.37 49.328C119.847 49.1162 120.399 49.0103 121.025 49.0103C121.917 49.0103 122.645 49.2353 123.21 49.6855C123.784 50.1268 124.101 50.7359 124.163 51.5126H122.495C122.468 51.1772 122.309 50.8903 122.018 50.652C121.727 50.4137 121.343 50.2945 120.866 50.2945C120.434 50.2945 120.081 50.4049 119.807 50.6255C119.534 50.8462 119.397 51.1639 119.397 51.5788C119.397 51.8612 119.481 52.0952 119.648 52.2805C119.825 52.457 120.045 52.5983 120.31 52.7042C120.575 52.8101 120.937 52.9248 121.396 53.0484C122.005 53.2161 122.499 53.3838 122.879 53.5515C123.267 53.7192 123.594 53.9796 123.859 54.3327C124.132 54.6769 124.269 55.1403 124.269 55.7229C124.269 56.1907 124.141 56.632 123.885 57.0469C123.638 57.4617 123.272 57.7971 122.786 58.0531C122.309 58.3002 121.745 58.4238 121.091 58.4238Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M131.597 56.4511H127.745L127.083 58.3311H125.507L128.804 49.1162H130.552L133.848 58.3311H132.259L131.597 56.4511ZM131.174 55.2198L129.678 50.9433L128.168 55.2198H131.174Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M142.842 58.3311H141.332L136.791 51.4596V58.3311H135.282V49.1162H136.791L141.332 55.9744V49.1162H142.842V58.3311Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M150.371 56.4511H146.518L145.856 58.3311H144.281L147.578 49.1162H149.325L152.622 58.3311H151.033L150.371 56.4511ZM149.947 55.2198L148.451 50.9433L146.942 55.2198H149.947Z" fill="rgba(255,255,255,0.5)"/>
+        <path d="M160 49.1294V50.3607H157.551V58.3311H156.041V50.3607H153.579V49.1294H160Z" fill="rgba(255,255,255,0.5)"/>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

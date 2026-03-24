@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelkun Retail — Audit Concurrentiel Dashboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --kelkun: #6C5CE7;
+    --kelkun-light: #A29BFE;
+    --kelkun-dark: #4834D4;
+    --yuman: #E17055;
+    --yuman-light: #FAB1A0;
+    --bob: #00B894;
+    --bob-light: #55EFC4;
+    --bg: #0F0F1A;
+    --card: #1A1A2E;
+    --card-hover: #222240;
+    --border: #2D2D50;
+    --text: #E8E8F0;
+    --text-dim: #8888AA;
+    --success: #00B894;
+    --warning: #FDCB6E;
+    --danger: #E17055;
+    --accent: #74B9FF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* TOOLTIP SYSTEM */
+  .info-wrap {
+    position: relative;
+    display: inline;
+  }
+  .info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgba(108,92,231,0.25);
+    color: var(--kelkun-light);
+    font-size: 0.55rem;
+    font-weight: 800;
+    cursor: help;
+    margin-left: 3px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    transition: all 0.2s;
+    border: 1px solid rgba(108,92,231,0.3);
+    font-style: normal;
+    line-height: 1;
+  }
+  .info-icon:hover {
+    background: var(--kelkun);
+    color: white;
+    transform: scale(1.15);
+  }
+  .tooltip-box {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2A2A4A;
+    border: 1px solid var(--kelkun);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    width: 280px;
+    z-index: 9999;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 15px rgba(108,92,231,0.15);
+    pointer-events: none;
+  }
+  .tooltip-box::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--kelkun);
+  }
+  .tooltip-box .tt-term {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--kelkun-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.3rem;
+  }
+  .tooltip-box .tt-def {
+    font-size: 0.78rem;
+    color: var(--text);
+    line-height: 1.45;
+  }
+  .tooltip-box .tt-example {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-top: 0.35rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid rgba(45,45,80,0.5);
+    font-style: italic;
+  }
+  .info-wrap:hover .tooltip-box {
+    display: block;
+  }
+  /* Flip tooltip below if near top */
+  .info-wrap.tt-below .tooltip-box {
+    bottom: auto;
+    top: calc(100% + 8px);
+  }
+  .info-wrap.tt-below .tooltip-box::after {
+    top: auto;
+    bottom: 100%;
+    border-top-color: transparent;
+    border-bottom-color: var(--kelkun);
+  }
+
+  /* GLOSSARY PANEL */
+  .glossary-toggle {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--kelkun);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 0.7rem 1.2rem;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 4px 20px rgba(108,92,231,0.4);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .glossary-toggle:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(108,92,231,0.5); }
+  .glossary-toggle .g-icon { font-size: 1rem; }
+
+  .glossary-panel {
+    display: none;
+    position: fixed;
+    bottom: 4.5rem;
+    right: 1.5rem;
+    width: 360px;
+    max-height: 70vh;
+    background: #1E1E38;
+    border: 1px solid var(--kelkun);
+    border-radius: 16px;
+    z-index: 200;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    overflow: hidden;
+  }
+  .glossary-panel.open { display: flex; flex-direction: column; }
+  .glossary-panel-header {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .glossary-search {
+    margin: 0.8rem 1rem 0;
+    padding: 0.5rem 0.8rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.82rem;
+    width: calc(100% - 2rem);
+    outline: none;
+  }
+  .glossary-search:focus { border-color: var(--kelkun); }
+  .glossary-search::placeholder { color: var(--text-dim); }
+  .glossary-list {
+    overflow-y: auto;
+    padding: 0.8rem 1rem;
+    flex: 1;
+  }
+  .glossary-entry {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(45,45,80,0.3);
+  }
+  .glossary-entry:last-child { border-bottom: none; }
+  .glossary-entry .ge-term {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--kelkun-light);
+    margin-bottom: 0.15rem;
+  }
+  .glossary-entry .ge-def {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #1A1A2E 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 2rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .logo { font-size: 1.6rem; font-weight: 800; }
+  .logo span { color: var(--kelkun); }
+  .date { color: var(--text-dim); font-size: 0.85rem; }
+
+  /* TABS */
+  .tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .tab {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .tab:hover { border-color: var(--kelkun-light); color: var(--text); }
+  .tab.active { background: var(--kelkun); border-color: var(--kelkun); color: white; }
+
+  /* MAIN */
+  .main { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+  /* SECTION */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* SCORE CARDS */
+  .score-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .score-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .score-card:hover { transform: translateY(-2px); }
+  .score-card.kelkun { border-left: 4px solid var(--kelkun); }
+  .score-card.yuman { border-left: 4px solid var(--yuman); }
+  .score-card.bob { border-left: 4px solid var(--bob); }
+  .score-card .name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+  .score-card.kelkun .name { color: var(--kelkun-light); }
+  .score-card.yuman .name { color: var(--yuman-light); }
+  .score-card.bob .name { color: var(--bob-light); }
+  .score-card .big-number {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .score-card .sub { color: var(--text-dim); font-size: 0.82rem; }
+  .score-card .bar-bg {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--border);
+  }
+  .score-card .bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.8s ease;
+  }
+  .score-card.kelkun .bar-fill { background: var(--kelkun); width: 92%; }
+  .score-card.yuman .bar-fill { background: var(--yuman); width: 58%; }
+  .score-card.bob .bar-fill { background: var(--bob); width: 52%; }
+
+  /* FEATURE MATRIX */
+  .matrix-container {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .matrix-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .matrix-title { font-weight: 700; font-size: 1.1rem; }
+  .filter-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .pill {
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .pill:hover, .pill.active { background: var(--kelkun); border-color: var(--kelkun); color: white; }
+
+  .matrix-table { width: 100%; border-collapse: collapse; }
+  .matrix-table th {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--card);
+  }
+  .matrix-table th:nth-child(2), .matrix-table th:nth-child(3), .matrix-table th:nth-child(4) { text-align: center; }
+  .matrix-table td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid rgba(45,45,80,0.5);
+    font-size: 0.85rem;
+    vertical-align: middle;
+  }
+  .matrix-table td:nth-child(2), .matrix-table td:nth-child(3), .matrix-table td:nth-child(4) { text-align: center; }
+  .matrix-table tr:hover { background: var(--card-hover); }
+  .matrix-table tr.category-row { background: rgba(108,92,231,0.08); }
+  .matrix-table tr.category-row td {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--kelkun-light);
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .badge.yes { background: rgba(0,184,148,0.15); color: var(--success); }
+  .badge.no { background: rgba(225,112,85,0.15); color: var(--danger); }
+  .badge.partial { background: rgba(253,203,110,0.15); color: var(--warning); }
+  .badge.superior { background: rgba(108,92,231,0.2); color: var(--kelkun-light); }
+  .badge.new-feat { background: rgba(116,185,255,0.15); color: var(--accent); }
+
+  .feature-detail {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-top: 0.2rem;
+  }
+
+  /* RADAR SECTION */
+  .radar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .radar-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+  .radar-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+  .bar-chart-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  .bar-label {
+    width: 120px;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .bar-track {
+    flex: 1;
+    height: 24px;
+    background: rgba(45,45,80,0.4);
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bar-segment {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    transition: width 1s ease;
+  }
+
+  /* CROSS-INDUSTRY IDEAS */
+  .ideas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .idea-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    cursor: default;
+    position: relative;
+  }
+  .idea-card:hover {
+    border-color: var(--kelkun-light);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(108,92,231,0.15);
+  }
+  .idea-source {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+  .idea-source.healthcare { background: rgba(255,118,117,0.15); color: #FF7675; }
+  .idea-source.aviation { background: rgba(116,185,255,0.15); color: #74B9FF; }
+  .idea-source.hospitality { background: rgba(253,203,110,0.15); color: #FDCB6E; }
+  .idea-source.logistics { background: rgba(0,184,148,0.15); color: #00B894; }
+  .idea-source.gaming { background: rgba(162,155,254,0.15); color: #A29BFE; }
+  .idea-source.fintech { background: rgba(255,159,243,0.15); color: #FF9FF3; }
+  .idea-source.automotive { background: rgba(255,165,2,0.15); color: #FFA502; }
+  .idea-source.food { background: rgba(46,213,115,0.15); color: #2ED573; }
+  .idea-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .idea-card p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+  }
+  .idea-card .application {
+    background: rgba(108,92,231,0.1);
+    border: 1px solid rgba(108,92,231,0.2);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    color: var(--kelkun-light);
+  }
+  .idea-card .application strong { color: var(--text); }
+  .impact-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .impact-tag.high { background: rgba(0,184,148,0.2); color: var(--success); }
+  .impact-tag.mega { background: rgba(108,92,231,0.25); color: var(--kelkun-light); }
+  .impact-tag.medium { background: rgba(253,203,110,0.2); color: var(--warning); }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .pricing-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    text-align: center;
+  }
+  .pricing-card.featured {
+    border-color: var(--kelkun);
+    background: linear-gradient(180deg, rgba(108,92,231,0.1), var(--card));
+    transform: scale(1.03);
+  }
+  .pricing-card .plan-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+  }
+  .pricing-card .price { font-size: 2.5rem; font-weight: 900; margin-bottom: 0.3rem; }
+  .pricing-card .price-sub { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 1.2rem; }
+  .pricing-card ul { list-style: none; text-align: left; }
+  .pricing-card li {
+    padding: 0.4rem 0;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    border-bottom: 1px solid rgba(45,45,80,0.3);
+  }
+  .pricing-card li::before { content: "-> "; color: var(--kelkun-light); }
+
+  .weakness-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(45,45,80,0.3);
+    font-size: 0.85rem;
+  }
+  .weakness-item .opp {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(108,92,231,0.15);
+    color: var(--kelkun-light);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .score-row, .radar-grid, .pricing-grid { grid-template-columns: 1fr; }
+    .ideas-grid { grid-template-columns: 1fr; }
+    .tabs { overflow-x: auto; flex-wrap: nowrap; }
+    .tooltip-box { width: 220px; }
+    .glossary-panel { width: calc(100vw - 2rem); right: 1rem; }
+  }
+
+  /* ANIMATION */
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .section.active { animation: fadeIn 0.3s ease; }
+
+  .section-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.4rem; }
+  .section-sub { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo"><span>Kelkun</span> Retail — Audit Concurrentiel</div>
+    <div class="date">24 mars 2026</div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="showSection('overview')">Vue d'ensemble</button>
+    <button class="tab" onclick="showSection('matrix')">Matrice Features</button>
+    <button class="tab" onclick="showSection('comparison')">Comparatif visuel</button>
+    <button class="tab" onclick="showSection('ideas')">Idees Cross-Industry</button>
+    <button class="tab" onclick="showSection('pricing')">Pricing & Opportunites</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <div class="section active" id="overview">
+    <h2 class="section-title">Score de couverture fonctionnelle</h2>
+    <p class="section-sub">Sur 48 features analysees dans 10 categories</p>
+
+    <div class="score-row">
+      <div class="score-card yuman">
+        <div class="name">Yuman</div>
+        <div class="big-number">28/48</div>
+        <div class="sub">58% — Fort sur interventions & facturation</div>
+        <div class="bar-bg"><div class="bar-fill"></div></div>
+      </div>
+      <div class="score-card bob">
+        <div class="name">Bob! Desk</div>
+        <div class="big-number">25/48</div>
+        <div class="sub">52% — Fort sur prestataires & ticketing simple</div>
+        <div class="bar-bg"><div class="bar-fill"></div></div>
+      </div>
+      <div class="score-card kelkun">
+        <div class="name">Kelkun Retail (cible)</div>
+        <div class="big-number">48/48</div>
+        <div class="sub">100% de couverture + 16 features exclusives</div>
+        <div class="bar-bg"><div class="bar-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="radar-grid">
+      <div class="radar-card">
+        <h3>Couverture par categorie</h3>
+        <div id="category-bars"></div>
+      </div>
+      <div class="radar-card">
+        <h3>Forces & faiblesses concurrents</h3>
+        <div style="margin-bottom:1rem;">
+          <h4 style="color:var(--yuman-light);font-size:0.82rem;margin-bottom:0.6rem;">YUMAN — Points faibles exploitables</h4>
+          <div class="weakness-item"><span>Pas de portail prestataire</span><span class="opp">Kelkun -> Portail white-label</span></div>
+          <div class="weakness-item"><span>Pas de gestion budgetaire</span><span class="opp">Kelkun -> Budget IA par site</span></div>
+          <div class="weakness-item"><span>UX datee, pricing eleve</span><span class="opp">Kelkun -> UX moderne, -50% prix</span></div>
+          <div class="weakness-item"><span>Zero specifique retail</span><span class="opp">Kelkun -> Retail-first</span></div>
+        </div>
+        <div>
+          <h4 style="color:var(--bob-light);font-size:0.82rem;margin-bottom:0.6rem;">BOB! DESK — Points faibles exploitables</h4>
+          <div class="weakness-item"><span>Pas de facturation integree</span><span class="opp">Kelkun -> Factura. complete</span></div>
+          <div class="weakness-item"><span>Pas de gestion de stock</span><span class="opp">Kelkun -> Stock multi-sites</span></div>
+          <div class="weakness-item"><span>Pas d'optimisation trajet</span><span class="opp">Kelkun -> Tournees IA</span></div>
+          <div class="weakness-item"><span>API non documentee</span><span class="opp">Kelkun -> API REST + SDK</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE MATRIX -->
+  <div class="section" id="matrix">
+    <h2 class="section-title">Matrice de features detaillee</h2>
+    <p class="section-sub">Cliquez sur une categorie pour filtrer — les icones <i class="info-icon" style="position:static;cursor:default;">i</i> expliquent le jargon technique</p>
+
+    <div class="matrix-container">
+      <div class="matrix-header">
+        <div class="matrix-title">48 features · 10 categories</div>
+        <div class="filter-pills">
+          <button class="pill active" onclick="filterCategory('all', this)">Tout</button>
+          <button class="pill" onclick="filterCategory('ticketing', this)">Ticketing</button>
+          <button class="pill" onclick="filterCategory('preventive', this)">Preventif</button>
+          <button class="pill" onclick="filterCategory('planning', this)">Planning</button>
+          <button class="pill" onclick="filterCategory('providers', this)">Prestataires</button>
+          <button class="pill" onclick="filterCategory('billing', this)">Facturation</button>
+          <button class="pill" onclick="filterCategory('inventory', this)">Stock</button>
+          <button class="pill" onclick="filterCategory('equipment', this)">Equipements</button>
+          <button class="pill" onclick="filterCategory('reporting', this)">Reporting</button>
+          <button class="pill" onclick="filterCategory('communication', this)">Communication</button>
+          <button class="pill" onclick="filterCategory('integration', this)">API & Integrations</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="matrix-table" id="featureTable">
+          <thead>
+            <tr>
+              <th style="width:35%;">Feature</th>
+              <th style="width:15%;">Yuman</th>
+              <th style="width:15%;">Bob! Desk</th>
+              <th style="width:35%;">Kelkun Retail</th>
+            </tr>
+          </thead>
+          <tbody id="featureBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="section" id="comparison">
+    <h2 class="section-title">Comparatif visuel par categorie</h2>
+    <p class="section-sub">Chaque barre montre la couverture relative de chaque acteur</p>
+    <div id="comparison-bars" style="max-width:800px;"></div>
+  </div>
+
+  <!-- CROSS-INDUSTRY IDEAS -->
+  <div class="section" id="ideas">
+    <h2 class="section-title">Idees volees a d'autres industries</h2>
+    <p class="section-sub">Concepts de l'aviation, sante, gaming, fintech, food-delivery et automotive — appliques au retail maintenance. Les icones <i class="info-icon" style="position:static;cursor:default;">i</i> expliquent les termes techniques.</p>
+    <div class="ideas-grid" id="ideasGrid"></div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="section" id="pricing">
+    <h2 class="section-title">Positionnement tarifaire</h2>
+    <p class="section-sub">Se placer entre Bob! Desk (14,90 EUR) et Yuman (59 EUR) avec plus de valeur que les deux</p>
+
+    <div class="pricing-grid" id="pricingGrid">
+      <div class="pricing-card">
+        <div class="plan-name" style="color:var(--yuman-light);">Yuman</div>
+        <div class="price" style="color:var(--yuman);">59-79 EUR</div>
+        <div class="price-sub">par utilisateur / mois</div>
+        <ul id="yuman-pricing-list">
+          <li>Interventions completes</li>
+          <li>Facturation integree</li>
+          <li>Gestion de stock</li>
+          <li>Mobile iOS/Android</li>
+          <li style="color:var(--danger);">Non : portail prestataire</li>
+          <li style="color:var(--danger);">Non : budget</li>
+          <li style="color:var(--danger);">Non : retail-specific</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="plan-name" style="color:var(--kelkun-light);">Kelkun Retail Pro</div>
+        <div class="price" style="color:var(--kelkun);">34 EUR</div>
+        <div class="price-sub">par site / mois</div>
+        <ul id="kelkun-pricing-list">
+          <li>Tout Yuman + tout Bob! Desk</li>
+          <li>IA diagnostic & predictive</li>
+          <li>Marketplace prestataires</li>
+          <li>Budget par site + previsionnel</li>
+          <li>Multi-enseigne / retail-first</li>
+          <li>API REST documentee</li>
+          <li>Conformite reglementaire</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <div class="plan-name" style="color:var(--bob-light);">Bob! Desk</div>
+        <div class="price" style="color:var(--bob);">14,90-24,90 EUR</div>
+        <div class="price-sub">par point de vente / mois</div>
+        <ul id="bob-pricing-list">
+          <li>Ticketing simple & efficace</li>
+          <li>40 KPIs</li>
+          <li>Portail prestataires</li>
+          <li>Annuaire 1500+ entreprises</li>
+          <li style="color:var(--danger);">Non : facturation</li>
+          <li style="color:var(--danger);">Non : stock</li>
+          <li style="color:var(--danger);">Non : API documentee</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="radar-card" style="margin-bottom:2rem;">
+      <h3>Grille Kelkun Retail complete</h3>
+      <table class="matrix-table" id="pricing-table">
+        <thead><tr><th>Plan</th><th>Prix</th><th>Cible</th><th>Inclus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Starter</strong></td><td>Gratuit</td><td>Test / petit magasin</td><td>1 site, 3 users, ticketing basique, 5 Go</td></tr>
+          <tr><td><strong>Essentiel</strong></td><td>19 EUR/site/mois</td><td>Reseau &lt; 20 sites</td><td>Ticketing complet, preventif, reporting, app mobile, 3 prestataires</td></tr>
+          <tr><td><strong style="color:var(--kelkun-light);">Pro</strong></td><td><strong>34 EUR/site/mois</strong></td><td>Reseau 20-200 sites</td><td>+ facturation, budgets, API, integrations, prestataires illimites, analytics</td></tr>
+          <tr><td><strong>Enterprise</strong></td><td>Sur devis</td><td>Grandes enseignes</td><td>+ SSO, SLA custom, multi-enseigne, IA predictive, account manager</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- GLOSSARY FLOATING BUTTON -->
+<button class="glossary-toggle" onclick="toggleGlossary()">
+  <span class="g-icon">?</span> Glossaire
+</button>
+
+<!-- GLOSSARY PANEL -->
+<div class="glossary-panel" id="glossaryPanel">
+  <div class="glossary-panel-header">
+    <span>Glossaire des termes</span>
+    <span style="cursor:pointer;color:var(--text-dim);" onclick="toggleGlossary()">Fermer</span>
+  </div>
+  <input class="glossary-search" type="text" placeholder="Rechercher un terme..." oninput="filterGlossary(this.value)">
+  <div class="glossary-list" id="glossaryList"></div>
+</div>
+
+<script>
+// =============================================
+// GLOSSARY — dictionnaire complet des termes
+// =============================================
+const GLOSSARY = {
+  "GMAO": {
+    def: "Gestion de Maintenance Assistee par Ordinateur. Logiciel qui centralise toutes les operations de maintenance : pannes, preventif, stock, prestataires.",
+    example: "Yuman et Bob! Desk sont des GMAO. Kelkun Retail en sera une aussi, specialisee retail."
+  },
+  "SLA": {
+    def: "Service Level Agreement — engagement contractuel sur un niveau de service. Definit les delais max de reaction et de resolution.",
+    example: "Ex : \"Panne critique resolue en moins de 4h\" = un SLA. Si non respecte, penalites ou remboursement."
+  },
+  "Ticketing": {
+    def: "Systeme de creation et suivi de demandes d'intervention. Chaque probleme signale = 1 ticket, avec un statut qui evolue jusqu'a resolution.",
+    example: "Le responsable magasin cree un ticket \"fuite au plafond\", le prestataire le traite et le cloture."
+  },
+  "Curatif": {
+    def: "Maintenance effectuee apres qu'une panne s'est produite. On repare ce qui est casse (par opposition au preventif).",
+    example: "La caisse enregistreuse tombe en panne -> intervention curative pour la reparer."
+  },
+  "Preventif": {
+    def: "Maintenance planifiee a l'avance pour eviter les pannes. Inspections regulieres, remplacement de pieces avant usure.",
+    example: "Verifier les extincteurs tous les 6 mois, nettoyer les filtres clim tous les 3 mois."
+  },
+  "Dispatch": {
+    def: "Action d'assigner et envoyer un technicien ou prestataire sur une intervention. Peut etre manuel ou automatise par IA.",
+    example: "Le systeme dispatche le plombier le plus proche qui a les competences requises."
+  },
+  "Pipeline": {
+    def: "Enchainement d'etapes par lesquelles passe un ticket. Chaque etape a un statut : nouveau -> assigne -> en cours -> termine -> facture.",
+    example: "Comme un pipeline de vente (CRM), mais pour les interventions de maintenance."
+  },
+  "Geofencing": {
+    def: "Perimetre virtuel GPS autour d'un lieu. Quand un technicien entre ou sort de cette zone, une action se declenche automatiquement.",
+    example: "Le technicien arrive sur site -> le geofencing declenche le chrono d'intervention tout seul."
+  },
+  "IoT": {
+    def: "Internet of Things — objets connectes qui envoient des donnees en continu (temperature, vibrations, consommation electrique...).",
+    example: "Un capteur dans la chambre froide envoie la temperature toutes les 5 min. Si > 5 deg C -> alerte automatique."
+  },
+  "First-fix": {
+    def: "Taux de resolution au premier passage. Le probleme est regle des la premiere visite du technicien, sans besoin de revenir.",
+    example: "Un taux de first-fix de 85% = 85% des pannes resolues du premier coup."
+  },
+  "TCO": {
+    def: "Total Cost of Ownership — cout total de possession d'un equipement sur toute sa duree de vie : achat + maintenance + energie + remplacement.",
+    example: "Une clim a 3000 EUR qui coute 800 EUR/an en maintenance a un TCO de 7000 EUR sur 5 ans."
+  },
+  "MTBF": {
+    def: "Mean Time Between Failures — temps moyen entre deux pannes. Plus c'est eleve, plus l'equipement est fiable.",
+    example: "Un MTBF de 200 jours = en moyenne, une panne tous les 200 jours."
+  },
+  "MTTR": {
+    def: "Mean Time To Repair — temps moyen pour reparer une panne, du signalement a la resolution complete.",
+    example: "Un MTTR de 6h = en moyenne, une panne est reparee 6h apres le signalement."
+  },
+  "KPI": {
+    def: "Key Performance Indicator — indicateur chiffre qui mesure la performance. Sert a suivre les objectifs et prendre des decisions.",
+    example: "Nombre de tickets/mois, cout moyen par intervention, taux de satisfaction = des KPIs."
+  },
+  "NPS": {
+    def: "Net Promoter Score — mesure de satisfaction client via une seule question : \"Recommanderiez-vous ce service ?\". Score de -100 a +100.",
+    example: "Un NPS de +50 = excellent. Apres chaque intervention, on demande au magasin de noter."
+  },
+  "API REST": {
+    def: "Interface de programmation qui permet a des logiciels de communiquer entre eux via internet. REST est le standard le plus courant.",
+    example: "L'API permet de connecter Kelkun a votre ERP, compta, ou toute autre appli automatiquement."
+  },
+  "SDK": {
+    def: "Software Development Kit — boite a outils pour les developpeurs qui veulent integrer Kelkun dans leurs propres applications.",
+    example: "Avec le SDK, un dev peut creer un bouton 'Signaler une panne' dans l'app interne du magasin."
+  },
+  "Webhook": {
+    def: "Notification automatique envoyee par un systeme quand un evenement se produit. Comme un SMS envoye entre logiciels.",
+    example: "Quand un ticket est cree dans Kelkun -> un webhook envoie un message dans Slack automatiquement."
+  },
+  "SSO": {
+    def: "Single Sign-On — connexion unique. Les employes se connectent une seule fois (ex: avec leur compte Google ou Microsoft) et accedent a tout.",
+    example: "Pas besoin d'un mot de passe Kelkun separe : on se connecte avec le compte entreprise."
+  },
+  "SAML": {
+    def: "Protocole technique qui permet le SSO dans les grandes entreprises. Utilise notamment par Azure AD, Okta, Google Workspace.",
+    example: "Necessaire pour les entreprises > 500 personnes qui veulent centraliser les acces."
+  },
+  "White-label": {
+    def: "Produit en marque blanche — l'interface porte le logo et les couleurs du client, pas ceux de Kelkun.",
+    example: "Le portail prestataire affiche le logo Carrefour, pas Kelkun. Le prestataire croit utiliser un outil Carrefour."
+  },
+  "ERP": {
+    def: "Enterprise Resource Planning — logiciel central d'entreprise qui gere la compta, les achats, les RH, le stock... (SAP, Oracle, Sage...).",
+    example: "Connecter Kelkun a l'ERP permet de synchroniser les factures et les bons de commande automatiquement."
+  },
+  "Chorus Pro": {
+    def: "Plateforme officielle de l'Etat francais pour la facturation electronique obligatoire vers les administrations publiques.",
+    example: "Si un magasin travaille avec une collectivite, les factures doivent passer par Chorus Pro."
+  },
+  "Gantt": {
+    def: "Diagramme en barres horizontales qui montre la planification dans le temps. Chaque barre = une tache, avec debut, fin et chevauchements.",
+    example: "Vue Gantt du planning preventif : on voit d'un coup d'oeil toutes les maintenances planifiees sur le mois."
+  },
+  "Escalade": {
+    def: "Mecanisme qui remonte automatiquement un probleme au niveau superieur si il n'est pas traite dans le delai prevu.",
+    example: "Ticket non traite en 2h -> escalade au manager. Toujours rien en 4h -> escalade au directeur regional."
+  },
+  "QR code": {
+    def: "Code-barres 2D scannable avec un smartphone. En maintenance : colle sur un equipement, il ouvre sa fiche ou cree un ticket en 1 scan.",
+    example: "Scan du QR sur la clim -> acces direct a l'historique de pannes, docs techniques, et bouton 'signaler un probleme'."
+  },
+  "NFC": {
+    def: "Near Field Communication — technologie sans contact (comme le paiement par telephone). Plus robuste que les QR codes en milieu industriel.",
+    example: "Le technicien approche son telephone de la pastille NFC sur la machine -> la fiche equipement s'ouvre."
+  },
+  "OTA": {
+    def: "Over-The-Air — mise a jour a distance, sans intervention physique. Comme quand votre telephone se met a jour tout seul.",
+    example: "Mettre a jour le firmware de la chambre froide connectee sans envoyer un technicien sur place."
+  },
+  "ETA": {
+    def: "Estimated Time of Arrival — heure d'arrivee estimee, calculee en temps reel comme sur Uber ou Deliveroo.",
+    example: "Le magasin voit : \"Votre electricien arrive dans 14 min\" avec sa position sur la carte."
+  },
+  "Product-Led Growth": {
+    def: "Strategie ou le produit lui-meme genere la croissance : essai gratuit, onboarding facile, l'utilisateur decouvre la valeur seul puis upgrade.",
+    example: "Slack, Notion, Figma = product-led. L'utilisateur s'inscrit, essaie, adore, puis son entreprise achete."
+  },
+  "Onboarding": {
+    def: "Processus d'accueil qui guide un nouvel utilisateur pas a pas pour qu'il soit productif le plus vite possible.",
+    example: "Premiere connexion Kelkun : 3 etapes simples et vous etes operationnel en 5 minutes."
+  },
+  "Downtime": {
+    def: "Temps d'arret — periode pendant laquelle un equipement ou un rayon est hors service a cause d'une panne.",
+    example: "2h de downtime sur les caisses automatiques un samedi = impact direct sur le chiffre d'affaires."
+  },
+  "Ride-hailing": {
+    def: "Modele Uber/Bolt : vous demandez un service, un prestataire proche est matche automatiquement et arrive en temps reel.",
+    example: "Applique a la maintenance : ticket urgent -> push aux prestataires proches -> le premier qui accepte est envoye."
+  },
+  "Marketplace": {
+    def: "Place de marche qui met en relation des acheteurs et des vendeurs (ou des demandeurs et des prestataires).",
+    example: "La marketplace Kelkun : trouvez, comparez et notez les prestataires de votre zone, comme un Airbnb de la maintenance."
+  },
+  "Crowdsourcing": {
+    def: "Intelligence collective — collecter des informations ou signalements aupres d'un grand nombre de contributeurs pour detecter des tendances.",
+    example: "5 magasins signalent le meme defaut sur le meme frigo -> alerte automatique de defaut fabricant."
+  },
+  "Benchmark": {
+    def: "Comparaison de performance entre entites similaires pour identifier les meilleures pratiques et les ecarts.",
+    example: "Comparer le cout de maintenance/m2 entre 50 magasins similaires pour trouver les anomalies."
+  },
+  "SIRH": {
+    def: "Systeme d'Information des Ressources Humaines — logiciel qui gere les employes, conges, paie, formations.",
+    example: "Connecter Kelkun au SIRH permet de savoir quels techniciens sont en conge ou en formation."
+  },
+  "DAF": {
+    def: "Directeur Administratif et Financier — responsable des finances de l'entreprise. Decide des budgets et valide les depenses importantes.",
+    example: "Le DAF voit le budget maintenance en temps reel et recoit une alerte si un site depasse son enveloppe."
+  },
+  "GSA": {
+    def: "Grande Surface Alimentaire — hypermarches et supermarches (Carrefour, Leclerc, Auchan, etc.).",
+    example: "Les GSA ont des besoins specifiques : chambres froides, rayons frais, caisses, parking..."
+  },
+  "Maintenance conditionnelle": {
+    def: "Maintenance declenchee par l'etat reel de l'equipement (mesures, capteurs) et non par un calendrier fixe.",
+    example: "La clim est inspectee non pas tous les 3 mois, mais quand le capteur detecte une baisse de performance."
+  },
+  "Rapprochement bancaire": {
+    def: "Verification automatique que les factures emises correspondent bien aux paiements recus sur le compte en banque.",
+    example: "Kelkun fait le match automatique : facture 1200 EUR emise le 10/03 = virement de 1200 EUR recu le 18/03."
+  },
+  "OAuth2": {
+    def: "Protocole d'authentification securise utilise par Google, Microsoft, Facebook pour permettre la connexion a des apps tierces.",
+    example: "\"Se connecter avec Google\" utilise OAuth2. Pas besoin de creer un nouveau mot de passe."
+  },
+  "Azure AD": {
+    def: "Service d'identite Microsoft utilise par les entreprises pour gerer les comptes employes et les acces aux applications.",
+    example: "Les grandes enseignes utilisent souvent Azure AD. L'integration SSO avec Kelkun est donc indispensable."
+  }
+};
+
+// =============================================
+// FEATURE DATA — with glossary terms tagged
+// =============================================
+const features = [
+  { cat: "ticketing", catLabel: "Gestion des interventions / {Ticketing}", features: [
+    { name: "Creation de tickets ({Curatif})", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Creation vocale + photo IA (detection auto du type de panne)" },
+    { name: "Suivi de statut / {Pipeline}", yuman: "partial", bob: "yes", kelkun: "superior", kelkunDetail: "{Pipeline} configurable + statuts custom + {SLA} automatiques", yumanDetail: "Basique (start/stop)", bobDetail: "{Pipeline} detaille" },
+    { name: "Assignation d'urgence", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Priorisation IA (historique, impact business, cout estime)" },
+    { name: "Rapport d'intervention terrain", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Checklist dynamique, photos avant/apres, video, signature, geoloc", yumanDetail: "Photos + signature" },
+    { name: "Bouton START/STOP + {Geofencing}", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "{Geofencing} auto (start/stop declenche par arrivee/depart du site)" },
+    { name: "{Dispatch} automatique", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "{Dispatch} IA : competences, proximite, charge, disponibilite" },
+  ]},
+  { cat: "preventive", catLabel: "Maintenance {Preventif}e", features: [
+    { name: "Plans de maintenance {Preventif}e", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "+ {Maintenance conditionnelle} (seuils {IoT}, compteurs d'usage)" },
+    { name: "Rappels et alertes + {Escalade}", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Multi-canal (push, SMS, email, WhatsApp) + {Escalade} auto" },
+    { name: "Calendrier {Preventif}", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Vue calendrier + {Gantt} + drag & drop" },
+    { name: "Conformite reglementaire", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : suivi obligations legales par type d'equipement + alertes echeance" },
+  ]},
+  { cat: "planning", catLabel: "Planning & Scheduling", features: [
+    { name: "Calendrier partage", yuman: "yes", bob: "partial", kelkun: "superior", kelkunDetail: "Jour/semaine/mois + vue par site, technicien, prestataire", bobDetail: "Limite" },
+    { name: "Calcul temps de trajet", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "+ Optimisation de tournee multi-stops" },
+    { name: "Sync calendrier externe", yuman: "partial", bob: "no", kelkun: "superior", kelkunDetail: "Google, Outlook, Apple Calendar, iCal", yumanDetail: "Google uniquement" },
+    { name: "Guidage GPS + {ETA}", yuman: "partial", bob: "no", kelkun: "superior", kelkunDetail: "Google Maps, Waze, Apple Plans + {ETA} en temps reel", yumanDetail: "Waze uniquement" },
+  ]},
+  { cat: "providers", catLabel: "Gestion des prestataires", features: [
+    { name: "Interface prestataire {White-label}", yuman: "no", bob: "yes", kelkun: "superior", kelkunDetail: "Portail {White-label} + app mobile dediee" },
+    { name: "Seuil d'intervention sans devis", yuman: "no", bob: "yes", kelkun: "superior", kelkunDetail: "+ Regles d'approbation multi-niveaux (montant, type, site)" },
+    { name: "{Marketplace} prestataires", yuman: "no", bob: "yes", kelkun: "superior", kelkunDetail: "{Marketplace} avec notation, avis, historique, tarifs compares", bobDetail: "1 500+ entreprises" },
+    { name: "Gestion des contrats", yuman: "yes", bob: "partial", kelkun: "superior", kelkunDetail: "Contrats digitaux + signature electronique + renouvellement auto", bobDetail: "Metadonnees basiques" },
+  ]},
+  { cat: "billing", catLabel: "Facturation & Finances", features: [
+    { name: "Facturation integree", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "Facturation auto + validation workflow + {Rapprochement bancaire}" },
+    { name: "Facturation sur site", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "+ Paiement immediat (CB, virement, lien de paiement)" },
+    { name: "{Chorus Pro}", yuman: "yes", bob: "no", kelkun: "yes" },
+    { name: "Export vers {ERP} / compta", yuman: "partial", bob: "no", kelkun: "superior", kelkunDetail: "QuickBooks, Xero, Pennylane, Sage, DATEV", yumanDetail: "Winbooks, Sage" },
+    { name: "Gestion budgets", yuman: "no", bob: "yes", kelkun: "superior", kelkunDetail: "Budget par site, categorie, periode + alertes + previsionnel IA" },
+    { name: "Relances automatiques", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "Scenarios configurables (email + SMS)" },
+  ]},
+  { cat: "inventory", catLabel: "Inventaire & Pieces detachees", features: [
+    { name: "Base articles (equipements, pieces)", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "Catalogue unifie avec photos, docs techniques, compatibilite" },
+    { name: "Import base distributeurs", yuman: "partial", bob: "no", kelkun: "superior", kelkunDetail: "{API REST} ouverte tout fournisseur + scan code-barres/{QR code}", yumanDetail: "4 distributeurs" },
+    { name: "Gestion de stock", yuman: "partial", bob: "no", kelkun: "superior", kelkunDetail: "Stock par site + central + transferts + reappro auto", yumanDetail: "Alertes seuils" },
+    { name: "Commandes fournisseurs", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "BC digital + suivi livraison + reception partielle" },
+  ]},
+  { cat: "equipment", catLabel: "Equipements & Patrimoine", features: [
+    { name: "Fiche equipement + {TCO}", yuman: "yes", bob: "partial", kelkun: "superior", kelkunDetail: "Photos, docs, historique, {TCO}, {QR code}", bobDetail: "Basique" },
+    { name: "{QR code} / {NFC}", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "{NFC} + {QR code} dynamiques + scan pour creer un ticket" },
+    { name: "Arborescence sites", yuman: "partial", bob: "yes", kelkun: "superior", kelkunDetail: "Illimite : enseigne -> region -> magasin -> zone -> equipement" },
+    { name: "Plans interactifs", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : plans du magasin avec positionnement equipements" },
+  ]},
+  { cat: "reporting", catLabel: "Reporting & Analytics", features: [
+    { name: "{KPI} / Indicateurs", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Dashboards drag & drop + {KPI} retail ({Downtime}/rayon, cout/m2, {MTBF})", bobDetail: "40 indicateurs" },
+    { name: "Rapports exportables", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "+ Export planifie + envoi auto aux stakeholders" },
+    { name: "Analyse predictive pannes", yuman: "no", bob: "partial", kelkun: "superior", kelkunDetail: "IA : anticipation pannes, recommandations, scoring fiabilite", bobDetail: "Tendances basiques" },
+    { name: "Performance prestataires + {Benchmark}", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : {SLA} tracking, {MTTR}, satisfaction, {Benchmark}" },
+  ]},
+  { cat: "communication", catLabel: "Communication & Collaboration", features: [
+    { name: "Notifications push", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Multi-canal configurable (push, email, SMS, WhatsApp)" },
+    { name: "Chat integre", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : messagerie contextuelle par ticket" },
+    { name: "Commentaires sur intervention", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "+ Pieces jointes, mentions @, historique" },
+    { name: "Portail demandeur (magasin)", yuman: "no", bob: "yes", kelkun: "superior", kelkunDetail: "App simplifiee : scan {QR code} -> photo -> description -> envoi" },
+  ]},
+  { cat: "integration", catLabel: "{API REST} & Integrations", features: [
+    { name: "{API REST} ouverte + {Webhook}s", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : {API REST} + {Webhook}s + {SDK}" },
+    { name: "Integrations natives ({ERP}, etc.)", yuman: "partial", bob: "partial", kelkun: "superior", kelkunDetail: "{ERP}, compta, {SIRH}, {IoT}, Slack, Teams", yumanDetail: "Sage, Google Cal", bobDetail: "Limite" },
+    { name: "{SSO} / {SAML}", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : {SAML}, {OAuth2}, {Azure AD}" },
+    { name: "Import/Export donnees", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Import massif + migration assistee depuis concurrents" },
+  ]},
+];
+
+const crossIndustryIdeas = [
+  {
+    source: "aviation", sourceLabel: "Aviation",
+    title: "\"Power by the Hour\" — Maintenance as a Service",
+    desc: "Rolls-Royce ne vend plus des moteurs mais des heures de vol. Le client paye pour le uptime, pas pour les reparations. Tout l'incentive est aligne sur la fiabilite.",
+    application: "Kelkun propose un forfait \"Uptime Garanti\" : le client paye un fixe mensuel, Kelkun gere tout (prestataires, pieces, {Preventif}). Si le {Downtime} depasse le {SLA} -> remboursement automatique.",
+    impact: "mega"
+  },
+  {
+    source: "healthcare", sourceLabel: "Sante",
+    title: "Triage automatique (urgences hospitalieres)",
+    desc: "Aux urgences, chaque patient est trie par gravite en quelques secondes (code couleur). Les cas critiques passent en premier, pas les premiers arrives.",
+    application: "Chaque ticket entrant est auto-trie par un score d'urgence IA : impact business (CA perdu/heure), risque securite, nombre de clients affectes. Le responsable regional voit un \"monitoring vital\" de ses magasins avec des {KPI} en temps reel.",
+    impact: "high"
+  },
+  {
+    source: "logistics", sourceLabel: "Logistique / Uber",
+    title: "{Dispatch} en temps reel facon {Ride-hailing}",
+    desc: "Uber matche un chauffeur en 3 secondes via proximite, rating et disponibilite. Le client voit le chauffeur arriver en temps reel sur la carte.",
+    application: "Quand un ticket urgent arrive, Kelkun envoie un push aux 3 prestataires les plus proches/qualifies. Le premier qui accepte est dispatche. Le magasin voit l'intervenant arriver sur une carte avec un {ETA} live.",
+    impact: "mega"
+  },
+  {
+    source: "gaming", sourceLabel: "Gaming / Gamification",
+    title: "XP, badges et leaderboards",
+    desc: "Les jeux video maintiennent l'engagement grace a des systemes de progression : points d'experience, niveaux, badges de competences, classements entre joueurs.",
+    application: "Les prestataires gagnent des points pour : rapidite, qualite ({NPS} client), taux de {First-fix}. Badges \"Expert Froid\", \"Reponse < 2h\". Les meilleurs obtiennent plus de missions via la {Marketplace}.",
+    impact: "high"
+  },
+  {
+    source: "fintech", sourceLabel: "Fintech / Neobanques",
+    title: "Alertes budget en temps reel facon Revolut",
+    desc: "Les neobanques envoient une notification instantanee a chaque depense, avec un graphique de budget restant et des categories automatiques.",
+    application: "Chaque facture prestataire validee declenche une notif au {DAF} avec : montant, budget restant du site, projection fin de mois, comparaison vs. N-1. Vue \"budget burn\" en temps reel par enseigne, region, site.",
+    impact: "high"
+  },
+  {
+    source: "food", sourceLabel: "Food Delivery",
+    title: "Tracking live & {ETA} dynamique (Deliveroo/Uber Eats)",
+    desc: "Le client voit sa commande passer par chaque etape (preparation -> en route -> arrivee) avec un temps restant qui se met a jour en temps reel.",
+    application: "Le responsable magasin voit son intervention passer par : Ticket recu -> Prestataire assigne -> En route ({ETA} live) -> Sur site -> En cours -> Termine -> Facture. \"Votre electricien arrive dans 12 min.\"",
+    impact: "mega"
+  },
+  {
+    source: "automotive", sourceLabel: "Automobile / Tesla",
+    title: "{OTA} Updates & Diagnostic distant",
+    desc: "Tesla diagnostique les problemes a distance et pousse des mises a jour logicielles sans passage en atelier. Le proprietaire ne sait meme pas qu'une panne a ete evitee.",
+    application: "Pour les equipements connectes ({IoT}) : monitoring en continu, diagnostic a distance, resolution logicielle sans intervention physique ({OTA}). Le {Preventif} devient invisible.",
+    impact: "high"
+  },
+  {
+    source: "hospitality", sourceLabel: "Hotellerie",
+    title: "Score {NPS} post-intervention (facon hotels)",
+    desc: "Les hotels envoient un micro-survey apres le sejour : 1 question, 1 clic. Le {NPS} est suivi en temps reel par etablissement.",
+    application: "Apres chaque intervention : 1 question au magasin. {NPS} par prestataire, par categorie, par site. Les prestataires sous 4/5 recoivent un coaching automatique ou sont desactives.",
+    impact: "medium"
+  },
+  {
+    source: "fintech", sourceLabel: "Assurance / InsurTech",
+    title: "Claim automatise par photo IA",
+    desc: "Les apps d'assurance auto comme Lemonade permettent de declarer un sinistre en 3 min : photo du degat -> IA analyse -> indemnisation en 30 secondes.",
+    application: "Le responsable magasin prend une photo. L'IA identifie le probleme (fuite, vitre cassee, panne electrique), estime le cout, pre-remplit le ticket et {Dispatch} le prestataire. De la photo au {Dispatch} en 60 secondes.",
+    impact: "mega"
+  },
+  {
+    source: "logistics", sourceLabel: "Supply Chain / Amazon",
+    title: "Reapprovisionnement predictif (pieces detachees)",
+    desc: "Amazon anticipe les commandes et pre-positionne les stocks dans les entrepots les plus proches des zones de demande.",
+    application: "Kelkun analyse l'historique de pannes par site et pre-commande les pieces les plus probables. Ex : \"Les neons du magasin Lyon tombent en panne tous les 8 mois -> commande auto a M-1.\" Meilleur {MTTR}, zero rupture.",
+    impact: "high"
+  },
+  {
+    source: "gaming", sourceLabel: "SaaS / {Product-Led Growth}",
+    title: "{Onboarding} progressif & templates sectoriels",
+    desc: "Les meilleurs SaaS (Notion, Figma) offrent des templates prets a l'emploi par secteur et un {Onboarding} par etapes qui debloque les features au fur et a mesure.",
+    application: "Au signup, le client choisit son secteur (boulangerie, pret-a-porter, {GSA}, restau...). Kelkun pre-configure : types d'equipements, plans {Preventif}s, checklist reglementaires, {KPI}s adaptes. Productif en 10 min.",
+    impact: "high"
+  },
+  {
+    source: "healthcare", sourceLabel: "Sante / Pharmacovigilance",
+    title: "Signalement collaboratif ({Crowdsourcing})",
+    desc: "En pharmacovigilance, chaque professionnel de sante peut signaler un effet indesirable. L'agregation des signalements detecte des problemes systemiques.",
+    application: "Si 5 magasins signalent le meme probleme sur le meme modele de chambre froide -> alerte auto au siege + maintenance groupee. {Crowdsourcing} du reseau pour detecter les defauts fabricants.",
+    impact: "mega"
+  },
+];
+
+// =============================================
+// TOOLTIP / GLOSSARY RENDERING ENGINE
+// =============================================
+
+function injectTooltips(text) {
+  // Replace {Term} patterns with tooltip-wrapped HTML
+  return text.replace(/\{([^}]+)\}/g, (match, term) => {
+    const key = term.charAt(0).toUpperCase() + term.slice(1);
+    // Try exact match, then case-insensitive
+    let entry = GLOSSARY[key] || GLOSSARY[term] || GLOSSARY[term.toUpperCase()];
+    // Try partial match
+    if (!entry) {
+      const lowerTerm = term.toLowerCase();
+      for (const [k, v] of Object.entries(GLOSSARY)) {
+        if (k.toLowerCase() === lowerTerm || k.toLowerCase().startsWith(lowerTerm.toLowerCase())) {
+          entry = v;
+          break;
+        }
+      }
+    }
+    if (!entry) return term; // No glossary entry, just return the term
+
+    const tooltipHtml = `<span class="info-wrap"><span>${term}</span><i class="info-icon">i</i><div class="tooltip-box"><div class="tt-term">${term}</div><div class="tt-def">${entry.def}</div>${entry.example ? `<div class="tt-example">${entry.example}</div>` : ''}</div></span>`;
+    return tooltipHtml;
+  });
+}
+
+// =============================================
+// RENDER FUNCTIONS
+// =============================================
+
+function renderFeatureTable(filter = 'all') {
+  const tbody = document.getElementById('featureBody');
+  tbody.innerHTML = '';
+  features.forEach(cat => {
+    if (filter !== 'all' && cat.cat !== filter) return;
+    const catRow = document.createElement('tr');
+    catRow.className = 'category-row';
+    catRow.dataset.cat = cat.cat;
+    catRow.innerHTML = `<td colspan="4">${injectTooltips(cat.catLabel)}</td>`;
+    tbody.appendChild(catRow);
+    cat.features.forEach(f => {
+      const row = document.createElement('tr');
+      row.dataset.cat = cat.cat;
+      row.innerHTML = `
+        <td><strong>${injectTooltips(f.name)}</strong></td>
+        <td>${badge(f.yuman, f.yumanDetail)}</td>
+        <td>${badge(f.bob, f.bobDetail)}</td>
+        <td>${badge(f.kelkun, f.kelkunDetail)}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  });
+}
+
+function badge(status, detail) {
+  const labels = {
+    'yes': '&#10003; Oui',
+    'no': '&#10007; Non',
+    'partial': '~ Partiel',
+    'superior': '&#9733; Superieur',
+    'new-feat': '&#10022; Nouveau'
+  };
+  let html = `<span class="badge ${status}">${labels[status]||status}</span>`;
+  if (detail) html += `<div class="feature-detail">${injectTooltips(detail)}</div>`;
+  return html;
+}
+
+function filterCategory(cat, btn) {
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  renderFeatureTable(cat);
+}
+
+function renderCategoryBars() {
+  const container = document.getElementById('category-bars');
+  const data = features.map(cat => {
+    let yCount = 0, bCount = 0;
+    cat.features.forEach(f => {
+      if (f.yuman === 'yes' || f.yuman === 'partial') yCount++;
+      if (f.bob === 'yes' || f.bob === 'partial') bCount++;
+    });
+    return { label: cat.catLabel.replace(/\{|\}/g,'').split('/')[0].split('&')[0].trim(), total: cat.features.length, yuman: yCount, bob: bCount };
+  });
+
+  container.innerHTML = data.map(d => {
+    const yPct = (d.yuman / d.total * 100);
+    const bPct = (d.bob / d.total * 100);
+    return `
+      <div class="bar-chart-item">
+        <div class="bar-label">${d.label}</div>
+        <div class="bar-track">
+          <div class="bar-segment" style="left:0;width:100%;background:rgba(108,92,231,0.3);z-index:1;justify-content:flex-end;padding-right:8px;color:var(--kelkun-light);">${d.total}/${d.total}</div>
+          <div class="bar-segment" style="left:0;width:${yPct}%;background:rgba(225,112,85,0.5);z-index:2;color:var(--yuman-light);">${d.yuman}</div>
+          <div class="bar-segment" style="left:0;width:${bPct}%;background:rgba(0,184,148,0.5);z-index:3;color:var(--bob-light);border-right:2px solid var(--bg);">${d.bob}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderComparisonBars() {
+  const container = document.getElementById('comparison-bars');
+  const data = features.map(cat => {
+    let yCount = 0, bCount = 0;
+    cat.features.forEach(f => {
+      if (f.yuman === 'yes') yCount += 1;
+      else if (f.yuman === 'partial') yCount += 0.5;
+      if (f.bob === 'yes') bCount += 1;
+      else if (f.bob === 'partial') bCount += 0.5;
+    });
+    return { label: cat.catLabel.replace(/\{|\}/g,''), total: cat.features.length, yuman: yCount, bob: bCount };
+  });
+
+  container.innerHTML = data.map(d => `
+    <div style="margin-bottom:1.5rem;">
+      <div style="font-size:0.85rem;font-weight:600;margin-bottom:0.6rem;">${d.label}</div>
+      <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem;">
+        <div style="width:90px;text-align:right;font-size:0.72rem;color:var(--yuman-light);">Yuman</div>
+        <div style="flex:1;height:20px;background:rgba(45,45,80,0.4);border-radius:4px;overflow:hidden;"><div style="width:${d.yuman/d.total*100}%;height:100%;background:var(--yuman);border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-size:0.68rem;font-weight:700;">${d.yuman}/${d.total}</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem;">
+        <div style="width:90px;text-align:right;font-size:0.72rem;color:var(--bob-light);">Bob! Desk</div>
+        <div style="flex:1;height:20px;background:rgba(45,45,80,0.4);border-radius:4px;overflow:hidden;"><div style="width:${d.bob/d.total*100}%;height:100%;background:var(--bob);border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-size:0.68rem;font-weight:700;">${d.bob}/${d.total}</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <div style="width:90px;text-align:right;font-size:0.72rem;color:var(--kelkun-light);">Kelkun</div>
+        <div style="flex:1;height:20px;background:rgba(45,45,80,0.4);border-radius:4px;overflow:hidden;"><div style="width:100%;height:100%;background:var(--kelkun);border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-size:0.68rem;font-weight:700;">${d.total}/${d.total}</div></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderIdeas() {
+  const grid = document.getElementById('ideasGrid');
+  grid.innerHTML = crossIndustryIdeas.map(idea => `
+    <div class="idea-card">
+      <span class="impact-tag ${idea.impact}">${idea.impact === 'mega' ? 'Game changer' : idea.impact === 'high' ? 'High impact' : 'Quick win'}</span>
+      <span class="idea-source ${idea.source}">${idea.sourceLabel}</span>
+      <h3>${injectTooltips(idea.title)}</h3>
+      <p>${idea.desc}</p>
+      <div class="application"><strong>-> Dans Kelkun Retail :</strong> ${injectTooltips(idea.application)}</div>
+    </div>
+  `).join('');
+}
+
+// =============================================
+// GLOSSARY PANEL
+// =============================================
+
+function renderGlossary(filter = '') {
+  const list = document.getElementById('glossaryList');
+  const entries = Object.entries(GLOSSARY)
+    .filter(([k]) => !filter || k.toLowerCase().includes(filter.toLowerCase()))
+    .sort(([a],[b]) => a.localeCompare(b));
+
+  list.innerHTML = entries.map(([term, data]) => `
+    <div class="glossary-entry">
+      <div class="ge-term">${term}</div>
+      <div class="ge-def">${data.def}${data.example ? `<br><em style="color:var(--text-dim);font-size:0.72rem;">${data.example}</em>` : ''}</div>
+    </div>
+  `).join('');
+}
+
+function toggleGlossary() {
+  const panel = document.getElementById('glossaryPanel');
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) renderGlossary();
+}
+
+function filterGlossary(val) {
+  renderGlossary(val);
+}
+
+// =============================================
+// TABS
+// =============================================
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// =============================================
+// TOOLTIP POSITION FIX — flip if near top
+// =============================================
+
+document.addEventListener('mouseover', function(e) {
+  const icon = e.target.closest('.info-icon');
+  if (!icon) return;
+  const wrap = icon.closest('.info-wrap');
+  if (!wrap) return;
+  const rect = icon.getBoundingClientRect();
+  if (rect.top < 200) {
+    wrap.classList.add('tt-below');
+  } else {
+    wrap.classList.remove('tt-below');
+  }
+});
+
+// =============================================
+// INIT
+// =============================================
+renderFeatureTable();
+renderCategoryBars();
+renderComparisonBars();
+renderIdeas();
+</script>
+
+</body>
+</html>

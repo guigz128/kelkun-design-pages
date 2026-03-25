@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kelkun × Leclerc — Déclaration magasin</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Bricolage+Grotesque:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --kelkun-primary: #00BFA6;
+      --kelkun-primary-dark: #00a891;
+      --kelkun-primary-light: #e6f9f6;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-300: #D1D5DB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --green-500: #10B981;
+      --green-50: #ECFDF5;
+      --yellow-500: #EAB308;
+      --yellow-50: #FEFCE8;
+      --orange-500: #F97316;
+      --orange-50: #FFF7ED;
+      --blue-light: #EEF2FF;
+      --blue-medium: #818CF8;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--gray-100);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      padding: 20px;
+    }
+
+    h1, h2, h3, .hero-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    /* =============================================
+       PHONE FRAME
+       ============================================= */
+    .phone-frame {
+      max-width: 430px;
+      width: 100%;
+      height: 860px;
+      position: relative;
+      overflow: hidden;
+      background: white;
+      border-radius: 40px;
+      border: 12px solid #1f2937;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.15);
+    }
+    .phone-inner {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+      scroll-behavior: smooth;
+    }
+    .phone-inner::-webkit-scrollbar { display: none; }
+
+    /* =============================================
+       STEPS
+       ============================================= */
+    .step {
+      display: none;
+      flex-direction: column;
+      min-height: 100%;
+      animation: fadeSlideIn 0.35s ease forwards;
+    }
+    .step.active { display: flex; }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .cascade > *:nth-child(1) { animation: slideInUp 0.4s 0.05s ease both; }
+    .cascade > *:nth-child(2) { animation: slideInUp 0.4s 0.1s ease both; }
+    .cascade > *:nth-child(3) { animation: slideInUp 0.4s 0.15s ease both; }
+    .cascade > *:nth-child(4) { animation: slideInUp 0.4s 0.2s ease both; }
+    .cascade > *:nth-child(5) { animation: slideInUp 0.4s 0.25s ease both; }
+    .cascade > *:nth-child(6) { animation: slideInUp 0.4s 0.3s ease both; }
+    .cascade > *:nth-child(7) { animation: slideInUp 0.4s 0.35s ease both; }
+    .cascade > *:nth-child(8) { animation: slideInUp 0.4s 0.4s ease both; }
+
+    /* =============================================
+       HEADER
+       ============================================= */
+    .header {
+      background: linear-gradient(135deg, var(--kelkun-primary), var(--kelkun-primary-dark));
+      padding: 20px 20px 100px;
+      position: relative;
+      overflow: hidden;
+      color: white;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+    }
+    .header-compact {
+      padding: 16px 20px 80px;
+    }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 2;
+    }
+    .header-logos {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .header-logos .sep { opacity: 0.5; font-weight: 400; }
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.3;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 6px;
+    }
+    .header p {
+      font-size: 14px;
+      opacity: 0.85;
+      position: relative;
+      z-index: 2;
+    }
+    .back-btn {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.3); }
+    .step-indicator {
+      font-size: 12px;
+      opacity: 0.8;
+      background: rgba(255,255,255,0.15);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    /* =============================================
+       PROGRESS BAR
+       ============================================= */
+    .progress-bar {
+      display: flex;
+      gap: 4px;
+      padding: 12px 20px 0;
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .progress-dot {
+      flex: 1;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--gray-200);
+      transition: background 0.3s ease;
+    }
+    .progress-dot.done { background: var(--kelkun-primary); }
+    .progress-dot.current {
+      background: var(--kelkun-primary);
+      animation: pulse-bar 1.5s ease infinite;
+    }
+    @keyframes pulse-bar {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* =============================================
+       CONTENT
+       ============================================= */
+    .content {
+      padding: 20px;
+      margin-top: -80px;
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-bottom: 100px;
+    }
+    .content.no-overlap { margin-top: 0; }
+
+    /* =============================================
+       CARDS
+       ============================================= */
+    .card {
+      background: white;
+      border-radius: 20px;
+      border: 2px solid var(--gray-200);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+      padding: 24px;
+    }
+    .card-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 16px;
+    }
+    .card-subtitle {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: -10px;
+      margin-bottom: 16px;
+    }
+
+    /* =============================================
+       SELECT CARDS GRID
+       ============================================= */
+    .select-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .select-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 10px;
+      background: var(--gray-50);
+      border: 2px solid var(--gray-200);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    .select-card:hover {
+      border-color: var(--kelkun-primary);
+      background: var(--kelkun-primary-light);
+    }
+    .select-card.selected {
+      border-color: var(--kelkun-primary);
+      background: var(--kelkun-primary-light);
+      box-shadow: 0 0 0 3px rgba(0,191,166,0.15);
+    }
+    .select-card-icon { font-size: 28px; }
+    .select-card-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+      line-height: 1.3;
+    }
+    .select-card.selected .select-card-label { color: var(--kelkun-primary-dark); }
+
+    /* Inline select cards (type intervention) */
+    .select-inline {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .select-inline-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--gray-50);
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .select-inline-card:hover {
+      border-color: var(--kelkun-primary);
+      background: var(--kelkun-primary-light);
+    }
+    .select-inline-card.selected {
+      border-color: var(--kelkun-primary);
+      background: var(--kelkun-primary-light);
+      box-shadow: 0 0 0 3px rgba(0,191,166,0.15);
+    }
+    .select-inline-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .select-inline-card.selected .select-inline-check {
+      background: var(--kelkun-primary);
+      border-color: var(--kelkun-primary);
+    }
+    .select-inline-card.selected .select-inline-check::after {
+      content: '✓';
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .select-inline-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+    .select-inline-card.selected .select-inline-label { color: var(--kelkun-primary-dark); }
+
+    /* =============================================
+       PROGRESSIVE DISCLOSURE
+       ============================================= */
+    .disclosure {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.25s ease;
+      margin-top: 0;
+    }
+    .disclosure.show {
+      max-height: 500px;
+      opacity: 1;
+      margin-top: 16px;
+    }
+
+    /* =============================================
+       FORM
+       ============================================= */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+    .form-label .optional {
+      font-weight: 400;
+      color: var(--gray-400);
+    }
+    .form-input {
+      font-family: 'DM Sans', sans-serif;
+      padding: 14px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      color: var(--gray-900);
+      background: white;
+    }
+    .form-input:focus { border-color: var(--kelkun-primary); }
+    .form-input::placeholder { color: var(--gray-400); }
+    .form-input.error { border-color: #EF4444; }
+    .form-textarea {
+      font-family: 'DM Sans', sans-serif;
+      padding: 14px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 14px;
+      outline: none;
+      resize: vertical;
+      min-height: 70px;
+      transition: border-color 0.2s;
+      color: var(--gray-900);
+      width: 100%;
+    }
+    .form-textarea:focus { border-color: var(--kelkun-primary); }
+    .form-textarea::placeholder { color: var(--gray-400); }
+    .form-hint {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
+    .form-error {
+      font-size: 11px;
+      color: #EF4444;
+      display: none;
+    }
+    .form-error.show { display: block; }
+
+    /* =============================================
+       URGENCY TOGGLE
+       ============================================= */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+    }
+    .toggle-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .toggle-label-main {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+    .toggle-label-sub {
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+    .toggle-switch {
+      width: 52px;
+      height: 30px;
+      background: var(--gray-300);
+      border-radius: 15px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.25s ease;
+      flex-shrink: 0;
+    }
+    .toggle-switch.on { background: var(--orange-500); }
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.25s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .toggle-switch.on::after { transform: translateX(22px); }
+    .urgency-badge {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      background: var(--orange-50);
+      color: var(--orange-500);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      margin-top: 8px;
+      animation: fadeSlideIn 0.25s ease;
+    }
+    .urgency-badge.show { display: inline-flex; }
+
+    /* =============================================
+       PHOTO UPLOAD
+       ============================================= */
+    .photo-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px;
+      background: var(--gray-50);
+      border: 2px dashed var(--gray-300);
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-600);
+      transition: all 0.2s;
+    }
+    .photo-btn:hover {
+      border-color: var(--kelkun-primary);
+      background: var(--kelkun-primary-light);
+      color: var(--kelkun-primary-dark);
+    }
+    .photo-btn.has-photo {
+      border-style: solid;
+      border-color: var(--kelkun-primary);
+      background: var(--kelkun-primary-light);
+      color: var(--kelkun-primary-dark);
+    }
+    .photo-preview {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: var(--gray-50);
+      border-radius: 10px;
+    }
+    .photo-preview.show { display: flex; }
+    .photo-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--gray-200), var(--gray-300));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .photo-info {
+      flex: 1;
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+    .photo-remove {
+      color: var(--gray-400);
+      cursor: pointer;
+      font-size: 18px;
+      padding: 4px;
+    }
+    .photo-remove:hover { color: #EF4444; }
+
+    /* =============================================
+       BUTTONS
+       ============================================= */
+    .btn-primary {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--kelkun-primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--kelkun-primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,191,166,0.3);
+    }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled {
+      background: var(--gray-300);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-primary:disabled:hover {
+      background: var(--gray-300);
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      font-family: 'DM Sans', sans-serif;
+      background: white;
+      color: var(--gray-700);
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--gray-300);
+      background: var(--gray-50);
+    }
+
+    .btn-disabled-hint {
+      font-size: 12px;
+      color: var(--gray-400);
+      text-align: center;
+      margin-top: 6px;
+      display: none;
+    }
+    .btn-disabled-hint.show { display: block; }
+
+    /* =============================================
+       RECENT REQUESTS TABLE
+       ============================================= */
+    .recent-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .recent-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .recent-item:last-child { border-bottom: none; }
+    .recent-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--gray-50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .recent-info { flex: 1; min-width: 0; }
+    .recent-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-900);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .recent-meta {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+    .recent-status {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .status-green { background: var(--green-50); color: var(--green-500); }
+    .status-yellow { background: var(--yellow-50); color: var(--yellow-500); }
+    .status-done { background: var(--gray-100); color: var(--gray-500); }
+
+    /* =============================================
+       RECAP
+       ============================================= */
+    .recap-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+      gap: 12px;
+    }
+    .recap-line:last-child { border-bottom: none; }
+    .recap-label {
+      font-size: 13px;
+      color: var(--gray-500);
+      flex-shrink: 0;
+    }
+    .recap-value {
+      font-size: 13px;
+      color: var(--gray-900);
+      font-weight: 600;
+      text-align: right;
+      flex: 1;
+    }
+    .recap-edit {
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: var(--gray-100);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      color: var(--gray-500);
+    }
+    .recap-edit:hover {
+      background: var(--kelkun-primary-light);
+      color: var(--kelkun-primary);
+    }
+
+    /* =============================================
+       INFO BANNER
+       ============================================= */
+    .info-banner {
+      background: var(--kelkun-primary-light);
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+    .info-banner strong {
+      color: var(--gray-900);
+    }
+
+    /* =============================================
+       SUCCESS ANIMATION
+       ============================================= */
+    .success-anim {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+    .success-check {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--green-500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: successPop 0.5s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    }
+    .success-check svg {
+      width: 40px;
+      height: 40px;
+      stroke: white;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+    .success-check svg path {
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      animation: drawCheck 0.4s 0.6s ease forwards;
+    }
+    @keyframes successPop {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    @keyframes drawCheck {
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* =============================================
+       TOAST
+       ============================================= */
+    .toast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--gray-900);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* =============================================
+       FOOTER
+       ============================================= */
+    .footer {
+      text-align: center;
+      padding: 16px 20px;
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    /* =============================================
+       MENTION
+       ============================================= */
+    .mention {
+      font-size: 12px;
+      color: var(--gray-400);
+      text-align: center;
+      padding: 8px 20px;
+      line-height: 1.5;
+    }
+
+    /* Other text field for "Autre" option */
+    .other-field {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.2s ease, margin 0.2s ease;
+      margin-top: 0;
+    }
+    .other-field.show {
+      max-height: 80px;
+      opacity: 1;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone-frame">
+  <div class="phone-inner" id="phoneInner">
+
+    <!-- Progress Bar (hidden on step 0 and 4) -->
+    <div class="progress-bar" id="progressBar" style="display: none;">
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- STEP 0 — Accueil conseiller                    -->
+    <!-- ============================================= -->
+    <div class="step active" id="step0">
+      <div class="header">
+        <div class="header-row">
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+          <div class="header-user">
+            👤 Julien D.
+          </div>
+        </div>
+        <p style="font-size: 12px; opacity: 0.7; margin-bottom: 12px;">Leclerc Montpellier Sud</p>
+        <h2>Bonjour Julien 👋</h2>
+        <p>Gérez les demandes d'intervention de vos clients</p>
+      </div>
+
+      <div class="content cascade">
+        <div class="card" style="text-align: center;">
+          <h3 class="card-title" style="margin-bottom: 8px;">Nouvelle demande</h3>
+          <p class="card-subtitle" style="margin-bottom: 20px; margin-top: 0;">Créez une demande d'intervention pour un client</p>
+          <button class="btn-primary" onclick="goToStep(1)" style="font-size: 16px;">
+            ➕ Créer une demande
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📋 Demandes récentes</div>
+          <div class="recent-list">
+            <div class="recent-item">
+              <div class="recent-icon">🚿</div>
+              <div class="recent-info">
+                <div class="recent-title">#KLK-2026-0142 · Plomberie</div>
+                <div class="recent-meta">Mme Martin · 24 mars 2026</div>
+              </div>
+              <span class="recent-status status-green">Artisan assigné</span>
+            </div>
+            <div class="recent-item">
+              <div class="recent-icon">⚡</div>
+              <div class="recent-info">
+                <div class="recent-title">#KLK-2026-0139 · Électricité</div>
+                <div class="recent-meta">M. Dupont · 22 mars 2026</div>
+              </div>
+              <span class="recent-status status-yellow">En cours</span>
+            </div>
+            <div class="recent-item">
+              <div class="recent-icon">🍳</div>
+              <div class="recent-info">
+                <div class="recent-title">#KLK-2026-0135 · Pose cuisine</div>
+                <div class="recent-meta">Mme Blanc · 19 mars 2026</div>
+              </div>
+              <span class="recent-status status-done">✅ Terminée</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">Support Kelcare : 09 78 45 27 40</div>
+      </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- STEP 1 — Rayon + Type                          -->
+    <!-- ============================================= -->
+    <div class="step" id="step1">
+      <div class="header header-compact">
+        <div class="header-row">
+          <button class="back-btn" onclick="goToStep(0)">←</button>
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+          <span class="step-indicator">Étape 1/3</span>
+        </div>
+        <h2>Sélectionnez le rayon</h2>
+        <p>Quel rayon concerne la demande ?</p>
+      </div>
+
+      <div class="content cascade">
+        <div class="card">
+          <div class="card-title">Rayon d'origine</div>
+          <div class="select-grid" id="rayonGrid">
+            <div class="select-card" onclick="selectRayon(this, 'plomberie')" data-rayon="plomberie">
+              <span class="select-card-icon">🚿</span>
+              <span class="select-card-label">Plomberie / Sanitaire</span>
+            </div>
+            <div class="select-card" onclick="selectRayon(this, 'electricite')" data-rayon="electricite">
+              <span class="select-card-icon">⚡</span>
+              <span class="select-card-label">Électricité</span>
+            </div>
+            <div class="select-card" onclick="selectRayon(this, 'cuisine')" data-rayon="cuisine">
+              <span class="select-card-icon">🍳</span>
+              <span class="select-card-label">Cuisine</span>
+            </div>
+            <div class="select-card" onclick="selectRayon(this, 'peinture')" data-rayon="peinture">
+              <span class="select-card-icon">🎨</span>
+              <span class="select-card-label">Peinture / Décoration</span>
+            </div>
+            <div class="select-card" onclick="selectRayon(this, 'menuiserie')" data-rayon="menuiserie">
+              <span class="select-card-icon">🏠</span>
+              <span class="select-card-label">Menuiserie / Aménagement</span>
+            </div>
+            <div class="select-card" onclick="selectRayon(this, 'chauffage')" data-rayon="chauffage">
+              <span class="select-card-icon">🔥</span>
+              <span class="select-card-label">Chauffage / Climatisation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Type intervention (progressive disclosure) -->
+        <div class="disclosure" id="typeDisclosure">
+          <div class="card">
+            <div class="card-title">Type d'intervention</div>
+            <div class="select-inline" id="typeOptions"></div>
+            <div class="other-field" id="otherField">
+              <input class="form-input" type="text" placeholder="Précisez le type d'intervention" id="otherInput">
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btnStep1" onclick="goToStep(2)" disabled>Suivant →</button>
+        <div class="btn-disabled-hint show" id="hintStep1">Sélectionnez un rayon pour continuer</div>
+      </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- STEP 2 — Coordonnées + détails                 -->
+    <!-- ============================================= -->
+    <div class="step" id="step2">
+      <div class="header header-compact">
+        <div class="header-row">
+          <button class="back-btn" onclick="goToStep(1)">←</button>
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+          <span class="step-indicator">Étape 2/3</span>
+        </div>
+        <h2>Coordonnées client</h2>
+        <p>Renseignez les informations du client</p>
+      </div>
+
+      <div class="content cascade">
+        <div class="card">
+          <div class="card-title">👤 Client</div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Nom complet *</label>
+              <input class="form-input" type="text" placeholder="ex : Marie Martin" id="inputName" oninput="validateStep2()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Téléphone *</label>
+              <input class="form-input" type="tel" placeholder="ex : 06 12 34 56 78" id="inputPhone" oninput="validatePhone()" maxlength="14">
+              <span class="form-error" id="phoneError">Format invalide — attendu : 10 chiffres commençant par 0</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email <span class="optional">(optionnel)</span></label>
+              <input class="form-input" type="email" placeholder="ex : marie@email.com" id="inputEmail">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📍 Intervention</div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Adresse d'intervention <span class="optional">(optionnel)</span></label>
+              <input class="form-input" type="text" placeholder="ex : 12 rue des Lilas, 34000 Montpellier" id="inputAddress">
+              <span class="form-hint">Si vide, Kelkun demandera au client par SMS</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Précisions <span class="optional">(optionnel)</span></label>
+              <textarea class="form-textarea" placeholder="ex : Cumulus qui fuit depuis ce matin" id="inputDesc"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Photo <span class="optional">(optionnel)</span></label>
+              <div class="photo-btn" id="photoBtn" onclick="simulatePhoto()">📷 Ajouter une photo</div>
+              <div class="photo-preview" id="photoPreview">
+                <div class="photo-thumb">📸</div>
+                <div class="photo-info">
+                  <div style="font-weight: 600;">photo_intervention.jpg</div>
+                  <div style="font-size: 11px; color: var(--gray-400);">1.4 MB</div>
+                </div>
+                <span class="photo-remove" onclick="removePhoto(event)">✕</span>
+              </div>
+              <span class="form-hint">La photo aide l'artisan à préparer son intervention</span>
+            </div>
+            <div style="border-top: 1px solid var(--gray-100); padding-top: 14px;">
+              <div class="toggle-row">
+                <div class="toggle-label">
+                  <span class="toggle-label-main">⚡ Urgent (sous 48h)</span>
+                  <span class="toggle-label-sub">Intervention prioritaire</span>
+                </div>
+                <div class="toggle-switch" id="urgencyToggle" onclick="toggleUrgency()"></div>
+              </div>
+              <div class="urgency-badge" id="urgencyBadge">⚠️ Intervention urgente sous 48h</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btnStep2" onclick="goToStep(3)" disabled>Suivant →</button>
+        <div class="btn-disabled-hint show" id="hintStep2">Remplissez le nom et le téléphone du client</div>
+      </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- STEP 3 — Récapitulatif                         -->
+    <!-- ============================================= -->
+    <div class="step" id="step3">
+      <div class="header header-compact">
+        <div class="header-row">
+          <button class="back-btn" onclick="goToStep(2)">←</button>
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+          <span class="step-indicator">Étape 3/3</span>
+        </div>
+        <h2>Vérifiez avant d'envoyer</h2>
+        <p>Confirmez les informations avec le client</p>
+      </div>
+
+      <div class="content cascade">
+        <div class="card">
+          <div class="card-title">📋 Récapitulatif</div>
+          <div class="recap-line">
+            <span class="recap-label">Rayon</span>
+            <span class="recap-value" id="recapRayon">—</span>
+            <button class="recap-edit" onclick="goToStep(1)">✏️</button>
+          </div>
+          <div class="recap-line">
+            <span class="recap-label">Type</span>
+            <span class="recap-value" id="recapType">—</span>
+            <button class="recap-edit" onclick="goToStep(1)">✏️</button>
+          </div>
+          <div class="recap-line">
+            <span class="recap-label">Client</span>
+            <span class="recap-value" id="recapClient">—</span>
+            <button class="recap-edit" onclick="goToStep(2)">✏️</button>
+          </div>
+          <div class="recap-line">
+            <span class="recap-label">Téléphone</span>
+            <span class="recap-value" id="recapPhone">—</span>
+            <button class="recap-edit" onclick="goToStep(2)">✏️</button>
+          </div>
+          <div class="recap-line" id="recapAddressLine" style="display: none;">
+            <span class="recap-label">Adresse</span>
+            <span class="recap-value" id="recapAddress">—</span>
+            <button class="recap-edit" onclick="goToStep(2)">✏️</button>
+          </div>
+          <div class="recap-line" id="recapDescLine" style="display: none;">
+            <span class="recap-label">Description</span>
+            <span class="recap-value" id="recapDesc">—</span>
+            <button class="recap-edit" onclick="goToStep(2)">✏️</button>
+          </div>
+          <div class="recap-line" id="recapUrgencyLine" style="display: none;">
+            <span class="recap-label">Urgence</span>
+            <span class="recap-value" id="recapUrgency" style="color: var(--orange-500);">⚠️ Urgent (sous 48h)</span>
+          </div>
+          <div class="recap-line" id="recapPhotoLine" style="display: none;">
+            <span class="recap-label">Photo</span>
+            <span class="recap-value">📷 1 photo jointe</span>
+          </div>
+          <div class="recap-line" style="border-top: 2px solid var(--gray-100); margin-top: 4px; padding-top: 14px;">
+            <span class="recap-label">Magasin</span>
+            <span class="recap-value">Leclerc Montpellier Sud</span>
+          </div>
+          <div class="recap-line">
+            <span class="recap-label">Conseiller</span>
+            <span class="recap-value">Julien D.</span>
+          </div>
+        </div>
+
+        <div class="info-banner">
+          📱 <strong>Le client recevra un SMS de confirmation</strong> avec un lien de suivi dans quelques secondes.<br><br>
+          Kelkun se charge du reste : recherche d'artisan, devis, suivi et paiement.
+        </div>
+
+        <button class="btn-primary" onclick="sendRequest()" style="font-size: 16px;">📤 Envoyer la demande</button>
+        <button class="btn-secondary" onclick="goToStep(2)">← Retour</button>
+      </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- STEP 4 — Confirmation                          -->
+    <!-- ============================================= -->
+    <div class="step" id="step4">
+      <div class="header" style="padding-bottom: 60px;">
+        <div class="header-row">
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+          <div class="header-user">
+            👤 Julien D.
+          </div>
+        </div>
+      </div>
+
+      <div class="content cascade" style="margin-top: -40px;">
+        <div class="card" style="text-align: center; padding: 32px 24px;">
+          <div class="success-anim">
+            <div class="success-check">
+              <svg viewBox="0 0 40 40">
+                <path d="M10 20 L17 27 L30 14"/>
+              </svg>
+            </div>
+            <h2 style="font-size: 22px; color: var(--gray-900);">Demande envoyée !</h2>
+            <p style="font-size: 14px; color: var(--gray-500);">Le client recevra un SMS dans quelques secondes</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📋 Résumé</div>
+          <div class="recap-line">
+            <span class="recap-label">N° demande</span>
+            <span class="recap-value" id="confirmNum" style="color: var(--kelkun-primary);">#KLK-2026-0143</span>
+          </div>
+          <div class="recap-line">
+            <span class="recap-label">Client</span>
+            <span class="recap-value" id="confirmClient">—</span>
+          </div>
+          <div class="recap-line">
+            <span class="recap-label">Type</span>
+            <span class="recap-value" id="confirmType">—</span>
+          </div>
+          <div class="recap-line">
+            <span class="recap-label">Statut</span>
+            <span class="recap-value">🔍 Recherche d'artisan en cours</span>
+          </div>
+        </div>
+
+        <div class="info-banner" style="text-align: center;">
+          <strong>✅ Vous n'avez plus rien à faire</strong><br><br>
+          Kelkun gère le dispatch, le devis, le suivi et le paiement.<br>
+          Le client pourra suivre son intervention depuis son téléphone.
+        </div>
+
+        <button class="btn-primary" onclick="newRequest()">➕ Nouvelle demande</button>
+        <button class="btn-secondary" onclick="goToStep(0)">← Retour à l'accueil</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // =============================================
+  // STATE
+  // =============================================
+  let currentStep = 0;
+  let selectedRayon = null;
+  let selectedType = null;
+  let isUrgent = false;
+  let hasPhoto = false;
+
+  const rayonTypes = {
+    plomberie:   ['Installation', 'Remplacement', 'Dépannage', 'Autre (préciser)'],
+    electricite: ['Installation', 'Mise aux normes', 'Dépannage', 'Autre (préciser)'],
+    cuisine:     ['Pose complète', 'Raccordements', 'Dépannage', 'Autre (préciser)'],
+    peinture:    ['Peinture intérieure', 'Peinture extérieure', 'Pose papier peint', 'Autre (préciser)'],
+    menuiserie:  ['Pose portes / fenêtres', 'Aménagement intérieur', 'Dépannage', 'Autre (préciser)'],
+    chauffage:   ['Installation', 'Remplacement', 'Entretien / dépannage', 'Autre (préciser)']
+  };
+
+  const rayonLabels = {
+    plomberie:   '🚿 Plomberie / Sanitaire',
+    electricite: '⚡ Électricité',
+    cuisine:     '🍳 Cuisine',
+    peinture:    '🎨 Peinture / Décoration',
+    menuiserie:  '🏠 Menuiserie / Aménagement',
+    chauffage:   '🔥 Chauffage / Climatisation'
+  };
+
+  // =============================================
+  // NAVIGATION
+  // =============================================
+  function goToStep(step) {
+    currentStep = step;
+
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + step).classList.add('active');
+
+    // Progress bar
+    const bar = document.getElementById('progressBar');
+    if (step === 0 || step === 4) {
+      bar.style.display = 'none';
+    } else {
+      bar.style.display = 'flex';
+      const dots = bar.querySelectorAll('.progress-dot');
+      dots.forEach((dot, i) => {
+        dot.className = 'progress-dot';
+        if (i < step - 1) dot.classList.add('done');
+        if (i === step - 1) dot.classList.add('current');
+      });
+    }
+
+    // Build recap on step 3
+    if (step === 3) buildRecap();
+
+    document.getElementById('phoneInner').scrollTop = 0;
+  }
+
+  // =============================================
+  // STEP 1 — Rayon selection
+  // =============================================
+  function selectRayon(el, rayon) {
+    selectedRayon = rayon;
+    selectedType = null;
+
+    // Highlight
+    document.querySelectorAll('#rayonGrid .select-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+
+    // Build type options (progressive disclosure)
+    const types = rayonTypes[rayon];
+    const container = document.getElementById('typeOptions');
+    container.innerHTML = types.map(t =>
+      `<div class="select-inline-card" onclick="selectType(this, '${t}')">
+        <div class="select-inline-check"></div>
+        <span class="select-inline-label">${t}</span>
+      </div>`
+    ).join('');
+
+    // Hide other field
+    document.getElementById('otherField').classList.remove('show');
+
+    // Show disclosure
+    document.getElementById('typeDisclosure').classList.add('show');
+
+    updateStep1Button();
+  }
+
+  function selectType(el, type) {
+    selectedType = type;
+
+    document.querySelectorAll('#typeOptions .select-inline-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+
+    // Handle "Autre" option
+    const otherField = document.getElementById('otherField');
+    if (type === 'Autre (préciser)') {
+      otherField.classList.add('show');
+      document.getElementById('otherInput').focus();
+    } else {
+      otherField.classList.remove('show');
+    }
+
+    updateStep1Button();
+  }
+
+  function updateStep1Button() {
+    const btn = document.getElementById('btnStep1');
+    const hint = document.getElementById('hintStep1');
+    const ready = selectedRayon && selectedType;
+    btn.disabled = !ready;
+    hint.classList.toggle('show', !ready);
+    if (!selectedType && selectedRayon) {
+      hint.textContent = 'Sélectionnez un type d\'intervention';
+    } else if (!selectedRayon) {
+      hint.textContent = 'Sélectionnez un rayon pour continuer';
+    }
+  }
+
+  // =============================================
+  // STEP 2 — Validation
+  // =============================================
+  function validatePhone() {
+    const phone = document.getElementById('inputPhone').value.replace(/\s/g, '');
+    const error = document.getElementById('phoneError');
+    const input = document.getElementById('inputPhone');
+
+    if (phone.length === 0) {
+      input.classList.remove('error');
+      error.classList.remove('show');
+    } else if (phone.length >= 10) {
+      const valid = /^0[1-9]\d{8}$/.test(phone);
+      input.classList.toggle('error', !valid);
+      error.classList.toggle('show', !valid);
+    } else {
+      input.classList.remove('error');
+      error.classList.remove('show');
+    }
+
+    validateStep2();
+  }
+
+  function validateStep2() {
+    const name = document.getElementById('inputName').value.trim();
+    const phone = document.getElementById('inputPhone').value.replace(/\s/g, '');
+    const phoneValid = /^0[1-9]\d{8}$/.test(phone);
+    const ready = name.length >= 2 && phoneValid;
+
+    const btn = document.getElementById('btnStep2');
+    const hint = document.getElementById('hintStep2');
+    btn.disabled = !ready;
+    hint.classList.toggle('show', !ready);
+  }
+
+  function toggleUrgency() {
+    isUrgent = !isUrgent;
+    document.getElementById('urgencyToggle').classList.toggle('on', isUrgent);
+    document.getElementById('urgencyBadge').classList.toggle('show', isUrgent);
+  }
+
+  function simulatePhoto() {
+    hasPhoto = true;
+    const btn = document.getElementById('photoBtn');
+    btn.classList.add('has-photo');
+    btn.innerHTML = '✅ Photo ajoutée';
+    document.getElementById('photoPreview').classList.add('show');
+  }
+
+  function removePhoto(e) {
+    e.stopPropagation();
+    hasPhoto = false;
+    const btn = document.getElementById('photoBtn');
+    btn.classList.remove('has-photo');
+    btn.innerHTML = '📷 Ajouter une photo';
+    document.getElementById('photoPreview').classList.remove('show');
+  }
+
+  // =============================================
+  // STEP 3 — Build recap
+  // =============================================
+  function buildRecap() {
+    const typeLabel = selectedType === 'Autre (préciser)'
+      ? document.getElementById('otherInput').value || 'Autre'
+      : selectedType;
+
+    document.getElementById('recapRayon').textContent = rayonLabels[selectedRayon] || '—';
+    document.getElementById('recapType').textContent = typeLabel;
+    document.getElementById('recapClient').textContent = document.getElementById('inputName').value || '—';
+    document.getElementById('recapPhone').textContent = document.getElementById('inputPhone').value || '—';
+
+    const address = document.getElementById('inputAddress').value.trim();
+    const addrLine = document.getElementById('recapAddressLine');
+    if (address) {
+      document.getElementById('recapAddress').textContent = address;
+      addrLine.style.display = 'flex';
+    } else {
+      addrLine.style.display = 'none';
+    }
+
+    const desc = document.getElementById('inputDesc').value.trim();
+    const descLine = document.getElementById('recapDescLine');
+    if (desc) {
+      document.getElementById('recapDesc').textContent = desc;
+      descLine.style.display = 'flex';
+    } else {
+      descLine.style.display = 'none';
+    }
+
+    document.getElementById('recapUrgencyLine').style.display = isUrgent ? 'flex' : 'none';
+    document.getElementById('recapPhotoLine').style.display = hasPhoto ? 'flex' : 'none';
+  }
+
+  // =============================================
+  // SEND REQUEST
+  // =============================================
+  function sendRequest() {
+    const num = '#KLK-2026-' + String(Math.floor(Math.random() * 9000) + 1000);
+    const typeLabel = selectedType === 'Autre (préciser)'
+      ? document.getElementById('otherInput').value || 'Autre'
+      : selectedType;
+
+    document.getElementById('confirmNum').textContent = num;
+    document.getElementById('confirmClient').textContent = document.getElementById('inputName').value;
+    const urgentTag = isUrgent ? ' (urgent)' : '';
+    document.getElementById('confirmType').textContent = typeLabel + ' ' + (rayonLabels[selectedRayon] || '').replace(/^[^\s]+\s/, '') + urgentTag;
+
+    goToStep(4);
+    showToast('Demande ' + num + ' envoyée !');
+  }
+
+  // =============================================
+  // NEW REQUEST (reset form)
+  // =============================================
+  function newRequest() {
+    selectedRayon = null;
+    selectedType = null;
+    isUrgent = false;
+    hasPhoto = false;
+
+    // Reset step 1
+    document.querySelectorAll('#rayonGrid .select-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('typeDisclosure').classList.remove('show');
+    document.getElementById('otherField').classList.remove('show');
+    document.getElementById('btnStep1').disabled = true;
+    document.getElementById('hintStep1').classList.add('show');
+    document.getElementById('hintStep1').textContent = 'Sélectionnez un rayon pour continuer';
+
+    // Reset step 2
+    document.getElementById('inputName').value = '';
+    document.getElementById('inputPhone').value = '';
+    document.getElementById('inputEmail').value = '';
+    document.getElementById('inputAddress').value = '';
+    document.getElementById('inputDesc').value = '';
+    document.getElementById('inputPhone').classList.remove('error');
+    document.getElementById('phoneError').classList.remove('show');
+    document.getElementById('urgencyToggle').classList.remove('on');
+    document.getElementById('urgencyBadge').classList.remove('show');
+    removePhoto(new Event('click'));
+    document.getElementById('btnStep2').disabled = true;
+    document.getElementById('hintStep2').classList.add('show');
+
+    goToStep(1);
+  }
+
+  // =============================================
+  // TOAST
+  // =============================================
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  // =============================================
+  // KEYBOARD NAV (demo)
+  // =============================================
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' && currentStep < 4) goToStep(currentStep + 1);
+    if (e.key === 'ArrowLeft' && currentStep > 0) goToStep(currentStep - 1);
+  });
+</script>
+
+</body>
+</html>

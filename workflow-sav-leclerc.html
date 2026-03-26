@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelkun × Leclerc — Workflow SAV</title>
+    <link rel="stylesheet" href="PARCOURS-SOUSCRIPTION-ARTISAN/shared/tokens.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-family);
+            font-size: var(--font-size-xl);
+            line-height: var(--line-height-6);
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: var(--space-10) var(--space-6);
+        }
+
+        /* ---- Page header ---- */
+
+        .page-title {
+            font-family: var(--font-family);
+            font-size: var(--font-size-5xl);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: var(--tracking-tight);
+            line-height: var(--line-height-10);
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .page-sub {
+            font-size: var(--font-size-xl);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-8);
+        }
+
+        /* ---- Scenario card ---- */
+
+        .scenario {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color-default);
+            border-radius: var(--rounded-2xl);
+            padding: var(--space-6);
+            margin-bottom: var(--space-7);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sc-label {
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-wider);
+            margin-bottom: var(--space-2);
+        }
+
+        .sc-title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .sc-sub {
+            font-size: var(--font-size-xl);
+            color: var(--text-secondary);
+            line-height: var(--line-height-6);
+        }
+
+        .pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-top: var(--space-4);
+        }
+
+        .pill {
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--rounded-lg);
+        }
+
+        .pill-r { background: var(--bg-error); color: var(--color-error); }
+        .pill-a { background: var(--bg-warning); color: var(--color-warning); }
+        .pill-i { background: var(--bg-info); color: var(--color-info); }
+
+        /* ---- Steps navigation ---- */
+
+        .steps-nav {
+            display: flex;
+            gap: var(--space-2);
+            margin-bottom: var(--space-6);
+            flex-wrap: wrap;
+        }
+
+        .sn-btn {
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--rounded-xl);
+            font-family: var(--font-family);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            border: 2px solid var(--border-color-default);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .sn-btn:hover {
+            border-color: var(--border-color-strong);
+            background: var(--bg-secondary);
+        }
+
+        .sn-btn.active {
+            background: var(--interactive-primary);
+            color: var(--text-inverse);
+            border-color: var(--interactive-primary);
+        }
+
+        /* ---- Phase panels ---- */
+
+        .phase {
+            display: none;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color-default);
+            border-radius: var(--rounded-2xl);
+            padding: var(--space-7);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .phase.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .phase-hdr {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-5);
+            border-bottom: 1px solid var(--border-color-default);
+        }
+
+        .phase-num {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--rounded-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            flex-shrink: 0;
+        }
+
+        .pn-red   { background: var(--bg-error);   color: var(--color-error); }
+        .pn-amber { background: var(--bg-warning); color: var(--color-warning); }
+        .pn-blue  { background: var(--bg-info);    color: var(--color-info); }
+        .pn-green { background: var(--bg-success); color: var(--color-success); }
+
+        .phase-title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .phase-time {
+            font-size: var(--font-size-lg);
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+
+        /* ---- Timeline items ---- */
+
+        .tl {
+            position: relative;
+            padding-left: var(--space-9);
+            margin-bottom: var(--space-2);
+        }
+
+        .tl::before {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 24px;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color-default);
+        }
+
+        .tl:last-of-type::before {
+            display: none;
+        }
+
+        .tl-dot {
+            position: absolute;
+            left: 2px;
+            top: 6px;
+            width: 16px;
+            height: 16px;
+            border-radius: var(--rounded-full);
+            border: 3px solid var(--border-color-strong);
+            background: var(--bg-primary);
+        }
+
+        .tl-dot.done {
+            background: var(--color-success);
+            border-color: var(--color-success);
+        }
+
+        .tl-dot.now {
+            background: var(--color-warning);
+            border-color: var(--color-warning);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(194, 123, 48, 0.3); }
+            50% { box-shadow: 0 0 0 6px rgba(194, 123, 48, 0); }
+        }
+
+        .tl-content {
+            padding-bottom: var(--space-5);
+        }
+
+        .tl-who {
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-wide);
+            margin-bottom: var(--space-1);
+        }
+
+        .tl-action {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            line-height: var(--line-height-6);
+        }
+
+        .tl-detail {
+            font-size: var(--font-size-lg);
+            color: var(--text-secondary);
+            margin-top: var(--space-2);
+            line-height: var(--line-height-6);
+        }
+
+        .tl-sla {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--rounded-lg);
+            margin-top: var(--space-3);
+        }
+
+        .sla-g { background: var(--bg-success); color: var(--color-success); }
+        .sla-a { background: var(--bg-warning); color: var(--color-warning); }
+        .sla-r { background: var(--bg-error);   color: var(--color-error); }
+
+        /* ---- Key rule box ---- */
+
+        .key-rule {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color-default);
+            border-radius: var(--rounded-xl);
+            padding: var(--space-5);
+            margin-top: var(--space-6);
+        }
+
+        .kr-label {
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-wide);
+            margin-bottom: var(--space-2);
+        }
+
+        .kr-text {
+            font-size: var(--font-size-xl);
+            color: var(--text-secondary);
+            line-height: var(--line-height-6);
+        }
+
+        /* ---- Footer ---- */
+
+        .footer-note {
+            text-align: center;
+            padding: var(--space-8) 0 var(--space-4);
+            font-size: var(--font-size-md);
+            color: var(--text-muted);
+        }
+
+        /* ---- Responsive ---- */
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: var(--font-size-4xl);
+                line-height: var(--line-height-8);
+            }
+
+            .steps-nav {
+                gap: var(--space-1);
+            }
+
+            .sn-btn {
+                padding: var(--space-2) var(--space-3);
+                font-size: var(--font-size-md);
+            }
+
+            .phase {
+                padding: var(--space-5);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-title">Workflow SAV Kelcare × Leclerc</div>
+        <div class="page-sub">Scenario concret — minute par minute</div>
+
+        <div class="scenario">
+            <div class="sc-label">Scenario SAV concret</div>
+            <div class="sc-title">Mme Martin — cumulus qui fuit 3 jours apres la pose</div>
+            <div class="sc-sub">Intervention initiale : remplacement cumulus Atlantic 200L, pose par Plomberie Laurent le lundi. Le jeudi matin, fuite au raccordement. La cliente est en colere.</div>
+            <div class="pills">
+                <span class="pill pill-r">Degat des eaux potentiel</span>
+                <span class="pill pill-a">Intervention initiale via Leclerc</span>
+                <span class="pill pill-i">Demande #KLK-2026-0142</span>
+            </div>
+        </div>
+
+        <div class="steps-nav">
+            <button class="sn-btn active" onclick="showPhase(0)">1. Alerte</button>
+            <button class="sn-btn" onclick="showPhase(1)">2. Prise en charge</button>
+            <button class="sn-btn" onclick="showPhase(2)">3. Resolution</button>
+            <button class="sn-btn" onclick="showPhase(3)">4. Cloture</button>
+            <button class="sn-btn" onclick="showPhase(4)">5. Escalade Allianz</button>
+        </div>
+
+        <!-- Phase 1 -->
+        <div class="phase active" id="phase-0">
+            <div class="phase-hdr">
+                <div class="phase-num pn-red">1</div>
+                <div>
+                    <div class="phase-title">Alerte et qualification</div>
+                    <div class="phase-time">Jeudi 8h12 — T+0 min</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Mme Martin (cliente)</div>
+                    <div class="tl-action">Clique sur "Signaler un probleme" depuis son lien de suivi</div>
+                    <div class="tl-detail">Elle est sur le meme lien SMS qu'elle a utilise depuis le debut. Pas de numero a chercher, pas de formulaire Leclerc.</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Systeme Kelkun</div>
+                    <div class="tl-action">Creation automatique du ticket SAV #SAV-2026-0089</div>
+                    <div class="tl-detail">Le ticket est lie a la demande initiale #KLK-2026-0142. Toute l'historique est rattache : artisan, devis, PV de chantier, paiement.</div>
+                    <div class="tl-sla sla-g">⚡ Instantane</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Systeme Kelkun</div>
+                    <div class="tl-action">Qualification automatique : urgence haute (fuite active)</div>
+                    <div class="tl-detail">Le mot "fuite" dans la description + la categorie "plomberie" declenchent le niveau "urgence haute". Notification prioritaire a l'equipe Kelcare.</div>
+                    <div class="tl-sla sla-g">⚡ Instantane</div>
+                </div>
+            </div>
+            <div class="key-rule">
+                <div class="kr-label">Role du magasin Leclerc</div>
+                <div class="kr-text">Aucun. Le magasin ne recoit aucune alerte, aucune notification, aucune demande d'action. La cliente ne retourne pas en magasin.</div>
+            </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase" id="phase-1">
+            <div class="phase-hdr">
+                <div class="phase-num pn-amber">2</div>
+                <div>
+                    <div class="phase-title">Prise en charge Kelcare</div>
+                    <div class="phase-time">Jeudi 8h12 — T+0 a T+30 min</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Kelcare — Elodie (service client)</div>
+                    <div class="tl-action">Appel sortant a Mme Martin dans les 15 minutes</div>
+                    <div class="tl-detail">Elodie a acces au dossier complet. Elle rassure, confirme la prise en charge, et demande une photo de la fuite. Pas de "veuillez rappeler" — c'est Kelcare qui appelle.</div>
+                    <div class="tl-sla sla-g">✓ SLA : rappel sous 15 min (urgence haute)</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Kelcare — Elodie</div>
+                    <div class="tl-action">Contact Plomberie Laurent (artisan initial)</div>
+                    <div class="tl-detail">L'artisan qui a pose le cumulus est recontacte en priorite. Kelcare lui transmet la photo et demande un creneau d'intervention corrective sous 24h.</div>
+                    <div class="tl-sla sla-a">⏱ SLA : contact artisan sous 30 min</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Systeme Kelkun</div>
+                    <div class="tl-action">Mme Martin recoit un SMS de confirmation</div>
+                    <div class="tl-detail">"Bonjour Mme Martin, nous avons bien pris en charge votre signalement. Elodie de Kelcare s'en occupe. Votre artisan sera recontacte dans l'heure."</div>
+                </div>
+            </div>
+            <div class="key-rule">
+                <div class="kr-label">Role du magasin Leclerc</div>
+                <div class="kr-text">Aucun. Meme si Mme Martin appelle le magasin, le conseiller peut dire : "C'est gere par Kelcare, ils vous ont deja contactee." Il n'a rien a faire.</div>
+            </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase" id="phase-2">
+            <div class="phase-hdr">
+                <div class="phase-num pn-blue">3</div>
+                <div>
+                    <div class="phase-title">Resolution</div>
+                    <div class="phase-time">Jeudi 8h42 — T+30 min a T+24h</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Plomberie Laurent (artisan)</div>
+                    <div class="tl-action">Accepte l'intervention corrective — creneau vendredi 9h</div>
+                    <div class="tl-detail">L'artisan intervient dans le cadre de sa garantie de parfait achevement. Pas de nouveau devis, pas de frais supplementaires pour la cliente.</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Systeme Kelkun</div>
+                    <div class="tl-action">Notification cliente : intervention corrective planifiee</div>
+                    <div class="tl-detail">Le lien de suivi est mis a jour. Nouveau statut : "Intervention corrective prevue — vendredi 9h". La timeline reprend avec un nouveau cycle.</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Plomberie Laurent</div>
+                    <div class="tl-action">Intervient vendredi 9h — resserre le raccordement</div>
+                    <div class="tl-detail">Le probleme etait un joint mal serre. L'artisan corrige, verifie l'ensemble de l'installation, prend des photos. Duree : 30 minutes.</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Systeme Kelkun</div>
+                    <div class="tl-action">Nouveau PV de chantier correctif genere</div>
+                    <div class="tl-detail">Le PV documente le probleme initial, la cause identifiee, la correction effectuee, et les photos avant/apres. Rattache au dossier initial.</div>
+                </div>
+            </div>
+            <div class="key-rule">
+                <div class="kr-label">Et si l'artisan initial refuse ou ne repond pas ?</div>
+                <div class="kr-text">Kelkun dispatche un autre artisan qualifie sous 2h. L'intervention corrective est prise en charge par Kelkun. Le dossier de l'artisan defaillant est mis a jour (impact sur son score et son maintien dans le reseau).</div>
+            </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="phase" id="phase-3">
+            <div class="phase-hdr">
+                <div class="phase-num pn-green">4</div>
+                <div>
+                    <div class="phase-title">Cloture et suivi qualite</div>
+                    <div class="phase-time">Vendredi 10h — T+26h</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Kelcare — Elodie</div>
+                    <div class="tl-action">Appel de courtoisie a Mme Martin</div>
+                    <div class="tl-detail">"Est-ce que tout fonctionne bien ? Etes-vous satisfaite de l'intervention ?" Elodie verifie que le probleme est resolu et que la cliente est rassuree.</div>
+                    <div class="tl-sla sla-g">✓ SLA : appel J+1 apres correction</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Systeme Kelkun</div>
+                    <div class="tl-action">Ticket SAV cloture — notation post-SAV demandee</div>
+                    <div class="tl-detail">Mme Martin recoit une demande de notation specifique au traitement SAV (distinct de la notation initiale). Sa note alimente les KPIs du dashboard magasin.</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Dashboard magasin Leclerc</div>
+                    <div class="tl-action">KPIs mis a jour automatiquement</div>
+                    <div class="tl-detail">Le ticket SAV apparait dans les metriques : nombre de reclamations, delai de resolution (26h), satisfaction post-SAV. Visible en vue magasin et vue zone.</div>
+                </div>
+            </div>
+            <div class="key-rule">
+                <div class="kr-label">Ce que voit le directeur Leclerc</div>
+                <div class="kr-text">Dans son dashboard : "1 reclamation ce mois — resolue en 26h — satisfaction post-SAV : 4/5". Pas d'action requise. Juste de la visibilite.</div>
+            </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="phase" id="phase-4">
+            <div class="phase-hdr">
+                <div class="phase-num pn-red">5</div>
+                <div>
+                    <div class="phase-title">Escalade Allianz (si necessaire)</div>
+                    <div class="phase-time">Uniquement si degat materiel ou litige non resolu</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot now"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Scenario aggrave</div>
+                    <div class="tl-action">La fuite a cause un degat des eaux — parquet gondole, peinture abimee</div>
+                    <div class="tl-detail">Le raccordement a fuite pendant 48h avant que Mme Martin ne s'en rende compte. Les dommages depassent la simple correction technique.</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Kelcare — Elodie</div>
+                    <div class="tl-action">Declenche la protection juridique Allianz</div>
+                    <div class="tl-detail">Kelcare informe la cliente et l'accompagne dans la declaration sur mesdemarches.allianz.fr/kelkun. La protection couvre jusqu'a 10 000€ TTC.</div>
+                </div>
+            </div>
+            <div class="tl">
+                <div class="tl-dot done"></div>
+                <div class="tl-content">
+                    <div class="tl-who">Allianz</div>
+                    <div class="tl-action">Prise en charge du sinistre</div>
+                    <div class="tl-detail">Allianz gere l'expertise, l'indemnisation et le reglement. Le dossier Kelkun (PV de chantier, photos, historique) sert de piece justificative.</div>
+                </div>
+            </div>
+            <div class="key-rule">
+                <div class="kr-label">Role du magasin Leclerc</div>
+                <div class="kr-text">Aucun, meme en cas d'escalade Allianz. La responsabilite est portee par l'artisan (decennale), couverte par Allianz (protection juridique), et geree par Kelcare (accompagnement). Leclerc est isole de toute la chaine de responsabilite.</div>
+            </div>
+        </div>
+
+        <div class="footer-note">Kelkun × Kelcare — Preparation rendez-vous Leclerc 31 mars 2026</div>
+    </div>
+
+    <script>
+        function showPhase(n) {
+            document.querySelectorAll('.phase').forEach(function(p, i) {
+                p.classList.toggle('active', i === n);
+            });
+            document.querySelectorAll('.sn-btn').forEach(function(b, i) {
+                b.classList.toggle('active', i === n);
+            });
+        }
+    </script>
+</body>
+</html>

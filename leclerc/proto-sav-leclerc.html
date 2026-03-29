@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelkun × Leclerc — Parcours SAV</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Bricolage+Grotesque:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --kelkun-primary: #00BFA6;
+      --kelkun-primary-dark: #00a891;
+      --kelkun-primary-light: #e6f9f6;
+      --green-500: #10B981;
+      --green-50: #ECFDF5;
+      --red-500: #EF4444;
+      --red-50: #FEF2F2;
+      --yellow-500: #EAB308;
+      --yellow-50: #FEFCE8;
+      --orange-500: #F97316;
+      --orange-50: #FFF7ED;
+      --blue-500: #3B82F6;
+      --blue-50: #EFF6FF;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-300: #D1D5DB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --bg-dark: #0f172a;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: white;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .slides-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      animation: fadeSlideIn 0.4s ease forwards;
+    }
+    .slide.active { display: flex; }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cover slide */
+    .cover-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800;
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .cover-subtitle {
+      font-size: 20px;
+      color: var(--gray-400);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+    .cover-badge {
+      color: var(--kelkun-primary);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .phase-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 560px;
+    }
+    .phase-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .phase-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .pn-red { background: var(--red-500); }
+    .pn-orange { background: var(--orange-500); }
+    .pn-blue { background: var(--blue-500); }
+    .pn-green { background: var(--green-500); }
+    .pn-teal { background: var(--kelkun-primary); }
+    .phase-item-text { font-weight: 500; font-size: 15px; }
+
+    /* Content slides */
+    .slide-header {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: clamp(18px, 2.5vw, 26px);
+      text-align: center;
+      margin-bottom: 24px;
+      max-width: 700px;
+    }
+    .slide-header .num {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      margin-right: 12px;
+    }
+
+    .phone-and-message {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .phone-frame {
+      width: 320px;
+      min-width: 320px;
+      height: 640px;
+      background: white;
+      border-radius: 36px;
+      border: 10px solid #1f2937;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.2);
+      overflow-y: auto;
+      overflow-x: hidden;
+      color: var(--gray-900);
+      position: relative;
+    }
+
+    .phone-header {
+      padding: 16px 16px 20px;
+      color: white;
+      position: relative;
+    }
+    .phone-header::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+    }
+    .phone-header .logo {
+      font-weight: 700;
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+    .phone-header h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+    .phone-header .sub {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+    .header-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+
+    .phone-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border: 1px solid var(--gray-100);
+    }
+    .card-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title .icon-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 13px;
+      border-bottom: 1px solid var(--gray-50);
+    }
+    .card-row:last-child { border-bottom: none; }
+    .card-row .label { color: var(--gray-500); }
+    .card-row .value { font-weight: 600; color: var(--gray-900); }
+
+    .alert-banner {
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 4px 0;
+    }
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 8px 0;
+      position: relative;
+    }
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 3px;
+      position: relative;
+      z-index: 1;
+    }
+    .timeline-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 19px;
+      bottom: -8px;
+      width: 2px;
+      background: var(--gray-200);
+    }
+    .timeline-text {
+      font-size: 13px;
+      color: var(--gray-700);
+    }
+    .timeline-text strong { font-weight: 600; }
+    .timeline-text .dim { color: var(--gray-400); }
+
+    .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: white;
+      text-align: center;
+      cursor: default;
+    }
+
+    .photo-row {
+      display: flex;
+      gap: 8px;
+    }
+    .photo-placeholder {
+      flex: 1;
+      height: 70px;
+      background: var(--gray-100);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-label {
+      font-size: 11px;
+      color: var(--gray-400);
+      font-weight: 500;
+    }
+
+    .stars {
+      display: flex;
+      gap: 4px;
+    }
+    .star {
+      width: 24px;
+      height: 24px;
+      color: var(--yellow-500);
+    }
+    .star.empty { color: var(--gray-300); }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .kpi-box {
+      padding: 10px;
+      border-radius: 8px;
+      background: var(--gray-50);
+      text-align: center;
+    }
+    .kpi-box .kpi-value {
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+    .kpi-box .kpi-label {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    /* Key message */
+    .key-message {
+      max-width: 320px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.04);
+      border-left: 3px solid var(--kelkun-primary);
+      border-radius: 0 12px 12px 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--gray-300);
+      font-style: italic;
+    }
+
+    /* Navigation */
+    .nav-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      transition: background 0.2s;
+    }
+    .nav-arrow:hover { background: rgba(255,255,255,0.15); }
+    .nav-arrow.left { left: 24px; }
+    .nav-arrow.right { right: 24px; }
+    .nav-arrow svg { width: 20px; height: 20px; }
+
+    .dots {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dot.active {
+      background: var(--kelkun-primary);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .phone-and-message {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .key-message { max-width: 320px; }
+      .phone-frame { width: 280px; min-width: 280px; height: 560px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="slides-container">
+
+  <!-- SLIDE 0 — COVER -->
+  <div class="slide active" data-index="0">
+    <div class="cover-badge">KELCARE × LECLERC</div>
+    <h1 class="cover-title">Parcours SAV</h1>
+    <p class="cover-subtitle">Le service apr&egrave;s-vente int&eacute;gr&eacute; — z&eacute;ro charge pour le magasin</p>
+    <div class="phase-list">
+      <div class="phase-item">
+        <div class="phase-num pn-red">1</div>
+        <span class="phase-item-text">Alerte client</span>
+      </div>
+      <div class="phase-item">
+        <div class="phase-num pn-orange">2</div>
+        <span class="phase-item-text">Qualification Kelcare</span>
+      </div>
+      <div class="phase-item">
+        <div class="phase-num pn-blue">3</div>
+        <span class="phase-item-text">Intervention corrective</span>
+      </div>
+      <div class="phase-item">
+        <div class="phase-num pn-green">4</div>
+        <span class="phase-item-text">R&eacute;solution &amp; PV</span>
+      </div>
+      <div class="phase-item">
+        <div class="phase-num pn-teal">5</div>
+        <span class="phase-item-text">Suivi qualit&eacute;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 1 — ALERTE CLIENT -->
+  <div class="slide" data-index="1">
+    <div class="slide-header">
+      <span class="num" style="color:var(--red-500)">1</span>
+      ALERTE CLIENT — Le probl&egrave;me est signal&eacute; en 1 clic
+    </div>
+    <div class="phone-and-message">
+      <div class="phone-frame">
+        <div class="phone-header" style="background:linear-gradient(135deg, var(--red-500), #dc2626);">
+          <div class="logo">kelkun</div>
+          <h2>Signaler un probl&egrave;me</h2>
+          <div class="sub">Mission #2847</div>
+          <span class="header-badge" style="background:rgba(255,255,255,0.2);">Urgent</span>
+        </div>
+        <div class="phone-body">
+          <div class="alert-banner" style="background:var(--red-50); color:var(--red-500);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Fuite d&eacute;tect&eacute;e sur votre installation
+          </div>
+          <div class="card">
+            <div class="card-title">
+              <div class="icon-circle" style="background:var(--blue-50);color:var(--blue-500);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              D&eacute;tails intervention d'origine
+            </div>
+            <div class="card-row"><span class="label">Prestation</span><span class="value">Cumulus Atlantic 200L</span></div>
+            <div class="card-row"><span class="label">Artisan</span><span class="value">Thomas Renard</span></div>
+            <div class="card-row"><span class="label">Date</span><span class="value">25 juin 2026</span></div>
+            <div class="card-row"><span class="label">Probl&egrave;me</span><span class="value" style="color:var(--red-500);">Fuite au raccordement</span></div>
+          </div>
+          <div class="card" style="text-align:center; padding:20px;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gray-300)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            <p style="font-size:12px; color:var(--gray-400); margin-top:8px;">Ajoutez une photo du probl&egrave;me</p>
+          </div>
+          <button class="cta-btn" style="background:var(--red-500);">Envoyer le signalement</button>
+        </div>
+      </div>
+      <div class="key-message">
+        Le client ne retourne <strong>pas</strong> en magasin. Tout se fait depuis son lien de suivi SMS.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 — QUALIFICATION KELCARE -->
+  <div class="slide" data-index="2">
+    <div class="slide-header">
+      <span class="num" style="color:var(--orange-500)">2</span>
+      QUALIFICATION KELCARE — Prise en charge en 15 min
+    </div>
+    <div class="phone-and-message">
+      <div class="phone-frame">
+        <div class="phone-header" style="background:linear-gradient(135deg, var(--kelkun-primary), var(--kelkun-primary-dark));">
+          <div class="logo">kelkun</div>
+          <h2>Ticket SAV</h2>
+          <div class="sub">#SAV-2026-0089</div>
+          <span class="header-badge" style="background:var(--orange-500);">Urgent</span>
+        </div>
+        <div class="phone-body">
+          <div class="card">
+            <div class="card-title">
+              <div class="icon-circle" style="background:var(--kelkun-primary-light);color:var(--kelkun-primary);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              Agent Kelcare assign&eacute;
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 0;">
+              <div style="width:40px;height:40px;border-radius:50%;background:var(--kelkun-primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">ED</div>
+              <div>
+                <div style="font-weight:600;font-size:14px;">&Eacute;lodie D.</div>
+                <div style="font-size:12px;color:var(--gray-500);">Appel dans 12 minutes</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">
+              <div class="icon-circle" style="background:var(--green-50);color:var(--green-500);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              Qualification automatique
+            </div>
+            <div class="card-row"><span class="label">Cat&eacute;gorie</span><span class="value" style="color:var(--green-500);">Plomberie &#10003;</span></div>
+            <div class="card-row"><span class="label">Urgence</span><span class="value" style="color:var(--orange-500);">Haute (fuite active)</span></div>
+            <div class="card-row"><span class="label">Garantie</span><span class="value" style="color:var(--green-500);">Applicable (&lt; 30 jours) &#10003;</span></div>
+            <div class="card-row"><span class="label">SLA</span><span class="value">Intervention sous 24h</span></div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="margin-bottom:4px;">Progression</div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot" style="background:var(--green-500);"></div>
+                <div class="timeline-text"><strong>Signalement re&ccedil;u</strong> <span class="dim">10h12</span></div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot" style="background:var(--orange-500);animation:pulse 1.5s infinite;"></div>
+                <div class="timeline-text"><strong>Qualification</strong> <span class="dim">En cours</span></div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot" style="background:var(--gray-300);"></div>
+                <div class="timeline-text"><span class="dim">Contact artisan</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="key-message">
+        Kelcare qualifie automatiquement l'urgence et contacte l'artisan d'origine. Le magasin <strong>n'est pas sollicit&eacute;</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 — INTERVENTION CORRECTIVE -->
+  <div class="slide" data-index="3">
+    <div class="slide-header">
+      <span class="num" style="color:var(--blue-500)">3</span>
+      INTERVENTION CORRECTIVE — L'artisan d'origine reprend la main
+    </div>
+    <div class="phone-and-message">
+      <div class="phone-frame">
+        <div class="phone-header" style="background:linear-gradient(135deg, var(--kelkun-primary), var(--kelkun-primary-dark));">
+          <div class="logo">kelkun</div>
+          <h2>Intervention SAV</h2>
+          <div class="sub">Mission #2847</div>
+          <span class="header-badge" style="background:var(--blue-500);">Planifi&eacute;e</span>
+        </div>
+        <div class="phone-body">
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:12px;padding:4px 0 12px;">
+              <div style="width:44px;height:44px;border-radius:50%;background:var(--gray-200);overflow:hidden;display:flex;align-items:center;justify-content:center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div style="flex:1;">
+                <div style="font-weight:600;font-size:14px;">Thomas Renard</div>
+                <div style="font-size:12px;color:var(--gray-500);">Plombier — Artisan d'origine</div>
+                <div style="font-size:12px;color:var(--kelkun-primary);font-weight:500;">Priorit&eacute; automatique</div>
+              </div>
+              <span style="background:var(--kelkun-primary-light);color:var(--kelkun-primary);padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600;">V&eacute;rifi&eacute;</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-500);">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--yellow-500)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              4.8/5 &middot; V&eacute;rifi&eacute; Kelkun
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">
+              <div class="icon-circle" style="background:var(--blue-50);color:var(--blue-500);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              D&eacute;tails intervention
+            </div>
+            <div class="card-row"><span class="label">Date</span><span class="value">Vendredi 28 juin — 9h00</span></div>
+            <div class="card-row"><span class="label">Type</span><span class="value">Corrective (garantie)</span></div>
+            <div class="card-row"><span class="label">Diagnostic</span><span class="value">Raccord desserr&eacute;</span></div>
+            <div class="card-row"><span class="label">Dur&eacute;e</span><span class="value">1h estim&eacute;e</span></div>
+            <div class="card-row"><span class="label">Co&ucirc;t client</span><span class="value" style="color:var(--green-500);">0 &euro; (garantie)</span></div>
+          </div>
+          <div class="alert-banner" style="background:var(--green-50);color:var(--green-500);">
+            <span style="width:10px;height:10px;border-radius:50%;background:var(--green-500);animation:pulse 1.5s infinite;display:inline-block;flex-shrink:0;"></span>
+            Thomas est en route
+          </div>
+        </div>
+      </div>
+      <div class="key-message">
+        L'artisan d'origine est automatiquement recontact&eacute;. Intervention <strong>gratuite sous garantie</strong>. Le magasin n'intervient pas.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 — RÉSOLUTION -->
+  <div class="slide" data-index="4">
+    <div class="slide-header">
+      <span class="num" style="color:var(--green-500)">4</span>
+      R&Eacute;SOLUTION — Probl&egrave;me r&eacute;solu, PV g&eacute;n&eacute;r&eacute;
+    </div>
+    <div class="phone-and-message">
+      <div class="phone-frame">
+        <div class="phone-header" style="background:linear-gradient(135deg, var(--green-500), #059669);">
+          <div class="logo">kelkun</div>
+          <h2>Probl&egrave;me r&eacute;solu</h2>
+          <div class="sub">Ticket #SAV-2026-0089</div>
+          <span class="header-badge" style="background:rgba(255,255,255,0.2);">R&eacute;solu</span>
+        </div>
+        <div class="phone-body">
+          <div style="display:flex;gap:8px;">
+            <div style="flex:1;">
+              <p style="font-size:11px;font-weight:600;color:var(--gray-500);margin-bottom:4px;">Avant</p>
+              <div class="photo-placeholder" style="background:var(--red-50);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red-300)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              </div>
+            </div>
+            <div style="flex:1;">
+              <p style="font-size:11px;font-weight:600;color:var(--gray-500);margin-bottom:4px;">Apr&egrave;s</p>
+              <div class="photo-placeholder" style="background:var(--green-50);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green-400)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">
+              <div class="icon-circle" style="background:var(--green-50);color:var(--green-500);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              PV de chantier SAV
+            </div>
+            <div class="card-row"><span class="label">Diagnostic</span><span class="value">Raccord desserr&eacute;</span></div>
+            <div class="card-row"><span class="label">Action</span><span class="value">Resserrage + test &eacute;tanch&eacute;it&eacute;</span></div>
+            <div class="card-row"><span class="label">R&eacute;sultat</span><span class="value" style="color:var(--green-500);">Conforme</span></div>
+            <div class="card-row"><span class="label">Dur&eacute;e</span><span class="value">45 min</span></div>
+            <div class="card-row"><span class="label">Co&ucirc;t</span><span class="value" style="color:var(--green-500);">0 &euro; (garantie)</span></div>
+          </div>
+          <div class="alert-banner" style="background:var(--green-50);color:var(--green-500);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Sign&eacute; par Mme Martin — 28/06/2026
+          </div>
+        </div>
+      </div>
+      <div class="key-message">
+        PV horodat&eacute; avec photos avant/apr&egrave;s. Tra&ccedil;abilit&eacute; compl&egrave;te <strong>sans paperasse magasin</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 — SUIVI QUALITÉ -->
+  <div class="slide" data-index="5">
+    <div class="slide-header">
+      <span class="num" style="color:var(--kelkun-primary)">5</span>
+      SUIVI QUALIT&Eacute; — Satisfaction mesur&eacute;e, magasin inform&eacute;
+    </div>
+    <div class="phone-and-message">
+      <div class="phone-frame">
+        <div class="phone-header" style="background:linear-gradient(135deg, var(--kelkun-primary), var(--kelkun-primary-dark));">
+          <div class="logo">kelkun</div>
+          <h2>Ticket cl&ocirc;tur&eacute;</h2>
+          <div class="sub">#SAV-2026-0089</div>
+          <span class="header-badge" style="background:var(--green-500);">R&eacute;solu</span>
+        </div>
+        <div class="phone-body">
+          <div class="card" style="text-align:center;">
+            <p style="font-size:13px;font-weight:500;color:var(--gray-500);margin-bottom:8px;">Comment s'est pass&eacute;e l'intervention SAV ?</p>
+            <div class="stars" style="justify-content:center;">
+              <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star empty" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p style="font-size:13px;color:var(--gray-600);margin-top:8px;font-style:italic;">"Rapide et efficace, merci !"</p>
+          </div>
+          <div class="card">
+            <div class="card-title">
+              <div class="icon-circle" style="background:var(--blue-50);color:var(--blue-500);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+              </div>
+              KPIs magasin (dashboard)
+            </div>
+            <div class="kpi-grid">
+              <div class="kpi-box">
+                <div class="kpi-value" style="color:var(--kelkun-primary);">26h</div>
+                <div class="kpi-label">R&eacute;solution</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-value" style="color:var(--yellow-500);">4/5</div>
+                <div class="kpi-label">Satisfaction</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-value" style="color:var(--green-500);">0 &euro;</div>
+                <div class="kpi-label">Co&ucirc;t magasin</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-value" style="color:var(--blue-500);">Cl&ocirc;tur&eacute;</div>
+                <div class="kpi-label">Statut</div>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="border:1px solid var(--blue-50);">
+            <div class="card-title">
+              <div class="icon-circle" style="background:var(--blue-50);color:var(--blue-500);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              Protection Allianz
+            </div>
+            <p style="font-size:12px;color:var(--gray-500);margin-bottom:6px;">En cas de d&eacute;g&acirc;ts mat&eacute;riels — couverture jusqu'&agrave; 10 000 &euro; TTC</p>
+            <div class="alert-banner" style="background:var(--green-50);color:var(--green-500);font-size:12px;">
+              Non applicable — aucun d&eacute;g&acirc;t constat&eacute;
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="key-message">
+        Le magasin re&ccedil;oit un rapport automatique. <strong>Z&eacute;ro intervention, z&eacute;ro responsabilit&eacute;, z&eacute;ro co&ucirc;t.</strong>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav-arrow left" onclick="navigate(-1)">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+</div>
+<div class="nav-arrow right" onclick="navigate(1)">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+</div>
+<div class="dots" id="dots"></div>
+
+<style>
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+</style>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  let current = 0;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(index) {
+    if (index < 0 || index >= slides.length) return;
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+  }
+
+  function navigate(dir) { goTo(current + dir); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigate(-1);
+  });
+</script>
+
+</body>
+</html>

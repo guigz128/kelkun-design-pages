@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelkun x Leclerc — Optimisations produit</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Bricolage+Grotesque:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #00BFA6;
+      --primary-dark: #00a891;
+      --primary-light: #e6f9f6;
+      --green: #10B981;
+      --green-light: #ECFDF5;
+      --red: #EF4444;
+      --red-light: #FEF2F2;
+      --yellow: #EAB308;
+      --yellow-light: #FEFCE8;
+      --orange: #F97316;
+      --orange-light: #FFF7ED;
+      --blue: #3B82F6;
+      --blue-light: #EFF6FF;
+      --purple: #8B5CF6;
+      --purple-light: #F5F3FF;
+      --g50: #F9FAFB; --g100: #F3F4F6; --g200: #E5E7EB; --g300: #D1D5DB;
+      --g400: #9CA3AF; --g500: #6B7280; --g600: #4B5563; --g700: #374151; --g900: #111827;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: #0f172a;
+      color: white;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .slides-container { position: relative; width: 100vw; height: 100vh; }
+
+    .slide {
+      position: absolute; inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .slide.active { display: flex; animation: fadeIn 0.4s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* Slide header */
+    .slide-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 12px;
+    }
+    .slide-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700; font-size: clamp(18px, 2.5vw, 26px);
+      text-align: center; margin-bottom: 6px; max-width: 700px;
+    }
+    .slide-subtitle {
+      font-size: 14px; color: var(--g400); text-align: center; margin-bottom: 24px; max-width: 500px;
+    }
+
+    /* Layout */
+    .phone-and-msg { display: flex; align-items: center; gap: 36px; }
+
+    /* Phone */
+    .phone {
+      width: 320px; min-width: 320px; height: 640px;
+      background: white; border-radius: 36px; border: 10px solid #1f2937;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.2);
+      overflow-y: auto; overflow-x: hidden;
+      color: var(--g900); position: relative;
+    }
+    .phone::-webkit-scrollbar { width: 0; }
+
+    .ph {
+      padding: 16px 16px 20px; color: white; position: relative; overflow: hidden;
+    }
+    .ph::before {
+      content: ''; position: absolute; top: -30px; right: -30px;
+      width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1);
+    }
+    .ph .logo { font-weight: 700; font-size: 13px; opacity: .9; margin-bottom: 6px; }
+    .ph h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 17px; margin-bottom: 2px; }
+    .ph .sub { font-size: 12px; opacity: .85; }
+    .ph-badge {
+      position: absolute; top: 14px; right: 14px;
+      padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 600;
+      background: rgba(255,255,255,.2);
+    }
+
+    .pb { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+
+    .card {
+      background: white; border-radius: 12px; padding: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05); border: 1px solid var(--g100);
+    }
+    .ct {
+      font-weight: 600; font-size: 13px; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .ic {
+      width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .cr {
+      display: flex; justify-content: space-between; padding: 5px 0;
+      font-size: 12px; border-bottom: 1px solid var(--g50);
+    }
+    .cr:last-child { border-bottom: none; }
+    .cr .l { color: var(--g500); }
+    .cr .v { font-weight: 600; }
+
+    .btn {
+      display: block; width: 100%; padding: 12px; border: none; border-radius: 10px;
+      font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 13px;
+      color: white; text-align: center; cursor: default;
+    }
+
+    /* Key message */
+    .km {
+      max-width: 300px; padding: 18px 20px;
+      background: rgba(255,255,255,.04);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 10px 10px 0;
+      font-size: 13px; line-height: 1.6; color: var(--g300); font-style: italic;
+    }
+    .km strong { color: white; }
+
+    /* Progress bar */
+    .progress-row {
+      display: flex; align-items: center; gap: 6px; padding: 6px 0;
+    }
+    .progress-bar {
+      flex: 1; height: 6px; background: var(--g100); border-radius: 3px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 3px; transition: width 0.3s;
+    }
+    .progress-label { font-size: 11px; font-weight: 600; }
+
+    /* Tier badges */
+    .tier-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tier {
+      padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 600;
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    /* Timeline */
+    .tl-item {
+      display: flex; gap: 10px; padding: 6px 0; position: relative;
+    }
+    .tl-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 3px;
+      position: relative; z-index: 1;
+    }
+    .tl-item:not(:last-child)::before {
+      content: ''; position: absolute; left: 4px; top: 17px; bottom: -6px;
+      width: 2px; background: var(--g200);
+    }
+    .tl-text { font-size: 12px; color: var(--g700); }
+    .tl-text .dim { color: var(--g400); }
+
+    /* KPI grid */
+    .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .kpi {
+      padding: 10px; border-radius: 8px; background: var(--g50); text-align: center;
+    }
+    .kpi .n {
+      font-size: 18px; font-weight: 700;
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+    .kpi .lb { font-size: 10px; color: var(--g500); margin-top: 2px; }
+
+    /* Toggle */
+    .toggle-card {
+      background: white; border-radius: 10px; padding: 12px;
+      display: flex; align-items: center; gap: 10px;
+      border: 2px solid transparent; cursor: pointer; transition: all .2s;
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    }
+    .toggle-card.on { border-color: var(--primary); background: #F0FDFA; }
+    .toggle-card .info { flex: 1; }
+    .toggle-card .info strong { font-size: 12px; display: block; color: var(--g900); }
+    .toggle-card .info span { font-size: 11px; color: var(--g400); }
+    .toggle-card .price { font-size: 13px; font-weight: 700; white-space: nowrap; }
+    .toggle-card.on .price { color: var(--primary); }
+    .toggle-card:not(.on) .price { color: var(--g400); }
+    .tg-track {
+      width: 36px; height: 20px; border-radius: 10px;
+      background: var(--g300); position: relative; flex-shrink: 0; transition: background .2s;
+    }
+    .tg-track::after {
+      content: ''; position: absolute; top: 2px; left: 2px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: white; box-shadow: 0 1px 2px rgba(0,0,0,.15); transition: transform .2s;
+    }
+    .toggle-card.on .tg-track { background: var(--primary); }
+    .toggle-card.on .tg-track::after { transform: translateX(16px); }
+
+    /* Stars */
+    .stars { display: flex; gap: 3px; }
+    .star { width: 20px; height: 20px; }
+    .star.on { color: var(--yellow); }
+    .star.off { color: var(--g300); }
+
+    /* Kiosk special */
+    .kiosk-frame {
+      width: 480px; min-width: 480px; height: 600px;
+      background: white; border-radius: 24px; border: 8px solid #1f2937;
+      box-shadow: 0 20px 80px rgba(0,0,0,.2);
+      overflow-y: auto; color: var(--g900);
+    }
+    .kiosk-frame::-webkit-scrollbar { width: 0; }
+
+    /* Subscription card */
+    .plan-card {
+      background: white; border-radius: 14px; padding: 20px;
+      border: 2px solid var(--primary); position: relative; overflow: hidden;
+    }
+    .plan-card::before {
+      content: 'POPULAIRE'; position: absolute; top: 12px; right: -28px;
+      background: var(--primary); color: white; font-size: 9px; font-weight: 700;
+      padding: 3px 30px; transform: rotate(45deg); letter-spacing: 1px;
+    }
+    .plan-price {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 32px; font-weight: 800; color: var(--primary);
+    }
+    .plan-price span { font-size: 14px; font-weight: 500; color: var(--g500); }
+    .plan-feature {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; padding: 6px 0; color: var(--g700);
+    }
+    .plan-feature svg { color: var(--primary); flex-shrink: 0; }
+
+    /* Nav */
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+      color: white; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 100; transition: background .2s;
+    }
+    .nav-arrow:hover { background: rgba(255,255,255,.15); }
+    .nav-arrow.left { left: 20px; }
+    .nav-arrow.right { right: 20px; }
+    .nav-arrow svg { width: 18px; height: 18px; }
+
+    .dots {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 6px; z-index: 100;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.2); cursor: pointer; transition: all .2s;
+    }
+    .dot.active { background: var(--primary); width: 24px; border-radius: 4px; }
+
+    @media (max-width: 900px) {
+      .phone-and-msg { flex-direction: column; gap: 16px; }
+      .km { max-width: 320px; }
+      .phone { width: 280px; min-width: 280px; height: 560px; }
+      .kiosk-frame { width: 340px; min-width: 340px; height: 500px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="slides-container">
+
+<!-- ============================================================
+     SLIDE 0 — COVER
+     ============================================================ -->
+<div class="slide active" data-index="0">
+  <div class="slide-tag" style="background:var(--primary);color:white;">KELKUN x LECLERC</div>
+  <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(40px,5vw,64px);text-align:center;margin-bottom:12px;">Optimisations produit</h1>
+  <p style="font-size:18px;color:var(--g400);text-align:center;margin-bottom:48px;max-width:550px;">7 innovations cross-industrie pour diff&#233;rencier l'offre Leclerc</p>
+  <div style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:520px;">
+    <div style="display:flex;gap:10px;">
+      <span class="slide-tag" style="background:var(--primary);color:white;">TIER 1</span>
+      <span style="font-size:14px;color:var(--g300);padding-top:4px;">Cashback progressif &middot; Maintenance pr&#233;dictive</span>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <span class="slide-tag" style="background:var(--blue);color:white;">TIER 2</span>
+      <span style="font-size:14px;color:var(--g300);padding-top:4px;">Cross-sell sur devis &middot; Packs multi-m&#233;tiers</span>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <span class="slide-tag" style="background:var(--purple);color:white;">TIER 3</span>
+      <span style="font-size:14px;color:var(--g300);padding-top:4px;">Borne kiosk &middot; Carnet de Maison &middot; Abonnement</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 1 — TIER 1 : CASHBACK PROGRESSIF (Duolingo/Gaming)
+     ============================================================ -->
+<div class="slide" data-index="1">
+  <div class="slide-tag" style="background:var(--primary);color:white;">TIER 1 &middot; FIDELISATION</div>
+  <div class="slide-title">Cashback progressif &amp; statut client</div>
+  <div class="slide-subtitle">Inspir&#233; de Duolingo, Starbucks Rewards, Nike Run Club</div>
+  <div class="phone-and-msg">
+    <div class="phone">
+      <div class="ph" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));">
+        <div class="logo">kelkun</div>
+        <h2>Mon programme fid&#233;lit&#233;</h2>
+        <div class="sub">Leclerc Bordeaux</div>
+      </div>
+      <div class="pb">
+        <!-- Statut actuel -->
+        <div class="card">
+          <div class="ct">
+            <div class="ic" style="background:var(--yellow-light);color:var(--yellow);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            Votre statut
+          </div>
+          <div style="text-align:center;padding:4px 0 8px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;color:var(--primary);">Client Fid&#232;le</div>
+            <div style="font-size:11px;color:var(--g400);margin-top:2px;">3 interventions r&#233;alis&#233;es</div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-bar"><div class="progress-fill" style="width:75%;background:var(--primary);"></div></div>
+            <div class="progress-label" style="color:var(--primary);">3/4</div>
+          </div>
+          <div style="font-size:11px;color:var(--g400);text-align:center;">Encore 1 intervention pour le statut <strong style="color:var(--yellow);">Gold</strong></div>
+        </div>
+
+        <!-- Paliers -->
+        <div class="card">
+          <div class="ct">
+            <div class="ic" style="background:var(--primary-light);color:var(--primary);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+            </div>
+            Paliers cashback
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--g50);border-radius:8px;opacity:.6;">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--g300);"></div>
+              <span style="flex:1;font-size:12px;">D&#233;couverte</span>
+              <span style="font-size:12px;font-weight:700;">3%</span>
+              <span style="font-size:10px;color:var(--g400);">1re intervention</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--primary-light);border-radius:8px;border:1px solid var(--primary);">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--primary);"></div>
+              <span style="flex:1;font-size:12px;font-weight:600;color:var(--primary);">Fid&#232;le</span>
+              <span style="font-size:12px;font-weight:700;color:var(--primary);">5%</span>
+              <span style="font-size:10px;color:var(--primary);">Actuel</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--yellow-light);border-radius:8px;opacity:.7;">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--yellow);"></div>
+              <span style="flex:1;font-size:12px;">Gold</span>
+              <span style="font-size:12px;font-weight:700;">7%</span>
+              <span style="font-size:10px;color:var(--g400);">4+ interventions</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Solde cashback -->
+        <div class="card" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;border:none;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-size:11px;opacity:.85;">Votre solde cashback</div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:28px;">67,40 &#8364;</div>
+              <div style="font-size:11px;opacity:.7;">Bons d'achat Leclerc</div>
+            </div>
+            <div style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+            </div>
+          </div>
+          <button class="btn" style="background:white;color:var(--primary);margin-top:10px;font-size:12px;">Utiliser mes bons en magasin</button>
+        </div>
+      </div>
+    </div>
+    <div class="km">
+      Mod&#232;le <strong>Duolingo / Starbucks</strong> : la progression par paliers cr&#233;e un engagement r&#233;current. Le client revient en magasin d&#233;penser son cr&#233;dit <strong>ET</strong> rebooker un service. Churn r&#233;duit de 21% chez Duolingo gr&#226;ce aux streaks.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 2 — TIER 1 : MAINTENANCE PREDICTIVE (Lowe's HomeCare+)
+     ============================================================ -->
+<div class="slide" data-index="2">
+  <div class="slide-tag" style="background:var(--primary);color:white;">TIER 1 &middot; R&#201;CURRENCE</div>
+  <div class="slide-title">Rappels maintenance pr&#233;dictifs</div>
+  <div class="slide-subtitle">Inspir&#233; de Lowe's HomeCare+, Feu Vert Contrat Entretien, Tesla Service</div>
+  <div class="phone-and-msg">
+    <div class="phone">
+      <div class="ph" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));">
+        <div class="logo">kelkun</div>
+        <h2>Entretien programm&#233;</h2>
+        <div class="sub">Vos &#233;quipements install&#233;s</div>
+      </div>
+      <div class="pb">
+        <!-- Rappel urgent -->
+        <div class="card" style="border-left:3px solid var(--orange);">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <div>
+              <div style="font-size:10px;font-weight:600;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;">Rappel &middot; Sous 30 jours</div>
+              <div style="font-weight:700;font-size:14px;margin-top:4px;">D&#233;tartrage cumulus</div>
+              <div style="font-size:11px;color:var(--g400);margin-top:2px;">Atlantic 200L &middot; Install&#233; le 15/04/2025</div>
+            </div>
+            <div class="ic" style="background:var(--orange-light);color:var(--orange);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;">
+            <button class="btn" style="background:var(--primary);flex:1;font-size:11px;padding:10px;">R&#233;server un artisan</button>
+            <button class="btn" style="background:var(--g100);color:var(--g600);flex:0;padding:10px 14px;font-size:11px;">Reporter</button>
+          </div>
+        </div>
+
+        <!-- Rappel futur -->
+        <div class="card" style="border-left:3px solid var(--blue);opacity:.75;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <div>
+              <div style="font-size:10px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;">Planifi&#233; &middot; Avril 2027</div>
+              <div style="font-weight:700;font-size:14px;margin-top:4px;">Contr&#244;le groupe de s&#233;curit&#233;</div>
+              <div style="font-size:11px;color:var(--g400);margin-top:2px;">Cumulus Atlantic 200L</div>
+            </div>
+            <div class="ic" style="background:var(--blue-light);color:var(--blue);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rappel futur 2 -->
+        <div class="card" style="border-left:3px solid var(--g300);opacity:.5;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <div>
+              <div style="font-size:10px;font-weight:600;color:var(--g400);text-transform:uppercase;letter-spacing:.5px;">Planifi&#233; &middot; Juin 2027</div>
+              <div style="font-weight:700;font-size:14px;margin-top:4px;">V&#233;rification joints cuisine</div>
+              <div style="font-size:11px;color:var(--g400);margin-top:2px;">Cuisine Leclerc &middot; Install&#233;e le 10/06/2026</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coupon -->
+        <div style="background:var(--yellow-light);border-radius:10px;padding:12px;display:flex;align-items:center;gap:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--yellow);display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:600;color:var(--g900);">-15% sur votre entretien</div>
+            <div style="font-size:11px;color:var(--g500);">Coupon Leclerc inclus avec le rappel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="km">
+      <strong>Lowe's HomeCare+</strong> lanc&#233; en mars 2026 : abonnement maintenance avec visites programm&#233;es. Cr&#233;e du <strong>revenu r&#233;current</strong> &#224; partir d'une vente one-shot. Chaque rappel est une opportunit&#233; de rebooking + coupon magasin.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 3 — TIER 2 : CROSS-SELL SUR DEVIS (Quick Commerce)
+     ============================================================ -->
+<div class="slide" data-index="3">
+  <div class="slide-tag" style="background:var(--blue);color:white;">TIER 2 &middot; PANIER MOYEN</div>
+  <div class="slide-title">Cross-sell services sur le devis</div>
+  <div class="slide-subtitle">Inspir&#233; d'Amazon &laquo; Frequently bought together &raquo;, Gorillas, Deliveroo</div>
+  <div class="phone-and-msg">
+    <div class="phone">
+      <div class="ph" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));">
+        <div class="logo">kelkun</div>
+        <h2>Devis #DV-2026-0891</h2>
+        <div class="sub">Cumulus Atlantic 200L</div>
+        <span class="ph-badge">Accept&#233;</span>
+      </div>
+      <div class="pb">
+        <div class="card">
+          <div class="ct">
+            <div class="ic" style="background:var(--green-light);color:var(--green);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            Pose cumulus — 605 &#8364; TTC
+          </div>
+          <div class="cr"><span class="l">D&#233;pose ancien</span><span class="v">150 &#8364;</span></div>
+          <div class="cr"><span class="l">Installation</span><span class="v">320 &#8364;</span></div>
+          <div class="cr"><span class="l">Raccordements</span><span class="v">80 &#8364;</span></div>
+          <div class="cr"><span class="l">TVA 10%</span><span class="v">55 &#8364;</span></div>
+        </div>
+
+        <div style="font-size:12px;font-weight:600;color:var(--g700);display:flex;align-items:center;gap:6px;">
+          <div class="ic" style="background:var(--yellow-light);color:var(--yellow);width:22px;height:22px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+          </div>
+          Clients ayant install&#233; un cumulus ont aussi demand&#233; :
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div class="toggle-card on" onclick="tog(this)" data-price="95">
+            <div class="info"><strong>V&#233;rification tableau &#233;lectrique</strong><span>Conformit&#233; NF C 15-100</span></div>
+            <div class="price">95 &#8364;</div>
+            <div class="tg-track"></div>
+          </div>
+          <div class="toggle-card on" onclick="tog(this)" data-price="65">
+            <div class="info"><strong>Isolation tuyauterie</strong><span>Calorifuge cuivre</span></div>
+            <div class="price">65 &#8364;</div>
+            <div class="tg-track"></div>
+          </div>
+          <div class="toggle-card" onclick="tog(this)" data-price="45">
+            <div class="info"><strong>Thermostat connect&#233;</strong><span>Pose + configuration</span></div>
+            <div class="price" style="color:var(--g400);">45 &#8364;</div>
+            <div class="tg-track"></div>
+          </div>
+        </div>
+
+        <div style="background:var(--g50);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;font-size:13px;">
+          <span style="color:var(--g500);">Total avec services</span>
+          <strong id="crossTotal" style="color:var(--primary);">765 &#8364;</strong>
+        </div>
+      </div>
+    </div>
+    <div class="km">
+      Amazon g&#233;n&#232;re <strong>35% de son CA</strong> via &laquo; Frequently bought together &raquo;. Le cross-sell sur le devis (pas apr&#232;s le paiement) capture l'intention au moment o&#249; la volont&#233; de d&#233;penser est maximale.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 4 — TIER 2 : PACKS MULTI-METIERS (Airbnb Experiences)
+     ============================================================ -->
+<div class="slide" data-index="4">
+  <div class="slide-tag" style="background:var(--blue);color:white;">TIER 2 &middot; HIGH TICKET</div>
+  <div class="slide-title">Packs multi-m&#233;tiers coordonn&#233;s</div>
+  <div class="slide-subtitle">Inspir&#233; d'Airbnb Experiences, IKEA Kitchen Install, g&#233;n&#233;ral contractor US</div>
+  <div class="phone-and-msg">
+    <div class="phone">
+      <div class="ph" style="background:linear-gradient(135deg,#1c61c5,#1a4f9e);">
+        <div class="logo">kelkun</div>
+        <h2>Pack Pose Cuisine</h2>
+        <div class="sub">Leclerc Bordeaux &middot; Cuisine Loft ch&#234;ne</div>
+        <span class="ph-badge">Premium</span>
+      </div>
+      <div class="pb">
+        <div class="card">
+          <div class="ct">
+            <div class="ic" style="background:var(--blue-light);color:var(--blue);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            3 artisans coordonn&#233;s, 1 chef de projet
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:32px;height:32px;border-radius:8px;background:var(--orange-light);display:flex;align-items:center;justify-content:center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              </div>
+              <div style="flex:1;"><strong style="font-size:12px;">Poseur cuisine</strong><br><span style="font-size:11px;color:var(--g400);">Luc M. &middot; 4.9/5</span></div>
+              <span style="font-size:11px;color:var(--green);font-weight:600;">Confirm&#233;</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:32px;height:32px;border-radius:8px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div style="flex:1;"><strong style="font-size:12px;">&#201;lectricien</strong><br><span style="font-size:11px;color:var(--g400);">Thomas R. &middot; 4.8/5</span></div>
+              <span style="font-size:11px;color:var(--green);font-weight:600;">Confirm&#233;</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:32px;height:32px;border-radius:8px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M2 12h20"/></svg>
+              </div>
+              <div style="flex:1;"><strong style="font-size:12px;">Plombier</strong><br><span style="font-size:11px;color:var(--g400);">Marc D. &middot; 4.7/5</span></div>
+              <span style="font-size:11px;color:var(--yellow);font-weight:600;">En attente</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ct">
+            <div class="ic" style="background:var(--green-light);color:var(--green);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+            </div>
+            Planning coordonn&#233;
+          </div>
+          <div class="cr"><span class="l">Sem. 1 — Lun-Mar</span><span class="v">Pose meubles</span></div>
+          <div class="cr"><span class="l">Sem. 1 — Mer</span><span class="v">Plomberie</span></div>
+          <div class="cr"><span class="l">Sem. 1 — Jeu</span><span class="v">&#201;lectricit&#233;</span></div>
+          <div class="cr"><span class="l">Sem. 2 — Lun</span><span class="v">Finitions + PV</span></div>
+        </div>
+
+        <div style="background:var(--g50);border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:11px;color:var(--g400);">Devis global tout compris</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;color:var(--g900);">3 450 &#8364; <span style="font-size:13px;font-weight:400;color:var(--g400);">TTC</span></div>
+          <div style="font-size:11px;color:var(--green);font-weight:500;margin-top:2px;">Garantie Allianz 10 000 &#8364; incluse</div>
+        </div>
+      </div>
+    </div>
+    <div class="km">
+      Mod&#232;le <strong>Airbnb Experiences</strong> : un prix unique, un planning, un interlocuteur. Le client ne coordonne rien. Cible les cat&#233;gories <strong>les plus rentables</strong> de Leclerc (cuisine, SDB). Kelkun devient g&#233;n&#233;ral contractor.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 5 — TIER 3 : BORNE KIOSK (Apple Store)
+     ============================================================ -->
+<div class="slide" data-index="5">
+  <div class="slide-tag" style="background:var(--purple);color:white;">TIER 3 &middot; IN-STORE</div>
+  <div class="slide-title">Borne interactive en rayon</div>
+  <div class="slide-subtitle">Inspir&#233; d'Apple Store, McDonald's kiosk, Carglass diagnostic</div>
+  <div class="phone-and-msg">
+    <div class="kiosk-frame">
+      <div style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));padding:24px 28px;color:white;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.08);"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-size:13px;opacity:.85;">Rayon plomberie &middot; Leclerc Bordeaux</div>
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;margin-top:4px;">Besoin d'un artisan ?</div>
+            <div style="font-size:13px;opacity:.8;margin-top:2px;">Obtenez une estimation en 30 secondes</div>
+          </div>
+          <div style="font-weight:700;font-size:15px;opacity:.9;">kelkun</div>
+        </div>
+      </div>
+      <div style="padding:20px;display:flex;flex-direction:column;gap:16px;">
+        <div style="font-weight:600;font-size:14px;color:var(--g900);">Quel produit avez-vous achet&#233; ?</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+          <div style="background:var(--primary-light);border:2px solid var(--primary);border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" style="margin:0 auto 6px;display:block;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>
+            <div style="font-size:12px;font-weight:600;color:var(--primary);">Cumulus</div>
+          </div>
+          <div style="background:white;border:2px solid var(--g200);border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--g400)" stroke-width="1.5" style="margin:0 auto 6px;display:block;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <div style="font-size:12px;font-weight:600;color:var(--g700);">Cuisine</div>
+          </div>
+          <div style="background:white;border:2px solid var(--g200);border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--g400)" stroke-width="1.5" style="margin:0 auto 6px;display:block;"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <div style="font-size:12px;font-weight:600;color:var(--g700);">&#201;lectrom&#233;nager</div>
+          </div>
+          <div style="background:white;border:2px solid var(--g200);border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--g400)" stroke-width="1.5" style="margin:0 auto 6px;display:block;"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            <div style="font-size:12px;font-weight:600;color:var(--g700);">Carrelage</div>
+          </div>
+          <div style="background:white;border:2px solid var(--g200);border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--g400)" stroke-width="1.5" style="margin:0 auto 6px;display:block;"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/></svg>
+            <div style="font-size:12px;font-weight:600;color:var(--g700);">Climatisation</div>
+          </div>
+          <div style="background:white;border:2px solid var(--g200);border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--g400)" stroke-width="1.5" style="margin:0 auto 6px;display:block;"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            <div style="font-size:12px;font-weight:600;color:var(--g700);">Autre</div>
+          </div>
+        </div>
+
+        <div style="background:var(--primary-light);border-radius:12px;padding:16px;">
+          <div style="font-weight:700;font-size:15px;color:var(--g900);margin-bottom:4px;">Cumulus s&#233;lectionn&#233;</div>
+          <div style="font-size:12px;color:var(--g500);margin-bottom:12px;">Estimation pour votre d&#233;partement (33)</div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:28px;color:var(--primary);">480 — 650 &#8364;</div>
+            <span style="font-size:12px;color:var(--g400);">TTC</span>
+          </div>
+          <div style="font-size:11px;color:var(--g500);margin-top:4px;">Artisan disponible sous 48h</div>
+        </div>
+
+        <div style="text-align:center;padding:8px;">
+          <div style="width:100px;height:100px;background:var(--g100);border-radius:12px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--g300)" stroke-width="1"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </div>
+          <div style="font-size:13px;font-weight:600;color:var(--primary);">Scannez ce QR pour continuer sur votre t&#233;l&#233;phone</div>
+        </div>
+      </div>
+    </div>
+    <div class="km">
+      Mod&#232;le <strong>Apple Store / McDonald's kiosk</strong> : le client self-serve en 30 secondes sans solliciter un vendeur. McDonald's a mesur&#233; <strong>+20-30% de ticket moyen</strong> via ses bornes. Capture les clients qui ne scannent pas les QR en rayon.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 6 — TIER 3 : CARNET DE MAISON (Digital Twin)
+     ============================================================ -->
+<div class="slide" data-index="6">
+  <div class="slide-tag" style="background:var(--purple);color:white;">TIER 3 &middot; LOCK-IN</div>
+  <div class="slide-title">Carnet de Maison digital</div>
+  <div class="slide-subtitle">Inspir&#233; du Digital Twin, Tesla Service History, Apple Health</div>
+  <div class="phone-and-msg">
+    <div class="phone">
+      <div class="ph" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));">
+        <div class="logo">kelkun</div>
+        <h2>Ma Maison</h2>
+        <div class="sub">14 rue des Lilas, Bordeaux</div>
+      </div>
+      <div class="pb">
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="n" style="color:var(--primary);">4</div>
+            <div class="lb">Interventions</div>
+          </div>
+          <div class="kpi">
+            <div class="n" style="color:var(--green);">2</div>
+            <div class="lb">Garanties actives</div>
+          </div>
+          <div class="kpi">
+            <div class="n" style="color:var(--orange);">1</div>
+            <div class="lb">Entretien &#224; pr&#233;voir</div>
+          </div>
+          <div class="kpi">
+            <div class="n" style="color:var(--blue);">3</div>
+            <div class="lb">Documents</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ct">
+            <div class="ic" style="background:var(--blue-light);color:var(--blue);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            </div>
+            &#201;quipements install&#233;s
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--g50);border-radius:8px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/></svg>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:12px;font-weight:600;">Cumulus Atlantic 200L</div>
+                <div style="font-size:10px;color:var(--g400);">15/04/2025 &middot; Thomas R.</div>
+              </div>
+              <span style="font-size:10px;padding:2px 6px;border-radius:6px;background:var(--green-light);color:var(--green);font-weight:600;">Garantie 2027</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--g50);border-radius:8px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:var(--orange-light);display:flex;align-items:center;justify-content:center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:12px;font-weight:600;">Cuisine Loft ch&#234;ne</div>
+                <div style="font-size:10px;color:var(--g400);">10/06/2026 &middot; Luc M.</div>
+              </div>
+              <span style="font-size:10px;padding:2px 6px;border-radius:6px;background:var(--green-light);color:var(--green);font-weight:600;">Garantie 2028</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--g50);border-radius:8px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:12px;font-weight:600;">Tableau &#233;lectrique</div>
+                <div style="font-size:10px;color:var(--g400);">22/04/2025 &middot; Thomas R.</div>
+              </div>
+              <span style="font-size:10px;padding:2px 6px;border-radius:6px;background:var(--g100);color:var(--g500);font-weight:600;">Contr&#244;le 2030</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ct">
+            <div class="ic" style="background:var(--green-light);color:var(--green);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            Documents
+          </div>
+          <div class="cr"><span class="l">Facture cumulus</span><span class="v" style="color:var(--primary);">PDF</span></div>
+          <div class="cr"><span class="l">PV pose cuisine</span><span class="v" style="color:var(--primary);">PDF</span></div>
+          <div class="cr"><span class="l">Certificat Allianz</span><span class="v" style="color:var(--primary);">PDF</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="km">
+      <strong>Aucun concurrent en France</strong> ne propose un historique maison cross-m&#233;tiers. Cr&#233;e un <strong>lock-in massif</strong> : le client revient via Kelkun/Leclerc parce que toutes ses donn&#233;es sont l&#224;. Mod&#232;le Tesla (historique v&#233;hicule) et Apple Health (agr&#233;gation multi-sources).
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 7 — TIER 3 : ABONNEMENT (ClassPass / Feu Vert)
+     ============================================================ -->
+<div class="slide" data-index="7">
+  <div class="slide-tag" style="background:var(--purple);color:white;">TIER 3 &middot; RECURRING</div>
+  <div class="slide-title">Abonnement Kelkun Maison</div>
+  <div class="slide-subtitle">Inspir&#233; de ClassPass, Feu Vert Contrat Entretien, Lowe's HomeCare+</div>
+  <div class="phone-and-msg">
+    <div class="phone">
+      <div class="ph" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));">
+        <div class="logo">kelkun</div>
+        <h2>Kelkun Maison</h2>
+        <div class="sub">L'entretien de votre maison, simplifi&#233;</div>
+      </div>
+      <div class="pb">
+        <div class="plan-card">
+          <div style="margin-bottom:12px;">
+            <div style="font-size:11px;font-weight:600;color:var(--g400);text-transform:uppercase;letter-spacing:1px;">Formule Essentiel</div>
+            <div class="plan-price">9,90 &#8364; <span>/mois</span></div>
+            <div style="font-size:11px;color:var(--g400);">Via votre carte Leclerc</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <div class="plan-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              1 diagnostic annuel inclus
+            </div>
+            <div class="plan-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              -10% sur toutes les interventions
+            </div>
+            <div class="plan-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Booking prioritaire 48h
+            </div>
+            <div class="plan-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Ligne Kelcare d&#233;di&#233;e
+            </div>
+            <div class="plan-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Cashback 7% (statut Gold auto)
+            </div>
+            <div class="plan-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Carnet de Maison digital inclus
+            </div>
+          </div>
+          <button class="btn" style="background:var(--primary);margin-top:14px;">Souscrire via ma carte Leclerc</button>
+        </div>
+
+        <div style="background:var(--g50);border-radius:10px;padding:14px;">
+          <div style="font-size:13px;font-weight:600;color:var(--g900);margin-bottom:8px;">Comparaison</div>
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <div style="display:flex;justify-content:space-between;font-size:12px;">
+              <span style="color:var(--g500);">Feu Vert auto</span>
+              <span style="font-weight:600;">39-49 &#8364;/mois</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;">
+              <span style="color:var(--g500);">Lowe's HomeCare+</span>
+              <span style="font-weight:600;">8,25 &#8364;/mois</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--primary);font-weight:600;">
+              <span>Kelkun Maison</span>
+              <span>9,90 &#8364;/mois</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="km">
+      <strong>Feu Vert</strong> a normalis&#233; l'abonnement entretien auto (39-49 &#8364;/mois). <strong>Lowe's HomeCare+</strong> vient de lancer la version maison. &#192; 9,90 &#8364;/mois factur&#233; via la carte Leclerc, c'est un nouveau flux de <strong>revenus r&#233;currents</strong> pour le magasin.
+    </div>
+  </div>
+</div>
+
+</div><!-- /slides-container -->
+
+<!-- Nav -->
+<div class="nav-arrow left" onclick="nav(-1)">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+</div>
+<div class="nav-arrow right" onclick="nav(1)">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+</div>
+<div class="dots" id="dots"></div>
+
+<script>
+  var slides = document.querySelectorAll('.slide');
+  var dotsEl = document.getElementById('dots');
+  var cur = 0;
+
+  slides.forEach(function(_, i) {
+    var d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = function() { go(i); };
+    dotsEl.appendChild(d);
+  });
+
+  function go(i) {
+    if (i < 0 || i >= slides.length) return;
+    slides[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('active');
+    cur = i;
+    slides[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('active');
+  }
+  function nav(d) { go(cur + d); }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nav(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') nav(-1);
+  });
+
+  // Cross-sell toggles
+  function tog(el) {
+    el.classList.toggle('on');
+    var p = el.querySelector('.price');
+    p.style.color = el.classList.contains('on') ? 'var(--primary)' : 'var(--g400)';
+    var base = 605;
+    document.querySelectorAll('.toggle-card.on').forEach(function(c) {
+      base += parseFloat(c.getAttribute('data-price'));
+    });
+    document.getElementById('crossTotal').textContent = base + ' \u20AC';
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kelkun × Leclerc — Marketplace in-store</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Bricolage+Grotesque:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* =============================================
+       TOKENS
+       ============================================= */
+    :root {
+      --kelkun-primary: #00BFA6;
+      --kelkun-primary-dark: #00a891;
+      --kelkun-primary-light: #e6f9f6;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-300: #D1D5DB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --green-500: #10B981;
+      --green-50: #ECFDF5;
+      --yellow-500: #EAB308;
+      --yellow-50: #FEFCE8;
+      --orange-500: #F97316;
+      --orange-50: #FFF7ED;
+      --red-500: #EF4444;
+      --red-50: #FEF2F2;
+      --blue-light: #EEF2FF;
+      --blue-medium: #818CF8;
+    }
+
+    /* =============================================
+       RESET & BASE
+       ============================================= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--gray-100);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      padding: 20px;
+    }
+
+    h1, h2, h3, .hero-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    /* =============================================
+       SCENARIO TOGGLE
+       ============================================= */
+    .scenario-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: white;
+      padding: 6px;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .scenario-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--gray-500);
+      transition: all 0.25s ease;
+    }
+    .scenario-btn.active {
+      background: var(--kelkun-primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,191,166,0.3);
+    }
+
+    /* =============================================
+       PHONE FRAME
+       ============================================= */
+    .phone-frame {
+      max-width: 430px;
+      width: 100%;
+      height: 860px;
+      position: relative;
+      overflow: hidden;
+      background: white;
+      border-radius: 40px;
+      border: 12px solid #1f2937;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.15);
+    }
+    .phone-inner {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+      scroll-behavior: smooth;
+    }
+    .phone-inner::-webkit-scrollbar { display: none; }
+
+    /* =============================================
+       STEPS
+       ============================================= */
+    .step {
+      display: none;
+      flex-direction: column;
+      min-height: 100%;
+      animation: fadeSlideIn 0.4s ease forwards;
+    }
+    .step.active { display: flex; }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =============================================
+       PROGRESS BAR
+       ============================================= */
+    .progress-bar {
+      display: flex;
+      gap: 4px;
+      padding: 12px 20px 0;
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .progress-dot {
+      flex: 1;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--gray-200);
+      transition: background 0.3s ease;
+    }
+    .progress-dot.done { background: var(--kelkun-primary); }
+    .progress-dot.current {
+      background: var(--kelkun-primary);
+      animation: pulse-bar 1.5s ease infinite;
+    }
+    @keyframes pulse-bar {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* =============================================
+       HEADER
+       ============================================= */
+    .header {
+      background: linear-gradient(135deg, var(--kelkun-primary), var(--kelkun-primary-dark));
+      padding: 20px 20px 100px;
+      position: relative;
+      overflow: hidden;
+      color: white;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+    }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 2;
+    }
+    .header-logos {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .header-logos .sep { opacity: 0.5; font-weight: 400; }
+    .header-step { font-size: 12px; opacity: 0.8; }
+    .header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.3;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 8px;
+    }
+    .header p {
+      font-size: 14px;
+      opacity: 0.85;
+      position: relative;
+      z-index: 2;
+    }
+    .back-btn {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      transition: background 0.2s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.3); }
+
+    /* =============================================
+       CONTENT
+       ============================================= */
+    .content {
+      padding: 20px;
+      margin-top: -80px;
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-bottom: 100px;
+    }
+    .content.no-overlap { margin-top: 0; }
+
+    /* =============================================
+       CARDS
+       ============================================= */
+    .card {
+      background: white;
+      border-radius: 20px;
+      border: 2px solid var(--gray-200);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+      padding: 24px;
+    }
+    .card-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 16px;
+    }
+
+    /* Cascade */
+    .cascade > *:nth-child(1) { animation: slideInUp 0.4s 0.1s ease both; }
+    .cascade > *:nth-child(2) { animation: slideInUp 0.4s 0.2s ease both; }
+    .cascade > *:nth-child(3) { animation: slideInUp 0.4s 0.3s ease both; }
+    .cascade > *:nth-child(4) { animation: slideInUp 0.4s 0.4s ease both; }
+    .cascade > *:nth-child(5) { animation: slideInUp 0.4s 0.5s ease both; }
+    .cascade > *:nth-child(6) { animation: slideInUp 0.4s 0.6s ease both; }
+    .cascade > *:nth-child(7) { animation: slideInUp 0.4s 0.7s ease both; }
+
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =============================================
+       OPTION CARDS
+       ============================================= */
+    .option-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: white;
+    }
+    .option-card:hover {
+      border-color: var(--kelkun-primary);
+      background: var(--kelkun-primary-light);
+    }
+    .option-card.selected {
+      border-color: var(--kelkun-primary);
+      background: var(--kelkun-primary-light);
+      box-shadow: 0 0 0 3px rgba(0,191,166,0.15);
+    }
+    .option-icon {
+      font-size: 24px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gray-50);
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+    .option-card.selected .option-icon { background: rgba(0,191,166,0.15); }
+    .option-label { font-weight: 600; font-size: 15px; color: var(--gray-900); }
+    .option-desc { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+
+    /* =============================================
+       BUTTONS
+       ============================================= */
+    .btn-primary {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--kelkun-primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--kelkun-primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,191,166,0.3);
+    }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled {
+      background: var(--gray-300);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      font-family: 'DM Sans', sans-serif;
+      background: white;
+      color: var(--gray-700);
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--gray-300);
+      background: var(--gray-50);
+    }
+
+    /* Sticky bottom */
+    .sticky-bottom {
+      position: sticky;
+      bottom: 0;
+      padding: 16px 20px;
+      background: linear-gradient(to top, white 70%, transparent);
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* =============================================
+       DEVIS / RECAP LINES
+       ============================================= */
+    .devis-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 14px;
+      color: var(--gray-700);
+    }
+    .devis-line:last-of-type { border-bottom: none; }
+    .devis-line .amount { font-weight: 600; white-space: nowrap; }
+    .devis-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0 0;
+      border-top: 2px solid var(--gray-200);
+      margin-top: 8px;
+    }
+    .devis-total .label { font-weight: 700; font-size: 16px; color: var(--gray-900); }
+    .devis-total .amount { font-weight: 800; font-size: 20px; color: var(--kelkun-primary); }
+
+    .recap-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 13px;
+    }
+    .recap-line:last-child { border-bottom: none; }
+    .recap-label { color: var(--gray-500); }
+    .recap-value { color: var(--gray-900); font-weight: 600; }
+
+    /* =============================================
+       FORM FIELDS
+       ============================================= */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+    .form-input {
+      font-family: 'DM Sans', sans-serif;
+      padding: 14px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      color: var(--gray-900);
+      background: white;
+    }
+    .form-input:focus { border-color: var(--kelkun-primary); }
+    .form-input::placeholder { color: var(--gray-400); }
+
+    /* =============================================
+       QR CODE MOCK
+       ============================================= */
+    .qr-mock {
+      width: 160px;
+      height: 160px;
+      background: var(--gray-900);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+    .qr-mock-inner {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      background: white;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      gap: 2px;
+      padding: 6px;
+    }
+    .qr-cell { border-radius: 2px; }
+    .qr-cell.dark { background: var(--gray-900); }
+    .qr-cell.light { background: white; }
+
+    /* =============================================
+       PRODUCT GRID (NEW)
+       ============================================= */
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin: 0 -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .filter-pills::-webkit-scrollbar { display: none; }
+    .filter-pill {
+      font-family: 'DM Sans', sans-serif;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 2px solid var(--gray-200);
+      background: white;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-600);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .filter-pill:hover { border-color: var(--kelkun-primary); color: var(--kelkun-primary); }
+    .filter-pill.active {
+      background: var(--kelkun-primary);
+      border-color: var(--kelkun-primary);
+      color: white;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .product-card {
+      border: 2px solid var(--gray-200);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: white;
+    }
+    .product-card:hover { border-color: var(--kelkun-primary); }
+    .product-card.in-cart {
+      border-color: var(--kelkun-primary);
+      box-shadow: 0 0 0 3px rgba(0,191,166,0.15);
+    }
+    .product-thumb {
+      width: 100%;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+    .product-info {
+      padding: 12px;
+    }
+    .product-name {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--gray-900);
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+    .product-format {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+    }
+    .product-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .product-price {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--kelkun-primary);
+    }
+    .product-unit {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--gray-500);
+    }
+    .add-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      border: 2px solid var(--gray-200);
+      background: white;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: var(--gray-600);
+    }
+    .add-btn:hover {
+      border-color: var(--kelkun-primary);
+      color: var(--kelkun-primary);
+      background: var(--kelkun-primary-light);
+    }
+    .product-card.in-cart .add-btn {
+      background: var(--kelkun-primary);
+      border-color: var(--kelkun-primary);
+      color: white;
+    }
+
+    /* Qty control */
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 2px solid var(--gray-200);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: white;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-600);
+      transition: background 0.15s;
+    }
+    .qty-btn:hover { background: var(--gray-50); }
+    .qty-value {
+      width: 28px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gray-900);
+    }
+
+    /* Cart bar */
+    .cart-bar {
+      position: sticky;
+      bottom: 0;
+      z-index: 40;
+      padding: 16px 20px;
+      background: linear-gradient(to top, white 70%, transparent);
+    }
+    .cart-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--kelkun-primary);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 8px 24px rgba(0,191,166,0.3);
+    }
+    .cart-bar-inner:hover {
+      background: var(--kelkun-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,191,166,0.4);
+    }
+    .cart-count { font-weight: 700; font-size: 15px; }
+    .cart-arrow { font-size: 18px; font-weight: 700; }
+    .cart-bar.hidden { display: none; }
+
+    /* =============================================
+       OR DIVIDER
+       ============================================= */
+    .or-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 8px 0;
+    }
+    .or-divider::before,
+    .or-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gray-200);
+    }
+    .or-divider span {
+      font-size: 13px;
+      color: var(--gray-400);
+      font-weight: 600;
+    }
+
+    /* =============================================
+       UPSELL CARD
+       ============================================= */
+    .upsell-card {
+      background: linear-gradient(135deg, var(--orange-50), var(--yellow-50));
+      border: 2px solid var(--orange-500);
+      border-radius: 16px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .upsell-card:hover { box-shadow: 0 4px 16px rgba(249,115,22,0.15); }
+    .upsell-card.selected {
+      box-shadow: 0 0 0 3px rgba(249,115,22,0.2);
+    }
+    .upsell-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .upsell-icon {
+      width: 44px;
+      height: 44px;
+      background: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .upsell-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--gray-900);
+    }
+    .upsell-subtitle {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+    .upsell-body {
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .upsell-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .upsell-price {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--orange-500);
+    }
+    .upsell-price span {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-500);
+    }
+    .upsell-toggle {
+      width: 52px;
+      height: 28px;
+      border-radius: 14px;
+      background: var(--gray-300);
+      position: relative;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+    .upsell-toggle.on { background: var(--orange-500); }
+    .upsell-toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      transition: transform 0.25s;
+    }
+    .upsell-toggle.on::after { transform: translateX(24px); }
+
+    /* =============================================
+       SCAN AREA
+       ============================================= */
+    .scan-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+    .scan-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: var(--kelkun-primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+    }
+
+    /* =============================================
+       INFO BANNER
+       ============================================= */
+    .info-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--blue-light);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+    .info-banner-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* =============================================
+       CONFETTI
+       ============================================= */
+    .confetti-container {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 200px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(200px) rotate(720deg); opacity: 0; }
+    }
+
+    /* =============================================
+       SUCCESS ANIMATION
+       ============================================= */
+    .success-anim {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 32px 0 16px;
+      text-align: center;
+    }
+    .success-check {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--kelkun-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: popIn 0.4s 0.2s ease both;
+    }
+    .success-check svg {
+      width: 36px;
+      height: 36px;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      80% { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* =============================================
+       VENDOR BADGE
+       ============================================= */
+    .vendor-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .vendor-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* =============================================
+       MENTION
+       ============================================= */
+    .mention {
+      font-size: 12px;
+      color: var(--gray-400);
+      text-align: center;
+      padding: 12px 20px;
+      line-height: 1.5;
+    }
+
+    /* =============================================
+       TOAST
+       ============================================= */
+    .toast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--gray-900);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* =============================================
+       CART ITEM (recap)
+       ============================================= */
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-item-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--gray-900);
+    }
+    .cart-item-detail {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+    .cart-item-price {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gray-900);
+      white-space: nowrap;
+    }
+
+    /* =============================================
+       HERO ICON (landing)
+       ============================================= */
+    .hero-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      margin: 16px auto;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Scenario Toggle -->
+<div class="scenario-toggle">
+  <button class="scenario-btn active" onclick="switchFlow('client')">📱 Client</button>
+  <button class="scenario-btn" onclick="switchFlow('vendeur')">🏪 Vendeur</button>
+</div>
+
+<!-- Phone Frame -->
+<div class="phone-frame">
+  <div class="phone-inner" id="phoneInner">
+
+    <!-- ============================================= -->
+    <!-- CLIENT FLOW                                    -->
+    <!-- ============================================= -->
+
+    <!-- C1 — LANDING RAYON -->
+    <div class="step active" id="c1">
+      <div class="header" style="padding-bottom: 120px; text-align: center;">
+        <div class="header-row">
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+          <span class="header-step" style="opacity: 0.7;">Montpellier Sud</span>
+        </div>
+        <div class="hero-icon">🏗️</div>
+        <h2 style="font-size: 24px;">Rayon Carrelage</h2>
+        <p>Bienvenue ! Explorez notre catalogue ou demandez un conseil personnalisé.</p>
+      </div>
+
+      <div class="content cascade">
+        <div class="option-cards">
+          <div class="option-card" onclick="goToClientStep(2)" style="border-color: var(--kelkun-primary);">
+            <div class="option-icon">📦</div>
+            <div>
+              <div class="option-label">Voir les produits</div>
+              <div class="option-desc">Explorez le catalogue carrelage</div>
+            </div>
+            <div style="margin-left: auto; color: var(--kelkun-primary); font-size: 20px;">→</div>
+          </div>
+          <div class="option-card" onclick="showToast('Redirection vers un conseiller…')">
+            <div class="option-icon">🔧</div>
+            <div>
+              <div class="option-label">Conseil artisan</div>
+              <div class="option-desc">Besoin d'un poseur ou d'un conseil technique ?</div>
+            </div>
+          </div>
+        </div>
+        <div class="mention">Service proposé par votre magasin E.Leclerc avec Kelkun</div>
+      </div>
+    </div>
+
+    <!-- C2 — CATALOGUE PRODUITS -->
+    <div class="step" id="c2">
+      <div class="header" style="padding-bottom: 80px;">
+        <div class="header-row">
+          <button class="back-btn" onclick="goToClientStep(1)">←</button>
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+          <span class="header-step">Catalogue</span>
+        </div>
+        <h2>Catalogue Carrelage</h2>
+        <p>Sélectionnez vos articles</p>
+      </div>
+
+      <div class="content" style="padding-bottom: 80px;">
+        <!-- Filters -->
+        <div class="card" style="padding: 16px;">
+          <div class="filter-pills">
+            <button class="filter-pill active" onclick="filterProducts('all', this)">Tous</button>
+            <button class="filter-pill" onclick="filterProducts('sol', this)">Sol intérieur</button>
+            <button class="filter-pill" onclick="filterProducts('mural', this)">Mural</button>
+            <button class="filter-pill" onclick="filterProducts('mosaique', this)">Mosaïque</button>
+            <button class="filter-pill" onclick="filterProducts('exterieur', this)">Extérieur</button>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+      <!-- Cart bar -->
+      <div class="cart-bar hidden" id="cartBar">
+        <div class="cart-bar-inner" onclick="goToClientStep(3)">
+          <span class="cart-count" id="cartCount">0 article sélectionné</span>
+          <span class="cart-arrow">Voir →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- C3 — RÉCAP SÉLECTION (PANIER) -->
+    <div class="step" id="c3">
+      <div class="header" style="padding-bottom: 80px;">
+        <div class="header-row">
+          <button class="back-btn" onclick="goToClientStep(2)">←</button>
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+          <span class="header-step">Ma sélection</span>
+        </div>
+        <h2>Ma sélection</h2>
+        <p>Vérifiez vos articles avant de transmettre</p>
+      </div>
+
+      <div class="content cascade">
+        <div class="card">
+          <div class="card-title">🛒 Articles sélectionnés</div>
+          <div id="cartItems">
+            <!-- Filled by JS -->
+          </div>
+          <div class="devis-total" id="cartTotal">
+            <span class="label">Total estimé</span>
+            <span class="amount">0,00 €</span>
+          </div>
+        </div>
+
+        <div class="info-banner">
+          <span class="info-banner-icon">💡</span>
+          <span>Ce total est indicatif. Le vendeur confirmera les prix et disponibilités en rayon.</span>
+        </div>
+      </div>
+
+      <div class="sticky-bottom">
+        <button class="btn-primary" onclick="goToClientStep(4)">Valider ma sélection</button>
+        <button class="btn-secondary" onclick="goToClientStep(2)">Modifier</button>
+      </div>
+    </div>
+
+    <!-- C4 — CONFIRMATION + QR CODE -->
+    <div class="step" id="c4">
+      <div class="confetti-container" id="clientConfetti"></div>
+      <div class="header" style="padding-bottom: 80px; text-align: center;">
+        <div class="header-row" style="justify-content: center;">
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+        </div>
+        <div class="success-anim" style="padding: 16px 0 0;">
+          <div class="success-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+        </div>
+        <h2 style="font-size: 20px;">Demande transmise !</h2>
+        <p>Présentez ce QR code au vendeur en rayon</p>
+      </div>
+
+      <div class="content cascade">
+        <div class="card" style="text-align: center;">
+          <div class="qr-mock">
+            <div class="qr-mock-inner" id="qrGrid">
+              <!-- Filled by JS -->
+            </div>
+          </div>
+          <p style="font-weight: 700; font-size: 18px; color: var(--gray-900); margin-top: 16px; letter-spacing: 1px;" id="refNumber">MKT-2026-0847</p>
+          <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">Référence de votre sélection</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📋 Résumé</div>
+          <div id="confirmRecap">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+
+        <div class="info-banner">
+          <span class="info-banner-icon">ℹ️</span>
+          <span>Le vendeur peut aussi retrouver votre sélection avec la référence ci-dessus.</span>
+        </div>
+
+        <div class="mention">Service proposé par votre magasin E.Leclerc avec Kelkun</div>
+      </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- VENDEUR FLOW                                   -->
+    <!-- ============================================= -->
+
+    <!-- V1 — SCAN / SAISIE RÉFÉRENCE -->
+    <div class="step" id="v1">
+      <div class="header" style="padding-bottom: 80px;">
+        <div class="header-row">
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+          <div class="vendor-badge">
+            <div class="vendor-avatar">JD</div>
+            Julien D.
+          </div>
+        </div>
+        <h2>Sélection client</h2>
+        <p>Scannez le QR code du client ou saisissez la référence</p>
+      </div>
+
+      <div class="content cascade">
+        <div class="card">
+          <div class="scan-area">
+            <div class="scan-icon">📷</div>
+            <p style="font-size: 15px; font-weight: 600; color: var(--gray-900);">Scanner le QR code</p>
+            <p style="font-size: 13px; color: var(--gray-500);">Pointez la caméra vers le QR code affiché sur le téléphone du client</p>
+          </div>
+        </div>
+
+        <div class="or-divider"><span>ou</span></div>
+
+        <div class="card">
+          <div class="card-title">🔍 Saisie manuelle</div>
+          <div class="form-group">
+            <label class="form-label">Référence client</label>
+            <input class="form-input" type="text" placeholder="ex : MKT-2026-0847" value="MKT-2026-0847" id="refInput">
+          </div>
+          <button class="btn-primary" style="margin-top: 16px;" onclick="goToVendeurStep(2)">Rechercher</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- V2 — RÉCAP + UPSELL -->
+    <div class="step" id="v2">
+      <div class="header" style="padding-bottom: 80px;">
+        <div class="header-row">
+          <button class="back-btn" onclick="goToVendeurStep(1)">←</button>
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+          <div class="vendor-badge">
+            <div class="vendor-avatar">JD</div>
+            Julien D.
+          </div>
+        </div>
+        <h2>Sélection du client</h2>
+        <p>Réf. MKT-2026-0847</p>
+      </div>
+
+      <div class="content cascade">
+        <div class="card">
+          <div class="card-title">📦 Articles sélectionnés</div>
+          <div id="vendeurCartItems">
+            <!-- Filled by JS (same data as client cart) -->
+          </div>
+          <div class="devis-total" id="vendeurSubtotal">
+            <span class="label">Sous-total articles</span>
+            <span class="amount">0,00 €</span>
+          </div>
+        </div>
+
+        <!-- Upsell -->
+        <div class="upsell-card" id="upsellCard" onclick="toggleDiagnostic()">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 11px; font-weight: 700; color: var(--orange-500); text-transform: uppercase; letter-spacing: 1px;">Service recommandé</span>
+            <div class="upsell-toggle" id="diagToggle"></div>
+          </div>
+          <div class="upsell-header">
+            <div class="upsell-icon">📐</div>
+            <div>
+              <div class="upsell-title">Diagnostic et prise de métré</div>
+              <div class="upsell-subtitle">Par un artisan qualifié Kelkun</div>
+            </div>
+          </div>
+          <div class="upsell-body">
+            Un professionnel se déplace chez le client pour mesurer, vérifier la faisabilité et proposer un devis de pose personnalisé.
+          </div>
+          <div class="upsell-footer">
+            <div class="upsell-price">160 € <span>forfait</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="devis-total" id="vendeurTotal">
+            <span class="label">Total</span>
+            <span class="amount">0,00 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sticky-bottom">
+        <button class="btn-primary" onclick="goToVendeurStep(3)">🚀 Envoyer vers le réseau artisan</button>
+      </div>
+    </div>
+
+    <!-- V3 — CONFIRMATION ENVOI -->
+    <div class="step" id="v3">
+      <div class="confetti-container" id="vendeurConfetti"></div>
+      <div class="header" style="padding-bottom: 80px; text-align: center;">
+        <div class="header-row" style="justify-content: center;">
+          <div class="header-logos">
+            <span>E.Leclerc</span>
+            <span class="sep">×</span>
+            <span style="color: rgba(255,255,255,0.9);">Kelkun</span>
+          </div>
+        </div>
+        <div class="success-anim" style="padding: 16px 0 0;">
+          <div class="success-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+        </div>
+        <h2 style="font-size: 20px;">Demande envoyée !</h2>
+        <p>Les artisans disponibles seront notifiés</p>
+      </div>
+
+      <div class="content cascade">
+        <div class="card">
+          <div class="card-title">📋 Récapitulatif</div>
+          <div class="recap-line">
+            <span class="recap-label">Référence</span>
+            <span class="recap-value">MKT-2026-0847</span>
+          </div>
+          <div class="recap-line">
+            <span class="recap-label">Articles</span>
+            <span class="recap-value" id="recapArticles">3 articles</span>
+          </div>
+          <div class="recap-line">
+            <span class="recap-label">Diagnostic métré</span>
+            <span class="recap-value" id="recapDiag">Non</span>
+          </div>
+          <div class="recap-line">
+            <span class="recap-label">Total</span>
+            <span class="recap-value" style="color: var(--kelkun-primary); font-size: 15px;" id="recapTotal">0,00 €</span>
+          </div>
+        </div>
+
+        <div class="info-banner">
+          <span class="info-banner-icon">📲</span>
+          <span>Kelkun gère le dispatch, le contact artisan et le suivi. Le client sera notifié par SMS.</span>
+        </div>
+      </div>
+
+      <div class="sticky-bottom">
+        <button class="btn-primary" onclick="goToVendeurStep(1)">Nouvelle recherche</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  /* =============================================
+     DATA
+     ============================================= */
+  const products = [
+    { id: 1, name: 'Grès cérame Sahara', format: '60×60 cm', price: 24.90, unit: '€/m²', cat: 'sol', color: '#e8dcc8', emoji: '🟫' },
+    { id: 2, name: 'Metro blanc brillant', format: '10×20 cm', price: 12.50, unit: '€/m²', cat: 'mural', color: '#f0f0f0', emoji: '⬜' },
+    { id: 3, name: 'Travertin beige naturel', format: '40×40 cm', price: 34.90, unit: '€/m²', cat: 'sol', color: '#d4c5a9', emoji: '🟨' },
+    { id: 4, name: 'Mosaïque hexagonale grise', format: '30×30 cm', price: 29.90, unit: '€/plaque', cat: 'mosaique', color: '#b0b8c0', emoji: '🔷' },
+    { id: 5, name: 'Effet bois Chêne clair', format: '20×120 cm', price: 27.90, unit: '€/m²', cat: 'sol', color: '#c8a882', emoji: '🪵' },
+    { id: 6, name: 'Ardoise noire mate', format: '30×60 cm', price: 31.50, unit: '€/m²', cat: 'exterieur', color: '#4a4a4a', emoji: '⬛' },
+  ];
+
+  const cart = new Map(); // productId -> quantity
+  let currentFlow = 'client';
+  let diagnosticSelected = false;
+
+  /* =============================================
+     FLOW SWITCHING
+     ============================================= */
+  function switchFlow(flow) {
+    currentFlow = flow;
+    document.querySelectorAll('.scenario-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', (i === 0 && flow === 'client') || (i === 1 && flow === 'vendeur'));
+    });
+
+    // Hide all steps
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+
+    if (flow === 'client') {
+      document.getElementById('c1').classList.add('active');
+    } else {
+      document.getElementById('v1').classList.add('active');
+    }
+    scrollTop();
+  }
+
+  /* =============================================
+     CLIENT NAVIGATION
+     ============================================= */
+  function goToClientStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('c' + n).classList.add('active');
+
+    if (n === 2) renderProducts('all');
+    if (n === 3) renderCartRecap();
+    if (n === 4) {
+      renderConfirmRecap();
+      generateQR();
+      setTimeout(() => spawnConfetti('clientConfetti'), 300);
+    }
+    scrollTop();
+  }
+
+  /* =============================================
+     VENDEUR NAVIGATION
+     ============================================= */
+  function goToVendeurStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('v' + n).classList.add('active');
+
+    if (n === 2) renderVendeurRecap();
+    if (n === 3) {
+      renderFinalRecap();
+      setTimeout(() => spawnConfetti('vendeurConfetti'), 300);
+    }
+    scrollTop();
+  }
+
+  function scrollTop() {
+    document.getElementById('phoneInner').scrollTop = 0;
+  }
+
+  /* =============================================
+     PRODUCT RENDERING
+     ============================================= */
+  function renderProducts(filter) {
+    const grid = document.getElementById('productGrid');
+    const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
+
+    grid.innerHTML = filtered.map(p => {
+      const qty = cart.get(p.id) || 0;
+      const inCart = qty > 0;
+      return `
+        <div class="product-card ${inCart ? 'in-cart' : ''}" id="product-${p.id}">
+          <div class="product-thumb" style="background: linear-gradient(135deg, ${p.color}, ${adjustColor(p.color, -20)});">
+            ${p.emoji}
+          </div>
+          <div class="product-info">
+            <div class="product-name">${p.name}</div>
+            <div class="product-format">${p.format}</div>
+            <div class="product-bottom">
+              <div class="product-price">${formatPrice(p.price)} <span class="product-unit">${p.unit}</span></div>
+              ${inCart
+                ? `<div class="qty-control">
+                    <button class="qty-btn" onclick="event.stopPropagation(); changeQty(${p.id}, -1)">−</button>
+                    <span class="qty-value">${qty}</span>
+                    <button class="qty-btn" onclick="event.stopPropagation(); changeQty(${p.id}, 1)">+</button>
+                  </div>`
+                : `<button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">+</button>`
+              }
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    updateCartBar();
+  }
+
+  function filterProducts(cat, btn) {
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    renderProducts(cat);
+  }
+
+  /* =============================================
+     CART MANAGEMENT
+     ============================================= */
+  function addToCart(id) {
+    cart.set(id, 1);
+    renderProducts(getCurrentFilter());
+    showToast('Article ajouté !');
+  }
+
+  function changeQty(id, delta) {
+    const current = cart.get(id) || 0;
+    const newQty = current + delta;
+    if (newQty <= 0) {
+      cart.delete(id);
+    } else {
+      cart.set(id, newQty);
+    }
+    renderProducts(getCurrentFilter());
+  }
+
+  function getCurrentFilter() {
+    const active = document.querySelector('.filter-pill.active');
+    if (!active) return 'all';
+    const text = active.textContent.trim();
+    if (text === 'Tous') return 'all';
+    if (text === 'Sol intérieur') return 'sol';
+    if (text === 'Mural') return 'mural';
+    if (text === 'Mosaïque') return 'mosaique';
+    if (text === 'Extérieur') return 'exterieur';
+    return 'all';
+  }
+
+  function updateCartBar() {
+    const bar = document.getElementById('cartBar');
+    const count = document.getElementById('cartCount');
+    const total = getCartTotal();
+    const itemCount = getCartItemCount();
+
+    if (itemCount === 0) {
+      bar.classList.add('hidden');
+    } else {
+      bar.classList.remove('hidden');
+      count.textContent = `${itemCount} article${itemCount > 1 ? 's' : ''} · ${formatPrice(total)} €`;
+    }
+  }
+
+  function getCartTotal() {
+    let total = 0;
+    cart.forEach((qty, id) => {
+      const product = products.find(p => p.id === id);
+      if (product) total += product.price * qty;
+    });
+    return total;
+  }
+
+  function getCartItemCount() {
+    let count = 0;
+    cart.forEach(qty => count += qty);
+    return count;
+  }
+
+  /* =============================================
+     CART RECAP (C3)
+     ============================================= */
+  function renderCartRecap() {
+    const container = document.getElementById('cartItems');
+    const totalEl = document.getElementById('cartTotal');
+
+    let html = '';
+    cart.forEach((qty, id) => {
+      const p = products.find(pr => pr.id === id);
+      if (!p) return;
+      html += `
+        <div class="cart-item">
+          <div class="cart-item-thumb" style="background: linear-gradient(135deg, ${p.color}, ${adjustColor(p.color, -20)});">${p.emoji}</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${p.name}</div>
+            <div class="cart-item-detail">${p.format} · Qté : ${qty}</div>
+          </div>
+          <div class="cart-item-price">${formatPrice(p.price * qty)} €</div>
+        </div>`;
+    });
+
+    container.innerHTML = html || '<p style="font-size: 14px; color: var(--gray-400); text-align: center; padding: 20px;">Aucun article sélectionné</p>';
+    totalEl.querySelector('.amount').textContent = formatPrice(getCartTotal()) + ' €';
+  }
+
+  /* =============================================
+     CONFIRM RECAP (C4)
+     ============================================= */
+  function renderConfirmRecap() {
+    const container = document.getElementById('confirmRecap');
+    const count = getCartItemCount();
+    const total = getCartTotal();
+
+    let items = [];
+    cart.forEach((qty, id) => {
+      const p = products.find(pr => pr.id === id);
+      if (p) items.push(`${p.name} ×${qty}`);
+    });
+
+    container.innerHTML = `
+      <div class="recap-line">
+        <span class="recap-label">Articles</span>
+        <span class="recap-value">${count} article${count > 1 ? 's' : ''}</span>
+      </div>
+      <div class="recap-line">
+        <span class="recap-label">Détail</span>
+        <span class="recap-value" style="text-align: right; max-width: 60%; font-size: 12px;">${items.join(', ')}</span>
+      </div>
+      <div class="recap-line">
+        <span class="recap-label">Total estimé</span>
+        <span class="recap-value" style="color: var(--kelkun-primary);">${formatPrice(total)} €</span>
+      </div>`;
+  }
+
+  /* =============================================
+     VENDEUR RECAP (V2)
+     ============================================= */
+  function renderVendeurRecap() {
+    // Same cart items
+    const container = document.getElementById('vendeurCartItems');
+    let html = '';
+    cart.forEach((qty, id) => {
+      const p = products.find(pr => pr.id === id);
+      if (!p) return;
+      html += `
+        <div class="cart-item">
+          <div class="cart-item-thumb" style="background: linear-gradient(135deg, ${p.color}, ${adjustColor(p.color, -20)});">${p.emoji}</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${p.name}</div>
+            <div class="cart-item-detail">${p.format} · Qté : ${qty}</div>
+          </div>
+          <div class="cart-item-price">${formatPrice(p.price * qty)} €</div>
+        </div>`;
+    });
+    container.innerHTML = html;
+
+    // Subtotal
+    document.getElementById('vendeurSubtotal').querySelector('.amount').textContent = formatPrice(getCartTotal()) + ' €';
+
+    updateVendeurTotal();
+  }
+
+  function toggleDiagnostic() {
+    diagnosticSelected = !diagnosticSelected;
+    document.getElementById('diagToggle').classList.toggle('on', diagnosticSelected);
+    document.getElementById('upsellCard').classList.toggle('selected', diagnosticSelected);
+    updateVendeurTotal();
+  }
+
+  function updateVendeurTotal() {
+    const total = getCartTotal() + (diagnosticSelected ? 160 : 0);
+    document.getElementById('vendeurTotal').querySelector('.amount').textContent = formatPrice(total) + ' €';
+  }
+
+  /* =============================================
+     FINAL RECAP (V3)
+     ============================================= */
+  function renderFinalRecap() {
+    const count = getCartItemCount();
+    const total = getCartTotal() + (diagnosticSelected ? 160 : 0);
+
+    document.getElementById('recapArticles').textContent = `${count} article${count > 1 ? 's' : ''}`;
+    document.getElementById('recapDiag').textContent = diagnosticSelected ? 'Oui — 160 €' : 'Non';
+    document.getElementById('recapTotal').textContent = formatPrice(total) + ' €';
+  }
+
+  /* =============================================
+     QR CODE GENERATION (mock)
+     ============================================= */
+  function generateQR() {
+    const grid = document.getElementById('qrGrid');
+    // 7x7 QR mock pattern
+    const pattern = [
+      1,1,1,0,1,1,1,
+      1,0,1,1,1,0,1,
+      1,1,1,0,0,1,1,
+      0,1,0,1,0,1,0,
+      1,0,1,0,1,0,1,
+      1,0,1,1,0,0,1,
+      1,1,1,0,1,1,1,
+    ];
+    grid.innerHTML = pattern.map(v =>
+      `<div class="qr-cell ${v ? 'dark' : 'light'}"></div>`
+    ).join('');
+  }
+
+  /* =============================================
+     CONFETTI
+     ============================================= */
+  function spawnConfetti(containerId) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    const colors = ['#00BFA6', '#FFC114', '#FF7B1E', '#818CF8', '#F97316', '#10B981'];
+    for (let i = 0; i < 30; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti';
+      el.style.left = Math.random() * 100 + '%';
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.animationDelay = (Math.random() * 0.8) + 's';
+      el.style.animationDuration = (2 + Math.random() * 2) + 's';
+      el.style.width = (6 + Math.random() * 8) + 'px';
+      el.style.height = (6 + Math.random() * 8) + 'px';
+      container.appendChild(el);
+    }
+  }
+
+  /* =============================================
+     TOAST
+     ============================================= */
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  /* =============================================
+     UTILS
+     ============================================= */
+  function formatPrice(n) {
+    return n.toFixed(2).replace('.', ',');
+  }
+
+  function adjustColor(hex, amount) {
+    hex = hex.replace('#', '');
+    const r = Math.max(0, Math.min(255, parseInt(hex.substring(0, 2), 16) + amount));
+    const g = Math.max(0, Math.min(255, parseInt(hex.substring(2, 4), 16) + amount));
+    const b = Math.max(0, Math.min(255, parseInt(hex.substring(4, 6), 16) + amount));
+    return '#' + [r, g, b].map(c => c.toString(16).padStart(2, '0')).join('');
+  }
+
+  /* =============================================
+     KEYBOARD NAV
+     ============================================= */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') {
+      if (currentFlow === 'client') {
+        const current = getCurrentClientStep();
+        if (current < 4) goToClientStep(current + 1);
+      } else {
+        const current = getCurrentVendeurStep();
+        if (current < 3) goToVendeurStep(current + 1);
+      }
+    }
+    if (e.key === 'ArrowLeft') {
+      if (currentFlow === 'client') {
+        const current = getCurrentClientStep();
+        if (current > 1) goToClientStep(current - 1);
+      } else {
+        const current = getCurrentVendeurStep();
+        if (current > 1) goToVendeurStep(current - 1);
+      }
+    }
+  });
+
+  function getCurrentClientStep() {
+    for (let i = 1; i <= 4; i++) {
+      if (document.getElementById('c' + i).classList.contains('active')) return i;
+    }
+    return 1;
+  }
+
+  function getCurrentVendeurStep() {
+    for (let i = 1; i <= 3; i++) {
+      if (document.getElementById('v' + i).classList.contains('active')) return i;
+    }
+    return 1;
+  }
+
+  /* =============================================
+     INIT
+     ============================================= */
+  // Pre-fill cart with some items for demo
+  cart.set(1, 2); // Grès cérame Sahara x2
+  cart.set(3, 1); // Travertin beige x1
+  cart.set(5, 3); // Effet bois Chêne x3
+
+  renderProducts('all');
+</script>
+
+</body>
+</html>

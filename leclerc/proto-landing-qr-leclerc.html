@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelkun x Leclerc — Landing QR</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Bricolage+Grotesque:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .page-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: clamp(20px, 3vw, 28px);
+      color: white;
+      text-align: center;
+      margin-bottom: 32px;
+      max-width: 600px;
+    }
+
+    .phone-frame {
+      max-width: 430px;
+      width: 100%;
+      height: 860px;
+      position: relative;
+      overflow: hidden;
+      background: white;
+      border-radius: 40px;
+      border: 12px solid #1f2937;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #00BFA6, #00a891);
+      padding: 28px 24px 32px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+    }
+    .header .logo {
+      font-weight: 700;
+      font-size: 15px;
+      opacity: 0.9;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .header h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+    .header p {
+      font-size: 14px;
+      opacity: 0.85;
+      line-height: 1.4;
+    }
+
+    .content {
+      flex: 1;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+      animation: fadeSlideIn 0.5s ease forwards;
+    }
+
+    .product-detected {
+      background: #F9FAFB;
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .product-img {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      background: #E5E7EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .detect-label {
+      font-size: 11px;
+      color: #9CA3AF;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .product-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e6f9f6;
+      color: #00BFA6;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .product-store {
+      font-size: 12px;
+      color: #6B7280;
+      margin-top: 4px;
+    }
+
+    .section-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #111827;
+    }
+
+    .entry-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .entry-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: white;
+      border: 2px solid #E5E7EB;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .entry-card:hover {
+      border-color: #00BFA6;
+      box-shadow: 0 4px 20px rgba(0,191,166,0.12);
+      transform: translateY(-2px);
+    }
+
+    .entry-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .entry-icon.marketplace { background: #EFF6FF; color: #3B82F6; }
+    .entry-icon.artisan { background: #e6f9f6; color: #00BFA6; }
+
+    .entry-text { flex: 1; }
+    .entry-text h3 { font-weight: 700; font-size: 16px; color: #111827; margin-bottom: 2px; }
+    .entry-text p { font-size: 13px; color: #6B7280; line-height: 1.4; }
+
+    .entry-arrow { color: #D1D5DB; flex-shrink: 0; transition: color 0.2s; }
+    .entry-card:hover .entry-arrow { color: #00BFA6; }
+
+    .footer {
+      padding: 16px 20px 24px;
+      text-align: center;
+    }
+    .footer p { font-size: 12px; color: #9CA3AF; }
+    .footer strong { color: #6B7280; }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <h2 class="page-title">LANDING QR — Les deux entr&#233;es client en magasin</h2>
+
+  <div class="phone-frame">
+    <div class="header">
+      <div class="logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-5"/></svg>
+        kelkun
+      </div>
+      <h1>Bienvenue !</h1>
+      <p>Scannez le QR code de votre rayon pour commencer</p>
+    </div>
+
+    <div class="content">
+      <div class="product-detected">
+        <div class="product-img">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div>
+          <div class="detect-label">Produit d&#233;tect&#233; automatiquement</div>
+          <div class="product-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Rayon carrelage
+          </div>
+          <div class="product-store">Magasin Leclerc Bordeaux</div>
+        </div>
+      </div>
+
+      <div class="section-title">Comment peut-on vous aider ?</div>
+
+      <div class="entry-cards">
+        <a class="entry-card" href="#">
+          <div class="entry-icon marketplace">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          </div>
+          <div class="entry-text">
+            <h3>Marketplace magasin</h3>
+            <p>Click &amp; collect, catalogue et disponibilit&#233;s en rayon</p>
+          </div>
+          <div class="entry-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </a>
+
+        <a class="entry-card" href="#">
+          <div class="entry-icon artisan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="entry-text">
+            <h3>J'ai besoin d'un artisan</h3>
+            <p>Besoin d'un poseur, installateur ou r&#233;parateur</p>
+          </div>
+          <div class="entry-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Service propos&#233; par votre magasin <strong>E.Leclerc</strong> avec <strong>Kelkun</strong></p>
+    </div>
+  </div>
+
+</body>
+</html>

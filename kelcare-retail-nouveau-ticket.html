@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelcare Retail — Nouveau ticket</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ================================================
+   KELCARE RETAIL — NOUVEAU TICKET
+   Design tokens from Kelkun Design System v2
+   ================================================ */
+
+:root {
+  /* Primary (Teal) */
+  --primary: #03c5b8;
+  --primary-10: #f1fefc;
+  --primary-25: #d5fbf6;
+  --primary-50: #c2faf3;
+  --primary-100: #93f6e9;
+  --primary-400: #3cdacc;
+  --primary-500: #03c5b8;
+  --primary-600: #029284;
+  --primary-700: #015f56;
+
+  /* Secondary (Navy) */
+  --secondary: #0e2f58;
+  --secondary-1: #f8f9fc;
+  --secondary-2: #f4f6fa;
+  --secondary-10: #eeeff7;
+  --secondary-25: #e0e2f0;
+  --secondary-50: #bdc3e0;
+  --secondary-100: #9aa3d0;
+  --secondary-200: #7e8cb8;
+  --secondary-300: #6274a0;
+  --secondary-400: #465d88;
+  --secondary-500: #0e2f58;
+  --secondary-600: #0a2342;
+  --secondary-700: #07172c;
+
+  /* Status */
+  --success: #3faf38;
+  --success-50: #f3fbf2;
+  --success-100: #e2f8e0;
+  --info: #3cb0f5;
+  --info-50: #effaff;
+  --info-100: #dbf3fe;
+  --warning: #c27b30;
+  --warning-50: #fcf7ee;
+  --warning-100: #f5e9d0;
+  --error: #fa4a57;
+  --error-50: #fff1f1;
+  --error-100: #ffe4e3;
+
+  /* Services */
+  --urgence: #ff634d;
+  --depannage: #ffc114;
+  --travaux: #1c61c5;
+
+  /* Accent */
+  --accent: #6778ed;
+  --accent-50: #eff4fe;
+  --accent-100: #e1ebfe;
+
+  /* Neutrals */
+  --neutral-50: #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #e5e5e5;
+  --neutral-300: #d4d4d4;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-700: #404040;
+  --neutral-800: #262626;
+  --neutral-900: #171717;
+
+  /* Typography */
+  --font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing */
+  --sidebar-w: 260px;
+  --topbar-h: 64px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--secondary-1);
+  color: var(--secondary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ================================================
+   LAYOUT
+   ================================================ */
+.layout { display: flex; min-height: 100vh; }
+
+/* ================================================
+   SIDEBAR
+   ================================================ */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--secondary-500);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 20;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.sidebar-logo-kelkun {
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--primary);
+  letter-spacing: -0.4px;
+}
+
+.sidebar-logo-care {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--primary-400);
+  opacity: 0.7;
+}
+
+.sidebar-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: rgba(3,197,184,0.15);
+  border: 1px solid rgba(3,197,184,0.25);
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--primary-100);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-store {
+  font-size: 12px;
+  opacity: 0.45;
+  margin-top: 4px;
+}
+
+.sidebar-nav {
+  padding: 16px 12px;
+  flex: 1;
+}
+
+.nav-section {
+  margin-bottom: 24px;
+}
+
+.nav-section-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  opacity: 0.3;
+  padding: 0 12px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+}
+
+.nav-item.active {
+  background: rgba(3,197,184,0.12);
+  color: var(--primary);
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.75;
+}
+
+.nav-badge {
+  margin-left: auto;
+  background: var(--primary);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+  min-width: 22px;
+  text-align: center;
+}
+
+.nav-badge.warn {
+  background: var(--urgence);
+}
+
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(-70deg, var(--primary-600), var(--primary-400));
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.sidebar-user { flex: 1; min-width: 0; }
+.sidebar-user-name { font-size: 13px; font-weight: 600; }
+.sidebar-user-role { font-size: 11px; opacity: 0.4; }
+
+.sidebar-logout {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+  opacity: 0.4;
+}
+.sidebar-logout:hover { background: rgba(255,255,255,0.08); opacity: 0.7; }
+.sidebar-logout svg { width: 16px; height: 16px; }
+
+/* ================================================
+   MAIN CONTENT
+   ================================================ */
+.main {
+  flex: 1;
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Topbar */
+.topbar {
+  height: var(--topbar-h);
+  background: white;
+  border-bottom: 1px solid var(--neutral-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar-search {
+  position: relative;
+}
+
+.topbar-search input {
+  width: 320px;
+  height: 38px;
+  padding: 0 12px 0 36px;
+  border: 1px solid var(--secondary-25);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--secondary);
+  background: var(--secondary-1);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.topbar-search input::placeholder { color: var(--secondary-50); }
+.topbar-search input:focus { border-color: var(--primary); }
+
+.topbar-search svg {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--secondary-50);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--secondary-25);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+  color: var(--secondary-300);
+}
+.topbar-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+.topbar-btn .notif-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  background: var(--urgence);
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.topbar-btn svg { width: 18px; height: 18px; }
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 28px 32px 40px;
+}
+
+/* ================================================
+   STEP INDICATOR
+   ================================================ */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 28px;
+  background: white;
+  border: 1px solid var(--neutral-200);
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.step + .step {
+  border-left: 1px solid var(--neutral-200);
+}
+
+.step.active {
+  background: var(--primary-10);
+}
+
+.step.active .step-number {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.step.active .step-label {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+.step.completed .step-number {
+  background: var(--success);
+  color: white;
+  border-color: var(--success);
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--neutral-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--neutral-400);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.step-text { flex: 1; }
+
+.step-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--neutral-400);
+  transition: color 0.2s;
+}
+
+.step-desc {
+  font-size: 12px;
+  color: var(--secondary-200);
+  margin-top: 1px;
+}
+
+.step.active .step-desc {
+  color: var(--primary-600);
+}
+
+/* ================================================
+   PAGE HEADER
+   ================================================ */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--secondary);
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+}
+
+.page-subtitle {
+  font-size: 13px;
+  color: var(--secondary-200);
+  font-weight: 400;
+}
+
+/* ================================================
+   BUTTONS
+   ================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+
+.btn svg { width: 16px; height: 16px; }
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+.btn-primary:hover { background: var(--primary-600); box-shadow: 0 4px 12px rgba(3,197,184,0.25); }
+
+.btn-ghost {
+  background: white;
+  color: var(--secondary-400);
+  border: 1px solid var(--secondary-25);
+}
+.btn-ghost:hover { border-color: var(--secondary-100); color: var(--secondary); }
+
+.btn-secondary {
+  background: var(--secondary);
+  color: white;
+}
+.btn-secondary:hover { background: var(--secondary-600); }
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+}
+
+.btn-sm svg { width: 14px; height: 14px; }
+
+/* ================================================
+   FORM LAYOUT (2-col)
+   ================================================ */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border: 1px solid var(--neutral-200);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card + .card {
+  margin-top: 16px;
+}
+
+.card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--neutral-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title svg { width: 18px; height: 18px; color: var(--secondary-200); }
+
+.card-title .title-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-title .title-icon svg { width: 15px; height: 15px; }
+
+.card-body { padding: 20px; }
+
+.card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.card-badge.ai {
+  background: linear-gradient(135deg, var(--accent-50), var(--primary-10));
+  color: var(--accent);
+  border: 1px solid rgba(103,120,237,0.2);
+}
+
+.card-badge.ai svg { width: 13px; height: 13px; }
+
+/* ================================================
+   MISSION TYPE SELECTOR
+   ================================================ */
+.mission-type-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.mission-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  border: 2px solid var(--neutral-200);
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font);
+  text-align: center;
+}
+
+.mission-type-card:hover {
+  border-color: var(--neutral-300);
+  background: var(--neutral-50);
+}
+
+.mission-type-card.active {
+  border-color: var(--urgence);
+  background: #fff8f7;
+}
+
+.mission-type-card.active.t-urgence { border-color: var(--urgence); background: #fff8f7; }
+.mission-type-card.active.t-depannage { border-color: var(--depannage); background: #fffcf0; }
+.mission-type-card.active.t-travaux { border-color: var(--travaux); background: #f0f5fd; }
+.mission-type-card.active.t-entretien { border-color: var(--accent); background: var(--accent-50); }
+.mission-type-card.active.t-preventif { border-color: var(--success); background: var(--success-50); }
+
+.mission-type-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mission-type-icon svg { width: 22px; height: 22px; }
+
+.mission-type-icon.mi-urgence { background: #ffcecc; color: #e03030; }
+.mission-type-icon.mi-depannage { background: #fff2cc; color: #b06900; }
+.mission-type-icon.mi-travaux { background: #d2e2f9; color: var(--travaux); }
+.mission-type-icon.mi-entretien { background: #d3d5f8; color: #4b52e0; }
+.mission-type-icon.mi-preventif { background: var(--success-100); color: var(--success); }
+
+.mission-type-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.mission-type-sub {
+  font-size: 11px;
+  color: var(--secondary-200);
+  line-height: 1.3;
+}
+
+/* ================================================
+   PHOTO UPLOAD ZONE
+   ================================================ */
+.photo-upload {
+  border: 2px dashed var(--secondary-25);
+  border-radius: 10px;
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--secondary-1);
+  position: relative;
+}
+
+.photo-upload:hover {
+  border-color: var(--primary);
+  background: var(--primary-10);
+}
+
+.photo-upload-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--accent-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.photo-upload-icon svg { width: 24px; height: 24px; color: var(--accent); }
+
+.photo-upload-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--secondary);
+  margin-bottom: 4px;
+}
+
+.photo-upload-desc {
+  font-size: 12px;
+  color: var(--secondary-200);
+  margin-bottom: 8px;
+}
+
+.photo-upload-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--accent-50), var(--primary-10));
+  border: 1px solid rgba(103,120,237,0.15);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.photo-upload-ai svg { width: 14px; height: 14px; }
+
+/* ================================================
+   FORM FIELDS
+   ================================================ */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--secondary-300);
+}
+
+.form-label .required {
+  color: var(--error);
+}
+
+.form-input,
+.form-select {
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--secondary-25);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--secondary);
+  background: white;
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(3,197,184,0.1);
+}
+
+.form-input::placeholder { color: var(--secondary-50); }
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236274a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px 14px;
+  border: 1px solid var(--secondary-25);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--secondary);
+  background: white;
+  outline: none;
+  transition: border-color 0.15s;
+  resize: vertical;
+}
+
+.form-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(3,197,184,0.1);
+}
+
+.form-textarea::placeholder { color: var(--secondary-50); }
+
+.input-with-btn {
+  display: flex;
+  gap: 8px;
+}
+
+.input-with-btn .form-input,
+.input-with-btn .form-select {
+  flex: 1;
+}
+
+.input-with-btn .btn {
+  height: 42px;
+  padding: 0 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ================================================
+   URGENCY SELECTOR
+   ================================================ */
+.urgency-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.urgency-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border: 2px solid var(--neutral-200);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+  font-family: var(--font);
+  background: white;
+}
+
+.urgency-option:hover {
+  border-color: var(--neutral-300);
+}
+
+.urgency-option.active.u-low {
+  border-color: var(--success);
+  background: var(--success-50);
+}
+.urgency-option.active.u-medium {
+  border-color: var(--depannage);
+  background: #fffcf0;
+}
+.urgency-option.active.u-high {
+  border-color: var(--warning);
+  background: var(--warning-50);
+}
+.urgency-option.active.u-critical {
+  border-color: var(--error);
+  background: var(--error-50);
+}
+
+.urgency-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.urgency-dot.d-low { background: var(--success); }
+.urgency-dot.d-medium { background: var(--depannage); }
+.urgency-dot.d-high { background: var(--warning); }
+.urgency-dot.d-critical { background: var(--error); }
+
+.urgency-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.urgency-sla {
+  font-size: 11px;
+  color: var(--secondary-200);
+}
+
+/* ================================================
+   RIGHT COLUMN — SMART PANEL
+   ================================================ */
+.right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* AI Dispatch card */
+.ai-dispatch-card {
+  background: linear-gradient(135deg, #0e2f58 0%, #1a4178 100%);
+  border-radius: 12px;
+  padding: 20px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-dispatch-card::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(103,120,237,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.ai-dispatch-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(3,197,184,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.ai-dispatch-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.ai-dispatch-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(103,120,237,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-dispatch-icon svg { width: 18px; height: 18px; color: #a0b0ff; }
+
+.ai-dispatch-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.ai-dispatch-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(3,197,184,0.2);
+  color: var(--primary-100);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ai-dispatch-features {
+  position: relative;
+  z-index: 1;
+}
+
+.ai-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.ai-feature + .ai-feature {
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.ai-feature-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ai-feature-icon svg { width: 14px; height: 14px; color: var(--primary-100); }
+
+.ai-feature-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+}
+
+.ai-feature-text strong {
+  color: white;
+  font-weight: 600;
+}
+
+/* Estimation IA */
+.estimation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.estimation-item {
+  padding: 14px;
+  border-radius: 8px;
+  background: var(--secondary-1);
+  border: 1px solid var(--neutral-200);
+  text-align: center;
+}
+
+.estimation-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--secondary-200);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+
+.estimation-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--secondary);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.estimation-unit {
+  font-size: 12px;
+  color: var(--secondary-200);
+  font-weight: 500;
+}
+
+.estimation-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--accent-50);
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.estimation-note svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* Prestataires suggeres */
+.prestataire-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--neutral-100);
+}
+
+.prestataire-item:last-child { border-bottom: none; }
+
+.prestataire-rank {
+  width: 22px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--secondary-200);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.prestataire-rank.gold { color: #b45309; }
+
+.prestataire-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.prestataire-avatar.av-1 { background: linear-gradient(-70deg, var(--primary-600), var(--primary-400)); }
+.prestataire-avatar.av-2 { background: linear-gradient(-70deg, var(--travaux), #3b7de0); }
+.prestataire-avatar.av-3 { background: linear-gradient(-70deg, var(--accent), #8b99f5); }
+
+.prestataire-info { flex: 1; min-width: 0; }
+.prestataire-name { font-size: 14px; font-weight: 600; color: var(--secondary); }
+.prestataire-meta {
+  font-size: 12px;
+  color: var(--secondary-200);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prestataire-stars {
+  color: var(--depannage);
+  font-size: 11px;
+}
+
+.prestataire-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.prestataire-tag.available {
+  background: var(--success-50);
+  color: var(--success);
+}
+
+.prestataire-tag.busy {
+  background: var(--warning-50);
+  color: var(--warning);
+}
+
+.prestataire-eta {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.prestataire-eta-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.prestataire-eta-label {
+  font-size: 11px;
+  color: var(--secondary-200);
+}
+
+/* SLA indicator */
+.sla-card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sla-gauge {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 4px solid var(--neutral-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.sla-gauge::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-top-color: var(--success);
+  border-right-color: var(--success);
+  border-bottom-color: var(--success);
+  transform: rotate(-90deg);
+}
+
+.sla-gauge-value {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--success);
+}
+
+.sla-info { flex: 1; }
+
+.sla-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--secondary);
+  margin-bottom: 2px;
+}
+
+.sla-desc {
+  font-size: 12px;
+  color: var(--secondary-200);
+  line-height: 1.4;
+}
+
+.sla-items {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.sla-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--secondary-300);
+  font-weight: 500;
+}
+
+.sla-item .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* ================================================
+   BOTTOM BAR
+   ================================================ */
+.bottom-bar {
+  background: white;
+  border-top: 1px solid var(--neutral-200);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.bottom-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bottom-bar-hint {
+  font-size: 13px;
+  color: var(--secondary-200);
+}
+
+.bottom-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-lg {
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 10px;
+}
+
+.btn-lg svg { width: 18px; height: 18px; }
+
+/* ================================================
+   FOOTER BAR
+   ================================================ */
+.footer-bar {
+  padding: 16px 32px;
+  border-top: 1px solid var(--neutral-200);
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--secondary-200);
+}
+
+.footer-bar a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ================================================
+   ANIMATIONS
+   ================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-indicator, .card, .ai-dispatch-card {
+  animation: fadeInUp 0.4s ease backwards;
+}
+
+.step-indicator { animation-delay: 0.03s; }
+.card:nth-child(1) { animation-delay: 0.06s; }
+.card:nth-child(2) { animation-delay: 0.09s; }
+.card:nth-child(3) { animation-delay: 0.12s; }
+.ai-dispatch-card { animation-delay: 0.08s; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--secondary-200) 25%, var(--secondary-100) 50%, var(--secondary-200) 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+@media (max-width: 1280px) {
+  .form-grid { grid-template-columns: 1fr 340px; }
+  .mission-type-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 1024px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .mission-type-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .mission-type-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-row { grid-template-columns: 1fr; }
+  .urgency-grid { grid-template-columns: repeat(2, 1fr); }
+  .step { padding: 12px 16px; }
+  .step-desc { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ========== SIDEBAR ========== -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <span class="sidebar-logo-kelkun">kelkun</span>
+        <span class="sidebar-badge">retail</span>
+      </div>
+      <div class="sidebar-store">Leroy Merlin Montpellier Odysseum</div>
+    </div>
+
+    <div class="sidebar-nav">
+      <!-- Operations -->
+      <div class="nav-section">
+        <div class="nav-section-label">Operations</div>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </span>
+          <span>Tableau de bord</span>
+        </a>
+        <a class="nav-item active" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          </span>
+          <span>Nouveau ticket</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"/><path d="m15 9 6-6"/></svg>
+          </span>
+          <span>Suivi interventions</span>
+          <span class="nav-badge">7</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <span>Mission live</span>
+          <span class="nav-badge warn">2</span>
+        </a>
+      </div>
+
+      <!-- Maintenance -->
+      <div class="nav-section">
+        <div class="nav-section-label">Maintenance</div>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </span>
+          <span>Preventif</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
+          </span>
+          <span>Equipements</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          <span>Conformite</span>
+          <span class="nav-badge warn">1</span>
+        </a>
+      </div>
+
+      <!-- Reseau -->
+      <div class="nav-section">
+        <div class="nav-section-label">Reseau</div>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          <span>Prestataires</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </span>
+          <span>Messagerie</span>
+          <span class="nav-badge">3</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-4-4"/></svg>
+          </span>
+          <span>Marketplace</span>
+        </a>
+      </div>
+
+      <!-- Pilotage -->
+      <div class="nav-section">
+        <div class="nav-section-label">Pilotage</div>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </span>
+          <span>Analytics</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          </span>
+          <span>Budget</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </span>
+          <span>Rapports</span>
+        </a>
+      </div>
+
+      <!-- Administration -->
+      <div class="nav-section">
+        <div class="nav-section-label">Administration</div>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span>Parametres</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-avatar">SB</div>
+      <div class="sidebar-user">
+        <div class="sidebar-user-name">Sophie Bertrand</div>
+        <div class="sidebar-user-role">Responsable maintenance</div>
+      </div>
+      <div class="sidebar-logout">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== MAIN ========== -->
+  <div class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-search">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Rechercher un ticket, equipement, prestataire...">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn" title="Aide">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </button>
+        <button class="topbar-btn" title="Notifications">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-dot"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- Page header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Nouveau ticket</h1>
+          <p class="page-subtitle">Creez un ticket en quelques clics, l'IA s'occupe du reste</p>
+        </div>
+      </div>
+
+      <!-- Step Indicator -->
+      <div class="step-indicator">
+        <div class="step active">
+          <div class="step-number">1</div>
+          <div class="step-text">
+            <div class="step-label">Description</div>
+            <div class="step-desc">Type, localisation, details</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-text">
+            <div class="step-label">Assignation</div>
+            <div class="step-desc">Prestataire et planning</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-text">
+            <div class="step-label">Validation</div>
+            <div class="step-desc">Relecture et envoi</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Grid -->
+      <div class="form-grid">
+
+        <!-- ===== LEFT COLUMN: MAIN FORM ===== -->
+        <div class="left-col">
+
+          <!-- Mission Type -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="title-icon" style="background: var(--secondary-10); color: var(--secondary);">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </span>
+                Type de mission
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="mission-type-grid">
+                <button class="mission-type-card active t-urgence" data-type="urgence">
+                  <div class="mission-type-icon mi-urgence">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  </div>
+                  <div class="mission-type-label">Urgence</div>
+                  <div class="mission-type-sub">Intervention sous 4h</div>
+                </button>
+                <button class="mission-type-card t-depannage" data-type="depannage">
+                  <div class="mission-type-icon mi-depannage">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                  </div>
+                  <div class="mission-type-label">Depannage</div>
+                  <div class="mission-type-sub">Sous 24-48h</div>
+                </button>
+                <button class="mission-type-card t-travaux" data-type="travaux">
+                  <div class="mission-type-icon mi-travaux">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
+                  </div>
+                  <div class="mission-type-label">Travaux</div>
+                  <div class="mission-type-sub">Planifies sur devis</div>
+                </button>
+                <button class="mission-type-card t-entretien" data-type="entretien">
+                  <div class="mission-type-icon mi-entretien">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+                  </div>
+                  <div class="mission-type-label">Entretien</div>
+                  <div class="mission-type-sub">Maintenance courante</div>
+                </button>
+                <button class="mission-type-card t-preventif" data-type="preventif">
+                  <div class="mission-type-icon mi-preventif">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <div class="mission-type-label">Preventif</div>
+                  <div class="mission-type-sub">Inspection programmee</div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Photo Upload -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="title-icon" style="background: var(--accent-50); color: var(--accent);">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                </span>
+                Photo du probleme
+              </div>
+              <span class="card-badge ai">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/><circle cx="12" cy="15" r="2"/></svg>
+                IA Vision
+              </span>
+            </div>
+            <div class="card-body">
+              <div class="photo-upload" id="photoUpload">
+                <div class="photo-upload-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"/><line x1="16" y1="5" x2="22" y2="5"/><line x1="19" y1="2" x2="19" y2="8"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                </div>
+                <div class="photo-upload-title">Glissez une photo ou cliquez pour parcourir</div>
+                <div class="photo-upload-desc">JPG, PNG ou HEIC - 10 Mo max</div>
+                <div class="photo-upload-ai">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  L'IA analyse la photo et pre-remplit le ticket
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Site / Equipement / Description -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="title-icon" style="background: var(--primary-10); color: var(--primary);">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
+                Localisation et details
+              </div>
+            </div>
+            <div class="card-body" style="display: flex; flex-direction: column; gap: 16px;">
+
+              <!-- Site / Zone -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Site <span class="required">*</span></label>
+                  <select class="form-select">
+                    <option>Leroy Merlin Montpellier Odysseum</option>
+                    <option>Leroy Merlin Montpellier Trifontaine</option>
+                    <option>Leroy Merlin Beziers</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Zone / Batiment</label>
+                  <select class="form-select">
+                    <option value="">Selectionnez une zone...</option>
+                    <option>Hall d'entree</option>
+                    <option>Rayon Sanitaire</option>
+                    <option>Rayon Electricite</option>
+                    <option>Entrepot</option>
+                    <option>Parking</option>
+                    <option>Toiture</option>
+                    <option>Locaux sociaux</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Equipement -->
+              <div class="form-group">
+                <label class="form-label">Equipement concerne</label>
+                <div class="input-with-btn">
+                  <select class="form-select">
+                    <option value="">Selectionnez un equipement...</option>
+                    <option>CTA-01 — Centrale de traitement d'air</option>
+                    <option>PAC-02 — Pompe a chaleur entrepot</option>
+                    <option>ASC-01 — Ascenseur principal</option>
+                    <option>GRP-01 — Groupe electrogene</option>
+                    <option>PORT-01 — Porte automatique entree</option>
+                    <option>SSI-01 — Systeme securite incendie</option>
+                  </select>
+                  <button class="btn btn-ghost btn-sm" title="Scanner un QR code equipement">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/><line x1="21" y1="14" x2="21" y2="14.01"/><line x1="21" y1="21" x2="21" y2="21.01"/><line x1="14" y1="21" x2="14" y2="21.01"/></svg>
+                    QR Scan
+                  </button>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="form-group">
+                <label class="form-label">Description du probleme <span class="required">*</span></label>
+                <textarea class="form-textarea" placeholder="Decrivez le probleme constate (type de panne, symptomes, localisation exacte...)"></textarea>
+              </div>
+
+              <!-- Urgence -->
+              <div class="form-group">
+                <label class="form-label">Niveau d'urgence <span class="required">*</span></label>
+                <div class="urgency-grid">
+                  <button class="urgency-option u-low" data-urgency="low">
+                    <div class="urgency-dot d-low"></div>
+                    <div class="urgency-label">Faible</div>
+                    <div class="urgency-sla">SLA 72h</div>
+                  </button>
+                  <button class="urgency-option u-medium" data-urgency="medium">
+                    <div class="urgency-dot d-medium"></div>
+                    <div class="urgency-label">Moyen</div>
+                    <div class="urgency-sla">SLA 24h</div>
+                  </button>
+                  <button class="urgency-option active u-high" data-urgency="high">
+                    <div class="urgency-dot d-high"></div>
+                    <div class="urgency-label">Eleve</div>
+                    <div class="urgency-sla">SLA 8h</div>
+                  </button>
+                  <button class="urgency-option u-critical" data-urgency="critical">
+                    <div class="urgency-dot d-critical"></div>
+                    <div class="urgency-label">Critique</div>
+                    <div class="urgency-sla">SLA 4h</div>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ===== RIGHT COLUMN: SMART PANEL ===== -->
+        <div class="right-col">
+
+          <!-- AI Dispatch Card -->
+          <div class="ai-dispatch-card">
+            <div class="ai-dispatch-header">
+              <div class="ai-dispatch-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div class="ai-dispatch-title">Dispatch IA</div>
+              <div class="ai-dispatch-badge">Exclusif</div>
+            </div>
+            <div class="ai-dispatch-features">
+              <div class="ai-feature">
+                <div class="ai-feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                </div>
+                <div class="ai-feature-text"><strong>Matching competences</strong> par specialite</div>
+              </div>
+              <div class="ai-feature">
+                <div class="ai-feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div class="ai-feature-text"><strong>Proximite geographique</strong> temps reel</div>
+              </div>
+              <div class="ai-feature">
+                <div class="ai-feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div class="ai-feature-text"><strong>Score qualite</strong> et historique interventions</div>
+              </div>
+              <div class="ai-feature">
+                <div class="ai-feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <div class="ai-feature-text"><strong>Disponibilite</strong> et charge de travail</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Estimation IA -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="title-icon" style="background: var(--accent-50); color: var(--accent);">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </span>
+                Estimation IA
+              </div>
+              <span class="card-badge ai">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Auto
+              </span>
+            </div>
+            <div class="card-body">
+              <div class="estimation-grid">
+                <div class="estimation-item">
+                  <div class="estimation-label">Cout estime</div>
+                  <div class="estimation-value">280</div>
+                  <div class="estimation-unit">euros HT</div>
+                </div>
+                <div class="estimation-item">
+                  <div class="estimation-label">Duree estimee</div>
+                  <div class="estimation-value">2h30</div>
+                  <div class="estimation-unit">intervention</div>
+                </div>
+              </div>
+              <div class="estimation-note">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Basee sur 847 interventions similaires
+              </div>
+            </div>
+          </div>
+
+          <!-- Prestataires suggeres -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="title-icon" style="background: var(--primary-10); color: var(--primary);">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </span>
+                Prestataires suggeres
+              </div>
+              <span class="card-badge ai">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                IA
+              </span>
+            </div>
+            <div class="card-body" style="padding: 12px 20px;">
+
+              <!-- Prestataire 1 -->
+              <div class="prestataire-item">
+                <div class="prestataire-rank gold">1</div>
+                <div class="prestataire-avatar av-1">PD</div>
+                <div class="prestataire-info">
+                  <div class="prestataire-name">Pierre Dumont</div>
+                  <div class="prestataire-meta">
+                    <span class="prestataire-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>4.9</span>
+                    <span class="prestataire-tag available">
+                      <span style="width:6px;height:6px;border-radius:50%;background:var(--success);display:inline-block;"></span>
+                      Disponible
+                    </span>
+                  </div>
+                </div>
+                <div class="prestataire-eta">
+                  <div class="prestataire-eta-value">25 min</div>
+                  <div class="prestataire-eta-label">ETA</div>
+                </div>
+              </div>
+
+              <!-- Prestataire 2 -->
+              <div class="prestataire-item">
+                <div class="prestataire-rank">2</div>
+                <div class="prestataire-avatar av-2">ML</div>
+                <div class="prestataire-info">
+                  <div class="prestataire-name">Marc Lefebvre</div>
+                  <div class="prestataire-meta">
+                    <span class="prestataire-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                    <span>4.6</span>
+                    <span class="prestataire-tag available">
+                      <span style="width:6px;height:6px;border-radius:50%;background:var(--success);display:inline-block;"></span>
+                      Disponible
+                    </span>
+                  </div>
+                </div>
+                <div class="prestataire-eta">
+                  <div class="prestataire-eta-value">40 min</div>
+                  <div class="prestataire-eta-label">ETA</div>
+                </div>
+              </div>
+
+              <!-- Prestataire 3 -->
+              <div class="prestataire-item">
+                <div class="prestataire-rank">3</div>
+                <div class="prestataire-avatar av-3">SF</div>
+                <div class="prestataire-info">
+                  <div class="prestataire-name">Sarah Fischer</div>
+                  <div class="prestataire-meta">
+                    <span class="prestataire-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>4.8</span>
+                    <span class="prestataire-tag busy">
+                      <span style="width:6px;height:6px;border-radius:50%;background:var(--warning);display:inline-block;"></span>
+                      En mission
+                    </span>
+                  </div>
+                </div>
+                <div class="prestataire-eta">
+                  <div class="prestataire-eta-value">1h15</div>
+                  <div class="prestataire-eta-label">ETA</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- SLA Indicator -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="title-icon" style="background: var(--success-50); color: var(--success);">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </span>
+                Engagement SLA
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="sla-card-content">
+                <div class="sla-gauge">
+                  <div class="sla-gauge-value">96%</div>
+                </div>
+                <div class="sla-info">
+                  <div class="sla-title">Respect SLA ce mois</div>
+                  <div class="sla-desc">142 tickets resolus dans les delais contractuels sur 148 total</div>
+                  <div class="sla-items">
+                    <div class="sla-item">
+                      <span class="dot" style="background: var(--success);"></span>
+                      Dans les delais : 142
+                    </div>
+                    <div class="sla-item">
+                      <span class="dot" style="background: var(--error);"></span>
+                      Depassement : 6
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="bottom-bar">
+      <div class="bottom-bar-left">
+        <div class="bottom-bar-hint">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline;vertical-align:middle;margin-right:4px;color:var(--secondary-200);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          Etape 1 sur 3 — Les champs marques * sont obligatoires
+        </div>
+      </div>
+      <div class="bottom-bar-right">
+        <button class="btn btn-ghost">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Annuler
+        </button>
+        <button class="btn btn-primary btn-lg">
+          Creer le ticket
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-bar">
+      <span>Kelkun Retail v2.1 — Kelcare</span>
+      <span>Derniere synchro : il y a 2 min · <a href="#">API status</a></span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Mission type selector
+document.querySelectorAll('.mission-type-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.mission-type-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+  });
+});
+
+// Urgency selector
+document.querySelectorAll('.urgency-option').forEach(option => {
+  option.addEventListener('click', () => {
+    document.querySelectorAll('.urgency-option').forEach(o => o.classList.remove('active'));
+    option.classList.add('active');
+  });
+});
+
+// Photo upload hover effect
+const photoUpload = document.getElementById('photoUpload');
+photoUpload.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  photoUpload.style.borderColor = 'var(--primary)';
+  photoUpload.style.background = 'var(--primary-10)';
+});
+photoUpload.addEventListener('dragleave', () => {
+  photoUpload.style.borderColor = '';
+  photoUpload.style.background = '';
+});
+photoUpload.addEventListener('drop', (e) => {
+  e.preventDefault();
+  photoUpload.style.borderColor = '';
+  photoUpload.style.background = '';
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=376, initial-scale=1.0">
+  <title>Profil Artisan - Kelkun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #f0f0f0; display: flex; justify-content: center; padding: 40px 0; }
+
+    .phone {
+      width: 376px;
+      height: 812px;
+      border-radius: 16px;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0px 4px 34px rgba(0,0,0,0.45);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Nav */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 24px 8px;
+      flex-shrink: 0;
+    }
+    .nav svg { color: #9AA3D0; cursor: pointer; }
+    .nav__actions { display: flex; gap: 8px; }
+    .nav__back { padding-right: 8px; display: flex; }
+
+    /* Scroll */
+    .scroll { flex: 1; overflow-y: auto; }
+
+    /* Content */
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0 16px 24px;
+    }
+
+    /* Top certifs */
+    .top-certifs { display: flex; gap: 4px; }
+    .top-certif {
+      background: #3CB0F5;
+      color: #fff;
+      font-size: 12px;
+      padding: 0 8px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 9999px;
+    }
+
+    /* Header */
+    .sticky-header {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #DEE5EF;
+    }
+    .header {
+      display: flex;
+      gap: 8px;
+      padding-top: 16px;
+      padding-bottom: 8px;
+    }
+    .avatar {
+      width: 40px; height: 40px; min-width: 40px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #00A891, #00BFA6);
+      color: #fff;
+      font-size: 14px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .header-info { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .name-row { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+    .name { font-size: 16px; font-weight: 600; color: #0E2F58; line-height: 1.2; }
+    .details { display: flex; flex-direction: column; gap: 4px; }
+    .rating { display: flex; align-items: center; gap: 8px; color: #7E8CB8; font-size: 14px; }
+    .rating svg { color: #FFC014; fill: #FFC014; opacity: 0.8; }
+    .meta { color: #7E8CB8; font-size: 14px; display: flex; align-items: center; gap: 4px; }
+
+    /* Badge */
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 12px; border-radius: 9999px;
+      font-size: 12px; white-space: nowrap;
+    }
+    .badge svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .badge--fiabilite { background: #F1FEFC; color: #029183; border: 1px solid #76EDE0; }
+    .badge--fiabilite svg { color: #029183; }
+    .badge--reputation { background: #FFFBEB; color: #AD7F00; border: 1px solid #FFE9AD; }
+    .badge--reputation svg { color: #E0A500; }
+    .badge--experience { background: #EDEEF6; color: #0E2F58; border: 1px solid #BCC2E0; }
+    .badge--experience svg { color: #6274A0; }
+    .badge--qualite { background: #EFF4FE; color: #3C3FC6; border: 1px solid #C9D8FC; }
+    .badge--qualite svg { color: #6778ED; }
+
+    /* CTA */
+    .cta-group { display: flex; flex-direction: column; gap: 8px; }
+    .cta {
+      width: 100%; height: 40px; min-height: 36px; border-radius: 6px;
+      font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500;
+      line-height: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .cta--primary { background: #03C5B8; color: #fff; border: none; }
+    .cta--secondary { background: transparent; color: #03C5B8; border: 1px solid #03C5B8; }
+    .cta-subtitle { text-align: center; color: #7E8CB8; font-size: 12px; }
+
+    /* Badges section */
+    .badges-section { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 1px; }
+
+    /* Banner */
+    .banner {
+      width: 100%; height: 120px; border-radius: 8px;
+      background: linear-gradient(135deg, #03C5B8, #1C61C5);
+      display: flex; align-items: center; padding: 16px;
+    }
+    .banner__text { color: #fff; font-size: 18px; font-weight: 700; line-height: 1.2; max-width: 200px; }
+
+    /* Slots */
+    .slots { display: flex; flex-wrap: wrap; gap: 16px; }
+    .slot {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 8px;
+      background: #F1FEFC; border: 1px solid #03C5B8;
+      width: calc(50% - 8px);
+    }
+    .slot svg { color: #029183; opacity: 0.8; width: 16px; height: 16px; flex-shrink: 0; }
+    .slot span { color: #029183; font-size: 12px; }
+
+    /* Cards */
+    .card {
+      display: flex; flex-direction: column; gap: 12px;
+      padding: 16px; border-radius: 8px; border: 1px solid #DEE5EF;
+    }
+    .card__title { font-size: 14px; font-weight: 600; color: #0E2F58; }
+    .card__body { font-size: 14px; color: #0E2F58; line-height: 1.2; }
+    .card__tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* Certif pills */
+    .certif-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 8px; border-radius: 9999px;
+      background: #FFFBEB; color: #AD7F00; font-size: 12px;
+    }
+    .certif-pill svg { width: 16px; height: 16px; opacity: 0.8; color: #AD7F00; }
+
+    /* Competence tags */
+    .comp-tag {
+      display: inline-flex; align-items: center;
+      padding: 4px 8px; border-radius: 9999px;
+      background: #EDEEF6; color: #6274A0; font-size: 12px;
+    }
+
+    /* Ellipsis */
+    .ellipsis {
+      position: absolute; top: 76px; right: 16px;
+      background: none; border: none; cursor: pointer; z-index: 5;
+    }
+    .ellipsis svg { color: #3FAF38; }
+
+    /* Bottom bar */
+    .bottom-bar {
+      padding: 24px;
+      background: #fff;
+      border-top: 1px solid #D5FBF6;
+      flex-shrink: 0;
+    }
+    .bottom-cta {
+      width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 16px 24px; border-radius: 8px;
+      background: #03C5B8; color: #fff; border: none;
+      font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700;
+      line-height: 1.2; letter-spacing: 0.48px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+  <!-- Nav -->
+  <nav class="nav">
+    <span class="nav__back"><i data-lucide="arrow-left" style="width:20px;height:20px"></i></span>
+    <div class="nav__actions">
+      <i data-lucide="heart" style="width:20px;height:20px"></i>
+      <i data-lucide="share-2" style="width:20px;height:20px"></i>
+    </div>
+  </nav>
+
+  <button class="ellipsis"><i data-lucide="ellipsis-vertical" style="width:24px;height:24px"></i></button>
+
+  <!-- Scrollable -->
+  <div class="scroll">
+    <div class="content">
+
+      <!-- Top certifs -->
+      <div class="top-certifs">
+        <span class="top-certif">QualiSOL</span>
+        <span class="top-certif">QualiPV</span>
+        <span class="top-certif">RGE</span>
+      </div>
+
+      <!-- Sticky header -->
+      <div class="sticky-header">
+        <div class="header">
+          <div class="avatar">PM</div>
+          <div class="header-info">
+            <div class="name-row">
+              <span class="name">Plomberie Martin</span>
+              <span class="badge badge--fiabilite">
+                <i data-lucide="shield-check"></i> Verifie
+              </span>
+            </div>
+            <div class="details">
+              <div class="rating">
+                <i data-lucide="star" style="width:16px;height:16px"></i>
+                <span>4.2 (8)</span>
+              </div>
+              <div class="meta">📍 A 2,3 km de chez vous</div>
+              <div class="meta">🔧 16 interventions via Kelkun</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-group">
+          <button class="cta cta--primary">Envoyer ma demande</button>
+          <p class="cta-subtitle">Gratuit · Sans engagement</p>
+          <button class="cta cta--secondary">💬 Discuter de mon projet</button>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="badges-section">
+        <span class="badge badge--fiabilite"><i data-lucide="zap"></i> Reactif</span>
+        <span class="badge badge--reputation"><i data-lucide="thumbs-up"></i> Recommande</span>
+        <span class="badge badge--experience"><i data-lucide="award"></i> 10 missions</span>
+        <span class="badge badge--qualite"><i data-lucide="camera"></i> Portfolio</span>
+        <span class="badge badge--qualite"><i data-lucide="badge-check"></i> Certifie</span>
+      </div>
+
+      <!-- Banner -->
+      <div class="banner">
+        <span class="banner__text">Chez Kelkun, chaque artisan compte.</span>
+      </div>
+
+      <!-- Slots -->
+      <div class="slots">
+        <div class="slot"><i data-lucide="check"></i> <span>7j/7</span></div>
+        <div class="slot"><i data-lucide="check"></i> <span>Interventions sur rendez-vous</span></div>
+        <div class="slot"><i data-lucide="check"></i> <span>Devis clair avant intervention</span></div>
+        <div class="slot"><i data-lucide="check"></i> <span>24h/24</span></div>
+      </div>
+
+      <!-- Certifications -->
+      <div class="card">
+        <h2 class="card__title">Certifications professionnelles</h2>
+        <div class="card__tags">
+          <span class="certif-pill"><i data-lucide="info"></i> Chauffage +</span>
+          <span class="certif-pill"><i data-lucide="info"></i> Ventilation +</span>
+          <span class="certif-pill"><i data-lucide="info"></i> QUALIBAT-RGE</span>
+        </div>
+      </div>
+
+      <!-- Compétences -->
+      <div class="card">
+        <h2 class="card__title">Competences</h2>
+        <div class="card__tags">
+          <span class="comp-tag">Plombier</span>
+          <span class="comp-tag">Electricien</span>
+          <span class="comp-tag">Macon</span>
+          <span class="comp-tag">Platrier</span>
+          <span class="comp-tag">Carreleur</span>
+          <span class="comp-tag">Peintre en batiment</span>
+          <span class="comp-tag">Menuisier</span>
+          <span class="comp-tag">Chauffagiste</span>
+          <span class="comp-tag">Soudure</span>
+          <span class="comp-tag">Couvreur</span>
+          <span class="comp-tag">Vitrerie</span>
+          <span class="comp-tag">Terrassier</span>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="card">
+        <h2 class="card__title">Services proposes</h2>
+        <p class="card__body">Depannage, installation, renovation...</p>
+      </div>
+
+      <!-- Galerie -->
+      <div class="card">
+        <h2 class="card__title">Galerie</h2>
+        <p class="card__body">Photos de réalisations</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="bottom-bar">
+    <button class="bottom-cta">
+      <i data-lucide="chart-pie" style="width:16px;height:16px"></i>
+      Prendre RDV
+    </button>
+  </div>
+</div>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tableau de bord — Kelkun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ================================================
+       KELKUN DESIGN SYSTEM v2 — TOKENS
+    ================================================ */
+    :root {
+      --color-white: #ffffff;
+      --color-black: #000000;
+      --color-primary:     #03c5b8;
+      --color-primary-10:  #f1fefc;
+      --color-primary-25:  #d5fbf6;
+      --color-primary-50:  #c2faf3;
+      --color-primary-100: #93f6e9;
+      --color-primary-200: #76ede0;
+      --color-primary-500: #03c5b8;
+      --color-primary-600: #029284;
+      --color-primary-700: #015f56;
+      --color-secondary:     #0e2f58;
+      --color-secondary-1:   #f8f9fc;
+      --color-secondary-2:   #f4f6fa;
+      --color-secondary-10:  #eeeff7;
+      --color-secondary-25:  #e0e2f0;
+      --color-secondary-50:  #bdc3e0;
+      --color-secondary-100: #9aa3d0;
+      --color-secondary-400: #465d88;
+      --color-secondary-500: #0e2f58;
+      --color-tertiary:     #ffc114;
+      --color-tertiary-50:  #fffbeb;
+      --color-tertiary-100: #fff5c6;
+      --color-quarternary:     #ff7b1e;
+      --color-neutral-50:  #fafafa;
+      --color-neutral-100: #f5f5f5;
+      --color-neutral-200: #e5e5e5;
+      --color-neutral-300: #d4d4d4;
+      --color-neutral-400: #a3a3a3;
+      --color-neutral-500: #737373;
+      --color-neutral-600: #525252;
+      --color-neutral-700: #404040;
+      --color-neutral-800: #262626;
+      --color-success:     #3faf38;
+      --color-success-50:  #f3fbf2;
+      --color-success-100: #e2f8e0;
+      --color-error:       #fa4a57;
+      --color-error-50:    #fff1f1;
+      --color-accent:      #6778ed;
+      --color-accent-50:   #eff4fe;
+      --color-accent-100:  #e1ebfe;
+      --color-stone-50:    #dee5ef;
+      --color-stone-400:   #405163;
+      --color-stone-500:   #25303c;
+      --color-stone-600:   #0c1218;
+      --color-travaux:     #1c61c5;
+      --color-urgence:     #ff634d;
+      --color-depannage:   #ffc114;
+
+      --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-size-xs:  8px;
+      --font-size-sm:  10px;
+      --font-size-md:  12px;
+      --font-size-lg:  14px;
+      --font-size-xl:  16px;
+      --font-size-2xl: 20px;
+      --font-size-3xl: 22px;
+      --font-size-4xl: 24px;
+      --font-size-5xl: 32px;
+
+      --font-weight-normal:   400;
+      --font-weight-medium:   500;
+      --font-weight-semibold: 600;
+      --font-weight-bold:     700;
+      --font-weight-extrabold:800;
+
+      --space-1:  4px;
+      --space-2:  8px;
+      --space-3:  12px;
+      --space-4:  16px;
+      --space-5:  20px;
+      --space-6:  24px;
+      --space-7:  28px;
+      --space-8:  32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-14: 56px;
+      --space-16: 64px;
+      --space-20: 80px;
+      --space-24: 96px;
+
+      --rounded-sm:   4px;
+      --rounded-md:   6px;
+      --rounded-lg:   8px;
+      --rounded-xl:   12px;
+      --rounded-2xl:  16px;
+      --rounded-3xl:  24px;
+      --rounded-full: 9999px;
+
+      --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.10);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.10);
+      --shadow-xl: 0 20px 25px rgba(0,0,0,0.10);
+
+      --border: 1px;
+      --border-2: 2px;
+    }
+
+    /* ================================================
+       RESET & BASE
+    ================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-family);
+      background: var(--color-secondary-2);
+      color: var(--color-secondary);
+      min-height: 100vh;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ================================================
+       NAV (shared)
+    ================================================ */
+    .nav {
+      background: var(--color-white);
+      border-bottom: 1px solid var(--color-secondary-25);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .nav__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .nav__logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--color-primary);
+      border-radius: var(--rounded-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-xl);
+      color: var(--color-white);
+      letter-spacing: -0.5px;
+    }
+    .nav__brand {
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-xl);
+      color: var(--color-secondary);
+    }
+    .nav__brand span { color: var(--color-primary); }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+    }
+    .nav__link {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-600);
+      transition: color 0.15s;
+    }
+    .nav__link:hover { color: var(--color-secondary); }
+    .nav__link--active { color: var(--color-secondary); font-weight: var(--font-weight-semibold); }
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .nav__avatar {
+      width: 36px;
+      height: 36px;
+      background: var(--color-secondary-10);
+      border-radius: var(--rounded-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-secondary);
+      cursor: pointer;
+    }
+    .nav__notif {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--rounded-full);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-neutral-500);
+      position: relative;
+    }
+    .nav__notif-dot {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 8px;
+      height: 8px;
+      background: var(--color-error);
+      border-radius: var(--rounded-full);
+      border: 2px solid white;
+    }
+    .nav__burger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-secondary);
+      padding: var(--space-2);
+      margin-left: calc(-1 * var(--space-2));
+      margin-right: var(--space-2);
+    }
+
+    /* ================================================
+       LAYOUT (shared)
+    ================================================ */
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 64px);
+    }
+
+    /* Sidebar (shared) */
+    .sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      background: var(--color-white);
+      border-right: 1px solid var(--color-secondary-25);
+      padding: var(--space-6) 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+    }
+    .sidebar__section-label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-neutral-400);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: var(--space-4) var(--space-6) var(--space-2);
+      margin-top: var(--space-4);
+    }
+    .sidebar__section-label:first-child { margin-top: 0; }
+    .sidebar__item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-6);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-600);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+    .sidebar__item:hover {
+      color: var(--color-secondary);
+      background: var(--color-secondary-1);
+    }
+    .sidebar__item--active {
+      color: var(--color-primary-600);
+      background: var(--color-primary-10);
+      border-left-color: var(--color-primary);
+      font-weight: var(--font-weight-semibold);
+    }
+    .sidebar__item-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+    .sidebar__badge {
+      margin-left: auto;
+      background: var(--color-primary);
+      color: var(--color-white);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-bold);
+      padding: 2px var(--space-2);
+      border-radius: var(--rounded-full);
+      line-height: 1.6;
+    }
+    .sidebar__plan-chip {
+      margin: var(--space-6);
+      background: var(--color-secondary-10);
+      border-radius: var(--rounded-xl);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .sidebar__plan-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-neutral-500);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      font-weight: var(--font-weight-semibold);
+    }
+    .sidebar__plan-name {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-secondary);
+    }
+    .sidebar__plan-cta {
+      margin-top: var(--space-1);
+      background: var(--color-primary);
+      color: var(--color-white);
+      border: none;
+      border-radius: var(--rounded-sm);
+      padding: var(--space-2) var(--space-3);
+      font-family: var(--font-family);
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--space-10) var(--space-8);
+      max-width: calc(100% - 240px);
+    }
+    .main__inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ================================================
+       PAGE HEADER
+    ================================================ */
+    .page-header {
+      margin-bottom: var(--space-8);
+    }
+    .page-header__eyebrow {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--color-primary-600);
+      margin-bottom: var(--space-2);
+    }
+    .page-header__title {
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-extrabold);
+      color: var(--color-secondary);
+      line-height: 1.15;
+      margin-bottom: var(--space-3);
+    }
+    .page-header__sub {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-neutral-500);
+      max-width: 560px;
+      line-height: 1.5;
+    }
+
+    /* ================================================
+       SECTION HEADER
+    ================================================ */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: var(--space-5);
+    }
+    .section-title {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-secondary);
+    }
+    .section-link {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-primary-600);
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .section-link:hover { color: var(--color-primary-700); }
+
+    /* ================================================
+       STAT CARDS ROW
+    ================================================ */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+    .stat-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-secondary-25);
+      border-radius: var(--rounded-2xl);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      transition: box-shadow 0.2s;
+    }
+    .stat-card:hover { box-shadow: var(--shadow-md); }
+    .stat-card__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--rounded-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .stat-card__icon--krédits { background: var(--color-primary-10); }
+    .stat-card__icon--chantiers { background: rgba(28, 97, 197, 0.08); }
+    .stat-card__icon--demandes { background: var(--color-accent-50); }
+    .stat-card__icon--commission { background: var(--color-tertiary-50); }
+    .stat-card__value {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-extrabold);
+      color: var(--color-secondary);
+      line-height: 1;
+    }
+    .stat-card__label {
+      font-size: var(--font-size-md);
+      color: var(--color-neutral-500);
+      font-weight: var(--font-weight-medium);
+    }
+    .stat-card__trend {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      padding: 2px var(--space-2);
+      border-radius: var(--rounded-full);
+      width: fit-content;
+    }
+    .stat-card__trend--up { background: var(--color-success-50); color: var(--color-success); }
+    .stat-card__trend--down { background: var(--color-error-50); color: var(--color-error); }
+    .stat-card__trend--neutral { background: var(--color-neutral-100); color: var(--color-neutral-500); }
+
+    /* ================================================
+       WELCOME BANNER
+    ================================================ */
+    .welcome-banner {
+      background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-stone-500) 100%);
+      border-radius: var(--rounded-2xl);
+      padding: var(--space-8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      overflow: hidden;
+    }
+    .welcome-banner::before {
+      content: '';
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 200px;
+      height: 200px;
+      border-radius: var(--rounded-full);
+      background: rgba(255,255,255,0.04);
+    }
+    .welcome-banner__left { flex: 1; position: relative; z-index: 1; }
+    .welcome-banner__greeting {
+      font-size: var(--font-size-md);
+      color: rgba(255,255,255,0.6);
+      font-weight: var(--font-weight-medium);
+      margin-bottom: var(--space-2);
+    }
+    .welcome-banner__name {
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    .welcome-banner__plan {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: rgba(255,255,255,0.1);
+      border-radius: var(--rounded-full);
+      padding: var(--space-1) var(--space-4) var(--space-1) var(--space-3);
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+      color: rgba(255,255,255,0.8);
+    }
+    .welcome-banner__plan-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--rounded-full);
+      background: var(--color-neutral-400);
+    }
+    .welcome-banner__plan-dot--free { background: var(--color-neutral-400); }
+    .welcome-banner__right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--space-3);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .welcome-banner__cta {
+      background: var(--color-primary);
+      color: var(--color-white);
+      border: none;
+      border-radius: var(--rounded-sm);
+      padding: var(--space-3) var(--space-6);
+      font-family: var(--font-family);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: box-shadow 0.15s;
+      white-space: nowrap;
+    }
+    .welcome-banner__cta:hover { box-shadow: var(--shadow-md); }
+    .welcome-banner__sub {
+      font-size: var(--font-size-md);
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ================================================
+       QUICK ACTIONS
+    ================================================ */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-10);
+    }
+    .quick-action {
+      background: var(--color-white);
+      border: 1px solid var(--color-secondary-25);
+      border-radius: var(--rounded-2xl);
+      padding: var(--space-5);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      cursor: pointer;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .quick-action:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary-200);
+    }
+    .quick-action__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--rounded-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .quick-action__icon--krédits { background: var(--color-primary-10); }
+    .quick-action__icon--profil { background: var(--color-accent-50); }
+    .quick-action__icon--abonnement { background: var(--color-tertiary-50); }
+    .quick-action__text { flex: 1; }
+    .quick-action__title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-secondary);
+      margin-bottom: 2px;
+    }
+    .quick-action__desc {
+      font-size: var(--font-size-md);
+      color: var(--color-neutral-500);
+    }
+    .quick-action__arrow {
+      color: var(--color-neutral-300);
+      flex-shrink: 0;
+      transition: color 0.15s;
+    }
+    .quick-action:hover .quick-action__arrow { color: var(--color-primary); }
+
+    /* ================================================
+       ACTIVITY TABLE
+    ================================================ */
+    .activity {
+      background: var(--color-white);
+      border: 1px solid var(--color-secondary-25);
+      border-radius: var(--rounded-2xl);
+      box-shadow: var(--shadow-xs);
+      margin-bottom: var(--space-10);
+      overflow: hidden;
+    }
+    .activity__table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .activity__table th,
+    .activity__table td {
+      padding: var(--space-4) var(--space-6);
+      text-align: left;
+      border-bottom: 1px solid var(--color-neutral-100);
+      font-size: var(--font-size-lg);
+    }
+    .activity__table thead th {
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-neutral-400);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      background: var(--color-secondary-1);
+    }
+    .activity__table tbody tr:last-child td { border-bottom: none; }
+    .activity__table tbody tr:hover td { background: var(--color-neutral-50); }
+    .activity__table td { color: var(--color-secondary); }
+
+    .activity__type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+    }
+    .activity__type-badge--travaux { color: var(--color-travaux); }
+    .activity__type-badge--urgence { color: var(--color-urgence); }
+    .activity__type-badge--depannage { color: #ad7f00; }
+    .activity__type-badge--direct { color: var(--color-accent); }
+
+    .activity__status {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+    }
+    .activity__status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--rounded-full);
+    }
+    .activity__status--active .activity__status-dot { background: var(--color-success); }
+    .activity__status--active { color: var(--color-success); }
+    .activity__status--pending .activity__status-dot { background: var(--color-tertiary); }
+    .activity__status--pending { color: #ad7f00; }
+    .activity__status--done .activity__status-dot { background: var(--color-neutral-300); }
+    .activity__status--done { color: var(--color-neutral-500); }
+    .activity__status--refused .activity__status-dot { background: var(--color-error); }
+    .activity__status--refused { color: var(--color-error); }
+
+    .activity__client {
+      font-weight: var(--font-weight-medium);
+    }
+    .activity__date {
+      color: var(--color-neutral-400);
+      font-size: var(--font-size-md);
+    }
+    .activity__amount {
+      font-weight: var(--font-weight-semibold);
+    }
+
+    /* ================================================
+       TWO-COL GRID (Demandes directes + Derniers achats)
+    ================================================ */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+      margin-bottom: var(--space-10);
+    }
+
+    .card-panel {
+      background: var(--color-white);
+      border: 1px solid var(--color-secondary-25);
+      border-radius: var(--rounded-2xl);
+      box-shadow: var(--shadow-xs);
+      overflow: hidden;
+    }
+    .card-panel__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-5) var(--space-6);
+      border-bottom: 1px solid var(--color-neutral-100);
+    }
+    .card-panel__title {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-secondary);
+    }
+    .card-panel__link {
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-primary-600);
+      cursor: pointer;
+    }
+
+    .demand-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-6);
+      border-bottom: 1px solid var(--color-neutral-100);
+      transition: background 0.15s;
+    }
+    .demand-item:last-child { border-bottom: none; }
+    .demand-item:hover { background: var(--color-neutral-50); }
+    .demand-item__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--rounded-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .demand-item__icon--travaux { background: rgba(28, 97, 197, 0.08); }
+    .demand-item__icon--direct { background: var(--color-accent-50); }
+    .demand-item__info { flex: 1; min-width: 0; }
+    .demand-item__title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .demand-item__meta {
+      font-size: var(--font-size-md);
+      color: var(--color-neutral-400);
+    }
+    .demand-item__status { flex-shrink: 0; }
+
+    .purchase-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-6);
+      border-bottom: 1px solid var(--color-neutral-100);
+    }
+    .purchase-item:last-child { border-bottom: none; }
+    .purchase-item__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--rounded-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: var(--color-primary-10);
+    }
+    .purchase-item__info { flex: 1; }
+    .purchase-item__title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-secondary);
+    }
+    .purchase-item__date {
+      font-size: var(--font-size-md);
+      color: var(--color-neutral-400);
+    }
+    .purchase-item__amount {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-secondary);
+      flex-shrink: 0;
+    }
+
+    /* ================================================
+       SIDEBAR OVERLAY (mobile)
+    ================================================ */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(14, 47, 88, 0.4);
+      z-index: 299;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .sidebar-overlay.active { opacity: 1; }
+
+    /* ================================================
+       RESPONSIVE — TABLET (<=1024px)
+    ================================================ */
+    @media (max-width: 1024px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .quick-actions { grid-template-columns: repeat(2, 1fr); }
+      .welcome-banner {
+        flex-direction: column;
+        gap: var(--space-5);
+      }
+      .welcome-banner__right { align-items: flex-start; }
+      .activity { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .activity__table { min-width: 600px; }
+    }
+
+    /* ================================================
+       RESPONSIVE — MOBILE (<=768px)
+    ================================================ */
+    @media (max-width: 768px) {
+      .nav__burger { display: flex; }
+      .nav__links { display: none; }
+      .nav__inner { padding: 0 var(--space-4); }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 280px;
+        z-index: 300;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding-top: var(--space-4);
+        overflow-y: auto;
+      }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-overlay.visible { display: block; }
+
+      .layout { display: block; }
+      .main {
+        max-width: 100%;
+        padding: var(--space-6) var(--space-4);
+      }
+
+      .page-header__title { font-size: var(--font-size-4xl); }
+      .page-header__sub { font-size: var(--font-size-lg); }
+
+      .welcome-banner { padding: var(--space-6); }
+      .welcome-banner__name { font-size: var(--font-size-xl); }
+
+      .stats { grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+      .stat-card { padding: var(--space-4); }
+      .stat-card__value { font-size: var(--font-size-2xl); }
+
+      .quick-actions { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    /* ================================================
+       RESPONSIVE — SMALL MOBILE (<=480px)
+    ================================================ */
+    @media (max-width: 480px) {
+      .page-header__title { font-size: var(--font-size-3xl); }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .section-title { font-size: var(--font-size-xl); }
+    }
+
+    /* ================================================
+       MISSION TAG (v2)
+    ================================================ */
+    .kl-mission-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: var(--rounded-sm);
+      flex-shrink: 0;
+    }
+
+    /* ---- Select (v2) ---- */
+    .kl-select { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+    .kl-select__wrapper { position: relative; width: 100%; }
+    .kl-select__field {
+      width: 100%;
+      height: 40px;
+      padding: 12px;
+      padding-right: 40px;
+      background: var(--color-white);
+      border: 1px solid var(--color-secondary-25);
+      border-radius: var(--rounded-lg);
+      font-family: var(--font-family);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-secondary-400);
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .kl-select__field:focus { border-color: var(--color-secondary-100); }
+    .kl-select__chevron {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--color-secondary-2);
+      border-radius: var(--rounded-sm);
+      color: var(--color-secondary-400);
+      pointer-events: none;
+    }
+    .kl-select__label {
+      font-family: var(--font-family);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-secondary-100);
+    }
+
+    /* ---- Button (v2) ---- */
+    .kl-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      border-radius: var(--rounded-sm);
+      font-family: var(--font-family);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-xl);
+      line-height: 1.2;
+      transition: box-shadow 0.15s ease, opacity 0.15s ease;
+      white-space: nowrap;
+      text-decoration: none;
+      padding: var(--space-3) var(--space-4);
+      gap: var(--space-2);
+    }
+    .kl-button:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+    .kl-button--primary { background: var(--color-primary); color: var(--color-white); }
+    .kl-button--primary:hover { box-shadow: var(--shadow-md); }
+    .kl-button--secondary { background: var(--color-secondary); color: var(--color-white); }
+    .kl-button--secondary:hover { box-shadow: var(--shadow-md); }
+    .kl-button--ghost { background: var(--color-white); color: var(--color-secondary); border: 1px solid var(--color-secondary); }
+    .kl-button--ghost:hover { box-shadow: var(--shadow-md); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <button class="nav__burger" aria-label="Menu" onclick="toggleSidebar()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      </button>
+      <a class="nav__logo" href="tableau-de-bord.html">
+        <svg width="120" height="44" viewBox="0 0 160 59" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Kelkun — Le futur de l'artisanat" role="img">
+          <path d="M67.8352 44.2517H59.8718V0H67.8352V44.2517Z" fill="#03C5B8"/>
+          <path d="M102.15 33.6234V15.2906H110.175V32.1062C110.175 36.0889 112.768 37.6693 115.608 37.6693C118.447 37.6693 121.04 36.0889 121.04 32.1062V15.2906H129.003V33.6234C129.003 39.6922 124.312 45.0024 115.608 45.0024C106.903 45.0024 102.15 39.6922 102.15 33.6234Z" fill="#03C5B8"/>
+          <path d="M160 25.9189V44.2517H151.975V27.4361C151.975 23.4535 149.382 21.873 146.542 21.873C143.703 21.873 141.11 23.4535 141.11 27.4361V44.2517H133.147V25.9189C133.147 19.8501 137.838 14.5399 146.542 14.5399C155.247 14.5399 160 19.8501 160 25.9189Z" fill="#03C5B8"/>
+          <path d="M80.0193 44.2517H72.0559V0H80.0193V44.2517Z" fill="#03C5B8"/>
+          <path d="M82.5196 25.3737L89.395 16.4917C89.9814 15.7331 90.8688 15.2906 91.8102 15.2906H100.013L90.2592 27.1437C89.5725 27.9813 89.5339 29.1904 90.1666 30.0754L100.321 44.2517H92.3041C91.2932 44.2517 90.3518 43.746 89.7731 42.9005L82.3267 31.9798C80.9609 29.9727 81.0381 27.2939 82.5196 25.3737Z" fill="#03C5B8"/>
+          <path d="M7.96336 44.2517H0V0H7.96336V44.2517Z" fill="#03C5B8"/>
+          <path d="M10.4635 25.3737L17.3388 16.4917C17.9253 15.7331 18.8127 15.2906 19.7541 15.2906H27.9566L18.2031 27.1437C17.5163 27.9813 17.4777 29.1904 18.1105 30.0754L28.2653 44.2517H20.2479C19.2371 44.2517 18.2957 43.746 17.7169 42.9005L10.2706 31.9798C8.90477 29.9727 8.98194 27.2939 10.4635 25.3737Z" fill="#03C5B8"/>
+          <path d="M55.8902 31.8613C55.8902 19.7237 48.8528 14.5399 41.0747 14.5399C32.6174 14.5399 26.3826 20.9248 26.3826 29.7751C26.3826 38.6255 32.7409 45.0103 41.1981 45.0103C47.4947 45.0103 52.8036 42.1024 55.3346 35.9071C55.4504 35.6148 55.5584 35.3224 55.6587 35.0221H47.0009C45.8897 36.9818 43.6674 37.9933 41.3216 37.9933C37.7412 37.9933 35.2719 35.4014 34.8398 32.1774H55.8902V31.8613ZM34.6546 26.6775C35.2719 23.5799 37.6794 21.3673 41.0747 21.3673C44.4699 21.3673 46.8774 23.7695 47.3095 26.6775H34.6546Z" fill="#03C5B8"/>
+          <path d="M1.50934 57.113H4.6207V58.3311H0V49.1294H1.50934V57.113Z" fill="#0E2F58"/>
+          <path d="M7.39228 50.3475V53.0484H10.5698V54.2797H7.39228V57.0998H10.967V58.3311H5.88293V49.1162H10.967V50.3475H7.39228Z" fill="#0E2F58"/>
+          <path d="M21.6804 49.1294V50.3607H17.7747V53.0749H20.8198V54.3062H17.7747V58.3311H16.2653V49.1294H21.6804Z" fill="#0E2F58"/>
+          <path d="M24.5753 49.1294V54.9947C24.5753 55.692 24.7563 56.2172 25.1181 56.5702C25.4889 56.9233 26.0008 57.0998 26.654 57.0998C27.316 57.0998 27.8279 56.9233 28.1898 56.5702C28.5605 56.2172 28.7459 55.692 28.7459 54.9947V49.1294H30.2552V54.9682C30.2552 55.7185 30.0919 56.354 29.7653 56.8747C29.4387 57.3955 29.0018 57.7839 28.4546 58.0398C27.9073 58.2958 27.3027 58.4238 26.6407 58.4238C25.9787 58.4238 25.3741 58.2958 24.8269 58.0398C24.2884 57.7839 23.8604 57.3955 23.5426 56.8747C23.2248 56.354 23.066 55.7185 23.066 54.9682V49.1294H24.5753Z" fill="#0E2F58"/>
+          <path d="M38.1651 49.1294V50.3607H35.7157V58.3311H34.2064V50.3607H31.7437V49.1294H38.1651Z" fill="#0E2F58"/>
+          <path d="M41.1897 49.1294V54.9947C41.1897 55.692 41.3707 56.2172 41.7326 56.5702C42.1033 56.9233 42.6152 57.0998 43.2684 57.0998C43.9304 57.0998 44.4423 56.9233 44.8042 56.5702C45.1749 56.2172 45.3603 55.692 45.3603 54.9947V49.1294H46.8696V54.9682C46.8696 55.7185 46.7063 56.354 46.3798 56.8747C46.0532 57.3955 45.6163 57.7839 45.069 58.0398C44.5218 58.2958 43.9172 58.4238 43.2552 58.4238C42.5932 58.4238 41.9886 58.2958 41.4413 58.0398C40.9029 57.7839 40.4748 57.3955 40.157 56.8747C39.8393 56.354 39.6804 55.7185 39.6804 54.9682V49.1294H41.1897Z" fill="#0E2F58"/>
+          <path d="M53.6144 58.3311L51.496 54.6504H50.3442V58.3311H48.8348V49.1294H52.0124C52.7185 49.1294 53.3143 49.253 53.7998 49.5001C54.294 49.7473 54.6603 50.0783 54.8987 50.4931C55.1458 50.908 55.2694 51.3714 55.2694 51.8833C55.2694 52.4835 55.0928 53.0308 54.7398 53.5251C54.3956 54.0105 53.8615 54.3415 53.1378 54.518L55.415 58.3311H53.6144ZM50.3442 53.4456H52.0124C52.5773 53.4456 53.001 53.3044 53.2834 53.0219C53.5747 52.7395 53.7203 52.3599 53.7203 51.8833C53.7203 51.4067 53.5791 51.036 53.2966 50.7712C53.0142 50.4975 52.5861 50.3607 52.0124 50.3607H50.3442V53.4456Z" fill="#0E2F58"/>
+          <path d="M63.6449 49.1294C64.6247 49.1294 65.4808 49.3192 66.2135 49.6987C66.9549 50.0695 67.5242 50.6079 67.9214 51.314C68.3274 52.0113 68.5304 52.8278 68.5304 53.7634C68.5304 54.699 68.3274 55.511 67.9214 56.1995C67.5242 56.888 66.9549 57.4176 66.2135 57.7883C65.4808 58.1502 64.6247 58.3311 63.6449 58.3311H60.6395V49.1294H63.6449ZM63.6449 57.0998C64.7218 57.0998 65.547 56.8085 66.1208 56.226C66.6945 55.6434 66.9814 54.8226 66.9814 53.7634C66.9814 52.6954 66.6945 51.8612 66.1208 51.261C65.547 50.6608 64.7218 50.3607 63.6449 50.3607H62.1488V57.0998H63.6449Z" fill="#0E2F58"/>
+          <path d="M71.5357 50.3475V53.0484H74.7132V54.2797H71.5357V57.0998H75.1104V58.3311H70.0263V49.1162H75.1104V50.3475H71.5357Z" fill="#0E2F58"/>
+          <path d="M81.9181 57.113H85.0294V58.3311H80.4087V49.1294H81.9181V57.113Z" fill="#0E2F58"/>
+          <path d="M86.53 49.1294H88.1717L86.7815 52.2805H85.7224L86.53 49.1294Z" fill="#0E2F58"/>
+          <path d="M95.0457 56.4511H91.1929L90.5309 58.3311H88.9554L92.2521 49.1162H93.9997L97.2964 58.3311H95.7077L95.0457 56.4511ZM94.622 55.2198L93.1259 50.9433L91.6166 55.2198H94.622Z" fill="#0E2F58"/>
+          <path d="M103.509 58.3311L101.391 54.6504H100.239V58.3311H98.7299V49.1294H101.907C102.614 49.1294 103.209 49.253 103.695 49.5001C104.189 49.7473 104.555 50.0783 104.794 50.4931C105.041 50.908 105.164 51.3714 105.164 51.8833C105.164 52.4835 104.988 53.0308 104.635 53.5251C104.291 54.0105 103.757 54.3415 103.033 54.518L105.31 58.3311H103.509ZM100.239 53.4456H101.907C102.472 53.4456 102.896 53.3044 103.178 53.0219C103.47 52.7395 103.615 52.3599 103.615 51.8833C103.615 51.4067 103.474 51.036 103.192 50.7712C102.909 50.4975 102.481 50.3607 101.907 50.3607H100.239V53.4456Z" fill="#0E2F58"/>
+          <path d="M113.04 49.1294V50.3607H110.591V58.3311H109.081V50.3607H106.619V49.1294H113.04Z" fill="#0E2F58"/>
+          <path d="M116.078 49.1294V58.3311H114.569V49.1294H116.078Z" fill="#0E2F58"/>
+          <path d="M121.091 58.4238C120.474 58.4238 119.917 58.3179 119.423 58.106C118.929 57.8854 118.541 57.5764 118.258 57.1792C117.976 56.7821 117.834 56.3187 117.834 55.7891H119.45C119.485 56.1863 119.639 56.5128 119.913 56.7688C120.196 57.0248 120.588 57.1528 121.091 57.1528C121.612 57.1528 122.018 57.0292 122.309 56.7821C122.601 56.5261 122.746 56.1995 122.746 55.8023C122.746 55.4934 122.654 55.2418 122.468 55.0476C122.292 54.8535 122.067 54.7034 121.793 54.5975C121.528 54.4916 121.158 54.3768 120.681 54.2532C120.081 54.0944 119.591 53.9355 119.211 53.7766C118.841 53.6089 118.523 53.3529 118.258 53.0087C117.993 52.6645 117.861 52.2055 117.861 51.6318C117.861 51.1022 117.993 50.6388 118.258 50.2416C118.523 49.8444 118.894 49.5399 119.37 49.328C119.847 49.1162 120.399 49.0103 121.025 49.0103C121.917 49.0103 122.645 49.2353 123.21 49.6855C123.784 50.1268 124.101 50.7359 124.163 51.5126H122.495C122.468 51.1772 122.309 50.8903 122.018 50.652C121.727 50.4137 121.343 50.2945 120.866 50.2945C120.434 50.2945 120.081 50.4049 119.807 50.6255C119.534 50.8462 119.397 51.1639 119.397 51.5788C119.397 51.8612 119.481 52.0952 119.648 52.2805C119.825 52.457 120.045 52.5983 120.31 52.7042C120.575 52.8101 120.937 52.9248 121.396 53.0484C122.005 53.2161 122.499 53.3838 122.879 53.5515C123.267 53.7192 123.594 53.9796 123.859 54.3327C124.132 54.6769 124.269 55.1403 124.269 55.7229C124.269 56.1907 124.141 56.632 123.885 57.0469C123.638 57.4617 123.272 57.7971 122.786 58.0531C122.309 58.3002 121.745 58.4238 121.091 58.4238Z" fill="#0E2F58"/>
+          <path d="M131.597 56.4511H127.745L127.083 58.3311H125.507L128.804 49.1162H130.552L133.848 58.3311H132.259L131.597 56.4511ZM131.174 55.2198L129.678 50.9433L128.168 55.2198H131.174Z" fill="#0E2F58"/>
+          <path d="M142.842 58.3311H141.332L136.791 51.4596V58.3311H135.282V49.1162H136.791L141.332 55.9744V49.1162H142.842V58.3311Z" fill="#0E2F58"/>
+          <path d="M150.371 56.4511H146.518L145.856 58.3311H144.281L147.578 49.1162H149.325L152.622 58.3311H151.033L150.371 56.4511ZM149.947 55.2198L148.451 50.9433L146.942 55.2198H149.947Z" fill="#0E2F58"/>
+          <path d="M160 49.1294V50.3607H157.551V58.3311H156.041V50.3607H153.579V49.1294H160Z" fill="#0E2F58"/>
+        </svg>
+      </a>
+      <div class="nav__links">
+        <a class="nav__link nav__link--active" href="tableau-de-bord.html">Tableau de bord</a>
+        <a class="nav__link" href="mes-chantiers.html">Mes chantiers</a>
+        <a class="nav__link" href="#">Annuaire</a>
+        <a class="nav__link" href="espace-pro.html">Mon espace pro</a>
+      </div>
+      <div class="nav__actions">
+        <button class="nav__notif" aria-label="Notifications">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="nav__notif-dot"></span>
+        </button>
+        <div class="nav__avatar">JP</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+
+    <!-- SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <span class="sidebar__section-label">Mon compte</span>
+
+      <a class="sidebar__item sidebar__item--active" href="tableau-de-bord.html">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Tableau de bord
+      </a>
+      <a class="sidebar__item" href="espace-pro.html">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Mon abonnement
+      </a>
+      <a class="sidebar__item" href="mes-kredits.html">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+        Mes kredits
+        <span class="sidebar__badge">12</span>
+      </a>
+      <div class="sidebar__item">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Mes factures
+      </div>
+
+      <span class="sidebar__section-label">Activité</span>
+
+      <a class="sidebar__item" href="mes-chantiers.html">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Mes chantiers
+        <span class="sidebar__badge">3</span>
+      </a>
+      <div class="sidebar__item">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Demandes directes
+      </div>
+      <div class="sidebar__item">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Mon profil artisan
+      </div>
+
+      <div class="sidebar__plan-chip">
+        <span class="sidebar__plan-label">Plan actuel</span>
+        <span class="sidebar__plan-name">Free</span>
+        <a href="espace-pro.html"><button class="kl-button kl-button--primary" style="font-size: var(--font-size-md); padding: var(--space-2) var(--space-3); width: 100%;">Passer Master</button></a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+      <div class="main__inner">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+          <p class="page-header__eyebrow">Tableau de bord</p>
+          <h1 class="page-header__title">Bienvenue, Jean-Pierre</h1>
+          <p class="page-header__sub">Vue d'ensemble de votre activité sur Kelkun.</p>
+        </div>
+
+        <!-- WELCOME BANNER -->
+        <div class="welcome-banner">
+          <div class="welcome-banner__left">
+            <p class="welcome-banner__greeting">Votre plan</p>
+            <h2 class="welcome-banner__name">Plan Free</h2>
+            <div class="welcome-banner__plan">
+              <span class="welcome-banner__plan-dot welcome-banner__plan-dot--free"></span>
+              Passez Master pour débloquer les demandes directes
+            </div>
+          </div>
+          <div class="welcome-banner__right">
+            <a href="espace-pro.html">
+              <button class="kl-button kl-button--primary" style="font-size: var(--font-size-lg);">Essai Master 14 jours gratuit</button>
+            </a>
+            <span class="welcome-banner__sub">Sans engagement, sans CB</span>
+          </div>
+        </div>
+
+        <!-- STAT CARDS -->
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--krédits">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#03c5b8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+            </div>
+            <div class="stat-card__value">12</div>
+            <div class="stat-card__label">Krédits disponibles</div>
+            <div class="stat-card__trend stat-card__trend--neutral">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Stable
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--chantiers">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1c61c5" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="stat-card__value">3</div>
+            <div class="stat-card__label">Chantiers en cours</div>
+            <div class="stat-card__trend stat-card__trend--up">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+              +1 ce mois
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--demandes">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6778ed" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="stat-card__value">2</div>
+            <div class="stat-card__label">Demandes en attente</div>
+            <div class="stat-card__trend stat-card__trend--up">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+              Nouvelles
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--commission">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e0a500" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+            </div>
+            <div class="stat-card__value">20%</div>
+            <div class="stat-card__label">Commission actuelle</div>
+            <div class="stat-card__trend stat-card__trend--down">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14"/><polyline points="19 12 12 19 5 12"/></svg>
+              15% en Master
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK ACTIONS -->
+        <div class="section-header">
+          <h2 class="section-title">Actions rapides</h2>
+        </div>
+
+        <div class="quick-actions">
+          <a class="quick-action" href="mes-kredits.html">
+            <div class="quick-action__icon quick-action__icon--krédits">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#03c5b8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </div>
+            <div class="quick-action__text">
+              <div class="quick-action__title">Acheter des krédits</div>
+              <div class="quick-action__desc">Positionnez-vous sur des chantiers</div>
+            </div>
+            <svg class="quick-action__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+
+          <a class="quick-action" href="espace-pro.html">
+            <div class="quick-action__icon quick-action__icon--abonnement">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0a500" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="quick-action__text">
+              <div class="quick-action__title">Passer Master</div>
+              <div class="quick-action__desc">29€/mois, 14 jours d'essai gratuit</div>
+            </div>
+            <svg class="quick-action__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+
+          <div class="quick-action">
+            <div class="quick-action__icon quick-action__icon--profil">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6778ed" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="quick-action__text">
+              <div class="quick-action__title">Éditer mon profil</div>
+              <div class="quick-action__desc">Photo, métiers, zone d'intervention</div>
+            </div>
+            <svg class="quick-action__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+
+        <!-- RECENT ACTIVITY TABLE -->
+        <div class="section-header">
+          <h2 class="section-title">Activité récente</h2>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="kl-select__wrapper" style="width: 180px;">
+              <select class="kl-select__field">
+                <option>Ce mois</option>
+                <option>3 derniers mois</option>
+                <option>Cette année</option>
+                <option>Tout</option>
+              </select>
+              <div class="kl-select__chevron">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+            <span class="section-link">Voir tous les chantiers</span>
+          </div>
+        </div>
+
+        <div class="activity">
+          <table class="activity__table">
+            <thead>
+              <tr>
+                <th>Chantier</th>
+                <th>Type</th>
+                <th>Client</th>
+                <th>Statut</th>
+                <th>Date</th>
+                <th>Montant</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Rénovation salle de bain</strong></td>
+                <td><span class="activity__type-badge activity__type-badge--travaux"><span class="kl-mission-tag" style="background: #d2e2f9"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1c61c5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg></span> Travaux</span></td>
+                <td class="activity__client">Marie D.</td>
+                <td>
+                  <span class="activity__status activity__status--active">
+                    <span class="activity__status-dot"></span>
+                    En cours
+                  </span>
+                </td>
+                <td class="activity__date">8 mars</td>
+                <td class="activity__amount">4 200 €</td>
+              </tr>
+              <tr>
+                <td><strong>Fuite chauffe-eau</strong></td>
+                <td><span class="activity__type-badge activity__type-badge--urgence"><span class="kl-mission-tag" style="background: #ffcecc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e03030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span> Urgence</span></td>
+                <td class="activity__client">Thomas L.</td>
+                <td>
+                  <span class="activity__status activity__status--active">
+                    <span class="activity__status-dot"></span>
+                    En cours
+                  </span>
+                </td>
+                <td class="activity__date">7 mars</td>
+                <td class="activity__amount">380 €</td>
+              </tr>
+              <tr>
+                <td><strong>Pose carrelage terrasse</strong></td>
+                <td><span class="activity__type-badge activity__type-badge--direct"><span class="kl-mission-tag" style="background: #d3d5f8"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4b52e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span> Direct</span></td>
+                <td class="activity__client">Sophie M.</td>
+                <td>
+                  <span class="activity__status activity__status--pending">
+                    <span class="activity__status-dot"></span>
+                    En attente
+                  </span>
+                </td>
+                <td class="activity__date">6 mars</td>
+                <td class="activity__amount">1 800 €</td>
+              </tr>
+              <tr>
+                <td><strong>Changement serrure</strong></td>
+                <td><span class="activity__type-badge activity__type-badge--depannage"><span class="kl-mission-tag" style="background: #fff2cc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c27b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span> Dépannage</span></td>
+                <td class="activity__client">Pierre R.</td>
+                <td>
+                  <span class="activity__status activity__status--done">
+                    <span class="activity__status-dot"></span>
+                    Terminé
+                  </span>
+                </td>
+                <td class="activity__date">2 mars</td>
+                <td class="activity__amount">150 €</td>
+              </tr>
+              <tr>
+                <td><strong>Installation cuisine</strong></td>
+                <td><span class="activity__type-badge activity__type-badge--travaux"><span class="kl-mission-tag" style="background: #d2e2f9"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1c61c5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg></span> Travaux</span></td>
+                <td class="activity__client">Alain B.</td>
+                <td>
+                  <span class="activity__status activity__status--done">
+                    <span class="activity__status-dot"></span>
+                    Terminé
+                  </span>
+                </td>
+                <td class="activity__date">25 fév</td>
+                <td class="activity__amount">6 500 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- TWO-COL: Demandes directes + Derniers achats -->
+        <div class="two-col">
+
+          <!-- Demandes directes -->
+          <div class="card-panel">
+            <div class="card-panel__header">
+              <span class="card-panel__title">Demandes directes</span>
+              <span class="card-panel__link">Tout voir</span>
+            </div>
+            <div class="demand-item">
+              <div class="demand-item__icon demand-item__icon--direct">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6778ed" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="demand-item__info">
+                <div class="demand-item__title">Pose carrelage terrasse</div>
+                <div class="demand-item__meta">Sophie M. · il y a 2h</div>
+              </div>
+              <div class="demand-item__status">
+                <span class="activity__status activity__status--pending">
+                  <span class="activity__status-dot"></span>
+                  24h restantes
+                </span>
+              </div>
+            </div>
+            <div class="demand-item">
+              <div class="demand-item__icon demand-item__icon--travaux">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1c61c5" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><path d="M14 6a6 6 0 0 1 6 6v3"/></svg>
+              </div>
+              <div class="demand-item__info">
+                <div class="demand-item__title">Rénovation escalier bois</div>
+                <div class="demand-item__meta">Marc T. · il y a 5h</div>
+              </div>
+              <div class="demand-item__status">
+                <span class="activity__status activity__status--pending">
+                  <span class="activity__status-dot"></span>
+                  18h restantes
+                </span>
+              </div>
+            </div>
+            <div class="demand-item">
+              <div class="demand-item__icon demand-item__icon--direct">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6778ed" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="demand-item__info">
+                <div class="demand-item__title">Peinture chambre enfant</div>
+                <div class="demand-item__meta">Julie F. · hier</div>
+              </div>
+              <div class="demand-item__status">
+                <span class="activity__status activity__status--refused">
+                  <span class="activity__status-dot"></span>
+                  Expirée
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Derniers achats krédits -->
+          <div class="card-panel">
+            <div class="card-panel__header">
+              <span class="card-panel__title">Derniers achats</span>
+              <span class="card-panel__link">Mes factures</span>
+            </div>
+            <div class="purchase-item">
+              <div class="purchase-item__icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#03c5b8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+              </div>
+              <div class="purchase-item__info">
+                <div class="purchase-item__title">5 krédits</div>
+                <div class="purchase-item__date">5 mars 2026</div>
+              </div>
+              <div class="purchase-item__amount">9,90 €</div>
+            </div>
+            <div class="purchase-item">
+              <div class="purchase-item__icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#03c5b8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+              </div>
+              <div class="purchase-item__info">
+                <div class="purchase-item__title">10 krédits</div>
+                <div class="purchase-item__date">18 février 2026</div>
+              </div>
+              <div class="purchase-item__amount">17,90 €</div>
+            </div>
+            <div class="purchase-item">
+              <div class="purchase-item__icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#03c5b8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+              </div>
+              <div class="purchase-item__info">
+                <div class="purchase-item__title">5 krédits</div>
+                <div class="purchase-item__date">2 février 2026</div>
+              </div>
+              <div class="purchase-item__amount">9,90 €</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const isOpen = sidebar.classList.contains('open');
+      if (isOpen) {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        setTimeout(() => overlay.classList.remove('visible'), 250);
+      } else {
+        overlay.classList.add('visible');
+        requestAnimationFrame(() => {
+          overlay.classList.add('active');
+          sidebar.classList.add('open');
+        });
+      }
+    }
+  </script>
+
+</body>
+</html>

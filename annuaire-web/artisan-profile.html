@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelkun — Profil Artisan</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --primary:#00BFA6;
+            --primary-dark:#00a891;
+            --primary-light:#e6f9f6;
+            --primary-ultra-light:#f0fdfb;
+            --surface:#FFFFFF;
+            --surface-raised:#F8FAFB;
+            --surface-sunken:#F1F4F6;
+            --border:#E8ECED;
+            --border-light:#F0F2F3;
+            --text-primary:#0F1B2D;
+            --text-secondary:#506176;
+            --text-tertiary:#8B99A8;
+            --text-inverse:#FFFFFF;
+            --star:#F5A623;
+            --star-bg:#FEF7E8;
+            --success:#10B981;
+            --success-light:#ECFDF5;
+            --shadow-sm:0 1px 3px rgba(15,27,45,0.06);
+            --shadow-md:0 4px 16px rgba(15,27,45,0.08);
+            --shadow-lg:0 12px 40px rgba(15,27,45,0.12);
+            --shadow-xl:0 20px 60px rgba(15,27,45,0.16);
+            --radius-sm:10px;
+            --radius-md:14px;
+            --radius-lg:20px;
+            --radius-xl:24px;
+        }
+        html{-webkit-text-size-adjust:100%}
+        body{
+            font-family:'DM Sans',system-ui,sans-serif;
+            background:#E8ECED;
+            color:var(--text-primary);
+            line-height:1.5;
+            -webkit-font-smoothing:antialiased;
+        }
+
+        /* === MOBILE FRAME === */
+        .phone{
+            max-width:430px;
+            margin:32px auto;
+            background:var(--surface);
+            border-radius:44px;
+            box-shadow:var(--shadow-xl),0 0 0 12px #1a1f2e;
+            overflow:hidden;
+            position:relative;
+        }
+
+        /* === COVER / HERO === */
+        .cover{
+            height:200px;
+            background:linear-gradient(160deg,#007A6A 0%,var(--primary) 40%,#4DD9C0 100%);
+            position:relative;
+            overflow:hidden;
+        }
+        .cover::after{
+            content:'';
+            position:absolute;
+            inset:0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 80%,rgba(0,0,0,0.15),transparent),
+                radial-gradient(ellipse 60% 50% at 90% 20%,rgba(255,255,255,0.12),transparent);
+        }
+        .cover-pattern{
+            position:absolute;inset:0;
+            opacity:0.06;
+            background-image:
+                radial-gradient(circle at 20% 50%,#fff 1px,transparent 1px),
+                radial-gradient(circle at 60% 30%,#fff 1px,transparent 1px),
+                radial-gradient(circle at 80% 70%,#fff 1px,transparent 1px);
+            background-size:40px 40px,60px 60px,50px 50px;
+        }
+
+        /* Top bar */
+        .topbar{
+            position:absolute;top:0;left:0;right:0;z-index:10;
+            display:flex;justify-content:space-between;align-items:center;
+            padding:16px 20px;
+        }
+        .topbar-btn{
+            width:40px;height:40px;
+            background:rgba(255,255,255,0.2);
+            backdrop-filter:blur(12px);
+            -webkit-backdrop-filter:blur(12px);
+            border:none;border-radius:12px;
+            color:#fff;font-size:18px;
+            cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            transition:background 0.2s;
+        }
+        .topbar-btn:active{background:rgba(255,255,255,0.35)}
+        .topbar-right{display:flex;gap:8px}
+
+        /* === IDENTITY CARD — floats over cover === */
+        .identity{
+            position:relative;
+            margin:-72px 16px 0;
+            background:var(--surface);
+            border-radius:var(--radius-xl);
+            padding:20px;
+            box-shadow:var(--shadow-lg);
+            z-index:5;
+        }
+        .identity-top{
+            display:flex;gap:16px;align-items:flex-start;
+            margin-bottom:16px;
+        }
+        .avatar{
+            width:64px;height:64px;flex-shrink:0;
+            background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+            border-radius:16px;
+            display:flex;align-items:center;justify-content:center;
+            font-family:'Bricolage Grotesque',sans-serif;
+            font-weight:800;font-size:22px;color:#fff;
+            box-shadow:0 4px 12px rgba(0,191,166,0.3);
+            position:relative;
+        }
+        .avatar-badge{
+            position:absolute;bottom:-4px;right:-4px;
+            width:22px;height:22px;
+            background:var(--primary);
+            border:3px solid #fff;
+            border-radius:50%;
+            display:flex;align-items:center;justify-content:center;
+        }
+        .avatar-badge svg{width:10px;height:10px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+        .identity-info{flex:1;min-width:0}
+        .identity-name{
+            font-family:'Bricolage Grotesque',sans-serif;
+            font-weight:800;font-size:1.25rem;
+            color:var(--text-primary);
+            margin-bottom:2px;
+            display:flex;align-items:center;gap:6px;
+        }
+        .verified-tag{
+            display:inline-flex;align-items:center;gap:3px;
+            background:var(--primary-light);
+            color:var(--primary-dark);
+            font-family:'DM Sans',sans-serif;
+            font-size:0.688rem;font-weight:700;
+            padding:3px 8px;border-radius:6px;
+            white-space:nowrap;
+            letter-spacing:0.3px;
+        }
+        .verified-tag svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+        .identity-meta{
+            font-size:0.813rem;color:var(--text-secondary);
+            display:flex;flex-wrap:wrap;gap:4px 12px;
+            margin-top:4px;
+        }
+        .identity-meta span{display:flex;align-items:center;gap:4px}
+
+        /* Stats row */
+        .stats-row{
+            display:grid;grid-template-columns:repeat(3,1fr);
+            gap:8px;
+            margin-bottom:16px;
+        }
+        .stat-cell{
+            text-align:center;
+            padding:12px 4px;
+            background:var(--surface-raised);
+            border-radius:var(--radius-sm);
+        }
+        .stat-value{
+            font-family:'Bricolage Grotesque',sans-serif;
+            font-weight:800;font-size:1.25rem;
+            color:var(--text-primary);
+        }
+        .stat-value.star-color{color:var(--star)}
+        .stat-label{
+            font-size:0.688rem;font-weight:600;
+            color:var(--text-tertiary);
+            text-transform:uppercase;
+            letter-spacing:0.5px;
+            margin-top:2px;
+        }
+
+        /* CTA buttons */
+        .cta-group{display:flex;gap:10px}
+        .cta-primary{
+            flex:1;
+            background:var(--primary);color:#fff;
+            border:none;border-radius:var(--radius-md);
+            padding:14px 16px;
+            font-family:'DM Sans',sans-serif;
+            font-weight:700;font-size:0.938rem;
+            cursor:pointer;
+            display:flex;align-items:center;justify-content:center;gap:8px;
+            transition:all 0.2s;
+            box-shadow:0 4px 14px rgba(0,191,166,0.3);
+        }
+        .cta-primary:active{transform:scale(0.97);box-shadow:0 2px 8px rgba(0,191,166,0.2)}
+        .cta-secondary{
+            width:48px;height:48px;flex-shrink:0;
+            background:var(--surface);
+            border:2px solid var(--border);
+            border-radius:var(--radius-md);
+            font-size:18px;
+            cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            transition:all 0.2s;
+        }
+        .cta-secondary:active{background:var(--surface-raised);transform:scale(0.95)}
+
+        /* === CONTENT === */
+        .content{padding:16px 16px 120px}
+        .section{
+            background:var(--surface);
+            border:1.5px solid var(--border-light);
+            border-radius:var(--radius-lg);
+            padding:20px;
+            margin-bottom:12px;
+        }
+        .section-header{
+            display:flex;align-items:center;gap:10px;
+            margin-bottom:14px;
+        }
+        .section-icon{
+            width:36px;height:36px;
+            border-radius:10px;
+            display:flex;align-items:center;justify-content:center;
+            font-size:16px;flex-shrink:0;
+        }
+        .section-title{
+            font-family:'Bricolage Grotesque',sans-serif;
+            font-weight:700;font-size:1rem;
+            color:var(--text-primary);
+        }
+
+        /* Points forts — chips */
+        .highlights{display:flex;flex-wrap:wrap;gap:8px}
+        .highlight-chip{
+            display:inline-flex;align-items:center;gap:6px;
+            background:var(--surface-raised);
+            border:1.5px solid var(--border-light);
+            padding:8px 14px;
+            border-radius:100px;
+            font-size:0.813rem;font-weight:600;
+            color:var(--text-secondary);
+            transition:all 0.2s;
+        }
+        .highlight-chip .chip-icon{font-size:14px}
+        .highlight-chip .chip-count{
+            background:var(--primary-light);
+            color:var(--primary-dark);
+            font-size:0.688rem;font-weight:700;
+            padding:2px 7px;border-radius:100px;
+            min-width:20px;text-align:center;
+        }
+
+        /* Certifications */
+        .cert-list{display:flex;flex-wrap:wrap;gap:8px}
+        .cert-badge{
+            display:inline-flex;align-items:center;gap:6px;
+            background:#EEF2FF;
+            border:1.5px solid #C7D2FE;
+            padding:8px 14px;
+            border-radius:var(--radius-sm);
+            font-size:0.813rem;font-weight:600;
+            color:#4338CA;
+        }
+        .cert-badge svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+
+        /* Compétences tags */
+        .skill-tags{display:flex;flex-wrap:wrap;gap:6px}
+        .skill-tag{
+            background:var(--surface-sunken);
+            padding:7px 14px;
+            border-radius:8px;
+            font-size:0.813rem;font-weight:500;
+            color:var(--text-secondary);
+        }
+        .skill-more{
+            background:none;border:none;
+            color:var(--primary);
+            font-weight:700;font-size:0.813rem;
+            cursor:pointer;padding:7px 2px;
+        }
+
+        /* Services */
+        .services-text{
+            font-size:0.875rem;
+            color:var(--text-secondary);
+            line-height:1.65;
+        }
+
+        /* Portfolio grid */
+        .portfolio-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:6px;
+        }
+        .portfolio-item{
+            aspect-ratio:1;
+            border-radius:var(--radius-sm);
+            overflow:hidden;
+            position:relative;
+            cursor:pointer;
+        }
+        .portfolio-item img{
+            width:100%;height:100%;
+            object-fit:cover;
+            transition:transform 0.3s;
+        }
+        .portfolio-item:active img{transform:scale(1.05)}
+        .portfolio-more{
+            background:var(--surface-sunken);
+            display:flex;align-items:center;justify-content:center;
+            font-weight:700;font-size:0.938rem;
+            color:var(--text-secondary);
+        }
+
+        /* Placeholder colors for portfolio demo */
+        .ph{width:100%;height:100%}
+        .ph-1{background:linear-gradient(135deg,#a8e6cf,#88d8b0)}
+        .ph-2{background:linear-gradient(135deg,#b8d4e3,#7ec8e3)}
+        .ph-3{background:linear-gradient(135deg,#c5e1a5,#aed581)}
+        .ph-4{background:linear-gradient(135deg,#ffe0b2,#ffcc80)}
+        .ph-5{background:linear-gradient(135deg,#f8bbd0,#f48fb1)}
+
+        /* About */
+        .about-text{
+            font-size:0.875rem;
+            color:var(--text-secondary);
+            line-height:1.7;
+        }
+
+        /* Reviews */
+        .reviews-summary{
+            display:flex;align-items:center;gap:14px;
+            margin-bottom:16px;
+            padding-bottom:16px;
+            border-bottom:1.5px solid var(--border-light);
+        }
+        .reviews-score{
+            font-family:'Bricolage Grotesque',sans-serif;
+            font-weight:800;font-size:2.25rem;
+            color:var(--text-primary);
+            line-height:1;
+        }
+        .reviews-meta{flex:1}
+        .stars{display:flex;gap:2px;margin-bottom:4px}
+        .star-icon{color:var(--star);font-size:16px}
+        .star-icon.empty{color:var(--border)}
+        .reviews-count{
+            font-size:0.75rem;font-weight:600;
+            color:var(--text-tertiary);
+        }
+        .review-card{
+            padding:14px 0;
+            border-bottom:1px solid var(--border-light);
+        }
+        .review-card:last-of-type{border-bottom:none}
+        .review-top{
+            display:flex;justify-content:space-between;align-items:center;
+            margin-bottom:8px;
+        }
+        .reviewer{display:flex;align-items:center;gap:10px}
+        .reviewer-avatar{
+            width:32px;height:32px;
+            background:var(--surface-sunken);
+            border-radius:50%;
+            display:flex;align-items:center;justify-content:center;
+            font-weight:700;font-size:0.75rem;
+            color:var(--text-tertiary);
+        }
+        .reviewer-name{font-weight:600;font-size:0.875rem}
+        .reviewer-date{font-size:0.75rem;color:var(--text-tertiary)}
+        .review-stars{display:flex;gap:1px}
+        .review-stars .star-icon{font-size:12px}
+        .review-text{
+            font-size:0.813rem;
+            color:var(--text-secondary);
+            line-height:1.6;
+        }
+        .review-tag{
+            display:inline-block;
+            margin-top:8px;
+            background:var(--surface-sunken);
+            padding:4px 10px;
+            border-radius:6px;
+            font-size:0.688rem;font-weight:600;
+            color:var(--text-tertiary);
+        }
+        .reviews-see-all{
+            display:flex;align-items:center;justify-content:center;
+            gap:6px;
+            width:100%;
+            margin-top:14px;
+            padding:12px;
+            background:var(--surface-raised);
+            border:1.5px solid var(--border);
+            border-radius:var(--radius-md);
+            font-weight:700;font-size:0.875rem;
+            color:var(--text-secondary);
+            cursor:pointer;
+            transition:all 0.2s;
+        }
+        .reviews-see-all:active{background:var(--surface-sunken)}
+
+        /* Zone */
+        .zone-main{
+            font-size:0.875rem;
+            color:var(--text-secondary);
+            margin-bottom:10px;
+            display:flex;align-items:center;gap:6px;
+        }
+        .zone-tags{display:flex;flex-wrap:wrap;gap:6px}
+        .zone-tag{
+            background:var(--surface-sunken);
+            padding:6px 12px;
+            border-radius:8px;
+            font-size:0.75rem;font-weight:500;
+            color:var(--text-tertiary);
+        }
+
+        /* Trust footer */
+        .trust-section{
+            background:linear-gradient(135deg,var(--primary-ultra-light),var(--primary-light));
+            border:1.5px solid var(--primary);
+            border-radius:var(--radius-lg);
+            padding:20px;
+            margin-bottom:12px;
+        }
+        .trust-header{
+            display:flex;align-items:center;gap:10px;
+            margin-bottom:14px;
+        }
+        .trust-shield{
+            width:40px;height:40px;
+            background:var(--primary);
+            border-radius:12px;
+            display:flex;align-items:center;justify-content:center;
+            color:#fff;font-size:18px;
+        }
+        .trust-title{
+            font-family:'Bricolage Grotesque',sans-serif;
+            font-weight:700;font-size:0.938rem;
+            color:var(--text-primary);
+        }
+        .trust-subtitle{
+            font-size:0.75rem;color:var(--text-secondary);
+        }
+        .trust-items{display:flex;flex-direction:column;gap:10px}
+        .trust-item{
+            display:flex;align-items:center;gap:10px;
+            font-size:0.813rem;font-weight:500;
+            color:var(--text-secondary);
+        }
+        .trust-check{
+            width:20px;height:20px;flex-shrink:0;
+            background:var(--surface);
+            border-radius:6px;
+            display:flex;align-items:center;justify-content:center;
+            color:var(--primary);font-size:12px;font-weight:800;
+        }
+
+        /* === STICKY BOTTOM === */
+        .sticky-bottom{
+            position:fixed;
+            bottom:0;left:50%;transform:translateX(-50%);
+            width:100%;max-width:430px;
+            background:rgba(255,255,255,0.92);
+            backdrop-filter:blur(20px);
+            -webkit-backdrop-filter:blur(20px);
+            border-top:1px solid var(--border-light);
+            padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));
+            z-index:50;
+            display:flex;gap:10px;
+        }
+        .sticky-btn-primary{
+            flex:1;
+            background:var(--primary);color:#fff;
+            border:none;border-radius:var(--radius-md);
+            padding:15px 16px;
+            font-family:'DM Sans',sans-serif;
+            font-weight:700;font-size:0.938rem;
+            cursor:pointer;
+            display:flex;align-items:center;justify-content:center;gap:8px;
+            box-shadow:0 4px 14px rgba(0,191,166,0.3);
+            transition:all 0.2s;
+        }
+        .sticky-btn-primary:active{transform:scale(0.97)}
+        .sticky-btn-call{
+            display:flex;align-items:center;justify-content:center;gap:6px;
+            background:var(--surface);
+            border:2px solid var(--border);
+            border-radius:var(--radius-md);
+            padding:15px 20px;
+            font-family:'DM Sans',sans-serif;
+            font-weight:700;font-size:0.875rem;
+            color:var(--text-primary);
+            cursor:pointer;
+            transition:all 0.2s;
+        }
+        .sticky-btn-call:active{background:var(--surface-raised);transform:scale(0.97)}
+
+        /* === TOAST === */
+        .toast{
+            position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
+            background:var(--text-primary);color:#fff;
+            padding:14px 24px;border-radius:var(--radius-md);
+            font-weight:600;font-size:0.875rem;
+            box-shadow:var(--shadow-lg);
+            opacity:0;pointer-events:none;
+            transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+            z-index:100;
+            white-space:nowrap;
+        }
+        .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+        /* === ANIMATIONS === */
+        @keyframes fadeUp{
+            from{opacity:0;transform:translateY(24px)}
+            to{opacity:1;transform:translateY(0)}
+        }
+        .identity{animation:fadeUp 0.5s ease 0.1s both}
+        .content .section:nth-child(1){animation:fadeUp 0.5s ease 0.15s both}
+        .content .section:nth-child(2){animation:fadeUp 0.5s ease 0.2s both}
+        .content .section:nth-child(3){animation:fadeUp 0.5s ease 0.25s both}
+        .content .section:nth-child(4){animation:fadeUp 0.5s ease 0.3s both}
+        .content .section:nth-child(5){animation:fadeUp 0.5s ease 0.35s both}
+        .content .section:nth-child(6){animation:fadeUp 0.5s ease 0.4s both}
+        .content .section:nth-child(7){animation:fadeUp 0.5s ease 0.45s both}
+        .trust-section{animation:fadeUp 0.5s ease 0.5s both}
+
+        /* Scroll behavior */
+        @media(hover:none){
+            html{scroll-behavior:smooth}
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone">
+    <!-- COVER -->
+    <div class="cover">
+        <div class="cover-pattern"></div>
+        <div class="topbar">
+            <button class="topbar-btn" onclick="showToast('Retour')">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 9H3m0 0l5-5M3 9l5 5"/></svg>
+            </button>
+            <div class="topbar-right">
+                <button class="topbar-btn" onclick="showToast('Ajouté aux favoris ❤️')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.7 3.6a3.3 3.3 0 0 1 1.7 5.7L9 14.5l-5.4-5.2A3.3 3.3 0 0 1 8.3 4L9 4.8l.7-.8a3.3 3.3 0 0 1 3-.4z"/></svg>
+                </button>
+                <button class="topbar-btn" onclick="showToast('Lien copié !')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v3a1 1 0 001 1h8a1 1 0 001-1v-3M12 7l-3-3-3 3M9 4v9"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- IDENTITY CARD -->
+    <div class="identity">
+        <div class="identity-top">
+            <div class="avatar">
+                PM
+                <span class="avatar-badge">
+                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+            </div>
+            <div class="identity-info">
+                <div class="identity-name">
+                    Plomberie Martin
+                    <span class="verified-tag">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        Vérifié
+                    </span>
+                </div>
+                <div class="identity-meta">
+                    <span>🔧 Plombier · Chauffagiste</span>
+                    <span>📍 2,3 km</span>
+                    <span>✅ Disponible</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-cell">
+                <div class="stat-value" style="color:var(--primary)">16</div>
+                <div class="stat-label">Interventions</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value star-color">4,2</div>
+                <div class="stat-label">Note clients</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">2022</div>
+                <div class="stat-label">Membre depuis</div>
+            </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="cta-group">
+            <button class="cta-primary" onclick="showToast('Demande envoyée !')">
+                <span>📩</span> Envoyer ma demande
+            </button>
+            <button class="cta-secondary" onclick="showToast('Ouverture du chat…')">💬</button>
+        </div>
+    </div>
+
+    <!-- CONTENT SECTIONS -->
+    <div class="content">
+
+        <!-- Points forts -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:var(--star-bg)">⭐</div>
+                <div class="section-title">Points forts</div>
+            </div>
+            <div class="highlights">
+                <div class="highlight-chip">
+                    <span class="chip-icon">🤝</span> Courtois
+                    <span class="chip-count">10+</span>
+                </div>
+                <div class="highlight-chip">
+                    <span class="chip-icon">✨</span> Propre
+                    <span class="chip-count">3</span>
+                </div>
+                <div class="highlight-chip">
+                    <span class="chip-icon">⏱️</span> Ponctuel
+                    <span class="chip-count">1</span>
+                </div>
+                <div class="highlight-chip">
+                    <span class="chip-icon">💰</span> Juste prix
+                    <span class="chip-count">1</span>
+                </div>
+                <div class="highlight-chip">
+                    <span class="chip-icon">📅</span> Disponible
+                    <span class="chip-count">1</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trust / Vérifications — haut de page pour réassurance immédiate -->
+        <div class="trust-section">
+            <div class="trust-header">
+                <div class="trust-shield">🛡️</div>
+                <div>
+                    <div class="trust-title">Artisan vérifié par Kelkun</div>
+                    <div class="trust-subtitle">Identité, assurances RC pro et décennale vérifiées</div>
+                </div>
+            </div>
+            <div class="trust-items">
+                <div class="trust-item">
+                    <div class="trust-check">✓</div>
+                    Identité et SIREN vérifiés
+                </div>
+                <div class="trust-item">
+                    <div class="trust-check">✓</div>
+                    Assurance RC professionnelle active
+                </div>
+                <div class="trust-item">
+                    <div class="trust-check">✓</div>
+                    Assurance décennale active
+                </div>
+                <div class="trust-item">
+                    <div class="trust-check">✓</div>
+                    Charte Kelkun signée
+                </div>
+            </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:#EEF2FF">🎓</div>
+                <div class="section-title">Certifications professionnelles</div>
+            </div>
+            <div class="cert-list">
+                <div class="cert-badge">
+                    <svg viewBox="0 0 24 24"><path d="M12 15l-3 3v-4.5M12 15l3 3v-4.5M12 15V3"/><circle cx="12" cy="18" r="3"/></svg>
+                    Chauffage 4
+                </div>
+                <div class="cert-badge">
+                    <svg viewBox="0 0 24 24"><path d="M12 15l-3 3v-4.5M12 15l3 3v-4.5M12 15V3"/><circle cx="12" cy="18" r="3"/></svg>
+                    Ventilation 4
+                </div>
+                <div class="cert-badge">
+                    <svg viewBox="0 0 24 24"><path d="M12 15l-3 3v-4.5M12 15l3 3v-4.5M12 15V3"/><circle cx="12" cy="18" r="3"/></svg>
+                    QUALIBAT-RGE
+                </div>
+            </div>
+        </div>
+
+        <!-- Compétences -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:var(--primary-light)">🛠️</div>
+                <div class="section-title">Compétences</div>
+            </div>
+            <div class="skill-tags">
+                <span class="skill-tag">Plombier</span>
+                <span class="skill-tag">Électricien</span>
+                <span class="skill-tag">Maçon</span>
+                <span class="skill-tag">Plâtrier</span>
+                <span class="skill-tag">Carreleur</span>
+                <span class="skill-tag">Peintre en bâtiment</span>
+                <button class="skill-more" onclick="showToast('6 compétences supplémentaires')">+ 6 compétences</button>
+            </div>
+        </div>
+
+        <!-- Services proposés -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:#FEF3C7">🏗️</div>
+                <div class="section-title">Services proposés</div>
+            </div>
+            <p class="services-text">
+                Dépannage, installation, rénovation : nous intervenons sur tous vos travaux de plomberie avec sérieux et efficacité.
+            </p>
+        </div>
+
+        <!-- Portfolio -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:#FCE7F3">📸</div>
+                <div class="section-title">Portfolio</div>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item"><div class="ph ph-1"></div></div>
+                <div class="portfolio-item"><div class="ph ph-2"></div></div>
+                <div class="portfolio-item"><div class="ph ph-3"></div></div>
+                <div class="portfolio-item"><div class="ph ph-4"></div></div>
+                <div class="portfolio-item"><div class="ph ph-5"></div></div>
+                <div class="portfolio-item portfolio-more" onclick="showToast('Galerie complète')">+8</div>
+            </div>
+        </div>
+
+        <!-- À propos -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:var(--surface-sunken)">💬</div>
+                <div class="section-title">À propos</div>
+            </div>
+            <p class="about-text">
+                Plomberie Martin, votre artisan de confiance pour le dépannage et les travaux de plomberie. Intervention rapide, travail soigné et conseils personnalisés.
+            </p>
+        </div>
+
+        <!-- Avis clients -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:var(--star-bg)">💬</div>
+                <div class="section-title">Avis clients</div>
+            </div>
+            <div class="reviews-summary">
+                <div class="reviews-score">4,2</div>
+                <div class="reviews-meta">
+                    <div class="stars">
+                        <span class="star-icon">★</span>
+                        <span class="star-icon">★</span>
+                        <span class="star-icon">★</span>
+                        <span class="star-icon">★</span>
+                        <span class="star-icon empty">★</span>
+                    </div>
+                    <div class="reviews-count">8 avis vérifiés</div>
+                </div>
+            </div>
+
+            <!-- Review 1 -->
+            <div class="review-card">
+                <div class="review-top">
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">ML</div>
+                        <div>
+                            <div class="reviewer-name">Marie L.</div>
+                            <div class="reviewer-date">13 mars 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span>
+                    </div>
+                </div>
+                <div class="review-text">Intervention rapide et très propre pour un problème de fuite. Martin est arrivé en 1h, a tout réparé et nettoyé. Prix correct, je recommande.</div>
+                <span class="review-tag">Réparation fuite</span>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="review-card">
+                <div class="review-top">
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">JB</div>
+                        <div>
+                            <div class="reviewer-name">Julien B.</div>
+                            <div class="reviewer-date">08 février 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon empty">★</span>
+                    </div>
+                </div>
+                <div class="review-text">Bonne installation de chauffe-eau. Travail propre et bien fini. Un petit retard au démarrage mais rien de grave.</div>
+                <span class="review-tag">Installation chauffe-eau</span>
+            </div>
+
+            <button class="reviews-see-all" onclick="showToast('Chargement des 8 avis…')">
+                Voir les 8 avis →
+            </button>
+        </div>
+
+        <!-- Zone d'intervention -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:#DBEAFE">📍</div>
+                <div class="section-title">Zone d'intervention</div>
+            </div>
+            <div class="zone-main">
+                🔵 Rayon de 50 km autour de Saint-Pée-sur-Nivelle
+            </div>
+            <div class="zone-tags">
+                <span class="zone-tag">Saint-Pée-sur-Nivelle</span>
+                <span class="zone-tag">Bayonne</span>
+                <span class="zone-tag">Biarritz</span>
+                <span class="zone-tag">Anglet</span>
+                <span class="zone-tag">Hendaye</span>
+                <span class="zone-tag">Saint-Jean-de-Luz</span>
+                <span class="zone-tag">Hasparren</span>
+                <span class="zone-tag">Cambo-les-Bains</span>
+            </div>
+        </div>
+
+    </div><!-- /content -->
+
+    <!-- STICKY BOTTOM BAR -->
+    <div class="sticky-bottom">
+        <button class="sticky-btn-primary" onclick="showToast('Demande envoyée !')">
+            📩 Envoyer ma demande
+        </button>
+        <button class="sticky-btn-call" onclick="showToast('Appel en cours…')">
+            📞 Appeler
+        </button>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+function showToast(msg){
+    const t=document.getElementById('toast');
+    t.textContent=msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer=setTimeout(()=>t.classList.remove('show'),2500);
+}
+</script>
+</body>
+</html>

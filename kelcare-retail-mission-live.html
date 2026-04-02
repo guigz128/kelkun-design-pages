@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelcare Retail — Mission live</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ================================================
+   KELCARE RETAIL — MISSION LIVE
+   Design tokens from Kelkun Design System v2
+   ================================================ */
+
+:root {
+  /* Primary (Teal) */
+  --primary: #03c5b8;
+  --primary-10: #f1fefc;
+  --primary-25: #d5fbf6;
+  --primary-50: #c2faf3;
+  --primary-100: #93f6e9;
+  --primary-400: #3cdacc;
+  --primary-500: #03c5b8;
+  --primary-600: #029284;
+  --primary-700: #015f56;
+
+  /* Secondary (Navy) */
+  --secondary: #0e2f58;
+  --secondary-1: #f8f9fc;
+  --secondary-2: #f4f6fa;
+  --secondary-10: #eeeff7;
+  --secondary-25: #e0e2f0;
+  --secondary-50: #bdc3e0;
+  --secondary-100: #9aa3d0;
+  --secondary-200: #7e8cb8;
+  --secondary-300: #6274a0;
+  --secondary-400: #465d88;
+  --secondary-500: #0e2f58;
+  --secondary-600: #0a2342;
+  --secondary-700: #07172c;
+
+  /* Status */
+  --success: #3faf38;
+  --success-50: #f3fbf2;
+  --success-100: #e2f8e0;
+  --success-500: #3faf38;
+  --info: #3cb0f5;
+  --info-50: #effaff;
+  --info-100: #dbf3fe;
+  --info-500: #3cb0f5;
+  --warning: #c27b30;
+  --warning-50: #fcf7ee;
+  --warning-100: #f5e9d0;
+  --error: #fa4a57;
+  --error-50: #fff1f1;
+  --error-100: #ffe4e3;
+
+  /* Services */
+  --urgence: #ff634d;
+  --depannage: #ffc114;
+  --travaux: #1c61c5;
+
+  /* Neutrals */
+  --neutral-50: #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #e5e5e5;
+  --neutral-300: #d4d4d4;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-700: #404040;
+  --neutral-800: #262626;
+  --neutral-900: #171717;
+
+  /* Accent */
+  --accent: #6778ed;
+  --accent-50: #eff4fe;
+  --accent-100: #e1ebfe;
+
+  /* Typography */
+  --font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing */
+  --sidebar-w: 260px;
+  --topbar-h: 64px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--secondary-1);
+  color: var(--secondary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ================================================
+   LAYOUT
+   ================================================ */
+.layout { display: flex; min-height: 100vh; }
+
+/* ================================================
+   SIDEBAR
+   ================================================ */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--secondary-500);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 20;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.sidebar-logo-kelkun {
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--primary);
+  letter-spacing: -0.4px;
+}
+
+.sidebar-logo-care {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--primary-400);
+  opacity: 0.7;
+}
+
+.sidebar-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: rgba(3,197,184,0.15);
+  border: 1px solid rgba(3,197,184,0.25);
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--primary-100);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-store {
+  font-size: 12px;
+  opacity: 0.45;
+  margin-top: 4px;
+}
+
+.sidebar-nav {
+  padding: 16px 12px;
+  flex: 1;
+}
+
+.nav-section {
+  margin-bottom: 24px;
+}
+
+.nav-section-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  opacity: 0.3;
+  padding: 0 12px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+}
+
+.nav-item.active {
+  background: rgba(3,197,184,0.12);
+  color: var(--primary);
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.75;
+}
+
+.nav-badge {
+  margin-left: auto;
+  background: var(--primary);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+  min-width: 22px;
+  text-align: center;
+}
+
+.nav-badge.warn {
+  background: var(--urgence);
+}
+
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(-70deg, var(--primary-600), var(--primary-400));
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.sidebar-user { flex: 1; min-width: 0; }
+.sidebar-user-name { font-size: 13px; font-weight: 600; }
+.sidebar-user-role { font-size: 11px; opacity: 0.4; }
+
+.sidebar-logout {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+  opacity: 0.4;
+}
+.sidebar-logout:hover { background: rgba(255,255,255,0.08); opacity: 0.7; }
+.sidebar-logout svg { width: 16px; height: 16px; }
+
+/* ================================================
+   MAIN CONTENT
+   ================================================ */
+.main {
+  flex: 1;
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Topbar */
+.topbar {
+  height: var(--topbar-h);
+  background: white;
+  border-bottom: 1px solid var(--neutral-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar-search {
+  position: relative;
+}
+
+.topbar-search input {
+  width: 320px;
+  height: 38px;
+  padding: 0 12px 0 36px;
+  border: 1px solid var(--secondary-25);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--secondary);
+  background: var(--secondary-1);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.topbar-search input::placeholder { color: var(--secondary-50); }
+.topbar-search input:focus { border-color: var(--primary); }
+
+.topbar-search svg {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--secondary-50);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--secondary-25);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+  color: var(--secondary-300);
+}
+.topbar-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+.topbar-btn .notif-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  background: var(--urgence);
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.topbar-btn svg { width: 18px; height: 18px; }
+
+/* Content area */
+.content {
+  flex: 1;
+  padding: 28px 32px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.page-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.page-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--secondary);
+  letter-spacing: -0.3px;
+}
+
+.page-subtitle {
+  font-size: 13px;
+  color: var(--secondary-200);
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--error-50);
+  border: 1px solid var(--error-100);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--urgence);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--urgence);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.4); }
+}
+
+/* ================================================
+   SPLIT LAYOUT (left panel + map)
+   ================================================ */
+.split-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  min-height: 0;
+}
+
+/* ================================================
+   LEFT PANEL — Mission list
+   ================================================ */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: white;
+  border: 1px solid var(--neutral-200);
+  border-radius: 12px;
+}
+
+.panel-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-header-count {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.panel-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--success-50);
+  border: 1px solid var(--success-100);
+  color: var(--success);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.panel-header-badge .dot {
+  width: 6px;
+  height: 6px;
+  background: var(--success);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.panel-filter {
+  display: flex;
+  gap: 6px;
+}
+
+.filter-chip {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid var(--neutral-200);
+  background: white;
+  color: var(--neutral-500);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filter-chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.filter-chip.active {
+  background: var(--primary-10);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ================================================
+   MISSION CARD
+   ================================================ */
+.mission-card {
+  background: white;
+  border: 1px solid var(--neutral-200);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.mission-card:hover {
+  box-shadow: 0 4px 16px rgba(14,47,88,0.08);
+}
+
+.mission-card.urgence {
+  border-left: 4px solid var(--urgence);
+}
+
+.mission-card.travaux {
+  border-left: 4px solid var(--travaux);
+}
+
+.mission-card-header {
+  padding: 16px 18px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.mission-type-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mission-type-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.mission-type-icon.urgence {
+  background: var(--error-50);
+  color: var(--urgence);
+}
+
+.mission-type-icon.travaux {
+  background: var(--info-50);
+  color: var(--travaux);
+}
+
+.mission-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mission-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--secondary);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.mission-ref {
+  font-size: 12px;
+  color: var(--neutral-500);
+  font-weight: 500;
+}
+
+.mission-type-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.mission-type-tag.urgence {
+  background: var(--error-50);
+  color: var(--urgence);
+}
+
+.mission-type-tag.travaux {
+  background: var(--info-50);
+  color: var(--travaux);
+}
+
+/* Prestataire row */
+.mission-prestataire {
+  padding: 0 18px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prestataire-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.prestataire-avatar.urgence {
+  background: linear-gradient(-70deg, #e04535, var(--urgence));
+}
+
+.prestataire-avatar.travaux {
+  background: linear-gradient(-70deg, #1550a0, var(--travaux));
+}
+
+.prestataire-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.prestataire-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.prestataire-company {
+  font-size: 11px;
+  color: var(--neutral-500);
+}
+
+/* Timeline status */
+.mission-timeline {
+  padding: 0 18px 14px;
+}
+
+.timeline-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 8px;
+}
+
+.timeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.timeline-step-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--neutral-300);
+  background: white;
+  z-index: 1;
+  position: relative;
+}
+
+.timeline-step-dot.done {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.timeline-step-dot.active {
+  background: var(--success);
+  border-color: var(--success);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.timeline-step-label {
+  font-size: 9px;
+  color: var(--neutral-400);
+  margin-top: 4px;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.timeline-step-label.active {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.timeline-step-label.done {
+  color: var(--primary-600);
+}
+
+.timeline-step-time {
+  font-size: 9px;
+  color: var(--neutral-400);
+  font-weight: 500;
+}
+
+.timeline-connector {
+  flex: 1;
+  height: 2px;
+  background: var(--neutral-200);
+  margin: 0 -2px;
+  margin-top: -23px;
+  align-self: flex-start;
+  position: relative;
+  top: 6px;
+}
+
+.timeline-connector.done {
+  background: var(--primary);
+}
+
+.timeline-connector.active {
+  background: linear-gradient(90deg, var(--primary), var(--success));
+}
+
+/* Progress bar */
+.mission-progress {
+  padding: 0 18px;
+}
+
+.progress-bar-track {
+  height: 6px;
+  background: var(--neutral-100);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 1s ease;
+}
+
+.progress-bar-fill.urgence {
+  background: linear-gradient(90deg, var(--urgence), #ff8c7a);
+}
+
+.progress-bar-fill.travaux {
+  background: linear-gradient(90deg, var(--travaux), #4a8ae8);
+}
+
+/* SLA & timer */
+.mission-footer {
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--neutral-100);
+  margin-top: 4px;
+}
+
+.sla-countdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sla-countdown svg {
+  width: 14px;
+  height: 14px;
+}
+
+.sla-countdown.warning {
+  color: var(--warning);
+}
+
+.sla-countdown.ok {
+  color: var(--success);
+}
+
+.elapsed-timer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--secondary-300);
+}
+
+.elapsed-timer svg {
+  width: 14px;
+  height: 14px;
+}
+
+.mission-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--neutral-200);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--secondary-300);
+}
+
+.action-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-10);
+}
+
+.action-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ================================================
+   RIGHT PANEL — Map area
+   ================================================ */
+.right-panel {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--secondary-10);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Grid pattern */
+.map-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(14,47,88,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,47,88,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Subtle road-like lines */
+.map-roads {
+  position: absolute;
+  inset: 0;
+}
+
+.map-road {
+  position: absolute;
+  background: rgba(14,47,88,0.06);
+  border-radius: 2px;
+}
+
+.map-road.h1 { top: 30%; left: 5%; width: 90%; height: 3px; }
+.map-road.h2 { top: 55%; left: 10%; width: 80%; height: 2px; }
+.map-road.h3 { top: 75%; left: 15%; width: 70%; height: 2px; }
+.map-road.v1 { top: 10%; left: 25%; width: 3px; height: 80%; }
+.map-road.v2 { top: 15%; left: 50%; width: 2px; height: 70%; }
+.map-road.v3 { top: 5%; left: 72%; width: 2px; height: 85%; }
+
+/* Map center content */
+.map-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 1;
+  color: var(--secondary-200);
+}
+
+.map-center-icon {
+  width: 56px;
+  height: 56px;
+  background: white;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(14,47,88,0.08);
+}
+
+.map-center-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--secondary-100);
+}
+
+.map-center-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.map-center-sub {
+  font-size: 12px;
+  color: var(--secondary-100);
+}
+
+/* Map pins */
+.map-pin {
+  position: absolute;
+  z-index: 3;
+}
+
+.map-pin-marker {
+  width: 36px;
+  height: 36px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.map-pin-marker svg {
+  width: 16px;
+  height: 16px;
+  transform: rotate(45deg);
+  color: white;
+}
+
+.map-pin.urgence .map-pin-marker { background: var(--urgence); }
+.map-pin.travaux .map-pin-marker { background: var(--travaux); }
+.map-pin.store .map-pin-marker { background: var(--primary); }
+
+.map-pin-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  animation: mapPulse 2s ease-in-out infinite;
+}
+
+.map-pin.urgence .map-pin-pulse { background: var(--urgence); }
+.map-pin.travaux .map-pin-pulse { background: var(--travaux); }
+
+@keyframes mapPulse {
+  0% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2.5); }
+}
+
+/* ETA info card */
+.map-info-card {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: white;
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 4px 20px rgba(14,47,88,0.12);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--neutral-200);
+}
+
+.map-info-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(-70deg, #e04535, var(--urgence));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.map-info-details { flex: 1; }
+
+.map-info-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.map-info-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--neutral-500);
+  margin-top: 2px;
+}
+
+.map-info-eta {
+  font-weight: 700;
+  color: var(--urgence);
+}
+
+.map-info-distance {
+  font-weight: 500;
+}
+
+/* Route line */
+.map-route {
+  position: absolute;
+  z-index: 2;
+}
+
+.map-route path {
+  fill: none;
+  stroke: var(--urgence);
+  stroke-width: 3;
+  stroke-dasharray: 8, 6;
+  stroke-linecap: round;
+  animation: routeFlow 1s linear infinite;
+}
+
+@keyframes routeFlow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -14; }
+}
+
+/* Map legend */
+.map-legend {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  border-radius: 10px;
+  padding: 12px 16px;
+  box-shadow: 0 2px 12px rgba(14,47,88,0.08);
+  z-index: 5;
+  display: flex;
+  gap: 16px;
+  border: 1px solid var(--neutral-200);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--secondary-300);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.legend-dot.urgence { background: var(--urgence); }
+.legend-dot.travaux { background: var(--travaux); }
+.legend-dot.depannage { background: var(--depannage); }
+.legend-dot.store { background: var(--primary); }
+
+/* ================================================
+   BOTTOM BAR — Stats
+   ================================================ */
+.bottom-stats {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 14px 24px;
+  background: white;
+  border: 1px solid var(--neutral-200);
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.bottom-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--secondary-300);
+}
+
+.bottom-stat-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-stat-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.bottom-stat-icon.live {
+  background: var(--error-50);
+  color: var(--urgence);
+}
+
+.bottom-stat-icon.time {
+  background: var(--info-50);
+  color: var(--info);
+}
+
+.bottom-stat-icon.next {
+  background: var(--success-50);
+  color: var(--success);
+}
+
+.bottom-stat-value {
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.bottom-stat-label {
+  font-weight: 400;
+}
+
+.bottom-stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--neutral-200);
+}
+
+/* ================================================
+   FOOTER BAR
+   ================================================ */
+.footer-bar {
+  padding: 16px 32px;
+  border-top: 1px solid var(--neutral-200);
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--secondary-200);
+}
+
+.footer-bar a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ================================================
+   ANIMATIONS
+   ================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mission-card {
+  animation: fadeInUp 0.4s ease backwards;
+}
+
+.mission-card:nth-child(1) { animation-delay: 0.05s; }
+.mission-card:nth-child(2) { animation-delay: 0.15s; }
+
+.map-info-card { animation: fadeInUp 0.5s ease backwards 0.2s; }
+.bottom-stats { animation: fadeInUp 0.4s ease backwards 0.25s; }
+
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ========== SIDEBAR ========== -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <span class="sidebar-logo-kelkun">kelkun</span>
+        <span class="sidebar-logo-care">care</span>
+        <span class="sidebar-badge">retail</span>
+      </div>
+      <div class="sidebar-store">Leroy Merlin Montpellier Odysseum</div>
+    </div>
+
+    <div class="sidebar-nav">
+      <!-- Operations -->
+      <div class="nav-section">
+        <div class="nav-section-label">Operations</div>
+        <a class="nav-item" href="kelcare-retail-dashboard.html">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </span>
+          <span>Tableau de bord</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          </span>
+          <span>Nouveau ticket</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"/><path d="m15 9 6-6"/></svg>
+          </span>
+          <span>Suivi interventions</span>
+          <span class="nav-badge">7</span>
+        </a>
+        <a class="nav-item active" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <span>Mission live</span>
+          <span class="nav-badge warn">2</span>
+        </a>
+      </div>
+
+      <!-- Maintenance -->
+      <div class="nav-section">
+        <div class="nav-section-label">Maintenance</div>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </span>
+          <span>Preventif</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
+          </span>
+          <span>Equipements</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          <span>Conformite</span>
+          <span class="nav-badge warn">1</span>
+        </a>
+      </div>
+
+      <!-- Reseau -->
+      <div class="nav-section">
+        <div class="nav-section-label">Reseau</div>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          <span>Prestataires</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </span>
+          <span>Messagerie</span>
+          <span class="nav-badge">3</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-4-4"/></svg>
+          </span>
+          <span>Marketplace</span>
+        </a>
+      </div>
+
+      <!-- Pilotage -->
+      <div class="nav-section">
+        <div class="nav-section-label">Pilotage</div>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </span>
+          <span>Analytics</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          </span>
+          <span>Budget</span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </span>
+          <span>Rapports</span>
+        </a>
+      </div>
+
+      <!-- Admin -->
+      <div class="nav-section">
+        <div class="nav-section-label">Administration</div>
+        <a class="nav-item" href="#">
+          <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span>Parametres</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-avatar">SB</div>
+      <div class="sidebar-user">
+        <div class="sidebar-user-name">Sophie Bertrand</div>
+        <div class="sidebar-user-role">Responsable maintenance</div>
+      </div>
+      <div class="sidebar-logout">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== MAIN ========== -->
+  <div class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-search">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Rechercher un ticket, equipement, prestataire...">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn" title="Aide">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </button>
+        <button class="topbar-btn" title="Notifications">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-dot"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- Page header -->
+      <div class="page-header">
+        <div>
+          <div class="page-header-left">
+            <h1 class="page-title">Mission live</h1>
+            <div class="live-indicator">
+              <span class="live-dot"></span>
+              2 en cours
+            </div>
+          </div>
+          <p class="page-subtitle">Suivi en temps reel des interventions actives sur votre site</p>
+        </div>
+      </div>
+
+      <!-- Split layout -->
+      <div class="split-layout">
+
+        <!-- LEFT PANEL — Mission list -->
+        <div class="left-panel">
+
+          <!-- Panel header -->
+          <div class="panel-header">
+            <div class="panel-header-left">
+              <span class="panel-header-count">2 missions en cours</span>
+              <span class="panel-header-badge">
+                <span class="dot"></span>
+                Live
+              </span>
+            </div>
+            <div class="panel-filter">
+              <span class="filter-chip active">Toutes</span>
+              <span class="filter-chip">Urgence</span>
+              <span class="filter-chip">Travaux</span>
+            </div>
+          </div>
+
+          <!-- ======== CARD 1 — URGENCE ======== -->
+          <div class="mission-card urgence">
+            <div class="mission-card-header">
+              <div class="mission-type-icon urgence">
+                <!-- Lucide: AlertTriangle -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <div class="mission-header-info">
+                <div class="mission-title">Fuite d'eau — jardinerie</div>
+                <div class="mission-ref">#KR-1247</div>
+              </div>
+              <span class="mission-type-tag urgence">Urgence</span>
+            </div>
+
+            <!-- Prestataire -->
+            <div class="mission-prestataire">
+              <div class="prestataire-avatar urgence">PD</div>
+              <div class="prestataire-info">
+                <div class="prestataire-name">Pierre Duval</div>
+                <div class="prestataire-company">Duval Plomberie</div>
+              </div>
+            </div>
+
+            <!-- Timeline steps -->
+            <div class="mission-timeline">
+              <div class="timeline-steps">
+                <div class="timeline-step">
+                  <div class="timeline-step-dot done"></div>
+                  <div class="timeline-step-label done">Ticket cree</div>
+                  <div class="timeline-step-time">10h12</div>
+                </div>
+                <div class="timeline-connector done"></div>
+                <div class="timeline-step">
+                  <div class="timeline-step-dot done"></div>
+                  <div class="timeline-step-label done">Assigne</div>
+                  <div class="timeline-step-time">10h14</div>
+                </div>
+                <div class="timeline-connector done"></div>
+                <div class="timeline-step">
+                  <div class="timeline-step-dot done"></div>
+                  <div class="timeline-step-label done">En route</div>
+                  <div class="timeline-step-time">10h18</div>
+                </div>
+                <div class="timeline-connector active"></div>
+                <div class="timeline-step">
+                  <div class="timeline-step-dot active"></div>
+                  <div class="timeline-step-label active">ETA 14 min</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="mission-progress">
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill urgence" style="width: 65%"></div>
+              </div>
+            </div>
+
+            <!-- Footer / SLA -->
+            <div class="mission-footer">
+              <div class="sla-countdown warning">
+                <!-- Lucide: Clock -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                SLA : 2h47 restantes
+              </div>
+              <div class="mission-actions">
+                <button class="action-btn" title="Appeler">
+                  <!-- Lucide: Phone -->
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </button>
+                <button class="action-btn" title="Message">
+                  <!-- Lucide: MessageSquare -->
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ======== CARD 2 — TRAVAUX ======== -->
+          <div class="mission-card travaux">
+            <div class="mission-card-header">
+              <div class="mission-type-icon travaux">
+                <!-- Lucide: Wrench -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div class="mission-header-info">
+                <div class="mission-title">Remplacement eclairage LED — allee 7</div>
+                <div class="mission-ref">#KR-1243</div>
+              </div>
+              <span class="mission-type-tag travaux">Travaux</span>
+            </div>
+
+            <!-- Prestataire -->
+            <div class="mission-prestataire">
+              <div class="prestataire-avatar travaux">MR</div>
+              <div class="prestataire-info">
+                <div class="prestataire-name">Marc Renaud</div>
+                <div class="prestataire-company">Elec Pro 34</div>
+              </div>
+            </div>
+
+            <!-- Timeline steps -->
+            <div class="mission-timeline">
+              <div class="timeline-steps">
+                <div class="timeline-step">
+                  <div class="timeline-step-dot done"></div>
+                  <div class="timeline-step-label done">Ticket cree</div>
+                </div>
+                <div class="timeline-connector done"></div>
+                <div class="timeline-step">
+                  <div class="timeline-step-dot done"></div>
+                  <div class="timeline-step-label done">Assigne</div>
+                </div>
+                <div class="timeline-connector done"></div>
+                <div class="timeline-step">
+                  <div class="timeline-step-dot done"></div>
+                  <div class="timeline-step-label done">En route</div>
+                </div>
+                <div class="timeline-connector done"></div>
+                <div class="timeline-step">
+                  <div class="timeline-step-dot active"></div>
+                  <div class="timeline-step-label active">Sur site</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="mission-progress">
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill travaux" style="width: 80%"></div>
+              </div>
+            </div>
+
+            <!-- Footer / Timer -->
+            <div class="mission-footer">
+              <div class="elapsed-timer">
+                <!-- Lucide: Timer -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="14" x2="12" y2="8"/><circle cx="12" cy="14" r="8"/></svg>
+                Sur site depuis 9h30 — 2h32 ecoulees
+              </div>
+              <div class="mission-actions">
+                <button class="action-btn" title="Appeler">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </button>
+                <button class="action-btn" title="Message">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT PANEL — Map area -->
+        <div class="right-panel">
+          <div class="map-placeholder">
+            <!-- Grid pattern -->
+            <div class="map-grid"></div>
+
+            <!-- Road-like lines -->
+            <div class="map-roads">
+              <div class="map-road h1"></div>
+              <div class="map-road h2"></div>
+              <div class="map-road h3"></div>
+              <div class="map-road v1"></div>
+              <div class="map-road v2"></div>
+              <div class="map-road v3"></div>
+            </div>
+
+            <!-- Center label -->
+            <div class="map-center">
+              <div class="map-center-icon">
+                <!-- Lucide: MapPin -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="map-center-label">Carte temps reel</div>
+              <div class="map-center-sub">Positions GPS mises a jour toutes les 30s</div>
+            </div>
+
+            <!-- Store pin (center-bottom area) -->
+            <div class="map-pin store" style="bottom: 32%; left: 48%;">
+              <div class="map-pin-marker">
+                <!-- Lucide: Store -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><line x1="2" y1="7" x2="22" y2="7"/><path d="M6 7v3a3 3 0 0 0 6 0V7"/><path d="M12 7v3a3 3 0 0 0 6 0V7"/></svg>
+              </div>
+            </div>
+
+            <!-- Urgence pin (top-right) — Pierre Duval en route -->
+            <div class="map-pin urgence" style="top: 28%; right: 28%;">
+              <div class="map-pin-pulse"></div>
+              <div class="map-pin-marker">
+                <!-- Lucide: Truck -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"/><path d="M14 9h4l4 4v4c0 .6-.4 1-1 1h-2"/><circle cx="7" cy="18" r="2"/><path d="M15 18H9"/><circle cx="17" cy="18" r="2"/></svg>
+              </div>
+            </div>
+
+            <!-- Travaux pin (near store) — Marc Renaud sur site -->
+            <div class="map-pin travaux" style="bottom: 38%; left: 52%;">
+              <div class="map-pin-pulse"></div>
+              <div class="map-pin-marker">
+                <!-- Lucide: Wrench -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+            </div>
+
+            <!-- Animated route from urgence pin to store -->
+            <svg class="map-route" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+              <path d="M 72% 33% Q 65% 45% 52% 60%"/>
+              <!-- Fallback: manual coordinates -->
+            </svg>
+
+            <!-- ETA info card -->
+            <div class="map-info-card">
+              <div class="map-info-avatar">PD</div>
+              <div class="map-info-details">
+                <div class="map-info-name">Pierre Duval</div>
+                <div class="map-info-meta">
+                  <span class="map-info-eta">ETA 14 min</span>
+                  <span>·</span>
+                  <span class="map-info-distance">3,2 km</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="map-legend">
+              <div class="legend-item">
+                <span class="legend-dot urgence"></span>
+                Urgence
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot travaux"></span>
+                Travaux
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot depannage"></span>
+                Depannage
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot store"></span>
+                Magasin
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom stats bar -->
+      <div class="bottom-stats">
+        <div class="bottom-stat">
+          <div class="bottom-stat-icon live">
+            <!-- Lucide: Radio -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.4"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.4"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></svg>
+          </div>
+          <span><span class="bottom-stat-value">2</span> <span class="bottom-stat-label">missions live</span></span>
+        </div>
+        <div class="bottom-stat-separator"></div>
+        <div class="bottom-stat">
+          <div class="bottom-stat-icon time">
+            <!-- Lucide: Clock -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span><span class="bottom-stat-label">Temps moyen sur site :</span> <span class="bottom-stat-value">1h45</span></span>
+        </div>
+        <div class="bottom-stat-separator"></div>
+        <div class="bottom-stat">
+          <div class="bottom-stat-icon next">
+            <!-- Lucide: CalendarCheck -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
+          </div>
+          <span><span class="bottom-stat-label">Prochain RDV planifie :</span> <span class="bottom-stat-value">14h00</span></span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-bar">
+      <span>Kelkun Retail v2.1 — Kelcare</span>
+      <span>Derniere synchro : il y a 2 min · <a href="#">API status</a></span>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

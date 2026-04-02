@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Plomberie Martin — Profil artisan | Kelkun</title>
+  <link rel="stylesheet" href="shared.css?v=20260401">
+  <style>
+    /* ===== PROFIL ARTISAN — MOBILE OPTIMISÉ ===== */
+    /* Utilise shared.css tokens (Poppins, couleurs Kelkun) */
+
+    body {
+      background: var(--color-neutral-200);
+      line-height: var(--line-height-normal);
+    }
+
+    /* --- Phone frame --- */
+    .phone {
+      max-width: 430px;
+      margin: 32px auto;
+      background: var(--bg-primary);
+      border-radius: 44px;
+      box-shadow: var(--shadow-500), 0 0 0 12px var(--color-secondary);
+      overflow: hidden;
+      position: relative;
+    }
+    @media (max-width: 460px) {
+      .phone { margin: 0 auto; border-radius: 0; box-shadow: none; }
+    }
+
+    /* --- Cover hero --- */
+    .cover {
+      height: 200px;
+      background: linear-gradient(160deg, var(--color-primary-700) 0%, var(--color-primary) 40%, var(--color-primary-50) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(0,0,0,.12), transparent),
+        radial-gradient(ellipse 60% 50% at 90% 20%, rgba(255,255,255,.1), transparent);
+    }
+    .cover-pattern {
+      position: absolute; inset: 0;
+      opacity: .06;
+      background-image:
+        radial-gradient(circle at 20% 50%, #fff 1px, transparent 1px),
+        radial-gradient(circle at 60% 30%, #fff 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, #fff 1px, transparent 1px);
+      background-size: 40px 40px, 60px 60px, 50px 50px;
+    }
+
+    /* Top bar */
+    .topbar {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: var(--spacing-4) var(--spacing-5);
+    }
+    .topbar-btn {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,.2);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: none; border-radius: var(--radius-lg);
+      color: #fff; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .topbar-btn:active { background: rgba(255,255,255,.35); }
+    .topbar-btn svg { width: 18px; height: 18px; }
+    .topbar-right { display: flex; gap: var(--spacing-2); }
+
+    /* --- Identity card (flottante sur cover) --- */
+    .identity {
+      position: relative;
+      margin: -72px var(--spacing-4) 0;
+      background: var(--bg-primary);
+      border-radius: var(--radius-2xl);
+      padding: var(--spacing-5);
+      box-shadow: 0 12px 40px rgba(14, 47, 88, .12);
+      z-index: 5;
+    }
+    .identity-top {
+      display: flex; gap: var(--spacing-4); align-items: flex-start;
+      margin-bottom: var(--spacing-4);
+    }
+    .avatar {
+      width: 64px; height: 64px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+      border-radius: var(--radius-xl);
+      display: flex; align-items: center; justify-content: center;
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      color: rgba(255,255,255,.9);
+      box-shadow: 0 4px 12px rgba(3, 197, 184, .3);
+      position: relative;
+    }
+    .avatar-badge {
+      position: absolute; bottom: -4px; right: -4px;
+      width: 22px; height: 22px;
+      background: var(--color-primary);
+      border: 3px solid #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .avatar-badge svg { width: 10px; height: 10px; fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .identity-info { flex: 1; min-width: 0; }
+    .identity-name {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--text-primary);
+      margin-bottom: 2px;
+      display: flex; align-items: center; gap: var(--spacing-2);
+    }
+    .verified-tag {
+      display: inline-flex; align-items: center; gap: 3px;
+      background: var(--color-primary-25);
+      color: var(--color-primary-700);
+      font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold);
+      padding: 3px 8px; border-radius: var(--radius-sm);
+      white-space: nowrap; letter-spacing: .3px;
+    }
+    .verified-tag svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .identity-meta {
+      font-size: var(--font-size-xs); color: var(--text-secondary);
+      display: flex; flex-wrap: wrap; gap: 4px 12px;
+      margin-top: var(--spacing-1);
+    }
+    .identity-meta span { display: flex; align-items: center; gap: 4px; }
+    .identity-meta svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    /* Disponibilité */
+    .avail-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--color-success);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-2);
+      margin-bottom: var(--spacing-4);
+    }
+    .stat-cell {
+      text-align: center;
+      padding: var(--spacing-3) var(--spacing-1);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-subtle);
+    }
+    .stat-value {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .stat-value--primary { color: var(--color-primary); }
+    .stat-value--star { color: var(--color-tertiary); }
+    .stat-label {
+      font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-top: 2px;
+    }
+
+    /* CTA group */
+    .cta-group { display: flex; gap: var(--spacing-3); }
+    .cta-primary {
+      flex: 1;
+      background: var(--color-primary); color: #fff;
+      border: none; border-radius: var(--radius-lg);
+      padding: 14px var(--spacing-4);
+      font-family: var(--font-family);
+      font-weight: var(--font-weight-bold); font-size: var(--font-size-sm);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: var(--spacing-2);
+      transition: all .2s;
+      box-shadow: 0 4px 14px rgba(3, 197, 184, .3);
+    }
+    .cta-primary:active { transform: scale(.97); box-shadow: 0 2px 8px rgba(3, 197, 184, .2); }
+    .cta-primary svg { width: 16px; height: 16px; }
+    .cta-secondary {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: var(--bg-primary);
+      border: 2px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary);
+      transition: all .2s;
+    }
+    .cta-secondary:active { background: var(--bg-secondary); transform: scale(.95); }
+    .cta-secondary svg { width: 18px; height: 18px; }
+
+    /* --- Availability badges --- */
+    .avail-badges {
+      display: flex; gap: var(--spacing-2); flex-wrap: wrap;
+      margin-top: var(--spacing-3);
+      padding-top: var(--spacing-3);
+      border-top: 1.5px solid var(--border-subtle);
+    }
+    .avail-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-2xs); font-weight: var(--font-weight-bold);
+      letter-spacing: .3px;
+    }
+    .avail-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .avail-badge--active {
+      background: var(--color-success-50);
+      color: var(--color-success);
+      border: 1.5px solid #bbf7d0;
+    }
+    .avail-badge--urgence {
+      background: linear-gradient(135deg, #fff1f1, #ffe4e4);
+      color: var(--color-urgence);
+      border: 1.5px solid #fca5a5;
+    }
+
+    /* --- Content sections --- */
+    .content { padding: var(--spacing-4) var(--spacing-4) 120px; }
+    .section {
+      background: var(--bg-primary);
+      border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-5);
+      margin-bottom: var(--spacing-3);
+    }
+    /* Sections clés avec fond teinté pour rythme visuel */
+    .section--highlight {
+      background: var(--bg-secondary);
+      border-color: var(--border-strong);
+    }
+    .section-header {
+      display: flex; align-items: center; gap: var(--spacing-3);
+      margin-bottom: var(--spacing-4);
+    }
+    .section-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-icon svg { width: 18px; height: 18px; }
+    .section-icon--teal { background: var(--color-primary-25); color: var(--color-primary-600); }
+    .section-icon--navy { background: var(--color-secondary-10); color: var(--color-secondary); }
+    .section-icon--yellow { background: #fff5c6; color: #c08000; }
+    .section-icon--purple { background: var(--color-accent-50); color: var(--color-accent); }
+    .section-icon--green { background: var(--color-success-50); color: var(--color-success); }
+    .section-icon--blue { background: var(--color-info-50); color: var(--color-info); }
+    .section-icon--pink { background: #fce7f3; color: #be185d; }
+    .section-title {
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-bold);
+      color: var(--text-primary);
+    }
+
+    /* --- Points forts chips --- */
+    .highlights { display: flex; flex-wrap: wrap; gap: var(--spacing-2); }
+    .highlight-chip {
+      display: inline-flex; align-items: center; gap: var(--spacing-2);
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--border-subtle);
+      padding: var(--spacing-2) var(--spacing-4);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold);
+      color: var(--text-secondary);
+    }
+    .chip-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .chip-icon svg { width: 14px; height: 14px; }
+    .chip-icon--warm { background: #fff5e6; color: #c08000; }
+    .chip-icon--teal { background: var(--color-primary-25); color: var(--color-primary-600); }
+    .chip-icon--blue { background: var(--color-info-50); color: var(--color-info); }
+    .chip-icon--orange { background: #fef3e7; color: var(--color-quaternary); }
+    .chip-icon--green { background: var(--color-success-50); color: var(--color-success); }
+    .chip-count {
+      background: var(--color-primary-25);
+      color: var(--color-primary-700);
+      font-size: var(--font-size-2xs); font-weight: var(--font-weight-bold);
+      padding: 2px 7px; border-radius: var(--radius-full);
+      min-width: 20px; text-align: center;
+    }
+
+    /* --- Trust section --- */
+    .trust-section {
+      background: linear-gradient(135deg, var(--color-primary-10) 0%, var(--color-primary-25) 100%);
+      border: 1.5px solid var(--color-primary);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-5);
+      margin-bottom: var(--spacing-3);
+    }
+    .trust-header {
+      display: flex; align-items: center; gap: var(--spacing-3);
+      margin-bottom: var(--spacing-4);
+    }
+    .trust-shield {
+      width: 40px; height: 40px;
+      background: var(--color-primary);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+    }
+    .trust-shield svg { width: 20px; height: 20px; }
+    .trust-title {
+      font-size: var(--font-size-sm); font-weight: var(--font-weight-bold);
+      color: var(--text-primary);
+    }
+    .trust-subtitle {
+      font-size: var(--font-size-xs); color: var(--text-secondary);
+    }
+    .trust-items { display: flex; flex-direction: column; gap: var(--spacing-3); }
+    .trust-item {
+      display: flex; align-items: center; gap: var(--spacing-3);
+      font-size: var(--font-size-xs); font-weight: var(--font-weight-medium);
+      color: var(--text-secondary);
+    }
+    .trust-check {
+      width: 22px; height: 22px; flex-shrink: 0;
+      background: var(--bg-primary);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--color-primary);
+      box-shadow: var(--shadow-100);
+    }
+    .trust-check svg { width: 12px; height: 12px; }
+
+    /* --- Certifications avec logos --- */
+    .cert-list { display: flex; flex-direction: column; gap: var(--spacing-3); }
+    .cert-card {
+      display: flex; align-items: center; gap: var(--spacing-3);
+      padding: var(--spacing-3) var(--spacing-4);
+      border-radius: var(--radius-lg);
+      border: 1.5px solid;
+    }
+    .cert-logo {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: var(--font-weight-bold); font-size: var(--font-size-2xs);
+      letter-spacing: .3px; line-height: 1.1; text-align: center;
+    }
+    .cert-info { flex: 1; min-width: 0; }
+    .cert-name {
+      font-size: var(--font-size-sm); font-weight: var(--font-weight-bold);
+      color: var(--text-primary);
+    }
+    .cert-detail {
+      font-size: var(--font-size-2xs); color: var(--text-muted);
+      margin-top: 1px;
+    }
+    .cert-card--rge {
+      background: #f0fdf4; border-color: #bbf7d0;
+    }
+    .cert-card--rge .cert-logo {
+      background: #166534; color: #fff;
+    }
+    .cert-card--quali {
+      background: #eff6ff; border-color: #bfdbfe;
+    }
+    .cert-card--quali .cert-logo {
+      background: #1e40af; color: #fff;
+    }
+
+    /* --- Compétences --- */
+    .skill-tags { display: flex; flex-wrap: wrap; gap: var(--spacing-2); }
+    .skill-tag {
+      background: var(--bg-secondary);
+      padding: 7px 14px;
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-xs); font-weight: var(--font-weight-medium);
+      color: var(--text-secondary);
+    }
+    .skill-more {
+      background: none; border: none;
+      color: var(--color-primary);
+      font-family: var(--font-family);
+      font-weight: var(--font-weight-bold); font-size: var(--font-size-xs);
+      cursor: pointer; padding: 7px 2px;
+    }
+
+    /* --- Services --- */
+    .services-text {
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      line-height: var(--line-height-relaxed);
+    }
+
+    /* --- Portfolio --- */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .portfolio-item {
+      aspect-ratio: 1;
+      border-radius: var(--radius-md);
+      overflow: hidden; position: relative;
+      cursor: pointer;
+    }
+    .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+    .portfolio-item:active img { transform: scale(1.05); }
+    .portfolio-more {
+      background: var(--bg-tertiary);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: var(--font-weight-bold); font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+    .ph { width: 100%; height: 100%; }
+    .ph-1 { background: linear-gradient(135deg, #dee5ef, #bdc3e0); }
+    .ph-2 { background: linear-gradient(135deg, #d5fbf6, #93f6e9); }
+    .ph-3 { background: linear-gradient(135deg, #e2f8e0, #99e194); }
+    .ph-4 { background: linear-gradient(135deg, #fff5c6, #ffe9ad); }
+    .ph-5 { background: linear-gradient(135deg, #eff4fe, #c9d8fc); }
+
+    /* --- About --- */
+    .about-text {
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      line-height: var(--line-height-relaxed);
+    }
+
+    /* --- Reviews --- */
+    .reviews-summary {
+      display: flex; align-items: center; gap: var(--spacing-4);
+      margin-bottom: var(--spacing-4);
+      padding: var(--spacing-4);
+      background: var(--bg-primary);
+      border-radius: var(--radius-lg);
+      border: 1.5px solid var(--border-default);
+    }
+    .reviews-score {
+      font-size: 40px;
+      font-weight: var(--font-weight-bold);
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .reviews-meta { flex: 1; }
+    .stars { display: flex; gap: 2px; margin-bottom: var(--spacing-1); }
+    .star-icon { width: 16px; height: 16px; color: var(--color-tertiary); }
+    .star-icon--empty { color: var(--color-neutral-300); }
+    .reviews-count {
+      font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold);
+      color: var(--text-muted);
+    }
+    .review-card {
+      padding: var(--spacing-3) 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .review-card:last-of-type { border-bottom: none; }
+    .review-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: var(--spacing-2);
+    }
+    .reviewer { display: flex; align-items: center; gap: var(--spacing-2); }
+    .reviewer-avatar {
+      width: 32px; height: 32px;
+      background: var(--color-secondary-10);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: var(--font-weight-bold); font-size: var(--font-size-2xs);
+      color: var(--color-secondary);
+    }
+    .reviewer-name { font-weight: var(--font-weight-semibold); font-size: var(--font-size-sm); }
+    .reviewer-date { font-size: var(--font-size-2xs); color: var(--text-muted); }
+    .review-stars { display: flex; gap: 1px; }
+    .review-stars .star-icon { width: 12px; height: 12px; }
+    .review-text {
+      font-size: var(--font-size-xs);
+      color: var(--text-secondary);
+      line-height: var(--line-height-relaxed);
+    }
+    .review-tag {
+      display: inline-block;
+      margin-top: var(--spacing-2);
+      background: var(--bg-secondary);
+      padding: var(--spacing-1) var(--spacing-3);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold);
+      color: var(--text-muted);
+    }
+    .reviews-see-all {
+      display: flex; align-items: center; justify-content: center;
+      gap: var(--spacing-2);
+      width: 100%;
+      margin-top: var(--spacing-4);
+      padding: var(--spacing-3);
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      font-family: var(--font-family);
+      font-weight: var(--font-weight-bold); font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .reviews-see-all:active { background: var(--bg-tertiary); }
+
+    /* --- Zone d'intervention --- */
+    .zone-main {
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-3);
+      display: flex; align-items: center; gap: var(--spacing-2);
+    }
+    .zone-main svg { width: 14px; height: 14px; color: var(--color-primary); flex-shrink: 0; }
+    .zone-tags { display: flex; flex-wrap: wrap; gap: var(--spacing-2); }
+    .zone-tag {
+      background: var(--bg-secondary);
+      padding: var(--spacing-2) var(--spacing-3);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-2xs); font-weight: var(--font-weight-medium);
+      color: var(--text-muted);
+    }
+
+    /* --- Sticky bottom --- */
+    .sticky-bottom {
+      position: fixed;
+      bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 430px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border-subtle);
+      padding: var(--spacing-3) var(--spacing-4) calc(var(--spacing-3) + env(safe-area-inset-bottom, 0px));
+      z-index: 50;
+      display: flex; gap: var(--spacing-3);
+    }
+    .sticky-btn-primary {
+      flex: 1;
+      background: var(--color-primary); color: #fff;
+      border: none; border-radius: var(--radius-lg);
+      padding: 15px var(--spacing-4);
+      font-family: var(--font-family);
+      font-weight: var(--font-weight-bold); font-size: var(--font-size-sm);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: var(--spacing-2);
+      box-shadow: 0 4px 14px rgba(3, 197, 184, .3);
+      transition: all .2s;
+    }
+    .sticky-btn-primary:active { transform: scale(.97); }
+    .sticky-btn-primary svg { width: 16px; height: 16px; }
+    .sticky-btn-call {
+      display: flex; align-items: center; justify-content: center; gap: var(--spacing-2);
+      background: var(--bg-primary);
+      border: 2px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: 15px var(--spacing-5);
+      font-family: var(--font-family);
+      font-weight: var(--font-weight-bold); font-size: var(--font-size-sm);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .sticky-btn-call:active { background: var(--bg-secondary); transform: scale(.97); }
+    .sticky-btn-call svg { width: 16px; height: 16px; }
+
+    /* --- Toast --- */
+    .toast {
+      position: fixed; bottom: 100px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--color-secondary); color: #fff;
+      padding: var(--spacing-4) var(--spacing-6);
+      border-radius: var(--radius-lg);
+      font-weight: var(--font-weight-semibold); font-size: var(--font-size-sm);
+      box-shadow: var(--shadow-400);
+      opacity: 0; pointer-events: none;
+      transition: all .3s cubic-bezier(.4, 0, .2, 1);
+      z-index: 100;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* --- Animations --- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .identity { animation: fadeUp .5s ease .1s both; }
+    .content .section:nth-child(1) { animation: fadeUp .5s ease .15s both; }
+    .content .section:nth-child(2) { animation: fadeUp .5s ease .2s both; }
+    .content .section:nth-child(3) { animation: fadeUp .5s ease .25s both; }
+    .content .section:nth-child(4) { animation: fadeUp .5s ease .3s both; }
+    .content .section:nth-child(5) { animation: fadeUp .5s ease .35s both; }
+    .content .section:nth-child(6) { animation: fadeUp .5s ease .4s both; }
+    .content .section:nth-child(7) { animation: fadeUp .5s ease .45s both; }
+    .content .trust-section { animation: fadeUp .5s ease .17s both; }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-pattern"></div>
+    <div class="topbar">
+      <button class="topbar-btn" onclick="showToast('Retour')">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 12H5m0 0l6-6M5 12l6 6"/></svg>
+      </button>
+      <div class="topbar-right">
+        <button class="topbar-btn" onclick="showToast('Ajouté aux favoris')">
+          <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
+        <button class="topbar-btn" onclick="showToast('Lien copié !')">
+          <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- IDENTITY CARD -->
+  <div class="identity">
+    <div class="identity-top">
+      <div class="avatar">
+        PM
+        <span class="avatar-badge">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+      </div>
+      <div class="identity-info">
+        <div class="identity-name">
+          Plomberie Martin
+          <span class="verified-tag">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Vérifié
+          </span>
+        </div>
+        <div class="identity-meta">
+          <span>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            Plombier · Chauffagiste
+          </span>
+          <span>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            2,3 km
+          </span>
+          <span style="color:var(--color-success);font-weight:var(--font-weight-semibold)">
+            <span class="avail-dot"></span>
+            Disponible
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-value stat-value--primary">16</div>
+        <div class="stat-label">Interventions</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value stat-value--star">4,2</div>
+        <div class="stat-label">Note clients</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">2022</div>
+        <div class="stat-label">Membre depuis</div>
+      </div>
+    </div>
+
+    <!-- Availability badges -->
+    <div class="avail-badges">
+      <span class="avail-badge avail-badge--active">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        24h/24
+      </span>
+      <span class="avail-badge avail-badge--active">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+        7j/7
+      </span>
+      <span class="avail-badge avail-badge--urgence">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Urgences
+      </span>
+    </div>
+
+    <!-- CTAs -->
+    <div class="cta-group" style="margin-top:var(--spacing-4)">
+      <button class="cta-primary" onclick="showToast('Demande envoyée !')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        Envoyer ma demande
+      </button>
+      <button class="cta-secondary" onclick="showToast('Ouverture du chat...')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- CONTENT SECTIONS -->
+  <div class="content">
+
+    <!-- Points forts -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon section-icon--yellow">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="section-title">Points forts</div>
+      </div>
+      <div class="highlights">
+        <div class="highlight-chip">
+          <span class="chip-icon chip-icon--warm">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          Courtois
+          <span class="chip-count">99+</span>
+        </div>
+        <div class="highlight-chip">
+          <span class="chip-icon chip-icon--teal">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </span>
+          Propre
+          <span class="chip-count">2</span>
+        </div>
+        <div class="highlight-chip">
+          <span class="chip-icon chip-icon--blue">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </span>
+          Ponctuel
+          <span class="chip-count">1</span>
+        </div>
+        <div class="highlight-chip">
+          <span class="chip-icon chip-icon--orange">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </span>
+          Juste prix
+          <span class="chip-count">1</span>
+        </div>
+        <div class="highlight-chip">
+          <span class="chip-icon chip-icon--green">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+          </span>
+          Disponible
+          <span class="chip-count">1</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust / Vérifications -->
+    <div class="trust-section">
+      <div class="trust-header">
+        <div class="trust-shield">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <div>
+          <div class="trust-title">Artisan vérifié par Kelkun</div>
+          <div class="trust-subtitle">Identité, assurances RC pro et décennale vérifiées</div>
+        </div>
+      </div>
+      <div class="trust-items">
+        <div class="trust-item">
+          <div class="trust-check">
+            <svg fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          Identité et SIREN vérifiés
+        </div>
+        <div class="trust-item">
+          <div class="trust-check">
+            <svg fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          Assurance RC professionnelle active
+        </div>
+        <div class="trust-item">
+          <div class="trust-check">
+            <svg fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          Assurance décennale active
+        </div>
+        <div class="trust-item">
+          <div class="trust-check">
+            <svg fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          Charte Kelkun signée
+        </div>
+      </div>
+    </div>
+
+    <!-- Certifications avec logos -->
+    <div class="section section--highlight">
+      <div class="section-header">
+        <div class="section-icon section-icon--green">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="section-title">Certifications professionnelles</div>
+      </div>
+      <div class="cert-list">
+        <div class="cert-card cert-card--rge">
+          <div class="cert-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="8" fill="#166534"/>
+              <text x="20" y="16" text-anchor="middle" fill="#4ade80" font-family="Poppins" font-size="7" font-weight="700">RGE</text>
+              <circle cx="20" cy="26" r="7" stroke="#4ade80" stroke-width="1.5" fill="none"/>
+              <path d="M17 26l2 2 4-4" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+          <div class="cert-info">
+            <div class="cert-name">QUALIBAT-RGE</div>
+            <div class="cert-detail">Reconnu Garant de l'Environnement</div>
+          </div>
+        </div>
+        <div class="cert-card cert-card--quali">
+          <div class="cert-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="8" fill="#1e40af"/>
+              <text x="20" y="16" text-anchor="middle" fill="#93c5fd" font-family="Poppins" font-size="6" font-weight="700">QUALI</text>
+              <text x="20" y="30" text-anchor="middle" fill="#fff" font-family="Poppins" font-size="8" font-weight="700">4+</text>
+            </svg>
+          </div>
+          <div class="cert-info">
+            <div class="cert-name">Chauffage +</div>
+            <div class="cert-detail">Qualification Qualit'EnR niveau 4</div>
+          </div>
+        </div>
+        <div class="cert-card cert-card--quali">
+          <div class="cert-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="8" fill="#1e40af"/>
+              <text x="20" y="16" text-anchor="middle" fill="#93c5fd" font-family="Poppins" font-size="6" font-weight="700">QUALI</text>
+              <text x="20" y="30" text-anchor="middle" fill="#fff" font-family="Poppins" font-size="8" font-weight="700">4+</text>
+            </svg>
+          </div>
+          <div class="cert-info">
+            <div class="cert-name">Ventilation +</div>
+            <div class="cert-detail">Qualification Qualit'EnR niveau 4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compétences -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon section-icon--navy">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="section-title">Compétences</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Plombier</span>
+        <span class="skill-tag">Électricien</span>
+        <span class="skill-tag">Maçon</span>
+        <span class="skill-tag">Plâtrier</span>
+        <span class="skill-tag">Carreleur</span>
+        <span class="skill-tag">Peintre en bâtiment</span>
+        <button class="skill-more" onclick="showToast('6 compétences supplémentaires')">+ 6 compétences</button>
+      </div>
+    </div>
+
+    <!-- Services proposés -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon section-icon--teal">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div class="section-title">Services proposés</div>
+      </div>
+      <p class="services-text">
+        Dépannage, installation, rénovation : nous intervenons sur tous vos travaux de plomberie avec sérieux et efficacité.
+      </p>
+    </div>
+
+    <!-- Portfolio -->
+    <div class="section section--highlight">
+      <div class="section-header">
+        <div class="section-icon section-icon--pink">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+        </div>
+        <div class="section-title">Portfolio</div>
+      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-item"><div class="ph ph-1"></div></div>
+        <div class="portfolio-item"><div class="ph ph-2"></div></div>
+        <div class="portfolio-item"><div class="ph ph-3"></div></div>
+        <div class="portfolio-item"><div class="ph ph-4"></div></div>
+        <div class="portfolio-item"><div class="ph ph-5"></div></div>
+        <div class="portfolio-item portfolio-more" onclick="showToast('Galerie complète')">+8</div>
+      </div>
+    </div>
+
+    <!-- À propos -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon section-icon--blue">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </div>
+        <div class="section-title">À propos</div>
+      </div>
+      <p class="about-text">
+        Plomberie Martin, votre artisan de confiance pour le dépannage et les travaux de plomberie. Intervention rapide, travail soigné et conseils personnalisés.
+      </p>
+    </div>
+
+    <!-- Avis clients -->
+    <div class="section section--highlight">
+      <div class="section-header">
+        <div class="section-icon section-icon--yellow">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="section-title">Avis clients</div>
+      </div>
+
+      <div class="reviews-summary">
+        <div class="reviews-score">4,2</div>
+        <div class="reviews-meta">
+          <div class="stars">
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon star-icon--empty" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="reviews-count">8 avis vérifiés</div>
+        </div>
+      </div>
+
+      <!-- Review 1 -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer">
+            <div class="reviewer-avatar">ML</div>
+            <div>
+              <div class="reviewer-name">Marie L.</div>
+              <div class="reviewer-date">12 mars 2026</div>
+            </div>
+          </div>
+          <div class="review-stars">
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+        <div class="review-text">Intervention rapide et très propre pour un problème de fuite. Martin est arrivé en 1h, a tout réparé et nettoyé. Prix correct, je recommande.</div>
+        <span class="review-tag">Réparation fuite</span>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer">
+            <div class="reviewer-avatar">JB</div>
+            <div>
+              <div class="reviewer-name">Julien B.</div>
+              <div class="reviewer-date">28 février 2026</div>
+            </div>
+          </div>
+          <div class="review-stars">
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon star-icon--empty" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+        <div class="review-text">Bonne installation de chauffe-eau. Travail propre et bien fini. Un petit retard au démarrage mais rien de grave.</div>
+        <span class="review-tag">Installation chauffe-eau</span>
+      </div>
+
+      <button class="reviews-see-all" onclick="showToast('Chargement des 8 avis...')">
+        Voir les 8 avis
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <!-- Zone d'intervention -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon section-icon--purple">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="section-title">Zone d'intervention</div>
+      </div>
+      <div class="zone-main">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+        Rayon de 50 km autour de Saint-Pée-sur-Nivelle
+      </div>
+      <div class="zone-tags">
+        <span class="zone-tag">Saint-Pée-sur-Nivelle</span>
+        <span class="zone-tag">Bayonne</span>
+        <span class="zone-tag">Biarritz</span>
+        <span class="zone-tag">Anglet</span>
+        <span class="zone-tag">Hendaye</span>
+        <span class="zone-tag">Saint-Jean-de-Luz</span>
+        <span class="zone-tag">Hasparren</span>
+        <span class="zone-tag">Cambo-les-Bains</span>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- STICKY BOTTOM BAR -->
+  <div class="sticky-bottom">
+    <button class="sticky-btn-primary" onclick="showToast('Demande envoyée !')">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+      Envoyer ma demande
+    </button>
+    <button class="sticky-btn-call" onclick="showToast('Appel en cours...')">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Appeler
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelcare Retail — Registre — Accessibilite PMR</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #03c5b8; --primary-10: #f1fefc; --primary-25: #d5fbf6; --primary-50: #c2faf3; --primary-100: #93f6e9; --primary-400: #3cdacc; --primary-500: #03c5b8; --primary-600: #029284; --primary-700: #015f56;
+  --secondary: #0e2f58; --secondary-1: #f8f9fc; --secondary-2: #f4f6fa; --secondary-10: #eeeff7; --secondary-25: #e0e2f0; --secondary-50: #bdc3e0; --secondary-100: #9aa3d0; --secondary-200: #7e8cb8; --secondary-300: #6274a0; --secondary-400: #465d88; --secondary-500: #0e2f58; --secondary-600: #0a2342; --secondary-700: #07172c;
+  --success: #3faf38; --success-50: #f3fbf2; --success-100: #e2f8e0; --info: #3cb0f5; --info-50: #effaff; --info-100: #dbf3fe; --warning: #c27b30; --warning-50: #fcf7ee; --warning-100: #f5e9d0; --error: #fa4a57; --error-50: #fff1f1; --error-100: #ffe4e3;
+  --urgence: #ff634d; --depannage: #ffc114; --travaux: #1c61c5;
+  --neutral-50: #fafafa; --neutral-100: #f5f5f5; --neutral-200: #e5e5e5; --neutral-300: #d4d4d4; --neutral-400: #a3a3a3; --neutral-500: #737373; --neutral-600: #525252;
+  --accent: #6778ed; --accent-50: #eff4fe;
+  --font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --sidebar-w: 260px; --topbar-h: 64px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font); background: var(--secondary-1); color: var(--secondary); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+.layout { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar { width: var(--sidebar-w); background: var(--secondary-500); color: white; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; z-index: 20; overflow-y: auto; }
+.sidebar-header { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sidebar-brand { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.sidebar-logo-kelkun { font-weight: 800; font-size: 20px; color: var(--primary); letter-spacing: -0.4px; }
+.sidebar-badge { display: inline-flex; padding: 2px 8px; background: rgba(3,197,184,0.15); border: 1px solid rgba(3,197,184,0.25); border-radius: 4px; font-size: 10px; font-weight: 700; color: var(--primary-100); text-transform: uppercase; letter-spacing: 0.5px; }
+.sidebar-version { font-size: 9px; padding: 1px 6px; background: rgba(255,255,255,0.08); border-radius: 3px; color: rgba(255,255,255,0.35); font-weight: 600; }
+.sidebar-store { font-size: 12px; opacity: 0.45; margin-top: 4px; }
+.sidebar-nav { padding: 16px 12px; flex: 1; }
+.nav-section { margin-bottom: 24px; }
+.nav-section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; opacity: 0.3; padding: 0 12px; margin-bottom: 6px; font-weight: 600; }
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; color: rgba(255,255,255,0.55); text-decoration: none; }
+.nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); }
+.nav-item.active { background: rgba(3,197,184,0.12); color: var(--primary); }
+.nav-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nav-icon svg { width: 18px; height: 18px; stroke-width: 1.75; }
+.nav-badge { margin-left: auto; background: var(--primary); color: white; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 10px; min-width: 22px; text-align: center; }
+.nav-badge.warn { background: var(--urgence); }
+.sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 12px; }
+.sidebar-avatar { width: 36px; height: 36px; background: linear-gradient(-70deg, var(--primary-600), var(--primary-400)); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+.sidebar-user { flex: 1; min-width: 0; }
+.sidebar-user-name { font-size: 13px; font-weight: 600; }
+.sidebar-user-role { font-size: 11px; opacity: 0.4; }
+
+/* Main */
+.main { flex: 1; margin-left: var(--sidebar-w); min-height: 100vh; display: flex; flex-direction: column; }
+.topbar { height: var(--topbar-h); background: white; border-bottom: 1px solid var(--neutral-200); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; position: sticky; top: 0; z-index: 10; }
+.topbar-left { display: flex; align-items: center; gap: 16px; }
+.topbar-search { position: relative; }
+.topbar-search input { width: 320px; height: 38px; padding: 0 12px 0 36px; border: 1px solid var(--secondary-25); border-radius: 8px; font-family: var(--font); font-size: 13px; color: var(--secondary); background: var(--secondary-1); outline: none; }
+.topbar-search input::placeholder { color: var(--secondary-50); }
+.topbar-search input:focus { border-color: var(--primary); }
+.topbar-search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--secondary-50); }
+.topbar-right { display: flex; align-items: center; gap: 8px; }
+.topbar-btn { width: 38px; height: 38px; border-radius: 8px; border: 1px solid var(--secondary-25); background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; color: var(--secondary-300); }
+.topbar-btn:hover { border-color: var(--primary); color: var(--primary); }
+.topbar-btn .notif-dot { position: absolute; top: 7px; right: 7px; width: 8px; height: 8px; background: var(--urgence); border-radius: 50%; border: 2px solid white; }
+.topbar-btn svg { width: 18px; height: 18px; }
+.content { flex: 1; padding: 28px 32px 40px; }
+.page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+.page-title { font-size: 26px; font-weight: 800; color: var(--secondary); margin-bottom: 4px; letter-spacing: -0.3px; }
+.page-subtitle { font-size: 13px; color: var(--secondary-200); }
+.page-actions { display: flex; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 8px; font-family: var(--font); font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; }
+.btn svg { width: 16px; height: 16px; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-600); box-shadow: 0 4px 12px rgba(3,197,184,0.25); }
+.btn-ghost { background: white; color: var(--secondary-400); border: 1px solid var(--secondary-25); }
+.btn-ghost:hover { border-color: var(--secondary-100); color: var(--secondary); }
+.btn-sm { padding: 6px 12px; font-size: 12px; border-radius: 6px; }
+.footer-bar { padding: 16px 32px; border-top: 1px solid var(--neutral-200); background: white; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--secondary-200); }
+.footer-bar a { color: var(--primary); text-decoration: none; font-weight: 500; }
+
+/* Breadcrumb */
+.breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; }
+.breadcrumb a { color: var(--primary); text-decoration: none; font-weight: 500; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { color: var(--secondary-200); }
+.breadcrumb .current { color: var(--secondary-300); font-weight: 500; }
+
+/* Score cards */
+.score-hero { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.score-card { background: white; border-radius: 12px; padding: 20px; border: 1px solid var(--neutral-200); text-align: center; position: relative; overflow: hidden; }
+.score-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.score-card.sc-green::before { background: var(--success); }
+.score-card.sc-blue::before { background: var(--info); }
+.score-value { font-size: 32px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+.score-value.green { color: var(--success); }
+.score-value.blue { color: var(--info); }
+.score-label { font-size: 13px; color: var(--secondary-200); font-weight: 500; }
+
+/* Content layout */
+.detail-layout { display: grid; grid-template-columns: 1fr 320px; gap: 20px; }
+
+/* Cards */
+.card { background: white; border: 1px solid var(--neutral-200); border-radius: 12px; overflow: hidden; }
+.card-header { padding: 16px 20px; border-bottom: 1px solid var(--neutral-100); display: flex; justify-content: space-between; align-items: center; }
+.card-title { font-size: 15px; font-weight: 700; color: var(--secondary); display: flex; align-items: center; gap: 8px; }
+.card-title svg { width: 18px; height: 18px; color: var(--secondary-200); }
+.card-action { font-size: 13px; font-weight: 600; color: var(--primary); cursor: pointer; text-decoration: none; }
+.card-body { padding: 20px; }
+
+/* Status badges */
+.status { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.status-ok { background: var(--success-50); color: var(--success); }
+.status svg { width: 12px; height: 12px; }
+
+/* Detail row */
+.detail-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--neutral-100); font-size: 13px; }
+.detail-row:last-child { border-bottom: none; }
+.detail-label { color: var(--secondary-200); font-weight: 500; }
+.detail-value { color: var(--secondary); font-weight: 600; }
+
+/* Checklist */
+.checklist { padding: 0; }
+.checklist-item { display: flex; align-items: center; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--neutral-100); font-size: 13px; }
+.checklist-item:last-child { border-bottom: none; }
+.checklist-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.checklist-icon.ok { background: var(--success-50); color: var(--success); }
+.checklist-icon svg { width: 14px; height: 14px; }
+.checklist-label { flex: 1; font-weight: 500; color: var(--secondary); }
+.checklist-status { font-size: 11px; font-weight: 600; color: var(--success); }
+
+/* Success banner */
+.success-banner { display: flex; align-items: center; gap: 14px; padding: 16px 20px; background: var(--success-50); border: 1px solid rgba(63,175,56,0.2); border-radius: 12px; margin-bottom: 24px; }
+.success-banner svg { width: 24px; height: 24px; color: var(--success); flex-shrink: 0; }
+.success-banner-text { flex: 1; }
+.success-banner-title { font-size: 14px; font-weight: 700; color: #1a6b15; }
+.success-banner-desc { font-size: 12px; color: #2d7a28; }
+
+/* Doc line */
+.doc-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--neutral-100); }
+.doc-item:last-child { border-bottom: none; }
+.doc-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.doc-icon svg { width: 16px; height: 16px; }
+.doc-icon.pdf { background: var(--error-50); color: var(--error); }
+.doc-info { flex: 1; min-width: 0; }
+.doc-name { font-size: 13px; font-weight: 600; color: var(--secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.doc-meta { font-size: 11px; color: var(--secondary-200); }
+.doc-dl { font-size: 12px; font-weight: 600; color: var(--primary); cursor: pointer; }
+
+/* Domain icon */
+.domain-icon { width: 40px; height: 40px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.domain-icon svg { width: 20px; height: 20px; }
+.domain-icon.di-access { background: var(--primary-10); color: var(--primary); }
+
+/* Info block */
+.info-block { padding: 16px; font-size: 13px; color: var(--secondary-300); line-height: 1.8; }
+.info-block strong { color: var(--secondary); }
+
+/* Legal ref */
+.legal-ref { font-size: 12px; color: var(--secondary-100); font-style: italic; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.card, .score-card, .success-banner { animation: fadeInUp 0.4s ease backwards; }
+
+@media (max-width: 1280px) { .detail-layout { grid-template-columns: 1fr; } .score-hero { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+<div class="layout">
+  <!-- SIDEBAR V2 -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <span class="sidebar-logo-kelkun">kelkun</span>
+        <span class="sidebar-badge">retail</span>
+        <span class="sidebar-version">V2</span>
+      </div>
+      <div class="sidebar-store">Leroy Merlin Montpellier Odysseum</div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-label">Mon magasin</div>
+        <a class="nav-item" href="kelcare-v2-dashboard.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span>Tableau de bord</span></a>
+        <a class="nav-item" href="kelcare-v2-planning.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span>Planning</span><span class="nav-badge">3</span></a>
+        <a class="nav-item" href="kelcare-v2-equipements.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><span>Equipements</span></a>
+        <a class="nav-item" href="kelcare-v2-contacts.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span>Contacts / Intervenants</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">Conformite</div>
+        <a class="nav-item active" href="kelcare-v2-registre-securite.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span>Registre de securite</span><span class="nav-badge warn">2</span></a>
+        <a class="nav-item" href="kelcare-v2-contrats-entretien.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span><span>Contrats d'entretien</span></a>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      <div class="sidebar-avatar">SB</div>
+      <div class="sidebar-user"><div class="sidebar-user-name">Sophie Bertrand</div><div class="sidebar-user-role">Responsable magasin</div></div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-search">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Rechercher un controle, equipement...">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn" title="Notifications"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="notif-dot"></span></button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="kelcare-v2-registre-securite.html">Registre de securite</a>
+        <span class="sep">/</span>
+        <span class="current">Accessibilite PMR</span>
+      </div>
+
+      <!-- Page header -->
+      <div class="page-header">
+        <div>
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 4px;">
+            <div class="domain-icon di-access"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-4-4"/></svg></div>
+            <h1 class="page-title">Accessibilite PMR</h1>
+          </div>
+          <p class="page-subtitle">Registre public d'accessibilite — Decret n. 2017-431</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Exporter PDF
+          </button>
+          <button class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Mettre a jour le registre
+          </button>
+        </div>
+      </div>
+
+      <!-- Success banner -->
+      <div class="success-banner">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <div class="success-banner-text">
+          <div class="success-banner-title">Etablissement conforme — Registre d'accessibilite a jour</div>
+          <div class="success-banner-desc">L'Ad'AP est termine et l'attestation de conformite a ete deposee en prefecture. Le registre public d'accessibilite est disponible a l'accueil.</div>
+        </div>
+      </div>
+
+      <!-- KPI cards -->
+      <div class="score-hero">
+        <div class="score-card sc-green">
+          <div class="score-value green">Conforme</div>
+          <div class="score-label">Statut accessibilite</div>
+        </div>
+        <div class="score-card sc-green">
+          <div class="score-value green">6/6</div>
+          <div class="score-label">Points de controle OK</div>
+        </div>
+        <div class="score-card sc-blue">
+          <div class="score-value blue">8 mars</div>
+          <div class="score-label">Dernier audit</div>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="detail-layout">
+
+        <!-- Left: Detail -->
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+
+          <!-- Fiche registre -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-4-4"/></svg>
+                Registre public d'accessibilite
+              </div>
+              <span class="status status-ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> A jour</span>
+            </div>
+            <div class="card-body">
+              <div class="detail-row">
+                <span class="detail-label">Reference reglementaire</span>
+                <span class="detail-value">Decret n. 2017-431 du 28 mars 2017</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Dernier audit d'accessibilite</span>
+                <span class="detail-value">8 mars 2026</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Statut Ad'AP</span>
+                <span class="detail-value" style="color: var(--success);">Termine</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Attestation de conformite</span>
+                <span class="detail-value" style="color: var(--success);">Deposee en prefecture</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Registre disponible a l'accueil</span>
+                <span class="status status-ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Oui</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Checklist des 6 points -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                Points de controle accessibilite
+              </div>
+              <span style="font-size: 12px; color: var(--success); font-weight: 600;">6/6 conformes</span>
+            </div>
+            <div class="checklist">
+              <div class="checklist-item">
+                <div class="checklist-icon ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="checklist-label">Acces principal</div>
+                <div class="checklist-status">Conforme — Rampe d'acces et porte automatique</div>
+              </div>
+              <div class="checklist-item">
+                <div class="checklist-icon ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="checklist-label">Sanitaires</div>
+                <div class="checklist-status">Conforme — Cabine PMR aux normes</div>
+              </div>
+              <div class="checklist-item">
+                <div class="checklist-icon ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="checklist-label">Ascenseur</div>
+                <div class="checklist-status">Conforme — Cabine accessible, commandes en braille</div>
+              </div>
+              <div class="checklist-item">
+                <div class="checklist-icon ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="checklist-label">Stationnement</div>
+                <div class="checklist-status">Conforme — 8 places PMR proches de l'entree</div>
+              </div>
+              <div class="checklist-item">
+                <div class="checklist-icon ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="checklist-label">Signaletique</div>
+                <div class="checklist-status">Conforme — Pictogrammes, contrastes, hauteur adaptee</div>
+              </div>
+              <div class="checklist-item">
+                <div class="checklist-icon ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="checklist-label">Eclairage</div>
+                <div class="checklist-status">Conforme — Niveaux d'eclairement suffisants, contrastes</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right panel -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+
+          <!-- Documents -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Documents</div>
+            </div>
+            <div>
+              <div class="doc-item">
+                <div class="doc-icon pdf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                <div class="doc-info">
+                  <div class="doc-name">Attestation de conformite accessibilite.pdf</div>
+                  <div class="doc-meta">Prefecture de l'Herault · 12 janv. 2024</div>
+                </div>
+                <span class="doc-dl">Ouvrir</span>
+              </div>
+              <div class="doc-item">
+                <div class="doc-icon pdf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                <div class="doc-info">
+                  <div class="doc-name">Ad'AP — Attestation d'achevement.pdf</div>
+                  <div class="doc-meta">Exploitant · 8 dec. 2023</div>
+                </div>
+                <span class="doc-dl">Ouvrir</span>
+              </div>
+              <div class="doc-item">
+                <div class="doc-icon pdf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                <div class="doc-info">
+                  <div class="doc-name">Rapport audit accessibilite mars 2026.pdf</div>
+                  <div class="doc-meta">Cabinet Access+ · 8 mars 2026</div>
+                </div>
+                <span class="doc-dl">Ouvrir</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reference legale -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> Reference legale</div>
+            </div>
+            <div class="info-block">
+              <strong>Decret n. 2017-431 du 28 mars 2017</strong><br>
+              Relatif au registre public d'accessibilite et a la mise a disposition du public des informations sur l'accessibilite de l'etablissement.<br><br>
+              <strong>Obligations</strong><br>
+              - Registre public d'accessibilite mis a disposition<br>
+              - Attestation de conformite ou Ad'AP<br>
+              - Formation du personnel a l'accueil des personnes handicapees<br>
+              - Maintenance des equipements d'accessibilite<br><br>
+              <strong>Loi du 11 fevrier 2005</strong><br>
+              Pour l'egalite des droits et des chances, la participation et la citoyennete des personnes handicapees.<br><br>
+              <span class="legal-ref">Code de la construction et de l'habitation — Art. R111-19-33</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <span>Kelkun Retail v2 — Kelcare</span>
+      <span>Registre dematerialise conforme Art. R143-44 CCH · <a href="#">En savoir plus</a></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

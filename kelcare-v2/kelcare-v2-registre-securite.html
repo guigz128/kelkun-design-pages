@@ -104,7 +104,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
 
 /* Tabs */
 .reg-tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid var(--neutral-200); padding-bottom: 0; }
-.reg-tab { padding: 10px 16px; font-family: var(--font); font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: none; color: var(--secondary-300); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; }
+.reg-tab { padding: 10px 16px; font-family: var(--font); font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: none; color: var(--secondary-300); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; text-decoration: none; }
 .reg-tab:hover { color: var(--secondary); }
 .reg-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 .reg-tab .tab-count { font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 4px; margin-left: 6px; }
@@ -320,13 +320,13 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
 
       <!-- Tabs -->
       <div class="reg-tabs">
-        <button class="reg-tab active">Tous les controles <span class="tab-count ok">15</span></button>
-        <button class="reg-tab">Incendie <span class="tab-count ok">6</span></button>
-        <button class="reg-tab">Electrique</button>
-        <button class="reg-tab">Ascenseurs</button>
-        <button class="reg-tab">Sanitaire <span class="tab-count err">1</span></button>
-        <button class="reg-tab">CVC</button>
-        <button class="reg-tab">Accessibilite</button>
+        <a class="reg-tab active" href="kelcare-v2-registre-securite.html">Tous les controles <span class="tab-count ok">15</span></a>
+        <a class="reg-tab" href="registre-incendie.html">Incendie <span class="tab-count ok">6</span></a>
+        <a class="reg-tab" href="registre-electrique.html">Electrique</a>
+        <a class="reg-tab" href="registre-ascenseurs.html">Ascenseurs</a>
+        <a class="reg-tab" href="registre-sanitaire.html">Sanitaire <span class="tab-count err">1</span></a>
+        <a class="reg-tab" href="registre-cvc.html">CVC</a>
+        <a class="reg-tab" href="registre-accessibilite.html">Accessibilite</a>
       </div>
 
       <!-- Main content -->
@@ -358,7 +358,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <!-- INCENDIE -->
               <tr>
                 <td><div class="domain-icon di-fire"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div></td>
-                <td><strong>Extincteurs</strong><br><span class="legal-ref">Art. MS 73</span></td>
+                <td><a href="registre-incendie.html" style="text-decoration:none;color:inherit;"><strong>Extincteurs</strong></a><br><span class="legal-ref">Art. MS 73</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>12 janv. 2026</td>
                 <td>Securitas Fire</td>
@@ -367,7 +367,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               </tr>
               <tr>
                 <td><div class="domain-icon di-fire"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div></td>
-                <td><strong>SSI (Systeme de Securite Incendie)</strong><br><span class="legal-ref">Art. MS 56 a MS 72</span></td>
+                <td><a href="registre-incendie.html" style="text-decoration:none;color:inherit;"><strong>SSI (Systeme de Securite Incendie)</strong></a><br><span class="legal-ref">Art. MS 56 a MS 72</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>14 nov. 2025</td>
                 <td>Bureau Veritas</td>
@@ -376,7 +376,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               </tr>
               <tr>
                 <td><div class="domain-icon di-fire"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div></td>
-                <td><strong>Desenfumage</strong><br><span class="legal-ref">Art. DF</span></td>
+                <td><a href="registre-incendie.html" style="text-decoration:none;color:inherit;"><strong>Desenfumage</strong></a><br><span class="legal-ref">Art. DF</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>14 nov. 2025</td>
                 <td>Bureau Veritas</td>
@@ -385,7 +385,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               </tr>
               <tr>
                 <td><div class="domain-icon di-fire"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div></td>
-                <td><strong>Portes coupe-feu</strong><br><span class="legal-ref">Art. MS 60</span></td>
+                <td><a href="registre-incendie.html" style="text-decoration:none;color:inherit;"><strong>Portes coupe-feu</strong></a><br><span class="legal-ref">Art. MS 60</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>5 dec. 2025</td>
                 <td>Fermetures du Sud</td>
@@ -394,7 +394,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               </tr>
               <tr>
                 <td><div class="domain-icon di-fire"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div></td>
-                <td><strong>Eclairage de securite (BAES)</strong><br><span class="legal-ref">Art. EC 14-15</span></td>
+                <td><a href="registre-incendie.html" style="text-decoration:none;color:inherit;"><strong>Eclairage de securite (BAES)</strong></a><br><span class="legal-ref">Art. EC 14-15</span></td>
                 <td><span class="freq">Semestrielle</span></td>
                 <td>15 janv. 2026</td>
                 <td>Elec Pro 34</td>
@@ -404,7 +404,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <!-- ELECTRIQUE -->
               <tr>
                 <td><div class="domain-icon di-elec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div></td>
-                <td><strong>Installation electrique</strong><br><span class="legal-ref">Art. EL 19</span></td>
+                <td><a href="registre-electrique.html" style="text-decoration:none;color:inherit;"><strong>Installation electrique</strong></a><br><span class="legal-ref">Art. EL 19</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>15 oct. 2025</td>
                 <td>15 oct. 2026</td>
@@ -415,7 +415,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <!-- GAZ -->
               <tr>
                 <td><div class="domain-icon di-gas"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div></td>
-                <td><strong>Installation gaz</strong><br><span class="legal-ref">Art. GZ</span></td>
+                <td><a href="registre-cvc.html" style="text-decoration:none;color:inherit;"><strong>Installation gaz</strong></a><br><span class="legal-ref">Art. GZ</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>8 mars 2026</td>
                 <td>8 mars 2027</td>
@@ -426,7 +426,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <!-- ASCENSEUR -->
               <tr>
                 <td><div class="domain-icon di-lift"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 8 3-3 3 3"/><path d="m9 16 3 3 3-3"/></svg></div></td>
-                <td><strong>Ascenseur / Monte-charge</strong><br><span class="legal-ref">Decret 2004-964</span></td>
+                <td><a href="registre-ascenseurs.html" style="text-decoration:none;color:inherit;"><strong>Ascenseur / Monte-charge</strong></a><br><span class="legal-ref">Decret 2004-964</span></td>
                 <td><span class="freq">Semestrielle</span></td>
                 <td>10 janv. 2026</td>
                 <td>10 avr. 2026</td>
@@ -437,7 +437,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <!-- CVC -->
               <tr>
                 <td><div class="domain-icon di-hvac"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4"/></svg></div></td>
-                <td><strong>CTA / VMC / Chaudiere</strong><br><span class="legal-ref">Art. CH</span></td>
+                <td><a href="registre-cvc.html" style="text-decoration:none;color:inherit;"><strong>CTA / VMC / Chaudiere</strong></a><br><span class="legal-ref">Art. CH</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>20 fev. 2026</td>
                 <td>20 fev. 2027</td>
@@ -448,7 +448,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <!-- LEGIONELLOSE -->
               <tr style="background: var(--error-50);">
                 <td><div class="domain-icon di-water"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></div></td>
-                <td><strong>Legionellose — reseau ECS</strong><br><span class="legal-ref">Arrete 1er fev. 2010</span></td>
+                <td><a href="registre-sanitaire.html" style="text-decoration:none;color:inherit;"><strong>Legionellose — reseau ECS</strong></a><br><span class="legal-ref">Arrete 1er fev. 2010</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>21 mars 2025</td>
                 <td style="color: var(--error); font-weight: 700;">21 mars 2026</td>
@@ -459,7 +459,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <!-- ACCESSIBILITE -->
               <tr>
                 <td><div class="domain-icon di-access"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-4-4"/></svg></div></td>
-                <td><strong>Accessibilite PMR</strong><br><span class="legal-ref">Decret 2017-431</span></td>
+                <td><a href="registre-accessibilite.html" style="text-decoration:none;color:inherit;"><strong>Accessibilite PMR</strong></a><br><span class="legal-ref">Decret 2017-431</span></td>
                 <td><span class="freq">Permanent</span></td>
                 <td>8 mars 2026</td>
                 <td>Continu</td>
@@ -470,7 +470,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <!-- EXERCICES EVACUATION -->
               <tr>
                 <td><div class="domain-icon di-fire"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div></td>
-                <td><strong>Exercices d'evacuation</strong><br><span class="legal-ref">2 par an minimum</span></td>
+                <td><a href="registre-incendie.html" style="text-decoration:none;color:inherit;"><strong>Exercices d'evacuation</strong></a><br><span class="legal-ref">2 par an minimum</span></td>
                 <td><span class="freq">Semestrielle</span></td>
                 <td>28 fev. 2026</td>
                 <td>Aout 2026</td>

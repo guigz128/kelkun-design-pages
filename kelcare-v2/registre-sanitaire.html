@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kelcare Retail — Registre — Sanitaire (Legionellose)</title>
+<title>Kelcare Retail — Registre — Sanitaire (Légionellose)</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --primary: #03c5b8; --primary-10: #f1fefc; --primary-25: #d5fbf6; --primary-50: #c2faf3; --primary-100: #93f6e9; --primary-400: #3cdacc; --primary-500: #03c5b8; --primary-600: #029284; --primary-700: #015f56;
   --secondary: #0e2f58; --secondary-1: #f8f9fc; --secondary-2: #f4f6fa; --secondary-10: #eeeff7; --secondary-25: #e0e2f0; --secondary-50: #bdc3e0; --secondary-100: #9aa3d0; --secondary-200: #7e8cb8; --secondary-300: #6274a0; --secondary-400: #465d88; --secondary-500: #0e2f58; --secondary-600: #0a2342; --secondary-700: #07172c;
   --success: #3faf38; --success-50: #f3fbf2; --success-100: #e2f8e0; --info: #3cb0f5; --info-50: #effaff; --info-100: #dbf3fe; --warning: #c27b30; --warning-50: #fcf7ee; --warning-100: #f5e9d0; --error: #fa4a57; --error-50: #fff1f1; --error-100: #ffe4e3;
-  --urgence: #ff634d; --depannage: #ffc114; --travaux: #1c61c5;
+  --urgence: #ff634d; --dépannage: #ffc114; --travaux: #1c61c5;
   --neutral-50: #fafafa; --neutral-100: #f5f5f5; --neutral-200: #e5e5e5; --neutral-300: #d4d4d4; --neutral-400: #a3a3a3; --neutral-500: #737373; --neutral-600: #525252;
   --accent: #6778ed; --accent-50: #eff4fe;
   --font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -139,7 +139,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
 .history-item:last-child { border-bottom: none; }
 .history-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
 .history-dot.green { background: var(--success); }
-.history-dot.yellow { background: var(--depannage); }
+.history-dot.yellow { background: var(--dépannage); }
 .history-dot.red { background: var(--error); }
 .history-info { flex: 1; }
 .history-title { font-size: 13px; font-weight: 600; color: var(--secondary); }
@@ -191,12 +191,12 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
         <div class="nav-section-label">Mon magasin</div>
         <a class="nav-item" href="kelcare-v2-dashboard.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span>Tableau de bord</span></a>
         <a class="nav-item" href="kelcare-v2-planning.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span>Planning</span><span class="nav-badge">3</span></a>
-        <a class="nav-item" href="kelcare-v2-equipements.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><span>Equipements</span></a>
+        <a class="nav-item" href="kelcare-v2-equipements.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><span>Équipements</span></a>
         <a class="nav-item" href="kelcare-v2-contacts.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span>Contacts / Intervenants</span></a>
       </div>
       <div class="nav-section">
-        <div class="nav-section-label">Conformite</div>
-        <a class="nav-item active" href="kelcare-v2-registre-securite.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span>Registre de securite</span><span class="nav-badge warn">2</span></a>
+        <div class="nav-section-label">Conformité</div>
+        <a class="nav-item active" href="kelcare-v2-registre-securite.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span>Registre de sécurité</span><span class="nav-badge warn">2</span></a>
         <a class="nav-item" href="kelcare-v2-contrats-entretien.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span><span>Contrats d'entretien</span></a>
       </div>
     </div>
@@ -212,7 +212,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
       <div class="topbar-left">
         <div class="topbar-search">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Rechercher un controle, equipement...">
+          <input type="text" placeholder="Rechercher un controle, équipement...">
         </div>
       </div>
       <div class="topbar-right">
@@ -224,9 +224,9 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
 
       <!-- Breadcrumb -->
       <div class="breadcrumb">
-        <a href="kelcare-v2-registre-securite.html">Registre de securite</a>
+        <a href="kelcare-v2-registre-securite.html">Registre de sécurité</a>
         <span class="sep">/</span>
-        <span class="current">Sanitaire (Legionellose)</span>
+        <span class="current">Sanitaire (Légionellose)</span>
       </div>
 
       <!-- Page header -->
@@ -234,9 +234,9 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
         <div>
           <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 4px;">
             <div class="domain-icon di-water"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></div>
-            <h1 class="page-title">Sanitaire (Legionellose)</h1>
+            <h1 class="page-title">Sanitaire (Légionellose)</h1>
           </div>
-          <p class="page-subtitle">Analyse legionellose reseau eau chaude sanitaire — Arrete du 1er fevrier 2010</p>
+          <p class="page-subtitle">Analyse légionellose réseau eau chaude sanitaire — Arrêté du 1er fevrier 2010</p>
         </div>
         <div class="page-actions">
           <button class="btn btn-ghost">
@@ -252,9 +252,9 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
         </div>
         <div class="alert-banner-text">
-          <div class="alert-banner-title">Analyse ECS non realisee — EN RETARD de 13 jours</div>
+          <div class="alert-banner-title">Analyse ECS non réalisée — EN RETARD de 13 jours</div>
           <div class="alert-banner-desc">
-            L'analyse legionellose du reseau d'eau chaude sanitaire n'a pas ete realisee dans les delais reglementaires.<br>
+            L'analyse légionellose du réseau d'eau chaude sanitaire n'a pas ete réalisée dans les delais réglementaires.<br>
             <strong>Risque sanitaire et risque de fermeture administrative par l'ARS.</strong> Un controle positif non detecte peut entrainer une contamination des usagers.
           </div>
           <div class="alert-banner-actions">
@@ -271,7 +271,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
       <div class="score-hero">
         <div class="score-card sc-red">
           <div class="score-value red">+13j</div>
-          <div class="score-label">Retard sur echeance</div>
+          <div class="score-label">Retard sur échéance</div>
         </div>
         <div class="score-card sc-blue">
           <div class="score-value blue">1</div>
@@ -279,7 +279,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
         </div>
         <div class="score-card sc-green">
           <div class="score-value green">28 mars</div>
-          <div class="score-label">Derniere mesure temperature</div>
+          <div class="score-label">Dernière mesure temperature</div>
         </div>
       </div>
 
@@ -294,17 +294,17 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
             <div class="card-header">
               <div class="card-title">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
-                Analyse legionellose — Reseau ECS
+                Analyse légionellose — Réseau ECS
               </div>
               <span class="status status-late"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> En retard 13j</span>
             </div>
             <div class="card-body">
               <div class="detail-row">
-                <span class="detail-label">Reference reglementaire</span>
-                <span class="detail-value">Arrete du 1er fevrier 2010</span>
+                <span class="detail-label">Reference réglementaire</span>
+                <span class="detail-value">Arrêté du 1er fevrier 2010</span>
               </div>
               <div class="detail-row">
-                <span class="detail-label">Frequence</span>
+                <span class="detail-label">Fréquence</span>
                 <span class="detail-value">Annuelle</span>
               </div>
               <div class="detail-row">
@@ -312,7 +312,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
                 <span class="detail-value">21 mars 2025</span>
               </div>
               <div class="detail-row">
-                <span class="detail-label">Echeance</span>
+                <span class="detail-label">Échéance</span>
                 <span class="detail-value" style="color: var(--error); font-weight: 700;">21 mars 2026 — EN RETARD</span>
               </div>
               <div class="detail-row">
@@ -333,11 +333,11 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
             </div>
             <div class="card-body">
               <div class="detail-row">
-                <span class="detail-label">Frequence de releve</span>
+                <span class="detail-label">Fréquence de releve</span>
                 <span class="detail-value">Mensuelle</span>
               </div>
               <div class="detail-row">
-                <span class="detail-label">Derniere mesure</span>
+                <span class="detail-label">Dernière mesure</span>
                 <span class="detail-value">28 mars 2026</span>
               </div>
               <div class="detail-row">
@@ -367,29 +367,29 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <div class="history-item">
                 <div class="history-dot red"></div>
                 <div class="history-info">
-                  <div class="history-title">Analyse legionellose — Echeance depassee</div>
-                  <div class="history-meta">Echeance : 21 mars 2026 · Aucun prelevement realise · Aucun intervenant assigne</div>
+                  <div class="history-title">Analyse légionellose — Échéance dépassée</div>
+                  <div class="history-meta">Échéance : 21 mars 2026 · Aucun prelevement réalisé · Aucun intervenant assigne</div>
                 </div>
               </div>
               <div class="history-item">
                 <div class="history-dot green"></div>
                 <div class="history-info">
-                  <div class="history-title">Analyse legionellose — Conforme</div>
+                  <div class="history-title">Analyse légionellose — Conforme</div>
                   <div class="history-meta">21 mars 2025 · Laboratoire Eurofins · Resultat : < 100 UFC/L (seuil : 1 000 UFC/L)</div>
                 </div>
               </div>
               <div class="history-item">
                 <div class="history-dot green"></div>
                 <div class="history-info">
-                  <div class="history-title">Analyse legionellose — Conforme</div>
+                  <div class="history-title">Analyse légionellose — Conforme</div>
                   <div class="history-meta">18 mars 2024 · Laboratoire Eurofins · Resultat : < 100 UFC/L</div>
                 </div>
               </div>
               <div class="history-item">
                 <div class="history-dot yellow"></div>
                 <div class="history-info">
-                  <div class="history-title">Analyse legionellose — Conforme (limite)</div>
-                  <div class="history-meta">22 mars 2023 · Laboratoire Eurofins · Resultat : 450 UFC/L (seuil : 1 000 UFC/L) — choc thermique realise</div>
+                  <div class="history-title">Analyse légionellose — Conforme (limite)</div>
+                  <div class="history-meta">22 mars 2023 · Laboratoire Eurofins · Resultat : 450 UFC/L (seuil : 1 000 UFC/L) — choc thermique réalisé</div>
                 </div>
               </div>
             </div>
@@ -406,9 +406,9 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
             </div>
             <div style="padding: 16px;">
               <div class="alert-card alert-card-red" style="margin-bottom: 16px;">
-                <strong>Planifier immediatement l'analyse legionellose</strong>
+                <strong>Planifiér immediatement l'analyse légionellose</strong>
                 Le controle annuel est en retard de 13 jours. Contactez un laboratoire agree pour un prelevement dans les plus brefs delais.
-                <div class="alert-date">Echeance depassee le 21 mars 2026</div>
+                <div class="alert-date">Échéance dépassée le 21 mars 2026</div>
               </div>
               <button class="btn btn-danger" style="width: 100%; justify-content: center;">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -423,16 +423,16 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <div class="card-title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> Reference legale</div>
             </div>
             <div class="info-block">
-              <strong>Arrete du 1er fevrier 2010</strong><br>
+              <strong>Arrêté du 1er fevrier 2010</strong><br>
               Relatif a la surveillance des legionelles dans les installations de production, de stockage et de distribution d'eau chaude sanitaire.<br><br>
               <strong>Obligations</strong><br>
               - Analyse annuelle par laboratoire agree COFRAC<br>
               - Surveillance mensuelle des temperatures<br>
-              - Carnet sanitaire tenu a jour<br>
+              - Carnet sanitaire tenu à jour<br>
               - Seuil d'alerte : 1 000 UFC/L<br>
               - Seuil d'action : 10 000 UFC/L<br><br>
               <strong>Sanctions</strong><br>
-              Fermeture administrative par l'ARS en cas de non-conformite.<br><br>
+              Fermeture administrative par l'ARS en cas de non-conformité.<br><br>
               <span class="legal-ref">Code de la sante publique — Art. L1321-4 et R1321-23</span>
             </div>
           </div>
@@ -446,7 +446,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <div class="doc-item">
                 <div class="doc-icon pdf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
                 <div class="doc-info">
-                  <div class="doc-name">Rapport analyse legionellose 2025.pdf</div>
+                  <div class="doc-name">Rapport analyse légionellose 2025.pdf</div>
                   <div class="doc-meta">Eurofins · 21 mars 2025</div>
                 </div>
                 <span class="doc-dl">Ouvrir</span>
@@ -467,7 +467,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
 
     <div class="footer-bar">
       <span>Kelkun Retail v2 — Kelcare</span>
-      <span>Registre dematerialise conforme Art. R143-44 CCH · <a href="#">En savoir plus</a></span>
+      <span>Registre dématérialisé conforme Art. R143-44 CCH · <a href="#">En savoir plus</a></span>
     </div>
   </div>
 </div>

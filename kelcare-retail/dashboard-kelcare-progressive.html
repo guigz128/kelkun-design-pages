@@ -721,7 +721,7 @@ function initCharts() {
   });
 
   // Dépenses
-  new Chart(document.getElementById('chartDepenses'), {
+  new Chart(document.getElementById('chartDépenses'), {
     type: 'bar',
     data: {
       labels: months,
@@ -731,7 +731,7 @@ function initCharts() {
   });
 
   // Métiers
-  new Chart(document.getElementById('chartMetiers'), {
+  new Chart(document.getElementById('chartMétiers'), {
     type: 'doughnut',
     data: { labels:['Plombier','Électricien','Multi-services','Climaticien','Serrurier'], datasets:[{ data:[8,5,3,2,1], backgroundColor:['#4f6ef7','#22c55e','#f59e0b','#06b6d4','#8b5cf6'], borderWidth:0, spacing:2 }] },
     options: { cutout:'65%', plugins:{ legend:{ display:true, position:'bottom', labels:{ boxWidth:10, usePointStyle:true, pointStyle:'circle', padding:8, font:{size:11} } } } }

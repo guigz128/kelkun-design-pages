@@ -605,7 +605,7 @@
   <!-- OVERVIEW -->
   <div class="section active" id="overview">
     <h2 class="section-title">Score de couverture fonctionnelle</h2>
-    <p class="section-sub">Sur 48 features analysees dans 10 categories</p>
+    <p class="section-sub">Sur 48 features analysees dans 10 catégories</p>
 
     <div class="score-row">
       <div class="score-card yuman">
@@ -630,7 +630,7 @@
 
     <div class="radar-grid">
       <div class="radar-card">
-        <h3>Couverture par categorie</h3>
+        <h3>Couverture par catégorie</h3>
         <div id="category-bars"></div>
       </div>
       <div class="radar-card">
@@ -638,13 +638,13 @@
         <div style="margin-bottom:1rem;">
           <h4 style="color:var(--yuman-light);font-size:0.82rem;margin-bottom:0.6rem;">YUMAN — Points faibles exploitables</h4>
           <div class="weakness-item"><span>Pas de portail prestataire</span><span class="opp">Kelkun -> Portail white-label</span></div>
-          <div class="weakness-item"><span>Pas de gestion budgetaire</span><span class="opp">Kelkun -> Budget IA par site</span></div>
+          <div class="weakness-item"><span>Pas de gestion budgétaire</span><span class="opp">Kelkun -> Budget IA par site</span></div>
           <div class="weakness-item"><span>UX datee, pricing eleve</span><span class="opp">Kelkun -> UX moderne, -50% prix</span></div>
           <div class="weakness-item"><span>Zero specifique retail</span><span class="opp">Kelkun -> Retail-first</span></div>
         </div>
         <div>
           <h4 style="color:var(--bob-light);font-size:0.82rem;margin-bottom:0.6rem;">BOB! DESK — Points faibles exploitables</h4>
-          <div class="weakness-item"><span>Pas de facturation integree</span><span class="opp">Kelkun -> Factura. complete</span></div>
+          <div class="weakness-item"><span>Pas de facturation intégrée</span><span class="opp">Kelkun -> Factura. complete</span></div>
           <div class="weakness-item"><span>Pas de gestion de stock</span><span class="opp">Kelkun -> Stock multi-sites</span></div>
           <div class="weakness-item"><span>Pas d'optimisation trajet</span><span class="opp">Kelkun -> Tournees IA</span></div>
           <div class="weakness-item"><span>API non documentee</span><span class="opp">Kelkun -> API REST + SDK</span></div>
@@ -656,20 +656,20 @@
   <!-- FEATURE MATRIX -->
   <div class="section" id="matrix">
     <h2 class="section-title">Matrice de features detaillee</h2>
-    <p class="section-sub">Cliquez sur une categorie pour filtrer — les icones <i class="info-icon" style="position:static;cursor:default;">i</i> expliquent le jargon technique</p>
+    <p class="section-sub">Cliquez sur une catégorie pour filtrer — les icones <i class="info-icon" style="position:static;cursor:default;">i</i> expliquent le jargon technique</p>
 
     <div class="matrix-container">
       <div class="matrix-header">
-        <div class="matrix-title">48 features · 10 categories</div>
+        <div class="matrix-title">48 features · 10 catégories</div>
         <div class="filter-pills">
           <button class="pill active" onclick="filterCategory('all', this)">Tout</button>
           <button class="pill" onclick="filterCategory('ticketing', this)">Ticketing</button>
-          <button class="pill" onclick="filterCategory('preventive', this)">Preventif</button>
+          <button class="pill" onclick="filterCategory('preventive', this)">Préventif</button>
           <button class="pill" onclick="filterCategory('planning', this)">Planning</button>
           <button class="pill" onclick="filterCategory('providers', this)">Prestataires</button>
           <button class="pill" onclick="filterCategory('billing', this)">Facturation</button>
           <button class="pill" onclick="filterCategory('inventory', this)">Stock</button>
-          <button class="pill" onclick="filterCategory('equipment', this)">Equipements</button>
+          <button class="pill" onclick="filterCategory('equipment', this)">Équipements</button>
           <button class="pill" onclick="filterCategory('reporting', this)">Reporting</button>
           <button class="pill" onclick="filterCategory('communication', this)">Communication</button>
           <button class="pill" onclick="filterCategory('integration', this)">API & Integrations</button>
@@ -693,7 +693,7 @@
 
   <!-- COMPARISON -->
   <div class="section" id="comparison">
-    <h2 class="section-title">Comparatif visuel par categorie</h2>
+    <h2 class="section-title">Comparatif visuel par catégorie</h2>
     <p class="section-sub">Chaque barre montre la couverture relative de chaque acteur</p>
     <div id="comparison-bars" style="max-width:800px;"></div>
   </div>
@@ -717,7 +717,7 @@
         <div class="price-sub">par utilisateur / mois</div>
         <ul id="yuman-pricing-list">
           <li>Interventions completes</li>
-          <li>Facturation integree</li>
+          <li>Facturation intégrée</li>
           <li>Gestion de stock</li>
           <li>Mobile iOS/Android</li>
           <li style="color:var(--danger);">Non : portail prestataire</li>
@@ -733,10 +733,10 @@
           <li>Tout Yuman + tout Bob! Desk</li>
           <li>IA diagnostic & predictive</li>
           <li>Marketplace prestataires</li>
-          <li>Budget par site + previsionnel</li>
+          <li>Budget par site + prévisionnel</li>
           <li>Multi-enseigne / retail-first</li>
           <li>API REST documentee</li>
-          <li>Conformite reglementaire</li>
+          <li>Conformité réglementaire</li>
         </ul>
       </div>
       <div class="pricing-card">
@@ -761,8 +761,8 @@
         <thead><tr><th>Plan</th><th>Prix</th><th>Cible</th><th>Inclus</th></tr></thead>
         <tbody>
           <tr><td><strong>Starter</strong></td><td>Gratuit</td><td>Test / petit magasin</td><td>1 site, 3 users, ticketing basique, 5 Go</td></tr>
-          <tr><td><strong>Essentiel</strong></td><td>19 EUR/site/mois</td><td>Reseau &lt; 20 sites</td><td>Ticketing complet, preventif, reporting, app mobile, 3 prestataires</td></tr>
-          <tr><td><strong style="color:var(--kelkun-light);">Pro</strong></td><td><strong>34 EUR/site/mois</strong></td><td>Reseau 20-200 sites</td><td>+ facturation, budgets, API, integrations, prestataires illimites, analytics</td></tr>
+          <tr><td><strong>Essentiel</strong></td><td>19 EUR/site/mois</td><td>Réseau &lt; 20 sites</td><td>Ticketing complet, préventif, reporting, app mobile, 3 prestataires</td></tr>
+          <tr><td><strong style="color:var(--kelkun-light);">Pro</strong></td><td><strong>34 EUR/site/mois</strong></td><td>Réseau 20-200 sites</td><td>+ facturation, budgets, API, integrations, prestataires illimites, analytics</td></tr>
           <tr><td><strong>Enterprise</strong></td><td>Sur devis</td><td>Grandes enseignes</td><td>+ SSO, SLA custom, multi-enseigne, IA predictive, account manager</td></tr>
         </tbody>
       </table>
@@ -792,7 +792,7 @@
 // =============================================
 const GLOSSARY = {
   "GMAO": {
-    def: "Gestion de Maintenance Assistee par Ordinateur. Logiciel qui centralise toutes les operations de maintenance : pannes, preventif, stock, prestataires.",
+    def: "Gestion de Maintenance Assistee par Ordinateur. Logiciel qui centralise toutes les operations de maintenance : pannes, préventif, stock, prestataires.",
     example: "Yuman et Bob! Desk sont des GMAO. Kelkun Retail en sera une aussi, specialisee retail."
   },
   "SLA": {
@@ -801,19 +801,19 @@ const GLOSSARY = {
   },
   "Ticketing": {
     def: "Systeme de creation et suivi de demandes d'intervention. Chaque probleme signale = 1 ticket, avec un statut qui evolue jusqu'a resolution.",
-    example: "Le responsable magasin cree un ticket \"fuite au plafond\", le prestataire le traite et le cloture."
+    example: "Le responsable magasin créé un ticket \"fuite au plafond\", le prestataire le traite et le clôturé."
   },
   "Curatif": {
-    def: "Maintenance effectuee apres qu'une panne s'est produite. On repare ce qui est casse (par opposition au preventif).",
+    def: "Maintenance effectuee apres qu'une panne s'est produite. On repare ce qui est casse (par opposition au préventif).",
     example: "La caisse enregistreuse tombe en panne -> intervention curative pour la reparer."
   },
-  "Preventif": {
-    def: "Maintenance planifiee a l'avance pour eviter les pannes. Inspections regulieres, remplacement de pieces avant usure.",
+  "Préventif": {
+    def: "Maintenance planifiée a l'avance pour eviter les pannes. Inspections regulieres, remplacement de pieces avant usure.",
     example: "Verifier les extincteurs tous les 6 mois, nettoyer les filtres clim tous les 3 mois."
   },
   "Dispatch": {
     def: "Action d'assigner et envoyer un technicien ou prestataire sur une intervention. Peut etre manuel ou automatise par IA.",
-    example: "Le systeme dispatche le plombier le plus proche qui a les competences requises."
+    example: "Le systeme dispatché le plombier le plus proche qui a les competences requises."
   },
   "Pipeline": {
     def: "Enchainement d'etapes par lesquelles passe un ticket. Chaque etape a un statut : nouveau -> assigne -> en cours -> termine -> facture.",
@@ -824,7 +824,7 @@ const GLOSSARY = {
     example: "Le technicien arrive sur site -> le geofencing declenche le chrono d'intervention tout seul."
   },
   "IoT": {
-    def: "Internet of Things — objets connectes qui envoient des donnees en continu (temperature, vibrations, consommation electrique...).",
+    def: "Internet of Things — objets connectes qui envoient des donnees en continu (temperature, vibrations, consommation électrique...).",
     example: "Un capteur dans la chambre froide envoie la temperature toutes les 5 min. Si > 5 deg C -> alerte automatique."
   },
   "First-fix": {
@@ -832,11 +832,11 @@ const GLOSSARY = {
     example: "Un taux de first-fix de 85% = 85% des pannes resolues du premier coup."
   },
   "TCO": {
-    def: "Total Cost of Ownership — cout total de possession d'un equipement sur toute sa duree de vie : achat + maintenance + energie + remplacement.",
+    def: "Total Cost of Ownership — cout total de possession d'un équipement sur toute sa duree de vie : achat + maintenance + energie + remplacement.",
     example: "Une clim a 3000 EUR qui coute 800 EUR/an en maintenance a un TCO de 7000 EUR sur 5 ans."
   },
   "MTBF": {
-    def: "Mean Time Between Failures — temps moyen entre deux pannes. Plus c'est eleve, plus l'equipement est fiable.",
+    def: "Mean Time Between Failures — temps moyen entre deux pannes. Plus c'est eleve, plus l'équipement est fiable.",
     example: "Un MTBF de 200 jours = en moyenne, une panne tous les 200 jours."
   },
   "MTTR": {
@@ -856,12 +856,12 @@ const GLOSSARY = {
     example: "L'API permet de connecter Kelkun a votre ERP, compta, ou toute autre appli automatiquement."
   },
   "SDK": {
-    def: "Software Development Kit — boite a outils pour les developpeurs qui veulent integrer Kelkun dans leurs propres applications.",
-    example: "Avec le SDK, un dev peut creer un bouton 'Signaler une panne' dans l'app interne du magasin."
+    def: "Software Development Kit — boite a outils pour les developpeurs qui veulent intégrér Kelkun dans leurs propres applications.",
+    example: "Avec le SDK, un dev peut créer un bouton 'Signaler une panne' dans l'app interne du magasin."
   },
   "Webhook": {
     def: "Notification automatique envoyee par un systeme quand un evenement se produit. Comme un SMS envoye entre logiciels.",
-    example: "Quand un ticket est cree dans Kelkun -> un webhook envoie un message dans Slack automatiquement."
+    example: "Quand un ticket est créé dans Kelkun -> un webhook envoie un message dans Slack automatiquement."
   },
   "SSO": {
     def: "Single Sign-On — connexion unique. Les employes se connectent une seule fois (ex: avec leur compte Google ou Microsoft) et accedent a tout.",
@@ -885,30 +885,30 @@ const GLOSSARY = {
   },
   "Gantt": {
     def: "Diagramme en barres horizontales qui montre la planification dans le temps. Chaque barre = une tache, avec debut, fin et chevauchements.",
-    example: "Vue Gantt du planning preventif : on voit d'un coup d'oeil toutes les maintenances planifiees sur le mois."
+    example: "Vue Gantt du planning préventif : on voit d'un coup d'oeil toutes les maintenances planifiées sur le mois."
   },
   "Escalade": {
     def: "Mecanisme qui remonte automatiquement un probleme au niveau superieur si il n'est pas traite dans le delai prevu.",
     example: "Ticket non traite en 2h -> escalade au manager. Toujours rien en 4h -> escalade au directeur regional."
   },
   "QR code": {
-    def: "Code-barres 2D scannable avec un smartphone. En maintenance : colle sur un equipement, il ouvre sa fiche ou cree un ticket en 1 scan.",
+    def: "Code-barres 2D scannable avec un smartphone. En maintenance : colle sur un équipement, il ouvre sa fiche ou créé un ticket en 1 scan.",
     example: "Scan du QR sur la clim -> acces direct a l'historique de pannes, docs techniques, et bouton 'signaler un probleme'."
   },
   "NFC": {
     def: "Near Field Communication — technologie sans contact (comme le paiement par telephone). Plus robuste que les QR codes en milieu industriel.",
-    example: "Le technicien approche son telephone de la pastille NFC sur la machine -> la fiche equipement s'ouvre."
+    example: "Le technicien approche son telephone de la pastille NFC sur la machine -> la fiche équipement s'ouvre."
   },
   "OTA": {
-    def: "Over-The-Air — mise a jour a distance, sans intervention physique. Comme quand votre telephone se met a jour tout seul.",
-    example: "Mettre a jour le firmware de la chambre froide connectee sans envoyer un technicien sur place."
+    def: "Over-The-Air — mise à jour a distance, sans intervention physique. Comme quand votre telephone se met à jour tout seul.",
+    example: "Mettre à jour le firmware de la chambre froide connectee sans envoyer un technicien sur place."
   },
   "ETA": {
     def: "Estimated Time of Arrival — heure d'arrivee estimee, calculee en temps reel comme sur Uber ou Deliveroo.",
     example: "Le magasin voit : \"Votre electricien arrive dans 14 min\" avec sa position sur la carte."
   },
   "Product-Led Growth": {
-    def: "Strategie ou le produit lui-meme genere la croissance : essai gratuit, onboarding facile, l'utilisateur decouvre la valeur seul puis upgrade.",
+    def: "Strategie ou le produit lui-meme généré la croissance : essai gratuit, onboarding facile, l'utilisateur decouvre la valeur seul puis upgrade.",
     example: "Slack, Notion, Figma = product-led. L'utilisateur s'inscrit, essaie, adore, puis son entreprise achete."
   },
   "Onboarding": {
@@ -916,7 +916,7 @@ const GLOSSARY = {
     example: "Premiere connexion Kelkun : 3 etapes simples et vous etes operationnel en 5 minutes."
   },
   "Downtime": {
-    def: "Temps d'arret — periode pendant laquelle un equipement ou un rayon est hors service a cause d'une panne.",
+    def: "Temps d'arret — periode pendant laquelle un équipement ou un rayon est hors service a cause d'une panne.",
     example: "2h de downtime sur les caisses automatiques un samedi = impact direct sur le chiffre d'affaires."
   },
   "Ride-hailing": {
@@ -940,24 +940,24 @@ const GLOSSARY = {
     example: "Connecter Kelkun au SIRH permet de savoir quels techniciens sont en conge ou en formation."
   },
   "DAF": {
-    def: "Directeur Administratif et Financier — responsable des finances de l'entreprise. Decide des budgets et valide les depenses importantes.",
-    example: "Le DAF voit le budget maintenance en temps reel et recoit une alerte si un site depasse son enveloppe."
+    def: "Directeur Administratif et Financier — responsable des finances de l'entreprise. Decide des budgets et valide les dépenses importantes.",
+    example: "Le DAF voit le budget maintenance en temps reel et recoit une alerte si un site dépassé son enveloppe."
   },
   "GSA": {
     def: "Grande Surface Alimentaire — hypermarches et supermarches (Carrefour, Leclerc, Auchan, etc.).",
     example: "Les GSA ont des besoins specifiques : chambres froides, rayons frais, caisses, parking..."
   },
   "Maintenance conditionnelle": {
-    def: "Maintenance declenchee par l'etat reel de l'equipement (mesures, capteurs) et non par un calendrier fixe.",
+    def: "Maintenance declenchee par l'etat reel de l'équipement (mesures, capteurs) et non par un calendrier fixe.",
     example: "La clim est inspectee non pas tous les 3 mois, mais quand le capteur detecte une baisse de performance."
   },
   "Rapprochement bancaire": {
-    def: "Verification automatique que les factures emises correspondent bien aux paiements recus sur le compte en banque.",
+    def: "Vérification automatique que les factures emises correspondent bien aux paiements recus sur le compte en banque.",
     example: "Kelkun fait le match automatique : facture 1200 EUR emise le 10/03 = virement de 1200 EUR recu le 18/03."
   },
   "OAuth2": {
     def: "Protocole d'authentification securise utilise par Google, Microsoft, Facebook pour permettre la connexion a des apps tierces.",
-    example: "\"Se connecter avec Google\" utilise OAuth2. Pas besoin de creer un nouveau mot de passe."
+    example: "\"Se connecter avec Google\" utilise OAuth2. Pas besoin de créer un nouveau mot de passe."
   },
   "Azure AD": {
     def: "Service d'identite Microsoft utilise par les entreprises pour gerer les comptes employes et les acces aux applications.",
@@ -977,11 +977,11 @@ const features = [
     { name: "Bouton START/STOP + {Geofencing}", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "{Geofencing} auto (start/stop declenche par arrivee/depart du site)" },
     { name: "{Dispatch} automatique", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "{Dispatch} IA : competences, proximite, charge, disponibilite" },
   ]},
-  { cat: "preventive", catLabel: "Maintenance {Preventif}e", features: [
-    { name: "Plans de maintenance {Preventif}e", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "+ {Maintenance conditionnelle} (seuils {IoT}, compteurs d'usage)" },
+  { cat: "préventive", catLabel: "Maintenance {Préventif}e", features: [
+    { name: "Plans de maintenance {Préventif}e", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "+ {Maintenance conditionnelle} (seuils {IoT}, compteurs d'usage)" },
     { name: "Rappels et alertes + {Escalade}", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Multi-canal (push, SMS, email, WhatsApp) + {Escalade} auto" },
-    { name: "Calendrier {Preventif}", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Vue calendrier + {Gantt} + drag & drop" },
-    { name: "Conformite reglementaire", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : suivi obligations legales par type d'equipement + alertes echeance" },
+    { name: "Calendrier {Préventif}", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Vue calendrier + {Gantt} + drag & drop" },
+    { name: "Conformité réglementaire", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : suivi obligations legales par type d'équipement + alertes échéance" },
   ]},
   { cat: "planning", catLabel: "Planning & Scheduling", features: [
     { name: "Calendrier partage", yuman: "yes", bob: "partial", kelkun: "superior", kelkunDetail: "Jour/semaine/mois + vue par site, technicien, prestataire", bobDetail: "Limite" },
@@ -996,34 +996,34 @@ const features = [
     { name: "Gestion des contrats", yuman: "yes", bob: "partial", kelkun: "superior", kelkunDetail: "Contrats digitaux + signature electronique + renouvellement auto", bobDetail: "Metadonnees basiques" },
   ]},
   { cat: "billing", catLabel: "Facturation & Finances", features: [
-    { name: "Facturation integree", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "Facturation auto + validation workflow + {Rapprochement bancaire}" },
+    { name: "Facturation intégrée", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "Facturation auto + validation workflow + {Rapprochement bancaire}" },
     { name: "Facturation sur site", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "+ Paiement immediat (CB, virement, lien de paiement)" },
     { name: "{Chorus Pro}", yuman: "yes", bob: "no", kelkun: "yes" },
     { name: "Export vers {ERP} / compta", yuman: "partial", bob: "no", kelkun: "superior", kelkunDetail: "QuickBooks, Xero, Pennylane, Sage, DATEV", yumanDetail: "Winbooks, Sage" },
-    { name: "Gestion budgets", yuman: "no", bob: "yes", kelkun: "superior", kelkunDetail: "Budget par site, categorie, periode + alertes + previsionnel IA" },
+    { name: "Gestion budgets", yuman: "no", bob: "yes", kelkun: "superior", kelkunDetail: "Budget par site, catégorie, periode + alertes + prévisionnel IA" },
     { name: "Relances automatiques", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "Scenarios configurables (email + SMS)" },
   ]},
   { cat: "inventory", catLabel: "Inventaire & Pieces detachees", features: [
-    { name: "Base articles (equipements, pieces)", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "Catalogue unifie avec photos, docs techniques, compatibilite" },
+    { name: "Base articles (équipements, pieces)", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "Catalogue unifie avec photos, docs techniques, compatibilite" },
     { name: "Import base distributeurs", yuman: "partial", bob: "no", kelkun: "superior", kelkunDetail: "{API REST} ouverte tout fournisseur + scan code-barres/{QR code}", yumanDetail: "4 distributeurs" },
     { name: "Gestion de stock", yuman: "partial", bob: "no", kelkun: "superior", kelkunDetail: "Stock par site + central + transferts + reappro auto", yumanDetail: "Alertes seuils" },
     { name: "Commandes fournisseurs", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "BC digital + suivi livraison + reception partielle" },
   ]},
-  { cat: "equipment", catLabel: "Equipements & Patrimoine", features: [
-    { name: "Fiche equipement + {TCO}", yuman: "yes", bob: "partial", kelkun: "superior", kelkunDetail: "Photos, docs, historique, {TCO}, {QR code}", bobDetail: "Basique" },
-    { name: "{QR code} / {NFC}", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "{NFC} + {QR code} dynamiques + scan pour creer un ticket" },
-    { name: "Arborescence sites", yuman: "partial", bob: "yes", kelkun: "superior", kelkunDetail: "Illimite : enseigne -> region -> magasin -> zone -> equipement" },
-    { name: "Plans interactifs", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : plans du magasin avec positionnement equipements" },
+  { cat: "equipment", catLabel: "Équipements & Patrimoine", features: [
+    { name: "Fiche équipement + {TCO}", yuman: "yes", bob: "partial", kelkun: "superior", kelkunDetail: "Photos, docs, historique, {TCO}, {QR code}", bobDetail: "Basique" },
+    { name: "{QR code} / {NFC}", yuman: "yes", bob: "no", kelkun: "superior", kelkunDetail: "{NFC} + {QR code} dynamiques + scan pour créer un ticket" },
+    { name: "Arborescence sites", yuman: "partial", bob: "yes", kelkun: "superior", kelkunDetail: "Illimite : enseigne -> region -> magasin -> zone -> équipement" },
+    { name: "Plans interactifs", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : plans du magasin avec positionnement équipements" },
   ]},
   { cat: "reporting", catLabel: "Reporting & Analytics", features: [
     { name: "{KPI} / Indicateurs", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Dashboards drag & drop + {KPI} retail ({Downtime}/rayon, cout/m2, {MTBF})", bobDetail: "40 indicateurs" },
-    { name: "Rapports exportables", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "+ Export planifie + envoi auto aux stakeholders" },
+    { name: "Rapports exportables", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "+ Export planifié + envoi auto aux stakeholders" },
     { name: "Analyse predictive pannes", yuman: "no", bob: "partial", kelkun: "superior", kelkunDetail: "IA : anticipation pannes, recommandations, scoring fiabilite", bobDetail: "Tendances basiques" },
     { name: "Performance prestataires + {Benchmark}", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : {SLA} tracking, {MTTR}, satisfaction, {Benchmark}" },
   ]},
   { cat: "communication", catLabel: "Communication & Collaboration", features: [
     { name: "Notifications push", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "Multi-canal configurable (push, email, SMS, WhatsApp)" },
-    { name: "Chat integre", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : messagerie contextuelle par ticket" },
+    { name: "Chat intégré", yuman: "no", bob: "no", kelkun: "new-feat", kelkunDetail: "NOUVEAU : messagerie contextuelle par ticket" },
     { name: "Commentaires sur intervention", yuman: "yes", bob: "yes", kelkun: "superior", kelkunDetail: "+ Pieces jointes, mentions @, historique" },
     { name: "Portail demandeur (magasin)", yuman: "no", bob: "yes", kelkun: "superior", kelkunDetail: "App simplifiee : scan {QR code} -> photo -> description -> envoi" },
   ]},
@@ -1040,21 +1040,21 @@ const crossIndustryIdeas = [
     source: "aviation", sourceLabel: "Aviation",
     title: "\"Power by the Hour\" — Maintenance as a Service",
     desc: "Rolls-Royce ne vend plus des moteurs mais des heures de vol. Le client paye pour le uptime, pas pour les reparations. Tout l'incentive est aligne sur la fiabilite.",
-    application: "Kelkun propose un forfait \"Uptime Garanti\" : le client paye un fixe mensuel, Kelkun gere tout (prestataires, pieces, {Preventif}). Si le {Downtime} depasse le {SLA} -> remboursement automatique.",
+    application: "Kelkun propose un forfait \"Uptime Garanti\" : le client paye un fixe mensuel, Kelkun gere tout (prestataires, pieces, {Préventif}). Si le {Downtime} dépassé le {SLA} -> remboursement automatique.",
     impact: "mega"
   },
   {
     source: "healthcare", sourceLabel: "Sante",
     title: "Triage automatique (urgences hospitalieres)",
     desc: "Aux urgences, chaque patient est trie par gravite en quelques secondes (code couleur). Les cas critiques passent en premier, pas les premiers arrives.",
-    application: "Chaque ticket entrant est auto-trie par un score d'urgence IA : impact business (CA perdu/heure), risque securite, nombre de clients affectes. Le responsable regional voit un \"monitoring vital\" de ses magasins avec des {KPI} en temps reel.",
+    application: "Chaque ticket entrant est auto-trie par un score d'urgence IA : impact business (CA perdu/heure), risque sécurité, nombre de clients affectes. Le responsable regional voit un \"monitoring vital\" de ses magasins avec des {KPI} en temps reel.",
     impact: "high"
   },
   {
     source: "logistics", sourceLabel: "Logistique / Uber",
     title: "{Dispatch} en temps reel facon {Ride-hailing}",
     desc: "Uber matche un chauffeur en 3 secondes via proximite, rating et disponibilite. Le client voit le chauffeur arriver en temps reel sur la carte.",
-    application: "Quand un ticket urgent arrive, Kelkun envoie un push aux 3 prestataires les plus proches/qualifies. Le premier qui accepte est dispatche. Le magasin voit l'intervenant arriver sur une carte avec un {ETA} live.",
+    application: "Quand un ticket urgent arrive, Kelkun envoie un push aux 3 prestataires les plus proches/qualifies. Le premier qui accepte est dispatché. Le magasin voit l'intervenant arriver sur une carte avec un {ETA} live.",
     impact: "mega"
   },
   {
@@ -1074,29 +1074,29 @@ const crossIndustryIdeas = [
   {
     source: "food", sourceLabel: "Food Delivery",
     title: "Tracking live & {ETA} dynamique (Deliveroo/Uber Eats)",
-    desc: "Le client voit sa commande passer par chaque etape (preparation -> en route -> arrivee) avec un temps restant qui se met a jour en temps reel.",
+    desc: "Le client voit sa commande passer par chaque etape (preparation -> en route -> arrivee) avec un temps restant qui se met à jour en temps reel.",
     application: "Le responsable magasin voit son intervention passer par : Ticket recu -> Prestataire assigne -> En route ({ETA} live) -> Sur site -> En cours -> Termine -> Facture. \"Votre electricien arrive dans 12 min.\"",
     impact: "mega"
   },
   {
     source: "automotive", sourceLabel: "Automobile / Tesla",
     title: "{OTA} Updates & Diagnostic distant",
-    desc: "Tesla diagnostique les problemes a distance et pousse des mises a jour logicielles sans passage en atelier. Le proprietaire ne sait meme pas qu'une panne a ete evitee.",
-    application: "Pour les equipements connectes ({IoT}) : monitoring en continu, diagnostic a distance, resolution logicielle sans intervention physique ({OTA}). Le {Preventif} devient invisible.",
+    desc: "Tesla diagnostique les problemes a distance et pousse des mises à jour logicielles sans passage en atelier. Le proprietaire ne sait meme pas qu'une panne a ete evitee.",
+    application: "Pour les équipements connectes ({IoT}) : monitoring en continu, diagnostic a distance, resolution logicielle sans intervention physique ({OTA}). Le {Préventif} devient invisible.",
     impact: "high"
   },
   {
     source: "hospitality", sourceLabel: "Hotellerie",
     title: "Score {NPS} post-intervention (facon hotels)",
     desc: "Les hotels envoient un micro-survey apres le sejour : 1 question, 1 clic. Le {NPS} est suivi en temps reel par etablissement.",
-    application: "Apres chaque intervention : 1 question au magasin. {NPS} par prestataire, par categorie, par site. Les prestataires sous 4/5 recoivent un coaching automatique ou sont desactives.",
+    application: "Apres chaque intervention : 1 question au magasin. {NPS} par prestataire, par catégorie, par site. Les prestataires sous 4/5 recoivent un coaching automatique ou sont desactives.",
     impact: "medium"
   },
   {
     source: "fintech", sourceLabel: "Assurance / InsurTech",
     title: "Claim automatise par photo IA",
     desc: "Les apps d'assurance auto comme Lemonade permettent de declarer un sinistre en 3 min : photo du degat -> IA analyse -> indemnisation en 30 secondes.",
-    application: "Le responsable magasin prend une photo. L'IA identifie le probleme (fuite, vitre cassee, panne electrique), estime le cout, pre-remplit le ticket et {Dispatch} le prestataire. De la photo au {Dispatch} en 60 secondes.",
+    application: "Le responsable magasin prend une photo. L'IA identifie le probleme (fuite, vitre cassee, panne électrique), estime le cout, pre-remplit le ticket et {Dispatch} le prestataire. De la photo au {Dispatch} en 60 secondes.",
     impact: "mega"
   },
   {
@@ -1110,14 +1110,14 @@ const crossIndustryIdeas = [
     source: "gaming", sourceLabel: "SaaS / {Product-Led Growth}",
     title: "{Onboarding} progressif & templates sectoriels",
     desc: "Les meilleurs SaaS (Notion, Figma) offrent des templates prets a l'emploi par secteur et un {Onboarding} par etapes qui debloque les features au fur et a mesure.",
-    application: "Au signup, le client choisit son secteur (boulangerie, pret-a-porter, {GSA}, restau...). Kelkun pre-configure : types d'equipements, plans {Preventif}s, checklist reglementaires, {KPI}s adaptes. Productif en 10 min.",
+    application: "Au signup, le client choisit son secteur (boulangerie, pret-a-porter, {GSA}, restau...). Kelkun pre-configure : types d'équipements, plans {Préventif}s, checklist réglementaires, {KPI}s adaptes. Productif en 10 min.",
     impact: "high"
   },
   {
     source: "healthcare", sourceLabel: "Sante / Pharmacovigilance",
     title: "Signalement collaboratif ({Crowdsourcing})",
     desc: "En pharmacovigilance, chaque professionnel de sante peut signaler un effet indesirable. L'agregation des signalements detecte des problemes systemiques.",
-    application: "Si 5 magasins signalent le meme probleme sur le meme modele de chambre froide -> alerte auto au siege + maintenance groupee. {Crowdsourcing} du reseau pour detecter les defauts fabricants.",
+    application: "Si 5 magasins signalent le meme probleme sur le meme modele de chambre froide -> alerte auto au siege + maintenance groupee. {Crowdsourcing} du réseau pour detecter les defauts fabricants.",
     impact: "mega"
   },
 ];

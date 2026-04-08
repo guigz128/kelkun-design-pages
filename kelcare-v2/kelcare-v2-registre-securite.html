@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kelcare Retail — Registre de securite</title>
+<title>Kelcare Retail — Registre de sécurité</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --primary: #03c5b8; --primary-10: #f1fefc; --primary-25: #d5fbf6; --primary-50: #c2faf3; --primary-100: #93f6e9; --primary-400: #3cdacc; --primary-500: #03c5b8; --primary-600: #029284; --primary-700: #015f56;
   --secondary: #0e2f58; --secondary-1: #f8f9fc; --secondary-2: #f4f6fa; --secondary-10: #eeeff7; --secondary-25: #e0e2f0; --secondary-50: #bdc3e0; --secondary-100: #9aa3d0; --secondary-200: #7e8cb8; --secondary-300: #6274a0; --secondary-400: #465d88; --secondary-500: #0e2f58; --secondary-600: #0a2342; --secondary-700: #07172c;
   --success: #3faf38; --success-50: #f3fbf2; --success-100: #e2f8e0; --info: #3cb0f5; --info-50: #effaff; --info-100: #dbf3fe; --warning: #c27b30; --warning-50: #fcf7ee; --warning-100: #f5e9d0; --error: #fa4a57; --error-50: #fff1f1; --error-100: #ffe4e3;
-  --urgence: #ff634d; --depannage: #ffc114; --travaux: #1c61c5;
+  --urgence: #ff634d; --dépannage: #ffc114; --travaux: #1c61c5;
   --neutral-50: #fafafa; --neutral-100: #f5f5f5; --neutral-200: #e5e5e5; --neutral-300: #d4d4d4; --neutral-400: #a3a3a3; --neutral-500: #737373; --neutral-600: #525252;
   --accent: #6778ed; --accent-50: #eff4fe;
   --font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -79,7 +79,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
 .score-card { background: white; border-radius: 12px; padding: 20px; border: 1px solid var(--neutral-200); text-align: center; position: relative; overflow: hidden; }
 .score-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
 .score-card.sc-green::before { background: var(--success); }
-.score-card.sc-yellow::before { background: var(--depannage); }
+.score-card.sc-yellow::before { background: var(--dépannage); }
 .score-card.sc-red::before { background: var(--error); }
 .score-card.sc-blue::before { background: var(--info); }
 .score-value { font-size: 32px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
@@ -166,7 +166,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
 .history-item:last-child { border-bottom: none; }
 .history-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
 .history-dot.green { background: var(--success); }
-.history-dot.yellow { background: var(--depannage); }
+.history-dot.yellow { background: var(--dépannage); }
 .history-dot.red { background: var(--error); }
 .history-info { flex: 1; }
 .history-title { font-size: 13px; font-weight: 600; color: var(--secondary); }
@@ -217,12 +217,12 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
         <div class="nav-section-label">Mon magasin</div>
         <a class="nav-item" href="kelcare-v2-dashboard.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span>Tableau de bord</span></a>
         <a class="nav-item" href="kelcare-v2-planning.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span>Planning</span><span class="nav-badge">3</span></a>
-        <a class="nav-item" href="kelcare-v2-equipements.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><span>Equipements</span></a>
+        <a class="nav-item" href="kelcare-v2-equipements.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span><span>Équipements</span></a>
         <a class="nav-item" href="kelcare-v2-contacts.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span>Contacts / Intervenants</span></a>
       </div>
       <div class="nav-section">
-        <div class="nav-section-label">Conformite</div>
-        <a class="nav-item active" href="kelcare-v2-registre-securite.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span>Registre de securite</span><span class="nav-badge warn">2</span></a>
+        <div class="nav-section-label">Conformité</div>
+        <a class="nav-item active" href="kelcare-v2-registre-securite.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span>Registre de sécurité</span><span class="nav-badge warn">2</span></a>
         <a class="nav-item" href="kelcare-v2-contrats-entretien.html"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span><span>Contrats d'entretien</span></a>
       </div>
     </div>
@@ -238,7 +238,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
       <div class="topbar-left">
         <div class="topbar-search">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Rechercher un controle, equipement...">
+          <input type="text" placeholder="Rechercher un controle, équipement...">
         </div>
       </div>
       <div class="topbar-right">
@@ -251,7 +251,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
       <!-- Page header -->
       <div class="page-header">
         <div>
-          <h1 class="page-title">Registre de securite</h1>
+          <h1 class="page-title">Registre de sécurité</h1>
           <p class="page-subtitle">ERP Type M — Leroy Merlin Montpellier Odysseum — Art. R143-44 CCH</p>
         </div>
         <div class="page-actions">
@@ -270,8 +270,8 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
       <div class="autofill-banner">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
         <div class="autofill-banner-text">
-          <div class="autofill-banner-title">Registre alimente automatiquement</div>
-          <div class="autofill-banner-desc">Chaque intervention artisan via Kelkun genere une entree dans le registre. Horodatage, rapport, signature — exportable PDF pour la commission de securite.</div>
+          <div class="autofill-banner-title">Registre alimenté automatiquement</div>
+          <div class="autofill-banner-desc">Chaque intervention artisan via Kelkun généré une entrée dans le registre. Horodatage, rapport, signature — exportable PDF pour la commission de sécurité.</div>
         </div>
       </div>
 
@@ -283,7 +283,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
         </div>
         <div class="score-card sc-yellow">
           <div class="score-value yellow">2</div>
-          <div class="score-label">Echeances proches</div>
+          <div class="score-label">Échéances proches</div>
         </div>
         <div class="score-card sc-red">
           <div class="score-value red">1</div>
@@ -291,7 +291,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
         </div>
         <div class="score-card sc-blue">
           <div class="score-value blue">86%</div>
-          <div class="score-label">Score conformite</div>
+          <div class="score-label">Score conformité</div>
         </div>
       </div>
 
@@ -308,11 +308,11 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
           </div>
         </div>
         <div class="compliance-info">
-          <div class="compliance-title">Pret pour la commission de securite</div>
+          <div class="compliance-title">Pret pour la commission de sécurité</div>
           <div class="compliance-detail">
-            <strong>12 controles a jour</strong> sur 15 obligations reglementaires.<br>
-            1 controle en retard (legionellose) · 2 echeances dans les 30 prochains jours.<br>
-            Derniere visite commission : <strong>14 nov. 2025</strong> — Avis favorable avec 2 reserves levees.
+            <strong>12 controles à jour</strong> sur 15 obligations réglementaires.<br>
+            1 controle en retard (légionellose) · 2 échéances dans les 30 prochains jours.<br>
+            Dernière visite commission : <strong>14 nov. 2025</strong> — Avis favorable avec 2 réserves levées.
           </div>
         </div>
         <div class="compliance-actions">
@@ -325,11 +325,11 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
       <div class="reg-tabs">
         <a class="reg-tab active" href="kelcare-v2-registre-securite.html">Tous les controles <span class="tab-count ok">15</span></a>
         <a class="reg-tab" href="registre-incendie.html">Incendie <span class="tab-count ok">6</span></a>
-        <a class="reg-tab" href="registre-electrique.html">Electrique</a>
+        <a class="reg-tab" href="registre-electrique.html">Électrique</a>
         <a class="reg-tab" href="registre-ascenseurs.html">Ascenseurs</a>
         <a class="reg-tab" href="registre-sanitaire.html">Sanitaire <span class="tab-count err">1</span></a>
         <a class="reg-tab" href="registre-cvc.html">CVC</a>
-        <a class="reg-tab" href="registre-accessibilite.html">Accessibilite</a>
+        <a class="reg-tab" href="registre-accessibilite.html">Accessibilité</a>
       </div>
 
       <!-- Main content -->
@@ -340,7 +340,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
           <div class="card-header">
             <div class="card-title">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Verifications periodiques obligatoires
+              Vérifications périodiques obligatoires
             </div>
             <span class="card-action">Voir le planning</span>
           </div>
@@ -349,7 +349,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <tr>
                 <th></th>
                 <th>Obligation</th>
-                <th>Frequence</th>
+                <th>Fréquence</th>
                 <th>Dernier controle</th>
                 <th>Prochain</th>
                 <th>Intervenant</th>
@@ -370,7 +370,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               </tr>
               <tr>
                 <td><div class="domain-icon di-fire"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div></td>
-                <td><a href="registre-incendie.html"><strong>SSI (Systeme de Securite Incendie)</strong></a><br><span class="legal-ref">Art. MS 56 a MS 72</span></td>
+                <td><a href="registre-incendie.html"><strong>SSI (Systeme de Sécurité Incendie)</strong></a><br><span class="legal-ref">Art. MS 56 a MS 72</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>14 nov. 2025</td>
                 <td>Bureau Veritas</td>
@@ -379,7 +379,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               </tr>
               <tr>
                 <td><div class="domain-icon di-fire"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div></td>
-                <td><a href="registre-incendie.html"><strong>Desenfumage</strong></a><br><span class="legal-ref">Art. DF</span></td>
+                <td><a href="registre-incendie.html"><strong>Désenfumage</strong></a><br><span class="legal-ref">Art. DF</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>14 nov. 2025</td>
                 <td>Bureau Veritas</td>
@@ -397,17 +397,17 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               </tr>
               <tr>
                 <td><div class="domain-icon di-fire"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div></td>
-                <td><a href="registre-incendie.html"><strong>Eclairage de securite (BAES)</strong></a><br><span class="legal-ref">Art. EC 14-15</span></td>
+                <td><a href="registre-incendie.html"><strong>Éclairage de sécurité (BAES)</strong></a><br><span class="legal-ref">Art. EC 14-15</span></td>
                 <td><span class="freq">Semestrielle</span></td>
                 <td>15 janv. 2026</td>
                 <td>Elec Pro 34</td>
-                <td><span class="status status-warn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Echeance J-12</span></td>
+                <td><span class="status status-warn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Échéance J-12</span></td>
                 <td><span class="doc-dl">Rapport</span></td>
               </tr>
               <!-- ELECTRIQUE -->
               <tr>
                 <td><div class="domain-icon di-elec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div></td>
-                <td><a href="registre-electrique.html"><strong>Installation electrique</strong></a><br><span class="legal-ref">Art. EL 19</span></td>
+                <td><a href="registre-electrique.html"><strong>Installation électrique</strong></a><br><span class="legal-ref">Art. EL 19</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>15 oct. 2025</td>
                 <td>15 oct. 2026</td>
@@ -429,12 +429,12 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <!-- ASCENSEUR -->
               <tr>
                 <td><div class="domain-icon di-lift"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 8 3-3 3 3"/><path d="m9 16 3 3 3-3"/></svg></div></td>
-                <td><a href="registre-ascenseurs.html"><strong>Ascenseur / Monte-charge</strong></a><br><span class="legal-ref">Decret 2004-964</span></td>
+                <td><a href="registre-ascenseurs.html"><strong>Ascenseur / Monte-charge</strong></a><br><span class="legal-ref">Décret 2004-964</span></td>
                 <td><span class="freq">Semestrielle</span></td>
                 <td>10 janv. 2026</td>
                 <td>10 avr. 2026</td>
                 <td>Schindler</td>
-                <td><span class="status status-warn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Echeance J-7</span></td>
+                <td><span class="status status-warn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Échéance J-7</span></td>
                 <td><span class="doc-dl">Rapport</span></td>
               </tr>
               <!-- CVC -->
@@ -451,34 +451,34 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <!-- LEGIONELLOSE -->
               <tr style="background: var(--error-50);">
                 <td><div class="domain-icon di-water"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></div></td>
-                <td><a href="registre-sanitaire.html"><strong>Legionellose — reseau ECS</strong></a><br><span class="legal-ref">Arrete 1er fev. 2010</span></td>
+                <td><a href="registre-sanitaire.html"><strong>Légionellose — réseau ECS</strong></a><br><span class="legal-ref">Arrêté 1er fev. 2010</span></td>
                 <td><span class="freq">Annuelle</span></td>
                 <td>21 mars 2025</td>
                 <td style="color: var(--error); font-weight: 700;">21 mars 2026</td>
                 <td>—</td>
                 <td><span class="status status-late"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> En retard 13j</span></td>
-                <td><span class="doc-dl" style="color: var(--error);">Planifier</span></td>
+                <td><span class="doc-dl" style="color: var(--error);">Planifiér</span></td>
               </tr>
               <!-- ACCESSIBILITE -->
               <tr>
                 <td><div class="domain-icon di-access"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-4-4"/></svg></div></td>
-                <td><a href="registre-accessibilite.html"><strong>Accessibilite PMR</strong></a><br><span class="legal-ref">Decret 2017-431</span></td>
+                <td><a href="registre-accessibilite.html"><strong>Accessibilité PMR</strong></a><br><span class="legal-ref">Décret 2017-431</span></td>
                 <td><span class="freq">Permanent</span></td>
                 <td>8 mars 2026</td>
                 <td>Continu</td>
                 <td>Exploitant</td>
-                <td><span class="status status-ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> A jour</span></td>
+                <td><span class="status status-ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> À jour</span></td>
                 <td><span class="doc-dl">Registre</span></td>
               </tr>
               <!-- EXERCICES EVACUATION -->
               <tr>
                 <td><div class="domain-icon di-fire"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div></td>
-                <td><a href="registre-incendie.html"><strong>Exercices d'evacuation</strong></a><br><span class="legal-ref">2 par an minimum</span></td>
+                <td><a href="registre-incendie.html"><strong>Exercices d'évacuation</strong></a><br><span class="legal-ref">2 par an minimum</span></td>
                 <td><span class="freq">Semestrielle</span></td>
                 <td>28 fev. 2026</td>
                 <td>Aout 2026</td>
                 <td>Responsable magasin</td>
-                <td><span class="status status-ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> A jour</span></td>
+                <td><span class="status status-ok"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> À jour</span></td>
                 <td><span class="doc-dl">CR</span></td>
               </tr>
             </tbody>
@@ -495,19 +495,19 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
             </div>
             <div style="padding: 12px 16px;">
               <div class="alert-card alert-card-red">
-                <strong>Legionellose — controle en retard</strong>
-                Analyse ECS non realisee depuis 13 jours. Risque sanitaire et fermeture administrative.
-                <div class="alert-date">Echeance depassee le 21 mars 2026</div>
+                <strong>Légionellose — controle en retard</strong>
+                Analyse ECS non réalisée depuis 13 jours. Risque sanitaire et fermeture administrative.
+                <div class="alert-date">Échéance dépassée le 21 mars 2026</div>
               </div>
               <div class="alert-card alert-card-yellow">
-                <strong>BAES — echeance dans 12 jours</strong>
-                Test autonomie eclairage de securite a planifier avec Elec Pro 34.
-                <div class="alert-date">Echeance : 15 avril 2026</div>
+                <strong>BAES — échéance dans 12 jours</strong>
+                Test autonomie éclairage de sécurité a planifiér avec Elec Pro 34.
+                <div class="alert-date">Échéance : 15 avril 2026</div>
               </div>
               <div class="alert-card alert-card-yellow">
-                <strong>Ascenseur — echeance dans 7 jours</strong>
+                <strong>Ascenseur — échéance dans 7 jours</strong>
                 Entretien semestriel Schindler a confirmer.
-                <div class="alert-date">Echeance : 10 avril 2026</div>
+                <div class="alert-date">Échéance : 10 avril 2026</div>
               </div>
             </div>
           </div>
@@ -529,15 +529,15 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <div class="doc-item">
                 <div class="doc-icon pdf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
                 <div class="doc-info">
-                  <div class="doc-name">PV commission securite nov 2025.pdf</div>
-                  <div class="doc-meta">Commission de securite · 14 nov. 2025</div>
+                  <div class="doc-name">PV commission sécurité nov 2025.pdf</div>
+                  <div class="doc-meta">Commission de sécurité · 14 nov. 2025</div>
                 </div>
                 <span class="doc-dl">Ouvrir</span>
               </div>
               <div class="doc-item">
                 <div class="doc-icon pdf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
                 <div class="doc-info">
-                  <div class="doc-name">Attestation verif electrique.pdf</div>
+                  <div class="doc-name">Attestation verif électrique.pdf</div>
                   <div class="doc-meta">Bureau Veritas · 15 oct. 2025</div>
                 </div>
                 <span class="doc-dl">Ouvrir</span>
@@ -545,7 +545,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
               <div class="doc-item">
                 <div class="doc-icon img"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div>
                 <div class="doc-info">
-                  <div class="doc-name">CR exercice evacuation fev 2026.pdf</div>
+                  <div class="doc-name">CR exercice évacuation fev 2026.pdf</div>
                   <div class="doc-meta">Sophie Bertrand · 28 fev. 2026</div>
                 </div>
                 <span class="doc-dl">Ouvrir</span>
@@ -556,16 +556,16 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
           <!-- Infos etablissement -->
           <div class="card">
             <div class="card-header">
-              <div class="card-title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Etablissement</div>
+              <div class="card-title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Établissement</div>
               <span class="card-action">Modifier</span>
             </div>
             <div style="padding: 16px; font-size: 13px; color: var(--secondary-300); line-height: 1.8;">
               <strong style="color: var(--secondary);">Leroy Merlin Montpellier Odysseum</strong><br>
-              ERP Type M — 2e categorie<br>
+              ERP Type M — 2e catégorie<br>
               Exploitant : SAS Leroy Merlin France<br>
               Responsable : Sophie Bertrand<br>
-              Capacite : 1 200 personnes<br>
-              Derniere visite commission : 14 nov. 2025<br>
+              Capacité : 1 200 personnes<br>
+              Dernière visite commission : 14 nov. 2025<br>
               Avis : <span style="color: var(--success); font-weight: 600;">Favorable</span>
             </div>
           </div>
@@ -575,7 +575,7 @@ body { font-family: var(--font); background: var(--secondary-1); color: var(--se
 
     <div class="footer-bar">
       <span>Kelkun Retail v2 — Kelcare</span>
-      <span>Registre dematerialise conforme Art. R143-44 CCH · <a href="#">En savoir plus</a></span>
+      <span>Registre dématérialisé conforme Art. R143-44 CCH · <a href="#">En savoir plus</a></span>
     </div>
   </div>
 </div>

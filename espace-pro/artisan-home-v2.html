@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelkun Pro — Accueil Artisan V2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ================================================
+           TOKENS — Kelkun Design System v2
+           ================================================ */
+        :root {
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --color-primary: #03c5b8;
+            --color-primary-10: #f1fefc;
+            --color-primary-25: #d5fbf6;
+            --color-primary-50: #c2faf3;
+            --color-primary-100: #93f6e9;
+            --color-primary-300: #59e3d6;
+            --color-primary-400: #3cdacc;
+            --color-primary-500: #03c5b8;
+            --color-primary-600: #029284;
+            --color-primary-700: #015f56;
+            --color-primary-800: #012d29;
+            --color-secondary: #0e2f58;
+            --color-secondary-1: #f8f9fc;
+            --color-secondary-2: #f4f6fa;
+            --color-secondary-10: #eeeff7;
+            --color-secondary-25: #e0e2f0;
+            --color-secondary-50: #bdc3e0;
+            --color-secondary-100: #9aa3d0;
+            --color-secondary-200: #7e8cb8;
+            --color-secondary-300: #6274a0;
+            --color-secondary-400: #465d88;
+            --color-secondary-500: #0e2f58;
+            --color-secondary-600: #0a2342;
+            --color-secondary-700: #07172c;
+            --color-tertiary: #ffc114;
+            --color-tertiary-50: #fffbeb;
+            --color-tertiary-500: #ffc114;
+            --color-tertiary-600: #e0a500;
+            --color-quarternary: #ff7b1e;
+            --color-quarternary-50: #fff7ed;
+            --color-quarternary-100: #ffedd4;
+            --color-quarternary-500: #ff7b1e;
+            --color-quarternary-600: #f05706;
+            --color-quarternary-700: #c74007;
+            --color-neutral-50: #fafafa;
+            --color-neutral-100: #f5f5f5;
+            --color-neutral-200: #e5e5e5;
+            --color-neutral-300: #d4d4d4;
+            --color-neutral-400: #a3a3a3;
+            --color-neutral-500: #737373;
+            --color-neutral-600: #525252;
+            --color-neutral-700: #404040;
+            --color-neutral-800: #262626;
+            --color-neutral-900: #171717;
+            --color-success: #3faf38;
+            --color-success-50: #f3fbf2;
+            --color-success-500: #3faf38;
+            --color-success-600: #2f9029;
+            --color-info: #3cb0f5;
+            --color-info-50: #effaff;
+            --color-info-500: #3cb0f5;
+            --color-info-600: #2694ea;
+            --color-warning: #c27b30;
+            --color-warning-50: #fcf7ee;
+            --color-error: #fa4a57;
+            --color-error-50: #fff1f1;
+            --color-error-200: #ffcbcd;
+            --color-accent: #6778ed;
+            --color-accent-50: #eff4fe;
+            --color-accent-600: #4b52e0;
+            --color-urgence: #ff634d;
+            --color-travaux: #1c61c5;
+            --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-size-xs: 8px;
+            --font-size-sm: 10px;
+            --font-size-md: 12px;
+            --font-size-lg: 14px;
+            --font-size-xl: 16px;
+            --font-size-2xl: 20px;
+            --font-size-3xl: 22px;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            --font-weight-extrabold: 800;
+            --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+            --space-5: 20px; --space-6: 24px; --space-7: 28px; --space-8: 32px;
+            --rounded-sm: 4px; --rounded-md: 6px; --rounded-lg: 8px;
+            --rounded-xl: 12px; --rounded-2xl: 16px; --rounded-3xl: 24px;
+            --rounded-full: 9999px;
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.10);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.10);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.10);
+            --shadow-2xl: 0 25px 50px rgba(0,0,0,0.25);
+            --z-sticky: 200; --z-toast: 600;
+            --duration-fast: 100ms; --duration-base: 150ms;
+            --duration-slow: 200ms; --duration-slower: 300ms;
+            --ease-default: ease; --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: var(--font-family);
+            background: var(--color-neutral-200);
+            color: var(--color-secondary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* === PHONE FRAME === */
+        .kl-phone {
+            max-width: 430px;
+            margin: var(--space-8) auto;
+            background: var(--color-neutral-50);
+            border-radius: 44px;
+            box-shadow: var(--shadow-2xl), 0 0 0 12px var(--color-secondary-700);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* === HEADER === */
+        .kl-header {
+            background: linear-gradient(160deg, var(--color-primary-700) 0%, var(--color-primary) 40%, var(--color-primary-300) 100%);
+            padding: var(--space-5) var(--space-5) var(--space-7);
+            position: relative;
+            overflow: hidden;
+        }
+        .kl-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 50% at 85% 15%, rgba(255,255,255,0.1), transparent),
+                radial-gradient(ellipse 60% 60% at 10% 90%, rgba(0,0,0,0.1), transparent);
+        }
+        .kl-header__row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            margin-bottom: var(--space-5);
+        }
+        .kl-header__left { display: flex; align-items: center; gap: var(--space-3); }
+        .kl-header__avatar {
+            width: 44px; height: 44px;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(12px);
+            border-radius: var(--rounded-xl);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: var(--font-weight-extrabold);
+            font-size: var(--font-size-xl);
+            color: var(--color-white);
+        }
+        .kl-header__greeting { color: var(--color-white); }
+        .kl-header__greeting-label {
+            font-size: var(--font-size-md);
+            opacity: 0.85;
+            font-weight: var(--font-weight-medium);
+        }
+        .kl-header__greeting-name {
+            font-weight: var(--font-weight-extrabold);
+            font-size: var(--font-size-2xl);
+            line-height: 1.2;
+        }
+        .kl-header__right { display: flex; gap: var(--space-2); }
+        .kl-header__btn {
+            width: 42px; height: 42px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(12px);
+            border: none; border-radius: var(--rounded-xl);
+            color: var(--color-white); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            transition: background var(--duration-slow);
+        }
+        .kl-header__btn:active { background: rgba(255,255,255,0.35); }
+        .kl-header__btn svg {
+            width: 20px; height: 20px; fill: none; stroke: currentColor;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .kl-header__badge {
+            position: absolute; top: 6px; right: 6px;
+            width: 18px; height: 18px;
+            background: var(--color-quarternary);
+            border: 2px solid rgba(3,197,184,0.8);
+            border-radius: var(--rounded-full);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-extrabold);
+            color: var(--color-white);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Dispo toggle */
+        .kl-dispo {
+            display: flex; align-items: center; gap: var(--space-3);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px);
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--rounded-xl);
+            position: relative; z-index: 2;
+        }
+        .kl-dispo__toggle {
+            width: 48px; height: 28px;
+            background: rgba(255,255,255,0.3);
+            border-radius: var(--rounded-full);
+            border: none; cursor: pointer;
+            position: relative;
+            transition: background var(--duration-slower);
+            flex-shrink: 0;
+        }
+        .kl-dispo__toggle.active { background: rgba(255,255,255,0.95); }
+        .kl-dispo__knob {
+            position: absolute; top: 3px; left: 3px;
+            width: 22px; height: 22px;
+            background: var(--color-white);
+            border-radius: var(--rounded-full);
+            transition: all var(--duration-slower) var(--ease-in-out);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        .kl-dispo__toggle.active .kl-dispo__knob {
+            left: 23px;
+            background: var(--color-primary);
+        }
+        .kl-dispo__text {
+            color: var(--color-white);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+        }
+        .kl-dispo__sub {
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-normal);
+            opacity: 0.8;
+        }
+
+        /* === ABO STRIP === */
+        .kl-abo-strip {
+            margin: 0 var(--space-4);
+            transform: translateY(-14px);
+            position: relative;
+            z-index: 3;
+            animation: kl-fadeUp 0.45s ease 0.05s both;
+        }
+        .kl-abo {
+            background: var(--color-white);
+            border-radius: var(--rounded-2xl);
+            padding: var(--space-3) var(--space-4);
+            box-shadow: var(--shadow-md);
+            display: flex; align-items: center; gap: var(--space-3);
+            cursor: pointer;
+            transition: all var(--duration-slow);
+            border: 1.5px solid var(--color-neutral-100);
+        }
+        .kl-abo:active { transform: scale(0.985); }
+        .kl-abo--upsell {
+            border-color: var(--color-primary);
+            background: linear-gradient(135deg, var(--color-white) 0%, var(--color-primary-10) 100%);
+        }
+        .kl-abo__icon {
+            width: 40px; height: 40px; flex-shrink: 0;
+            border-radius: var(--rounded-xl);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .kl-abo__icon svg {
+            width: 20px; height: 20px; fill: none; stroke: currentColor;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .kl-abo__icon--free {
+            background: var(--color-neutral-100);
+            color: var(--color-neutral-600);
+        }
+        .kl-abo__icon--pro {
+            background: linear-gradient(135deg, var(--color-primary-50), var(--color-primary));
+            color: var(--color-white);
+        }
+        .kl-abo__info { flex: 1; min-width: 0; }
+        .kl-abo__plan-row {
+            display: flex; align-items: center; gap: var(--space-2);
+            margin-bottom: 2px;
+        }
+        .kl-abo__plan-name {
+            font-weight: var(--font-weight-extrabold);
+            font-size: var(--font-size-lg);
+            color: var(--color-secondary);
+        }
+        .kl-abo__badge {
+            font-size: 9px; font-weight: var(--font-weight-bold);
+            padding: 2px 7px; border-radius: var(--rounded-sm);
+            text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .kl-abo__badge--active {
+            background: var(--color-success-50);
+            color: var(--color-success);
+        }
+        .kl-abo__sub {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-neutral-500);
+        }
+        .kl-abo__sub strong {
+            color: var(--color-primary-600);
+            font-weight: var(--font-weight-bold);
+        }
+        .kl-abo__right {
+            display: flex; align-items: center; gap: var(--space-2);
+            flex-shrink: 0;
+        }
+        .kl-abo__kredits { text-align: center; }
+        .kl-abo__kredits-value {
+            font-weight: var(--font-weight-extrabold);
+            font-size: var(--font-size-xl);
+            color: var(--color-primary-600);
+            line-height: 1;
+        }
+        .kl-abo__kredits-label {
+            font-size: 8px; font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-500);
+            text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .kl-abo__cta {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border: none; border-radius: var(--rounded-lg);
+            padding: 7px var(--space-3);
+            font-family: var(--font-family);
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all var(--duration-slow);
+        }
+        .kl-abo__cta:active { transform: scale(0.95); }
+        .kl-abo__arrow {
+            color: var(--color-neutral-400);
+        }
+        .kl-abo__arrow svg {
+            width: 16px; height: 16px; fill: none; stroke: currentColor;
+            stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        /* === CONTENT === */
+        .kl-content { padding: var(--space-2) var(--space-4) 100px; }
+
+        /* === SECTION LABEL === */
+        .kl-section {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: var(--space-3); padding: 0 var(--space-1);
+        }
+        .kl-section__left { display: flex; align-items: center; gap: var(--space-2); }
+        .kl-section__title {
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-xl);
+            color: var(--color-secondary);
+        }
+        .kl-section__count {
+            background: var(--color-quarternary-50);
+            color: var(--color-quarternary-700);
+            font-size: var(--font-size-sm); font-weight: var(--font-weight-bold);
+            padding: 3px 9px; border-radius: var(--rounded-full);
+        }
+        .kl-section__link {
+            font-size: var(--font-size-md); font-weight: var(--font-weight-semibold);
+            color: var(--color-primary); background: none; border: none; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 2px;
+        }
+        .kl-section__link svg {
+            width: 12px; height: 12px; fill: none; stroke: currentColor;
+            stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        /* === FILTER CHIPS === */
+        .kl-filters {
+            display: flex; gap: var(--space-2); margin-bottom: var(--space-3);
+            overflow-x: auto; -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; padding: 0 var(--space-1) var(--space-1);
+        }
+        .kl-filters::-webkit-scrollbar { display: none; }
+        .kl-chip {
+            display: inline-flex; align-items: center; gap: var(--space-1);
+            background: var(--color-white);
+            border: 1.5px solid var(--color-neutral-200);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--rounded-full);
+            font-family: var(--font-family);
+            font-size: var(--font-size-md); font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-600);
+            white-space: nowrap; cursor: pointer;
+            transition: all var(--duration-slow); flex-shrink: 0;
+        }
+        .kl-chip:active { transform: scale(0.96); }
+        .kl-chip.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: var(--color-white);
+        }
+        .kl-chip svg {
+            width: 14px; height: 14px; fill: none; stroke: currentColor;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        /* === REQUEST CARDS === */
+        .kl-requests {
+            display: flex; flex-direction: column; gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+        .kl-request {
+            background: var(--color-white);
+            border-radius: var(--rounded-2xl);
+            padding: var(--space-4);
+            box-shadow: var(--shadow-xs);
+            border: 1.5px solid var(--color-neutral-100);
+            cursor: pointer;
+            transition: all var(--duration-slow);
+        }
+        .kl-request:active { transform: scale(0.985); box-shadow: var(--shadow-md); }
+        .kl-request__top {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: var(--space-2);
+        }
+        .kl-request__urgency {
+            display: inline-flex; align-items: center; gap: var(--space-1);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--rounded-md);
+            font-size: var(--font-size-sm); font-weight: var(--font-weight-bold);
+            text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .kl-request__urgency svg {
+            width: 12px; height: 12px; fill: none; stroke: currentColor;
+            stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .kl-request__urgency--urgent { background: #ffcecc; color: #e03030; }
+        .kl-request__urgency--rdv { background: var(--color-info-50); color: var(--color-info-600); }
+        .kl-request__urgency--travaux { background: #d2e2f9; color: var(--color-travaux); }
+        .kl-request__timer {
+            display: flex; align-items: center; gap: var(--space-1);
+            font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);
+            color: var(--color-quarternary-700);
+        }
+        .kl-request__timer svg {
+            width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.5;
+        }
+        .kl-request__type {
+            font-weight: var(--font-weight-bold); font-size: var(--font-size-lg);
+            color: var(--color-secondary); line-height: 1.3;
+            margin-bottom: var(--space-1);
+        }
+        .kl-request__desc {
+            font-size: var(--font-size-md); color: var(--color-neutral-600);
+            line-height: 1.5; margin-bottom: var(--space-3);
+            display: -webkit-box; -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .kl-request__infos {
+            display: flex; flex-wrap: wrap; gap: 6px 10px;
+            margin-bottom: var(--space-3);
+        }
+        .kl-request__info {
+            display: flex; align-items: center; gap: var(--space-1);
+            font-size: var(--font-size-md); font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-500);
+        }
+        .kl-request__info svg {
+            width: 14px; height: 14px; fill: none; stroke: currentColor;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+        .kl-request__info--distance { color: var(--color-primary-600); font-weight: var(--font-weight-bold); }
+        .kl-request__info--payment { color: var(--color-success); }
+
+        .kl-competition {
+            display: flex; align-items: center; gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            background: var(--color-neutral-50);
+            border-radius: var(--rounded-lg); margin-bottom: var(--space-3);
+        }
+        .kl-competition__avatars { display: flex; }
+        .kl-competition__dot {
+            width: 20px; height: 20px;
+            border-radius: var(--rounded-full);
+            border: 2px solid var(--color-neutral-50);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 7px; font-weight: var(--font-weight-extrabold);
+            color: var(--color-white); margin-left: -6px;
+        }
+        .kl-competition__dot:first-child { margin-left: 0; }
+        .kl-competition__text {
+            font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-500);
+        }
+        .kl-competition__text strong { color: var(--color-quarternary-700); }
+
+        .kl-request__actions { display: flex; gap: var(--space-2); }
+        .kl-btn-respond {
+            flex: 1; background: var(--color-primary); color: var(--color-white);
+            border: none; border-radius: var(--rounded-lg);
+            padding: var(--space-3) var(--space-4);
+            font-family: var(--font-family);
+            font-weight: var(--font-weight-bold); font-size: var(--font-size-md);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+            transition: all var(--duration-slow);
+            box-shadow: 0 3px 10px rgba(3,197,184,0.25);
+        }
+        .kl-btn-respond:active { transform: scale(0.97); }
+        .kl-btn-details {
+            background: var(--color-neutral-50);
+            border: 1.5px solid var(--color-neutral-200);
+            border-radius: var(--rounded-lg);
+            padding: var(--space-3) var(--space-4);
+            font-family: var(--font-family);
+            font-weight: var(--font-weight-bold); font-size: var(--font-size-md);
+            color: var(--color-neutral-600); cursor: pointer;
+            transition: all var(--duration-slow);
+        }
+        .kl-btn-details:active { transform: scale(0.97); background: var(--color-neutral-100); }
+
+        /* === MA JOURNEE === */
+        .kl-day {
+            background: var(--color-white);
+            border-radius: var(--rounded-2xl);
+            padding: var(--space-4);
+            margin-bottom: var(--space-4);
+            box-shadow: var(--shadow-xs);
+            border: 1.5px solid var(--color-neutral-100);
+        }
+        .kl-day__counters { display: flex; gap: var(--space-3); }
+        .kl-day__counter {
+            display: flex; align-items: center; gap: var(--space-1);
+            font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-500);
+        }
+        .kl-day__dot {
+            width: 7px; height: 7px; border-radius: var(--rounded-full);
+        }
+        .kl-day__dot--green { background: var(--color-success); }
+        .kl-day__dot--orange { background: var(--color-quarternary); }
+
+        .kl-next {
+            display: flex; gap: var(--space-3); align-items: center;
+            background: var(--color-primary-10);
+            border: 1.5px solid var(--color-primary);
+            border-radius: var(--rounded-xl);
+            padding: var(--space-5) var(--space-3) var(--space-3);
+            position: relative;
+        }
+        .kl-next__badge {
+            display: flex; align-items: center; gap: var(--space-1);
+            position: absolute; top: -1px; left: var(--space-3);
+            background: var(--color-primary); color: var(--color-white);
+            font-size: 9px; font-weight: var(--font-weight-bold);
+            padding: 2px var(--space-2);
+            border-radius: 0 0 var(--rounded-md) var(--rounded-md);
+            text-transform: uppercase; letter-spacing: 0.4px;
+        }
+        .kl-next__pulse {
+            width: 5px; height: 5px;
+            background: var(--color-white);
+            border-radius: var(--rounded-full);
+            animation: kl-pulse 2s infinite;
+        }
+        @keyframes kl-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        .kl-next__time {
+            background: var(--color-white);
+            border-radius: var(--rounded-lg);
+            padding: var(--space-2) var(--space-3);
+            text-align: center; box-shadow: var(--shadow-xs);
+            flex-shrink: 0;
+        }
+        .kl-next__hour {
+            font-weight: var(--font-weight-extrabold);
+            font-size: var(--font-size-xl);
+            color: var(--color-secondary); line-height: 1;
+        }
+        .kl-next__dur {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-500); margin-top: 1px;
+        }
+        .kl-next__info { flex: 1; min-width: 0; }
+        .kl-next__title {
+            font-weight: var(--font-weight-bold); font-size: var(--font-size-lg);
+            color: var(--color-secondary); margin-bottom: 2px;
+        }
+        .kl-next__sub { font-size: var(--font-size-md); color: var(--color-neutral-600); }
+        .kl-next__sub--muted {
+            color: var(--color-neutral-500);
+            font-size: var(--font-size-sm);
+        }
+        .kl-next__tags {
+            display: flex; gap: var(--space-2); margin-top: var(--space-2); flex-wrap: wrap;
+        }
+        .kl-mini-tag {
+            display: inline-flex; align-items: center; gap: 3px;
+            background: var(--color-white);
+            padding: 3px var(--space-2); border-radius: var(--rounded-sm);
+            font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-600);
+        }
+        .kl-mini-tag svg {
+            width: 12px; height: 12px; fill: none; stroke: currentColor;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .kl-mini-tag--euro svg { stroke: var(--color-success-600); }
+
+        /* Day actions */
+        .kl-day__actions {
+            display: flex; gap: var(--space-2); margin-top: var(--space-3);
+        }
+        .kl-day__btn {
+            flex: 1;
+            display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+            padding: var(--space-3);
+            border-radius: var(--rounded-lg);
+            font-family: var(--font-family);
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-md);
+            cursor: pointer;
+            transition: all var(--duration-slow);
+        }
+        .kl-day__btn svg {
+            width: 16px; height: 16px; fill: none; stroke: currentColor;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .kl-day__btn--ghost {
+            background: var(--color-white);
+            border: 1.5px solid var(--color-neutral-200);
+            color: var(--color-secondary);
+        }
+        .kl-day__btn--ghost:active { background: var(--color-neutral-100); transform: scale(0.97); }
+        .kl-day__btn--primary {
+            background: var(--color-primary); border: none;
+            color: var(--color-white);
+            box-shadow: 0 3px 10px rgba(3,197,184,0.25);
+        }
+        .kl-day__btn--primary:active { transform: scale(0.97); }
+
+        /* === STATS === */
+        .kl-stats {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-3); margin-bottom: var(--space-4);
+        }
+        .kl-stat {
+            background: var(--color-white);
+            border-radius: var(--rounded-2xl);
+            padding: var(--space-3);
+            text-align: center;
+            box-shadow: var(--shadow-xs);
+            border: 1.5px solid var(--color-neutral-100);
+        }
+        .kl-stat__icon {
+            width: 28px; height: 28px;
+            border-radius: var(--rounded-md);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto var(--space-1);
+        }
+        .kl-stat__icon svg {
+            width: 16px; height: 16px; fill: none; stroke: currentColor;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .kl-stat__icon--green { background: var(--color-success-50); color: var(--color-success); }
+        .kl-stat__icon--primary { background: var(--color-primary-10); color: var(--color-primary); }
+        .kl-stat__icon--star { background: var(--color-tertiary-50); color: var(--color-tertiary-600); }
+        .kl-stat__value {
+            font-weight: var(--font-weight-extrabold);
+            font-size: var(--font-size-3xl);
+            color: var(--color-secondary); line-height: 1;
+        }
+        .kl-stat__value--green { color: var(--color-success); }
+        .kl-stat__value--star { color: var(--color-tertiary-600); }
+        .kl-stat__label {
+            font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-500);
+            text-transform: uppercase; letter-spacing: 0.4px; margin-top: 3px;
+        }
+        .kl-stat__progress {
+            height: 3px; background: var(--color-neutral-200);
+            border-radius: 3px; margin-top: var(--space-2); overflow: hidden;
+        }
+        .kl-stat__progress-bar { height: 100%; border-radius: 3px; }
+        .kl-stat__objective {
+            font-size: 9px; font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-500); margin-top: 3px;
+        }
+
+        /* === PROFILE NUDGE === */
+        .kl-nudge {
+            background: var(--color-white);
+            border: 1.5px solid var(--color-neutral-100);
+            border-radius: var(--rounded-xl);
+            padding: var(--space-3) var(--space-4);
+            display: flex; align-items: center; gap: var(--space-3);
+            cursor: pointer; transition: all var(--duration-slow);
+        }
+        .kl-nudge:active { transform: scale(0.985); }
+        .kl-nudge__icon {
+            width: 32px; height: 32px;
+            border-radius: var(--rounded-md);
+            background: var(--color-tertiary-50);
+            color: var(--color-tertiary-600);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .kl-nudge__icon svg {
+            width: 16px; height: 16px; fill: none; stroke: currentColor;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .kl-nudge__text {
+            flex: 1; font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-600);
+        }
+        .kl-nudge__text strong { color: var(--color-secondary); }
+        .kl-nudge__bar {
+            width: 48px; height: 4px;
+            background: var(--color-neutral-200);
+            border-radius: var(--rounded-sm); overflow: hidden; flex-shrink: 0;
+        }
+        .kl-nudge__bar-fill {
+            width: 65%; height: 100%;
+            background: var(--color-tertiary);
+            border-radius: var(--rounded-sm);
+        }
+        .kl-nudge__arrow { color: var(--color-neutral-400); flex-shrink: 0; }
+        .kl-nudge__arrow svg {
+            width: 16px; height: 16px; fill: none; stroke: currentColor;
+            stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        /* === TAB BAR === */
+        .kl-tabbar {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 430px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--color-neutral-100);
+            padding: var(--space-2) var(--space-2) calc(var(--space-2) + env(safe-area-inset-bottom, 0px));
+            z-index: var(--z-sticky); display: flex;
+        }
+        .kl-tab {
+            flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+            background: none; border: none;
+            padding: var(--space-2) var(--space-1);
+            cursor: pointer; border-radius: var(--rounded-lg);
+            transition: all var(--duration-slow);
+        }
+        .kl-tab:active { background: var(--color-neutral-100); }
+        .kl-tab svg {
+            width: 22px; height: 22px; fill: none; stroke: var(--color-neutral-500);
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .kl-tab.active svg { stroke: var(--color-primary); }
+        .kl-tab__label {
+            font-family: var(--font-family);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-500);
+        }
+        .kl-tab.active .kl-tab__label { color: var(--color-primary); }
+        .kl-tab__dot {
+            width: 4px; height: 4px; background: var(--color-primary);
+            border-radius: var(--rounded-full); display: none;
+        }
+        .kl-tab.active .kl-tab__dot { display: block; }
+        .kl-tab__icon-badge { position: relative; }
+        .kl-tab__icon-badge::after {
+            content: '3'; position: absolute; top: -4px; right: -8px;
+            min-width: 16px; height: 16px;
+            background: var(--color-quarternary);
+            border: 2px solid var(--color-white);
+            border-radius: var(--rounded-full);
+            font-size: 9px; font-weight: var(--font-weight-extrabold);
+            color: var(--color-white);
+            display: flex; align-items: center; justify-content: center; padding: 0 3px;
+        }
+
+        /* === TOAST === */
+        .kl-toast {
+            position: fixed; bottom: 90px; left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--color-secondary); color: var(--color-white);
+            padding: var(--space-3) var(--space-6);
+            border-radius: var(--rounded-xl);
+            font-family: var(--font-family);
+            font-weight: var(--font-weight-semibold); font-size: var(--font-size-lg);
+            box-shadow: var(--shadow-lg);
+            opacity: 0; pointer-events: none;
+            transition: all var(--duration-slower) var(--ease-in-out);
+            z-index: var(--z-toast); white-space: nowrap;
+        }
+        .kl-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* === ANIMATIONS === */
+        @keyframes kl-fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .kl-requests .kl-request:nth-child(1) { animation: kl-fadeUp 0.45s ease 0.1s both; }
+        .kl-requests .kl-request:nth-child(2) { animation: kl-fadeUp 0.45s ease 0.17s both; }
+        .kl-requests .kl-request:nth-child(3) { animation: kl-fadeUp 0.45s ease 0.24s both; }
+        .kl-day { animation: kl-fadeUp 0.45s ease 0.3s both; }
+        .kl-stats { animation: kl-fadeUp 0.45s ease 0.36s both; }
+        .kl-nudge { animation: kl-fadeUp 0.45s ease 0.4s both; }
+    </style>
+</head>
+<body>
+
+<div class="kl-phone">
+
+    <!-- HEADER -->
+    <div class="kl-header">
+        <div class="kl-header__row">
+            <div class="kl-header__left">
+                <div class="kl-header__avatar">GM</div>
+                <div class="kl-header__greeting">
+                    <div class="kl-header__greeting-label">Bonjour</div>
+                    <div class="kl-header__greeting-name">Guy Mercier</div>
+                </div>
+            </div>
+            <div class="kl-header__right">
+                <button class="kl-header__btn" onclick="showToast('Recherche...')">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+                <button class="kl-header__btn" onclick="showToast('3 nouvelles notifications')">
+                    <svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                    <span class="kl-header__badge">3</span>
+                </button>
+            </div>
+        </div>
+        <div class="kl-dispo">
+            <button class="kl-dispo__toggle active" id="dispoToggle" onclick="toggleDispo()">
+                <div class="kl-dispo__knob"></div>
+            </button>
+            <div class="kl-dispo__text">
+                <span id="dispoLabel">Disponible</span>
+                <br><span class="kl-dispo__sub" id="dispoSub">Vous recevez les nouvelles demandes</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABO STRIP -->
+    <div class="kl-abo-strip">
+        <div class="kl-abo kl-abo--upsell" onclick="showToast('Mon abonnement')">
+            <div class="kl-abo__icon kl-abo__icon--free">
+                <svg viewBox="0 0 24 24"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+            </div>
+            <div class="kl-abo__info">
+                <div class="kl-abo__plan-row">
+                    <span class="kl-abo__plan-name">Kelkun Free</span>
+                    <span class="kl-abo__badge kl-abo__badge--active">Actif</span>
+                </div>
+                <div class="kl-abo__sub">Commission 20% · <strong>Passez Pro → 15%</strong></div>
+            </div>
+            <div class="kl-abo__right">
+                <div class="kl-abo__kredits">
+                    <div class="kl-abo__kredits-value">1</div>
+                    <div class="kl-abo__kredits-label">Krédit</div>
+                </div>
+                <button class="kl-abo__cta" onclick="event.stopPropagation();showToast('Découvrir Kelkun Pro')">
+                    Passer Pro
+                </button>
+                <span class="kl-abo__arrow">
+                    <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="kl-content">
+
+        <!-- NOUVELLES DEMANDES -->
+        <div class="kl-section">
+            <div class="kl-section__left">
+                <h2 class="kl-section__title">Nouvelles demandes</h2>
+                <span class="kl-section__count">3</span>
+            </div>
+            <button class="kl-section__link" onclick="showToast('Toutes les demandes')">Voir tout <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        </div>
+
+        <div class="kl-filters">
+            <button class="kl-chip active">Toutes</button>
+            <button class="kl-chip" onclick="showToast('Filtre : Urgences')">
+                <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Urgences
+            </button>
+            <button class="kl-chip" onclick="showToast('Filtre : Sur RDV')">
+                <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Sur RDV
+            </button>
+            <button class="kl-chip" onclick="showToast('Filtre : Travaux')">
+                <svg viewBox="0 0 24 24"><path d="m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9"/><path d="m18 15 4-4"/><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"/></svg> Travaux
+            </button>
+            <button class="kl-chip" onclick="showToast('Filtre : < 5 km')">
+                <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> &lt; 5 km
+            </button>
+        </div>
+
+        <div class="kl-requests">
+
+            <!-- Demande 1 — Urgence -->
+            <div class="kl-request" onclick="showToast('Détails de la demande')">
+                <div class="kl-request__top">
+                    <span class="kl-request__urgency kl-request__urgency--urgent">
+                        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Urgent
+                    </span>
+                    <div class="kl-request__timer">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        Expire dans 45 min
+                    </div>
+                </div>
+                <div class="kl-request__type">Panne chauffe-eau</div>
+                <div class="kl-request__desc">Plus d'eau chaude depuis ce matin. Chauffe-eau Atlantic 200L, installé en 2019. Voyant rouge allumé.</div>
+                <div class="kl-request__infos">
+                    <span class="kl-request__info kl-request__info--distance">
+                        <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> 4,8 km · Montpellier
+                    </span>
+                    <span class="kl-request__info">
+                        <svg viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Marc Lefèvre
+                    </span>
+                    <span class="kl-request__info">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg> Budget client : 150-300 EUR
+                    </span>
+                    <span class="kl-request__info">
+                        <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 2 photos
+                    </span>
+                    <span class="kl-request__info kl-request__info--payment">
+                        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Paiement sécurisé Kelkun
+                    </span>
+                </div>
+                <div class="kl-competition">
+                    <div class="kl-competition__avatars">
+                        <span class="kl-competition__dot" style="background:var(--color-info)">JD</span>
+                        <span class="kl-competition__dot" style="background:var(--color-quarternary)">PL</span>
+                    </div>
+                    <span class="kl-competition__text"><strong>2 artisans</strong> ont vu cette demande</span>
+                </div>
+                <div class="kl-request__actions">
+                    <button class="kl-btn-respond" onclick="event.stopPropagation();showToast('Vous avez répondu — le client est notifié')">Répondre à cette demande</button>
+                    <button class="kl-btn-details" onclick="event.stopPropagation();showToast('Ouverture des détails...')">Détails</button>
+                </div>
+            </div>
+
+            <!-- Demande 2 — Sur RDV -->
+            <div class="kl-request" onclick="showToast('Détails de la demande')">
+                <div class="kl-request__top">
+                    <span class="kl-request__urgency kl-request__urgency--rdv">
+                        <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Sur RDV
+                    </span>
+                </div>
+                <div class="kl-request__type">Remplacement robinet cuisine</div>
+                <div class="kl-request__desc">Robinet mitigeur qui goutte. Le client souhaite un remplacement complet, il a déjà acheté le nouveau robinet.</div>
+                <div class="kl-request__infos">
+                    <span class="kl-request__info kl-request__info--distance">
+                        <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> 2,1 km · Lattes
+                    </span>
+                    <span class="kl-request__info">
+                        <svg viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Sophie Martin
+                    </span>
+                    <span class="kl-request__info">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg> Forfait main d'oeuvre
+                    </span>
+                    <span class="kl-request__info">
+                        <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Semaine prochaine
+                    </span>
+                    <span class="kl-request__info kl-request__info--payment">
+                        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Paiement sécurisé Kelkun
+                    </span>
+                </div>
+                <div class="kl-competition">
+                    <div class="kl-competition__avatars">
+                        <span class="kl-competition__dot" style="background:var(--color-neutral-400)">?</span>
+                    </div>
+                    <span class="kl-competition__text"><strong>1 artisan</strong> a vu cette demande</span>
+                </div>
+                <div class="kl-request__actions">
+                    <button class="kl-btn-respond" onclick="event.stopPropagation();showToast('Vous avez répondu — le client est notifié')">Répondre à cette demande</button>
+                    <button class="kl-btn-details" onclick="event.stopPropagation();showToast('Ouverture des détails...')">Détails</button>
+                </div>
+            </div>
+
+            <!-- Demande 3 — Travaux -->
+            <div class="kl-request" onclick="showToast('Détails de la demande')">
+                <div class="kl-request__top">
+                    <span class="kl-request__urgency kl-request__urgency--travaux">
+                        <svg viewBox="0 0 24 24"><path d="m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9"/><path d="m18 15 4-4"/><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"/></svg> Travaux
+                    </span>
+                </div>
+                <div class="kl-request__type">Installation salle de bain complète</div>
+                <div class="kl-request__desc">Rénovation complète SDB : douche italienne, double vasque, WC suspendu. Appartement T4, 2ème étage.</div>
+                <div class="kl-request__infos">
+                    <span class="kl-request__info kl-request__info--distance">
+                        <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> 8,5 km · Castelnau
+                    </span>
+                    <span class="kl-request__info">
+                        <svg viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Pierre Durand
+                    </span>
+                    <span class="kl-request__info">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg> Devis à établir
+                    </span>
+                    <span class="kl-request__info">
+                        <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 5 photos
+                    </span>
+                    <span class="kl-request__info">
+                        <svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg> Plan joint
+                    </span>
+                    <span class="kl-request__info kl-request__info--payment">
+                        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Paiement sécurisé Kelkun
+                    </span>
+                </div>
+                <div class="kl-competition">
+                    <div class="kl-competition__avatars">
+                        <span class="kl-competition__dot" style="background:var(--color-success)">MR</span>
+                        <span class="kl-competition__dot" style="background:var(--color-info)">JD</span>
+                        <span class="kl-competition__dot" style="background:var(--color-tertiary-600)">TB</span>
+                    </div>
+                    <span class="kl-competition__text"><strong>3 artisans</strong> ont vu cette demande</span>
+                </div>
+                <div class="kl-request__actions">
+                    <button class="kl-btn-respond" onclick="event.stopPropagation();showToast('Proposition de devis envoyée')">Proposer un devis</button>
+                    <button class="kl-btn-details" onclick="event.stopPropagation();showToast('Ouverture des détails...')">Détails</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MA JOURNEE -->
+        <div class="kl-section">
+            <div class="kl-section__left">
+                <h2 class="kl-section__title">Ma journée</h2>
+            </div>
+            <div class="kl-day__counters">
+                <div class="kl-day__counter"><span class="kl-day__dot kl-day__dot--green"></span> 2 faites</div>
+                <div class="kl-day__counter"><span class="kl-day__dot kl-day__dot--orange"></span> 1 à venir</div>
+            </div>
+        </div>
+
+        <div class="kl-day">
+            <div class="kl-next">
+                <div class="kl-next__badge">
+                    <span class="kl-next__pulse"></span>
+                    Prochaine · 14h30
+                </div>
+                <div class="kl-next__time">
+                    <span class="kl-next__hour">14h30</span>
+                    <span class="kl-next__dur">~1h</span>
+                </div>
+                <div class="kl-next__info">
+                    <div class="kl-next__title">Fuite sous évier</div>
+                    <div class="kl-next__sub">Fiona Prud'homme</div>
+                    <div class="kl-next__sub kl-next__sub--muted">12 Rue des Oliviers, Lattes (34) · 3,2 km</div>
+                    <div class="kl-next__tags">
+                        <span class="kl-mini-tag kl-mini-tag--euro">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg> ~120 EUR
+                        </span>
+                        <span class="kl-mini-tag">
+                            <svg viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><rect width="20" height="5" x="2" y="7"/></svg> Gedimat
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="kl-day__actions">
+                <button class="kl-day__btn kl-day__btn--ghost" onclick="showToast('Appel en cours...')">
+                    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Appeler
+                </button>
+                <button class="kl-day__btn kl-day__btn--primary" onclick="showToast('Ouverture GPS...')">
+                    <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Localiser
+                </button>
+            </div>
+        </div>
+
+        <!-- STATS EXPRESS -->
+        <div class="kl-section">
+            <div class="kl-section__left">
+                <h2 class="kl-section__title">Avril</h2>
+            </div>
+            <button class="kl-section__link" onclick="showToast('Statistiques détaillées')">Détails <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        </div>
+
+        <div class="kl-stats">
+            <div class="kl-stat">
+                <div class="kl-stat__icon kl-stat__icon--green">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+                </div>
+                <div class="kl-stat__value kl-stat__value--green">2 840 EUR</div>
+                <div class="kl-stat__label">Revenus</div>
+                <div class="kl-stat__progress"><div class="kl-stat__progress-bar" style="width:71%;background:var(--color-success)"></div></div>
+                <div class="kl-stat__objective">Obj. 4 000 EUR</div>
+            </div>
+            <div class="kl-stat">
+                <div class="kl-stat__icon kl-stat__icon--primary">
+                    <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <div class="kl-stat__value">14</div>
+                <div class="kl-stat__label">Interventions</div>
+                <div class="kl-stat__progress"><div class="kl-stat__progress-bar" style="width:70%;background:var(--color-primary)"></div></div>
+                <div class="kl-stat__objective">Obj. 20</div>
+            </div>
+            <div class="kl-stat">
+                <div class="kl-stat__icon kl-stat__icon--star">
+                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div class="kl-stat__value kl-stat__value--star">4,7</div>
+                <div class="kl-stat__label">Note</div>
+                <div class="kl-stat__progress"><div class="kl-stat__progress-bar" style="width:94%;background:var(--color-tertiary)"></div></div>
+                <div class="kl-stat__objective">sur 5,0</div>
+            </div>
+        </div>
+
+        <!-- PROFILE NUDGE -->
+        <div class="kl-nudge" onclick="showToast('Compléter mon profil')">
+            <div class="kl-nudge__icon">
+                <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </div>
+            <span class="kl-nudge__text"><strong>Profil 65%</strong> · Ajoutez vos photos chantier</span>
+            <div class="kl-nudge__bar"><div class="kl-nudge__bar-fill"></div></div>
+            <span class="kl-nudge__arrow"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+
+    </div>
+
+    <!-- TAB BAR -->
+    <div class="kl-tabbar">
+        <button class="kl-tab active">
+            <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="kl-tab__label">Accueil</span>
+            <span class="kl-tab__dot"></span>
+        </button>
+        <button class="kl-tab" onclick="showToast('Demandes')">
+            <span class="kl-tab__icon-badge"><svg viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span>
+            <span class="kl-tab__label">Demandes</span>
+        </button>
+        <button class="kl-tab" onclick="showToast('Planning')">
+            <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="kl-tab__label">Planning</span>
+        </button>
+        <button class="kl-tab" onclick="showToast('Messages')">
+            <svg viewBox="0 0 24 24"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+            <span class="kl-tab__label">Messages</span>
+        </button>
+        <button class="kl-tab" onclick="showToast('Mon profil')">
+            <svg viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="kl-tab__label">Profil</span>
+        </button>
+    </div>
+
+</div>
+
+<div class="kl-toast" id="toast"></div>
+
+<script>
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+function toggleDispo() {
+    const toggle = document.getElementById('dispoToggle');
+    const label = document.getElementById('dispoLabel');
+    const sub = document.getElementById('dispoSub');
+    toggle.classList.toggle('active');
+    if (toggle.classList.contains('active')) {
+        label.textContent = 'Disponible';
+        sub.textContent = 'Vous recevez les nouvelles demandes';
+    } else {
+        label.textContent = 'Indisponible';
+        sub.textContent = 'Vous ne recevez plus de demandes';
+    }
+}
+</script>
+</body>
+</html>

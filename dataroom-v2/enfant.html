@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataRoom Kelcare — Agence La Rochelle</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="dataroom.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="enfant" data-title="Agence La Rochelle" data-subtitle="Tableau de bord agence — vue enfant" data-level="enfant">
+
+  <!-- SIDEBAR (manuelle — pas shared.js) -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#03c5b8"/><path d="M10 10h4v12h-4zM18 14h4v8h-4z" fill="#fff"/></svg>
+      <strong style="font-size:15px;">Kelcare</strong>
+      <span class="sidebar-badge">DataRoom</span>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Navigation</div>
+      <ul class="sidebar-nav">
+        <li><a href="enfant.html" class="active"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Mon tableau de bord</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Mes indicateurs</div>
+      <ul class="sidebar-nav">
+        <li><a href="#section-deploy"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Deploiement</a></li>
+        <li><a href="#section-excel"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Excellence operationnelle</a></li>
+        <li><a href="#section-finance"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>Impact financier</a></li>
+        <li><a href="#section-incident"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Incidences</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Outils</div>
+      <ul class="sidebar-nav">
+        <li><a href="quoteguard.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>QuoteGuard IA</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-entity">
+      <div class="sidebar-entity-avatar" style="background:var(--color-accent-50);color:var(--color-accent-500);">LR</div>
+      <div class="sidebar-entity-info">
+        <div class="sidebar-entity-name">Agence La Rochelle</div>
+        <div class="sidebar-entity-role">Enfant — Mutuelle de Poitiers</div>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </div>
+  </aside>
+
+  <div class="main">
+    <!-- TOPBAR (manuelle) -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Agence La Rochelle</div>
+        <div class="topbar-subtitle">Tableau de bord agence — vue enfant</div>
+      </div>
+      <div class="topbar-right">
+        <div class="filter-group">
+          <span class="filter-label">Agence</span>
+          <select class="filter-select" onchange="if(this.value) window.location.href=this.value">
+            <option value="">Agence La Rochelle</option>
+            <option value="enfant.html?agence=poitiers">Agence Poitiers Centre</option>
+            <option value="enfant.html?agence=niort">Agence Niort</option>
+            <option value="enfant.html?agence=angouleme">Agence Angouleme</option>
+          </select>
+        </div>
+        <span class="badge-level enfant"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Enfant</span>
+        <a href="synthese.html" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Vue parent</a>
+        <button class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Exporter</button>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- FILTRES -->
+      <div class="filters-bar">
+        <div class="filter-group">
+          <span class="filter-label">Periode</span>
+          <select class="filter-select">
+            <option>Ce mois</option><option>Ce trimestre</option><option>Cette annee</option><option>Depuis le lancement</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Reseau</span>
+          <select class="filter-select">
+            <option>Tous</option><option>Certifies</option><option>Non certifies</option><option>Kelkun</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- MY POSITION BANNER -->
+      <div class="my-position" style="background:var(--color-warning-50);border-color:var(--color-warning-100);">
+        <div class="my-position-rank" style="background:var(--color-warning-500);">4</div>
+        <div class="my-position-info">
+          <div class="my-position-title">Agence La Rochelle <span style="font-size:var(--font-size-md);color:var(--color-error);font-weight:600;">&#8595; -1</span></div>
+          <div class="my-position-sub">4e sur 20 agences — Delais longs, formation basse, couts eleves</div>
+        </div>
+        <div class="my-position-score" style="color:var(--color-warning-500);">58<span style="font-size:var(--font-size-xl);font-weight:500;color:var(--color-neutral-400);">/100</span></div>
+      </div>
+
+      <!-- AXES DE PROGRESSION -->
+      <div class="progression-card">
+        <h3>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          Vos axes de progression
+        </h3>
+        <div class="progression-item">
+          <span class="progression-kpi">Formation certifies</span>
+          <span class="progression-val">72 %</span>
+          <span class="progression-gap">-6 pts vs parent</span>
+          <span class="progression-action">8 artisans en attente de formation</span>
+        </div>
+        <div class="progression-item">
+          <span class="progression-kpi">Delai attribution</span>
+          <span class="progression-val">3,2j</span>
+          <span class="progression-gap">+0,8j vs parent</span>
+          <span class="progression-action">Renforcer le reseau plomberie zone 17</span>
+        </div>
+        <div class="progression-item">
+          <span class="progression-kpi">Resolution SLA</span>
+          <span class="progression-val">64 %</span>
+          <span class="progression-gap">-8 pts vs parent</span>
+          <span class="progression-action">Prioriser le traitement des check-in</span>
+        </div>
+      </div>
+
+      <!-- SOMMAIRE CLIQUABLE -->
+      <div class="page-toc">
+        <a href="#section-deploy">Deploiement</a>
+        <a href="#section-excel">Excellence</a>
+        <a href="#section-finance">Impact financier</a>
+        <a href="#section-incident">Incidences</a>
+      </div>
+
+      <!-- ===== SECTION 1 : DEPLOIEMENT ===== -->
+      <h2 class="section-title" id="section-deploy">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Deploiement
+      </h2>
+
+      <div class="kpi-grid cols-5">
+        <!-- Formation certifies -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="position-badge mid">3e / 20 <span class="movement down">&#8595;1</span></span>
+          </div>
+          <div class="kpi-value">72<span class="unit">%</span></div>
+          <div class="kpi-label">Formation certifies</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">78 %</span> (-6 pts)</div>
+        </div>
+
+        <!-- Formation non certifies -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <span class="position-badge low">4e / 20 <span class="movement down">&#8595;1</span></span>
+          </div>
+          <div class="kpi-value">48<span class="unit">%</span></div>
+          <div class="kpi-label">Formation non certifies</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">54 %</span> (-6 pts)</div>
+        </div>
+
+        <!-- Activation certifies -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="position-badge mid">3e / 20</span>
+          </div>
+          <div class="kpi-value">62<span class="unit">%</span></div>
+          <div class="kpi-label">Activation certifies</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">68 %</span> (-6 pts)</div>
+        </div>
+
+        <!-- Certifies reseau -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="position-badge mid">3e / 20</span>
+          </div>
+          <div class="kpi-value">55<span class="unit">%</span></div>
+          <div class="kpi-label">Certifies reseau</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">60 %</span> (-5 pts)</div>
+        </div>
+
+        <!-- Hors logiciel -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <span class="position-badge low">4e / 20 <span class="movement down">&#8595;1</span></span>
+          </div>
+          <div class="kpi-value">19<span class="unit">%</span></div>
+          <div class="kpi-label">Hors logiciel</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">15,5 %</span> (+3,5 pts)</div>
+        </div>
+      </div>
+
+      <!-- ===== SECTION 2 : EXCELLENCE OPERATIONNELLE ===== -->
+      <h2 class="section-title" id="section-excel">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Excellence operationnelle
+      </h2>
+
+      <div class="kpi-grid cols-5">
+        <!-- Delai attribution -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="position-badge low">4e / 20 <span class="movement down">&#8595;1</span></span>
+          </div>
+          <div class="kpi-value">3,2<span class="unit">j</span></div>
+          <div class="kpi-label">Delai attribution</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">2,4j</span> (+0,8j)</div>
+        </div>
+
+        <!-- Creation -> RDV -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="position-badge low">4e / 20</span>
+          </div>
+          <div class="kpi-value">5,2<span class="unit">j</span></div>
+          <div class="kpi-label">Creation &#8594; RDV</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">4,2j</span> (+1,0j)</div>
+        </div>
+
+        <!-- Creation -> devis -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="position-badge low">4e / 20</span>
+          </div>
+          <div class="kpi-value">7,4<span class="unit">j</span></div>
+          <div class="kpi-label">Creation &#8594; devis</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">6,1j</span> (+1,3j)</div>
+        </div>
+
+        <!-- Temps acceptation -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="position-badge low">4e / 20</span>
+          </div>
+          <div class="kpi-value">48<span class="unit">min</span></div>
+          <div class="kpi-label">Temps acceptation</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">35 min</span> (+13 min)</div>
+        </div>
+
+        <!-- Devis valides -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="position-badge low">4e / 20</span>
+          </div>
+          <div class="kpi-value">87<span class="unit">%</span></div>
+          <div class="kpi-label">Devis valides</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">92 %</span> (-5 pts)</div>
+        </div>
+      </div>
+
+      <!-- CHART — Mes delais evolution -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Mes delais — evolution</div><div class="card-subtitle">6 derniers mois — La Rochelle vs parent</div></div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartDelais"></canvas></div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Mon respect SLA</div><div class="card-subtitle">Taux de respect par type</div></div>
+          </div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--space-4);padding-top:var(--space-3);">
+              <div class="gauge">
+                <div class="gauge-value" style="color:var(--color-warning-500);">64 %</div>
+                <div class="gauge-bar"><div class="fill" style="width:64%;background:var(--color-warning-500);"></div></div>
+                <div class="gauge-label">Resolution</div>
+              </div>
+              <div class="gauge">
+                <div class="gauge-value" style="color:var(--color-error);">58 %</div>
+                <div class="gauge-bar"><div class="fill" style="width:58%;background:var(--color-error);"></div></div>
+                <div class="gauge-label">Attribution</div>
+              </div>
+              <div class="gauge">
+                <div class="gauge-value" style="color:var(--color-success);">76 %</div>
+                <div class="gauge-bar"><div class="fill" style="width:76%;background:var(--color-success);"></div></div>
+                <div class="gauge-label">Check-in</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SECTION 3 : IMPACT FINANCIER ===== -->
+      <h2 class="section-title" id="section-finance">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+        Impact financier
+      </h2>
+
+      <div class="kpi-grid cols-3">
+        <!-- Panier certifies -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+            </div>
+            <span class="position-badge mid">3e / 20</span>
+          </div>
+          <div class="kpi-value">478<span class="unit">&euro;</span></div>
+          <div class="kpi-label">Panier moyen certifies</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">462 &euro;</span> (+16 &euro;)</div>
+        </div>
+
+        <!-- Panier non certifies -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+            </div>
+            <span class="position-badge low">4e / 20 <span class="movement down">&#8595;1</span></span>
+          </div>
+          <div class="kpi-value">545<span class="unit">&euro;</span></div>
+          <div class="kpi-label">Panier moyen non certifies</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">521 &euro;</span> (+24 &euro;)</div>
+        </div>
+
+        <!-- Ecart -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+            </div>
+            <span class="position-badge top">2e / 20 <span class="movement up">&#8593;1</span></span>
+          </div>
+          <div class="kpi-value">-12,3<span class="unit">%</span></div>
+          <div class="kpi-label">Ecart certifie / non certifie</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-better">-11,3 %</span> (-1,0 pt)</div>
+        </div>
+      </div>
+
+      <!-- CHART — Evolution paniers -->
+      <div class="card" style="margin-bottom:var(--space-6);">
+        <div class="card-header">
+          <div><div class="card-title">Evolution paniers</div><div class="card-subtitle">6 derniers mois — certifies vs non certifies</div></div>
+        </div>
+        <div class="card-body"><div class="chart-wrap"><canvas id="chartPaniers"></canvas></div></div>
+      </div>
+
+      <!-- ===== SECTION 4 : INCIDENCES OPERATIONNELLES ===== -->
+      <h2 class="section-title" id="section-incident">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Incidences operationnelles
+      </h2>
+
+      <div class="kpi-grid cols-4">
+        <!-- Volume -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <span class="kpi-trend down">+3</span>
+          </div>
+          <div class="kpi-value">15</div>
+          <div class="kpi-label">Volume incidences</div>
+          <div class="vs-parent">vs. parent moy. <span class="vs-val vs-worse">11,8</span></div>
+        </div>
+
+        <!-- Resolution SLA -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="position-badge low">4e / 20</span>
+          </div>
+          <div class="kpi-value">64<span class="unit">%</span></div>
+          <div class="kpi-label">Resolution SLA</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">72 %</span> (-8 pts)</div>
+        </div>
+
+        <!-- Temps resolution -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="position-badge low">4e / 20</span>
+          </div>
+          <div class="kpi-value">4,1<span class="unit">h</span></div>
+          <div class="kpi-label">Temps resolution moyen</div>
+          <div class="vs-parent">vs. parent <span class="vs-val vs-worse">3,2h</span> (+0,9h)</div>
+        </div>
+
+        <!-- Hors SLA -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+          </div>
+          <div class="kpi-value" style="color:var(--color-error);">4</div>
+          <div class="kpi-label">Incidents hors SLA</div>
+          <div class="kpi-sub">32 % des hors SLA du reseau parent</div>
+        </div>
+      </div>
+
+      <!-- TABLE INCIDENCES -->
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">Mes incidences</div><div class="card-subtitle">Incidences La Rochelle — 30 derniers jours</div></div>
+        </div>
+        <div class="card-body flush">
+          <table class="data-table">
+            <thead>
+              <tr><th>Type</th><th>Ref.</th><th>Artisan</th><th>Statut</th><th>Priorite</th><th class="text-right">Creee le</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Check-in non realise</td>
+                <td class="ref-link">INC-2041</td>
+                <td>M. Dupont (plomberie)</td>
+                <td><span class="badge error">Hors SLA</span></td>
+                <td><span class="badge warning">Haute</span></td>
+                <td class="text-right">10/04/2026</td>
+              </tr>
+              <tr>
+                <td>Artisan en retard</td>
+                <td class="ref-link">INC-2039</td>
+                <td>M. Leclerc (electricite)</td>
+                <td><span class="badge warning">En cours</span></td>
+                <td><span class="badge warning">Haute</span></td>
+                <td class="text-right">09/04/2026</td>
+              </tr>
+              <tr>
+                <td>Devis hors delai</td>
+                <td class="ref-link">INC-2036</td>
+                <td>Mme Garnier (peinture)</td>
+                <td><span class="badge error">Hors SLA</span></td>
+                <td><span class="badge neutral">Moyenne</span></td>
+                <td class="text-right">07/04/2026</td>
+              </tr>
+              <tr>
+                <td>PV non envoye</td>
+                <td class="ref-link">INC-2032</td>
+                <td>M. Morel (plomberie)</td>
+                <td><span class="badge error">Hors SLA</span></td>
+                <td><span class="badge neutral">Moyenne</span></td>
+                <td class="text-right">05/04/2026</td>
+              </tr>
+              <tr>
+                <td>Attribution non traitee</td>
+                <td class="ref-link">INC-2029</td>
+                <td>M. Bernard (couverture)</td>
+                <td><span class="badge success">Resolue</span></td>
+                <td><span class="badge neutral">Basse</span></td>
+                <td class="text-right">03/04/2026</td>
+              </tr>
+              <tr>
+                <td>Alerte devis — QuoteGuard IA</td>
+                <td class="ref-link">INC-2025</td>
+                <td>Mme Roux (plomberie)</td>
+                <td><span class="badge error">Hors SLA</span></td>
+                <td><span class="badge warning">Haute</span></td>
+                <td class="text-right">01/04/2026</td>
+              </tr>
+              <tr>
+                <td>Check-in non realise</td>
+                <td class="ref-link">INC-2021</td>
+                <td>M. Petit (menuiserie)</td>
+                <td><span class="badge success">Resolue</span></td>
+                <td><span class="badge neutral">Basse</span></td>
+                <td class="text-right">28/03/2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- NO shared.js — sidebar/topbar sont manuels -->
+  <script>
+    // ---- Chart: Mes delais — evolution ----
+    new Chart(document.getElementById('chartDelais'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'Dec.', 'Janv.', 'Fev.', 'Mars', 'Avr.'],
+        datasets: [
+          {
+            label: 'La Rochelle',
+            data: [2.8, 3.0, 3.1, 3.3, 3.1, 3.2],
+            borderColor: '#c27b30',
+            backgroundColor: 'rgba(194,123,48,0.08)',
+            fill: true,
+            tension: 0.35,
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointBackgroundColor: '#c27b30'
+          },
+          {
+            label: 'Parent (moy.)',
+            data: [2.6, 2.5, 2.4, 2.5, 2.4, 2.4],
+            borderColor: '#03c5b8',
+            backgroundColor: 'transparent',
+            borderDash: [6, 4],
+            fill: false,
+            tension: 0.35,
+            borderWidth: 2,
+            pointRadius: 3,
+            pointBackgroundColor: '#03c5b8'
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 20, usePointStyle: true, pointStyle: 'circle' } }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } },
+          y: { grid: { color: '#f5f5f5' }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3', callback: function(v) { return v + 'j'; } }, beginAtZero: false, min: 1.5, max: 4 }
+        }
+      }
+    });
+
+    // ---- Chart: Evolution paniers ----
+    new Chart(document.getElementById('chartPaniers'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'Dec.', 'Janv.', 'Fev.', 'Mars', 'Avr.'],
+        datasets: [
+          {
+            label: 'Certifies',
+            data: [465, 470, 472, 475, 480, 478],
+            borderColor: '#03c5b8',
+            backgroundColor: 'rgba(3,197,184,0.08)',
+            fill: true,
+            tension: 0.35,
+            borderWidth: 2,
+            pointRadius: 3,
+            pointBackgroundColor: '#03c5b8'
+          },
+          {
+            label: 'Non certifies',
+            data: [530, 535, 540, 542, 548, 545],
+            borderColor: '#fa4a57',
+            backgroundColor: 'rgba(250,74,87,0.06)',
+            fill: true,
+            tension: 0.35,
+            borderWidth: 2,
+            pointRadius: 3,
+            pointBackgroundColor: '#fa4a57'
+          },
+          {
+            label: 'Parent moy.',
+            data: [460, 458, 462, 460, 465, 462],
+            borderColor: '#a3a3a3',
+            backgroundColor: 'transparent',
+            borderDash: [6, 4],
+            fill: false,
+            tension: 0.35,
+            borderWidth: 1.5,
+            pointRadius: 2,
+            pointBackgroundColor: '#a3a3a3'
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 20, usePointStyle: true, pointStyle: 'circle' } },
+          tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ' : ' + ctx.parsed.y + ' \u20AC'; } } }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } },
+          y: { grid: { color: '#f5f5f5' }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3', callback: function(v) { return v + ' \u20AC'; } }, beginAtZero: false, min: 400, max: 580 }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

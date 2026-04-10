@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataRoom Kelcare — Vue comparative</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="dataroom.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="comparative" data-title="Vue comparative" data-subtitle="Comparaison inter-agences sur les indicateurs clés">
+  <div class="main">
+    <main class="content">
+
+      <!-- AXIS SUMMARY -->
+      <div class="axis-summary">
+        <div class="axis-summary-icon" style="background:var(--color-info-50);color:var(--color-info-500);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8" rx="1"/><rect x="14" y="6" width="3" height="12" rx="1"/></svg>
+        </div>
+        <div class="axis-summary-text">
+          <div class="axis-summary-title">Comparaison inter-agences</div>
+          <div class="axis-summary-insight">Poitiers Centre domine le classement (87/100). La Rochelle nécessite un plan d'action.</div>
+        </div>
+      </div>
+
+      <!-- FILTER TABS -->
+      <div class="filters-bar">
+        <div class="filter-group">
+          <span class="filter-label">Période</span>
+          <select class="filter-select">
+            <option>Ce mois</option><option>Ce trimestre</option><option>Cette année</option><option>Depuis le lancement</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Axe</span>
+          <div class="filter-tabs">
+            <button class="filter-tab active">Tous</button>
+            <button class="filter-tab">Déploiement</button>
+            <button class="filter-tab">Excellence</button>
+            <button class="filter-tab">Financier</button>
+            <button class="filter-tab">Incidences</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABS: Scorecard | Comparaison 1v1 -->
+      <div class="filters-bar" style="margin-bottom:var(--space-4);">
+        <div class="filter-tabs">
+          <button class="filter-tab active">Scorecard</button>
+          <button class="filter-tab">Comparaison 1v1</button>
+        </div>
+      </div>
+
+      <!-- ================================================
+           SCORECARD TABLE
+           ================================================ -->
+      <div class="card" style="margin-bottom:var(--space-6);">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Scorecard comparative</div>
+            <div class="card-subtitle">Ensemble des indicateurs clés par agence</div>
+          </div>
+        </div>
+        <div class="card-body flush">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Indicateur</th>
+                <th class="text-center">Consolidé Parent</th>
+                <th class="text-center">Poitiers Centre</th>
+                <th class="text-center">Niort</th>
+                <th class="text-center">La Rochelle</th>
+                <th class="text-center">Angoulême</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- SECTION: Déploiement -->
+              <tr style="background:var(--color-primary-10);">
+                <td colspan="6" style="font-weight:600;font-size:var(--font-size-md);color:var(--color-primary-700);padding:var(--space-2) var(--space-4);">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  Déploiement
+                </td>
+              </tr>
+              <tr>
+                <td>Taux formation certifiés</td>
+                <td class="text-center cell-value">78 %</td>
+                <td class="text-center"><span class="badge success">88 %</span></td>
+                <td class="text-center"><span class="badge success">82 %</span></td>
+                <td class="text-center"><span class="badge warning">72 %</span></td>
+                <td class="text-center"><span class="badge error">65 %</span></td>
+              </tr>
+              <tr>
+                <td>Taux formation non certifiés</td>
+                <td class="text-center cell-value">54 %</td>
+                <td class="text-center"><span class="badge success">62 %</span></td>
+                <td class="text-center"><span class="badge success">55 %</span></td>
+                <td class="text-center"><span class="badge warning">48 %</span></td>
+                <td class="text-center"><span class="badge error">42 %</span></td>
+              </tr>
+              <tr>
+                <td>Taux activation certifiés</td>
+                <td class="text-center cell-value">68 %</td>
+                <td class="text-center"><span class="badge success">76 %</span></td>
+                <td class="text-center"><span class="badge success">70 %</span></td>
+                <td class="text-center"><span class="badge warning">62 %</span></td>
+                <td class="text-center"><span class="badge error">58 %</span></td>
+              </tr>
+              <tr>
+                <td>Taux certifiés réseau</td>
+                <td class="text-center cell-value">60 %</td>
+                <td class="text-center"><span class="badge success">75 %</span></td>
+                <td class="text-center"><span class="badge success">62 %</span></td>
+                <td class="text-center"><span class="badge warning">55 %</span></td>
+                <td class="text-center"><span class="badge error">48 %</span></td>
+              </tr>
+              <tr>
+                <td>Part hors logiciel</td>
+                <td class="text-center cell-value">15,5 %</td>
+                <td class="text-center"><span class="badge success">10 %</span></td>
+                <td class="text-center"><span class="badge success">14 %</span></td>
+                <td class="text-center"><span class="badge warning">19 %</span></td>
+                <td class="text-center"><span class="badge error">22 %</span></td>
+              </tr>
+
+              <!-- SECTION: Excellence opérationnelle -->
+              <tr style="background:var(--color-info-50);">
+                <td colspan="6" style="font-weight:600;font-size:var(--font-size-md);color:var(--color-info-500);padding:var(--space-2) var(--space-4);">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Excellence opérationnelle
+                </td>
+              </tr>
+              <tr>
+                <td>Délai attribution</td>
+                <td class="text-center cell-value">2,4 j</td>
+                <td class="text-center"><span class="badge success">1,8 j</span></td>
+                <td class="text-center"><span class="badge success">2,3 j</span></td>
+                <td class="text-center"><span class="badge error">3,2 j</span></td>
+                <td class="text-center"><span class="badge warning">2,5 j</span></td>
+              </tr>
+              <tr>
+                <td>Création &rarr; RDV</td>
+                <td class="text-center cell-value">4,2 j</td>
+                <td class="text-center"><span class="badge success">3,5 j</span></td>
+                <td class="text-center"><span class="badge success">4,1 j</span></td>
+                <td class="text-center"><span class="badge error">5,2 j</span></td>
+                <td class="text-center"><span class="badge warning">4,4 j</span></td>
+              </tr>
+              <tr>
+                <td>Création &rarr; devis</td>
+                <td class="text-center cell-value">6,1 j</td>
+                <td class="text-center"><span class="badge success">5,2 j</span></td>
+                <td class="text-center"><span class="badge success">5,8 j</span></td>
+                <td class="text-center"><span class="badge error">7,4 j</span></td>
+                <td class="text-center"><span class="badge warning">6,5 j</span></td>
+              </tr>
+              <tr>
+                <td>Temps acceptation</td>
+                <td class="text-center cell-value">35 min</td>
+                <td class="text-center"><span class="badge success">22 min</span></td>
+                <td class="text-center"><span class="badge success">32 min</span></td>
+                <td class="text-center"><span class="badge error">48 min</span></td>
+                <td class="text-center"><span class="badge warning">38 min</span></td>
+              </tr>
+              <tr>
+                <td>Devis validés</td>
+                <td class="text-center cell-value">92 %</td>
+                <td class="text-center"><span class="badge success">96 %</span></td>
+                <td class="text-center"><span class="badge success">93 %</span></td>
+                <td class="text-center"><span class="badge error">87 %</span></td>
+                <td class="text-center"><span class="badge warning">90 %</span></td>
+              </tr>
+              <tr>
+                <td>Reprogrammation</td>
+                <td class="text-center cell-value">8 %</td>
+                <td class="text-center"><span class="badge success">5 %</span></td>
+                <td class="text-center"><span class="badge success">7 %</span></td>
+                <td class="text-center"><span class="badge error">12 %</span></td>
+                <td class="text-center"><span class="badge warning">9 %</span></td>
+              </tr>
+
+              <!-- SECTION: Impact financier -->
+              <tr style="background:var(--color-warning-50);">
+                <td colspan="6" style="font-weight:600;font-size:var(--font-size-md);color:var(--color-warning-500);padding:var(--space-2) var(--space-4);">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+                  Impact financier
+                </td>
+              </tr>
+              <tr>
+                <td>Panier certifiés</td>
+                <td class="text-center cell-value">462 &euro;</td>
+                <td class="text-center"><span class="badge success">438 &euro;</span></td>
+                <td class="text-center"><span class="badge success">455 &euro;</span></td>
+                <td class="text-center"><span class="badge warning">478 &euro;</span></td>
+                <td class="text-center"><span class="badge warning">481 &euro;</span></td>
+              </tr>
+              <tr>
+                <td>Panier non certifiés</td>
+                <td class="text-center cell-value">521 &euro;</td>
+                <td class="text-center"><span class="badge success">512 &euro;</span></td>
+                <td class="text-center"><span class="badge success">498 &euro;</span></td>
+                <td class="text-center"><span class="badge warning">545 &euro;</span></td>
+                <td class="text-center"><span class="badge warning">538 &euro;</span></td>
+              </tr>
+              <tr>
+                <td>Écart certifiés / non certifiés</td>
+                <td class="text-center cell-value">-11,3 %</td>
+                <td class="text-center"><span class="badge success">-14,5 %</span></td>
+                <td class="text-center"><span class="badge warning">-8,6 %</span></td>
+                <td class="text-center"><span class="badge warning">-12,3 %</span></td>
+                <td class="text-center"><span class="badge success">-10,6 %</span></td>
+              </tr>
+
+              <!-- SECTION: Incidences opérationnelles -->
+              <tr style="background:var(--color-error-50);">
+                <td colspan="6" style="font-weight:600;font-size:var(--font-size-md);color:var(--color-error-600);padding:var(--space-2) var(--space-4);">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  Incidences opérationnelles
+                </td>
+              </tr>
+              <tr>
+                <td>Volume</td>
+                <td class="text-center cell-value">47</td>
+                <td class="text-center"><span class="badge success">9</span></td>
+                <td class="text-center"><span class="badge warning">11</span></td>
+                <td class="text-center"><span class="badge error">15</span></td>
+                <td class="text-center"><span class="badge warning">12</span></td>
+              </tr>
+              <tr>
+                <td>Taux résolution SLA</td>
+                <td class="text-center cell-value">72 %</td>
+                <td class="text-center"><span class="badge success">82 %</span></td>
+                <td class="text-center"><span class="badge success">75 %</span></td>
+                <td class="text-center"><span class="badge error">64 %</span></td>
+                <td class="text-center"><span class="badge warning">68 %</span></td>
+              </tr>
+              <tr>
+                <td>Temps résolution</td>
+                <td class="text-center cell-value">3,2 h</td>
+                <td class="text-center"><span class="badge success">2,4 h</span></td>
+                <td class="text-center"><span class="badge success">3,0 h</span></td>
+                <td class="text-center"><span class="badge error">4,1 h</span></td>
+                <td class="text-center"><span class="badge warning">3,5 h</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ================================================
+           COMPARAISON 1 CONTRE 1
+           ================================================ -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"/><path d="m15 9 6-6"/></svg>
+        Comparaison 1 contre 1
+      </h2>
+
+      <div class="card" style="margin-bottom:var(--space-6);">
+        <div class="card-body" style="padding-top:var(--space-5);">
+          <div class="compare-header">
+            <select>
+              <option selected>Poitiers Centre</option>
+              <option>Niort</option>
+              <option>La Rochelle</option>
+              <option>Angoulême</option>
+            </select>
+            <span class="compare-vs">VS</span>
+            <select>
+              <option>Poitiers Centre</option>
+              <option>Niort</option>
+              <option selected>La Rochelle</option>
+              <option>Angoulême</option>
+            </select>
+          </div>
+          <div class="compare-grid">
+            <!-- Formation certifiés -->
+            <div class="compare-row">
+              <div class="compare-val left better">88 %</div>
+              <div class="compare-center">
+                <div class="compare-label">Formation certifiés</div>
+                <div class="compare-delta" style="color:var(--color-success);">+16 pts</div>
+              </div>
+              <div class="compare-val right worse">72 %</div>
+            </div>
+            <!-- Activation -->
+            <div class="compare-row">
+              <div class="compare-val left better">76 %</div>
+              <div class="compare-center">
+                <div class="compare-label">Activation certifiés</div>
+                <div class="compare-delta" style="color:var(--color-success);">+14 pts</div>
+              </div>
+              <div class="compare-val right worse">62 %</div>
+            </div>
+            <!-- Délai attribution -->
+            <div class="compare-row">
+              <div class="compare-val left better">1,8 j</div>
+              <div class="compare-center">
+                <div class="compare-label">Délai attribution</div>
+                <div class="compare-delta" style="color:var(--color-success);">-1,4 j</div>
+              </div>
+              <div class="compare-val right worse">3,2 j</div>
+            </div>
+            <!-- Panier certifiés -->
+            <div class="compare-row">
+              <div class="compare-val left better">438 &euro;</div>
+              <div class="compare-center">
+                <div class="compare-label">Panier certifiés</div>
+                <div class="compare-delta" style="color:var(--color-success);">-40 &euro;</div>
+              </div>
+              <div class="compare-val right worse">478 &euro;</div>
+            </div>
+            <!-- Résolution SLA -->
+            <div class="compare-row">
+              <div class="compare-val left better">82 %</div>
+              <div class="compare-center">
+                <div class="compare-label">Résolution SLA</div>
+                <div class="compare-delta" style="color:var(--color-success);">+18 pts</div>
+              </div>
+              <div class="compare-val right worse">64 %</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           CHARTS ROW — Radar + Ranking
+           ================================================ -->
+      <div class="grid-2">
+        <!-- Radar chart -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Profil multi-axes</div>
+              <div class="card-subtitle">7 dimensions par agence</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="chart-wrap lg"><canvas id="chartRadar"></canvas></div></div>
+        </div>
+
+        <!-- Ranking card -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Classement global</div>
+              <div class="card-subtitle">Score composite sur 100</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div style="display:flex;flex-direction:column;gap:var(--space-3);">
+              <!-- 1. Poitiers Centre -->
+              <div style="display:flex;align-items:center;gap:var(--space-4);padding:var(--space-4);background:var(--color-primary-10);border:2px solid var(--color-primary-25);border-radius:var(--rounded-xl);">
+                <div style="width:40px;height:40px;border-radius:var(--rounded-full);background:var(--color-primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--font-size-xl);">1</div>
+                <div style="flex:1;">
+                  <div style="font-weight:600;font-size:var(--font-size-lg);">Poitiers Centre</div>
+                  <div style="font-size:var(--font-size-md);color:var(--color-neutral-500);">Meilleur sur 6/7 dimensions</div>
+                </div>
+                <div style="font-size:var(--font-size-3xl);font-weight:700;color:var(--color-primary);">87</div>
+                <span class="position-badge" style="background:var(--color-neutral-100);color:var(--color-neutral-600);">=</span>
+              </div>
+              <!-- 2. Niort -->
+              <div style="display:flex;align-items:center;gap:var(--space-4);padding:var(--space-4);background:var(--color-white);border:1px solid var(--color-neutral-200);border-radius:var(--rounded-xl);">
+                <div style="width:40px;height:40px;border-radius:var(--rounded-full);background:var(--color-secondary-25);color:var(--color-secondary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--font-size-xl);">2</div>
+                <div style="flex:1;">
+                  <div style="font-weight:600;font-size:var(--font-size-lg);">Niort</div>
+                  <div style="font-size:var(--font-size-md);color:var(--color-neutral-500);">Progression notable ce mois</div>
+                </div>
+                <div style="font-size:var(--font-size-3xl);font-weight:700;color:var(--color-secondary);">74</div>
+                <span class="position-badge top"><span class="movement up">&uarr; +2</span></span>
+              </div>
+              <!-- 3. Angoulême -->
+              <div style="display:flex;align-items:center;gap:var(--space-4);padding:var(--space-4);background:var(--color-white);border:1px solid var(--color-neutral-200);border-radius:var(--rounded-xl);">
+                <div style="width:40px;height:40px;border-radius:var(--rounded-full);background:var(--color-secondary-25);color:var(--color-secondary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--font-size-xl);">3</div>
+                <div style="flex:1;">
+                  <div style="font-weight:600;font-size:var(--font-size-lg);">Angoulême</div>
+                  <div style="font-size:var(--font-size-md);color:var(--color-neutral-500);">Stable, axes d'amélioration identifiés</div>
+                </div>
+                <div style="font-size:var(--font-size-3xl);font-weight:700;color:var(--color-secondary);">66</div>
+                <span class="position-badge" style="background:var(--color-neutral-100);color:var(--color-neutral-600);">=</span>
+              </div>
+              <!-- 4. La Rochelle -->
+              <div style="display:flex;align-items:center;gap:var(--space-4);padding:var(--space-4);background:var(--color-error-50);border:1px solid var(--color-error-100);border-radius:var(--rounded-xl);">
+                <div style="width:40px;height:40px;border-radius:var(--rounded-full);background:var(--color-error);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--font-size-xl);">4</div>
+                <div style="flex:1;">
+                  <div style="font-weight:600;font-size:var(--font-size-lg);">La Rochelle</div>
+                  <div style="font-size:var(--font-size-md);color:var(--color-neutral-500);">Plan d'action requis</div>
+                </div>
+                <div style="font-size:var(--font-size-3xl);font-weight:700;color:var(--color-error);">58</div>
+                <span class="position-badge low"><span class="movement down">&darr; -1</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           4 COMPARISON CHARTS (grid-2)
+           ================================================ -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        Détails par indicateur
+      </h2>
+
+      <div class="grid-2">
+        <!-- Formation certifiés vs non certifiés -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Formation certifiés vs non certifiés</div>
+              <div class="card-subtitle">Taux de formation par agence (%)</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartFormation"></canvas></div></div>
+        </div>
+
+        <!-- Paniers moyens -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Paniers moyens certifiés vs non certifiés</div>
+              <div class="card-subtitle">Montant moyen en euros (&euro;)</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartPaniers"></canvas></div></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Délais clés -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Délais clés</div>
+              <div class="card-subtitle">Attribution, RDV, devis (en jours)</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartDelais"></canvas></div></div>
+        </div>
+
+        <!-- Incidences -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Incidences par agence</div>
+              <div class="card-subtitle">Résolues SLA, hors SLA, non résolues</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartIncidences"></canvas></div></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    /* ---- Chart defaults ---- */
+    Chart.defaults.font.family = 'Poppins';
+
+    const agencies = ['Poitiers Centre', 'Niort', 'La Rochelle', 'Angoulême'];
+    const agencyColors = ['#03c5b8', '#6778ed', '#fa4a57', '#ffc114'];
+    const agencyColorsBg = ['rgba(3,197,184,0.15)', 'rgba(103,120,237,0.15)', 'rgba(250,74,87,0.15)', 'rgba(255,193,20,0.15)'];
+
+    /* ---- RADAR CHART ---- */
+    new Chart(document.getElementById('chartRadar'), {
+      type: 'radar',
+      data: {
+        labels: ['Formation', 'Activation', 'Réseau certifié', 'Délai attribution', 'Conformité devis', 'Coût certifiés', 'Résolution SLA'],
+        datasets: [
+          {
+            label: 'Poitiers Centre',
+            data: [88, 76, 75, 90, 96, 85, 82],
+            borderColor: agencyColors[0],
+            backgroundColor: agencyColorsBg[0],
+            borderWidth: 2,
+            pointRadius: 3,
+            pointBackgroundColor: agencyColors[0]
+          },
+          {
+            label: 'Niort',
+            data: [82, 70, 62, 78, 93, 80, 75],
+            borderColor: agencyColors[1],
+            backgroundColor: agencyColorsBg[1],
+            borderWidth: 2,
+            pointRadius: 3,
+            pointBackgroundColor: agencyColors[1]
+          },
+          {
+            label: 'La Rochelle',
+            data: [72, 62, 55, 55, 87, 65, 64],
+            borderColor: agencyColors[2],
+            backgroundColor: agencyColorsBg[2],
+            borderWidth: 2,
+            pointRadius: 3,
+            pointBackgroundColor: agencyColors[2]
+          },
+          {
+            label: 'Angoulême',
+            data: [65, 58, 48, 72, 90, 70, 68],
+            borderColor: agencyColors[3],
+            backgroundColor: agencyColorsBg[3],
+            borderWidth: 2,
+            pointRadius: 3,
+            pointBackgroundColor: agencyColors[3]
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 100,
+            ticks: { stepSize: 20, font: { family: 'Poppins', size: 10 }, color: '#a3a3a3', backdropColor: 'transparent' },
+            pointLabels: { font: { family: 'Poppins', size: 11 }, color: '#525252' },
+            grid: { color: '#e5e5e5' },
+            angleLines: { color: '#e5e5e5' }
+          }
+        },
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 16, usePointStyle: true, pointStyle: 'circle' } }
+        }
+      }
+    });
+
+    /* ---- FORMATION CHART (grouped bar) ---- */
+    new Chart(document.getElementById('chartFormation'), {
+      type: 'bar',
+      data: {
+        labels: agencies,
+        datasets: [
+          { label: 'Certifiés', data: [88, 82, 72, 65], backgroundColor: '#03c5b8', borderRadius: 4, barPercentage: 0.6, categoryPercentage: 0.7 },
+          { label: 'Non certifiés', data: [62, 55, 48, 42], backgroundColor: '#6778ed', borderRadius: 4, barPercentage: 0.6, categoryPercentage: 0.7 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 16, usePointStyle: true, pointStyle: 'circle' } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } },
+          y: { grid: { color: '#f5f5f5' }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3', callback: function(v) { return v + ' %'; } }, beginAtZero: true, max: 100 }
+        }
+      }
+    });
+
+    /* ---- PANIERS CHART (grouped bar) ---- */
+    new Chart(document.getElementById('chartPaniers'), {
+      type: 'bar',
+      data: {
+        labels: agencies,
+        datasets: [
+          { label: 'Certifiés', data: [438, 455, 478, 481], backgroundColor: '#03c5b8', borderRadius: 4, barPercentage: 0.6, categoryPercentage: 0.7 },
+          { label: 'Non certifiés', data: [512, 498, 545, 538], backgroundColor: '#fa4a57', borderRadius: 4, barPercentage: 0.6, categoryPercentage: 0.7 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 16, usePointStyle: true, pointStyle: 'circle' } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } },
+          y: { grid: { color: '#f5f5f5' }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3', callback: function(v) { return v + ' \u20ac'; } }, beginAtZero: false, min: 350 }
+        }
+      }
+    });
+
+    /* ---- DÉLAIS CHART (grouped bar) ---- */
+    new Chart(document.getElementById('chartDelais'), {
+      type: 'bar',
+      data: {
+        labels: agencies,
+        datasets: [
+          { label: 'Attribution', data: [1.8, 2.3, 3.2, 2.5], backgroundColor: '#03c5b8', borderRadius: 4, barPercentage: 0.5, categoryPercentage: 0.7 },
+          { label: 'RDV', data: [3.5, 4.1, 5.2, 4.4], backgroundColor: '#6778ed', borderRadius: 4, barPercentage: 0.5, categoryPercentage: 0.7 },
+          { label: 'Devis', data: [5.2, 5.8, 7.4, 6.5], backgroundColor: '#ffc114', borderRadius: 4, barPercentage: 0.5, categoryPercentage: 0.7 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 16, usePointStyle: true, pointStyle: 'circle' } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } },
+          y: { grid: { color: '#f5f5f5' }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3', callback: function(v) { return v + ' j'; } }, beginAtZero: true }
+        }
+      }
+    });
+
+    /* ---- INCIDENCES CHART (stacked bar) ---- */
+    new Chart(document.getElementById('chartIncidences'), {
+      type: 'bar',
+      data: {
+        labels: agencies,
+        datasets: [
+          { label: 'Résolues SLA', data: [7, 8, 9, 8], backgroundColor: '#3faf38', borderRadius: 4, barPercentage: 0.5, categoryPercentage: 0.6 },
+          { label: 'Hors SLA', data: [1, 2, 4, 3], backgroundColor: '#ffc114', borderRadius: 0, barPercentage: 0.5, categoryPercentage: 0.6 },
+          { label: 'Non résolues', data: [1, 1, 2, 1], backgroundColor: '#fa4a57', borderRadius: { topLeft: 4, topRight: 4 }, barPercentage: 0.5, categoryPercentage: 0.6 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 16, usePointStyle: true, pointStyle: 'circle' } } },
+        scales: {
+          x: { stacked: true, grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } },
+          y: { stacked: true, grid: { color: '#f5f5f5' }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3', stepSize: 2 }, beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

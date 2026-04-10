@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataRoom Kelcare — Excellence op&eacute;rationnelle</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="dataroom.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="excellence" data-title="Excellence op&eacute;rationnelle" data-subtitle="Rapidit&eacute;, fluidit&eacute; et qualit&eacute; du cycle op&eacute;rationnel">
+  <div class="main">
+    <main class="content" data-axis="excellence">
+
+      <!-- AXIS SUMMARY -->
+      <div class="axis-summary">
+        <div class="axis-summary-icon" style="background: var(--color-info-50); color: var(--color-info-500);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="axis-summary-text">
+          <div class="axis-summary-title">Excellence op&eacute;rationnelle</div>
+          <div class="axis-summary-insight">D&eacute;lai attribution 2,4j (-12 %), 92 % de devis conformes. Point d'attention : La Rochelle &agrave; 3,2j d'attribution.</div>
+        </div>
+      </div>
+
+      <!-- FILTRES -->
+      <div class="filters-bar" id="filtersBar"></div>
+
+      <!-- SOMMAIRE -->
+      <div class="page-toc">
+        <a href="#section-cycle">Cycle op&eacute;rationnel</a>
+        <a href="#section-qualite">Qualit&eacute; et conformit&eacute;</a>
+      </div>
+
+      <!-- ============================================
+           SECTION 1 — CYCLE OPÉRATIONNEL
+           ============================================ -->
+      <h2 class="section-title" id="section-cycle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Cycle op&eacute;rationnel
+      </h2>
+
+      <!-- Row 1 — Délais de prise en charge (5 KPI) -->
+      <div class="kpi-grid cols-5">
+        <!-- Déclaration → Enregistrement -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <span class="kpi-trend down">-18 %</span>
+          </div>
+          <div class="kpi-value">45<span class="unit">min</span></div>
+          <div class="kpi-label">D&eacute;claration vers enregistrement</div>
+          <div class="kpi-sub">vs. 55 min p&eacute;riode pr&eacute;c.</div>
+        </div>
+
+        <!-- Attribution artisan -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="kpi-trend down">-12 %</span>
+          </div>
+          <div class="kpi-value">2,4<span class="unit">j</span></div>
+          <div class="kpi-label">D&eacute;lai moyen d'attribution</div>
+          <div class="kpi-sub">vs. 2,7j p&eacute;riode pr&eacute;c.</div>
+        </div>
+
+        <!-- Attribution → RDV -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <span class="kpi-trend neutral">0 %</span>
+          </div>
+          <div class="kpi-value">1,8<span class="unit">j</span></div>
+          <div class="kpi-label">Attribution vers RDV d&eacute;couverte</div>
+          <div class="kpi-sub">vs. 1,8j p&eacute;riode pr&eacute;c.</div>
+        </div>
+
+        <!-- Création → RDV -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <span class="kpi-trend down">-8 %</span>
+          </div>
+          <div class="kpi-value">4,2<span class="unit">j</span></div>
+          <div class="kpi-label">Cr&eacute;ation vers RDV d&eacute;couverte</div>
+          <div class="kpi-sub">vs. 4,6j p&eacute;riode pr&eacute;c.</div>
+        </div>
+
+        <!-- Création → Devis -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <span class="kpi-trend down">-6 %</span>
+          </div>
+          <div class="kpi-value">6,1<span class="unit">j</span></div>
+          <div class="kpi-label">Cr&eacute;ation vers r&eacute;ception devis</div>
+          <div class="kpi-sub">vs. 6,5j p&eacute;riode pr&eacute;c.</div>
+        </div>
+      </div>
+
+      <!-- Row 2 — Réactivité terrain (5 KPI) -->
+      <div class="kpi-grid cols-5">
+        <!-- Validation devis → Réparation -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1 7.5 3 11"/><path d="M11.7 13.5c2-2 3.7-4 6.3-5.5"/></svg>
+            </div>
+            <span class="kpi-trend down">-10 %</span>
+          </div>
+          <div class="kpi-value">3,5<span class="unit">j</span></div>
+          <div class="kpi-label">Validation devis vers r&eacute;paration</div>
+          <div class="kpi-sub">vs. 3,9j p&eacute;riode pr&eacute;c.</div>
+        </div>
+
+        <!-- Acceptation intervention -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="kpi-trend down">-22 %</span>
+          </div>
+          <div class="kpi-value">35<span class="unit">min</span></div>
+          <div class="kpi-label">Temps moyen d'acceptation</div>
+          <div class="kpi-sub">vs. 45 min p&eacute;riode pr&eacute;c.</div>
+        </div>
+
+        <!-- Premier contact client -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <span class="kpi-trend down">-15 %</span>
+          </div>
+          <div class="kpi-value">2,1<span class="unit">h</span></div>
+          <div class="kpi-label">Premier contact client</div>
+          <div class="kpi-sub">vs. 2,5h p&eacute;riode pr&eacute;c.</div>
+        </div>
+
+        <!-- Prise RDV → Intervention -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <span class="kpi-trend neutral">+2 %</span>
+          </div>
+          <div class="kpi-value">3,8<span class="unit">j</span></div>
+          <div class="kpi-label">Prise de RDV vers intervention</div>
+          <div class="kpi-sub">vs. 3,7j p&eacute;riode pr&eacute;c.</div>
+        </div>
+
+        <!-- Ponctualité -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4"/><path d="M12 14v-4"/><path d="M4 13a8 8 0 0 1 8-7 8 8 0 1 1-5.3 14L4 17.6"/><path d="M9 17H4v5"/></svg>
+            </div>
+            <span class="kpi-trend down">-3 min</span>
+          </div>
+          <div class="kpi-value">+12<span class="unit">min</span></div>
+          <div class="kpi-label">Delta moyen ponctualit&eacute;</div>
+          <div class="kpi-sub">vs. +15 min p&eacute;riode pr&eacute;c.</div>
+        </div>
+      </div>
+
+      <!-- Charts cycle opérationnel -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">&Eacute;volution des d&eacute;lais cl&eacute;s</div>
+              <div class="card-subtitle">6 derniers mois — consolid&eacute; parent</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-wrap lg">
+              <canvas id="chartDelais"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">D&eacute;lai attribution par agence</div>
+              <div class="card-subtitle">En jours — comparaison inter-agences</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-wrap">
+              <canvas id="chartAttribAgence"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           SECTION 2 — QUALITÉ ET CONFORMITÉ
+           ============================================ -->
+      <h2 class="section-title" id="section-qualite">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Qualit&eacute; et conformit&eacute;
+      </h2>
+
+      <div class="kpi-grid">
+        <!-- Reprogrammation -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+            </div>
+            <span class="kpi-trend down">-2 pts</span>
+          </div>
+          <div class="kpi-value">8<span class="unit">%</span></div>
+          <div class="kpi-label">Taux de reprogrammation</div>
+          <div class="kpi-sub">vs. 10 % p&eacute;riode pr&eacute;c.</div>
+        </div>
+
+        <!-- Temps moyen intervention -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="kpi-trend neutral">0 %</span>
+          </div>
+          <div class="kpi-value">2,8<span class="unit">h</span></div>
+          <div class="kpi-label">Temps moyen d'intervention</div>
+          <div class="kpi-sub">stable vs. p&eacute;riode pr&eacute;c.</div>
+        </div>
+
+        <!-- Devis validés -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+            </div>
+            <span class="kpi-trend up">+4 pts</span>
+          </div>
+          <div class="kpi-value">92<span class="unit">%</span></div>
+          <div class="kpi-label">Taux devis valid&eacute;s / re&ccedil;us</div>
+          <div class="kpi-sub">vs. 88 % p&eacute;riode pr&eacute;c.</div>
+        </div>
+
+        <!-- Retours qualité -->
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <span class="kpi-trend down">-1 pt</span>
+          </div>
+          <div class="kpi-value">3,2<span class="unit">%</span></div>
+          <div class="kpi-label">Taux de retours qualit&eacute;</div>
+          <div class="kpi-sub">litiges, non-conformit&eacute;s, SAV</div>
+        </div>
+      </div>
+
+      <!-- Grid-2 : SLA gauges + SLA by agency table -->
+      <div class="grid-2">
+        <!-- SLA Gauges -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">SLA — Taux de conformit&eacute;</div>
+              <div class="card-subtitle">Respect des engagements de d&eacute;lai par &eacute;tape</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div style="display:flex; flex-direction:column; gap:var(--space-4);">
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                  <span style="font-size:var(--font-size-md);">Enregistrement &lt; 1h</span>
+                  <span style="font-size:var(--font-size-md); font-weight:600; color:var(--color-success);">94 %</span>
+                </div>
+                <div class="gauge-bar"><div class="fill" style="width:94%; background:var(--color-success);"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                  <span style="font-size:var(--font-size-md);">Attribution &lt; 4h</span>
+                  <span style="font-size:var(--font-size-md); font-weight:600; color:var(--color-success);">87 %</span>
+                </div>
+                <div class="gauge-bar"><div class="fill" style="width:87%; background:var(--color-success);"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                  <span style="font-size:var(--font-size-md);">RDV d&eacute;couverte &lt; 3j</span>
+                  <span style="font-size:var(--font-size-md); font-weight:600; color:var(--color-warning-500);">72 %</span>
+                </div>
+                <div class="gauge-bar"><div class="fill" style="width:72%; background:var(--color-warning-500);"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                  <span style="font-size:var(--font-size-md);">Devis re&ccedil;u &lt; 7j</span>
+                  <span style="font-size:var(--font-size-md); font-weight:600; color:var(--color-primary);">82 %</span>
+                </div>
+                <div class="gauge-bar"><div class="fill" style="width:82%; background:var(--color-primary);"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                  <span style="font-size:var(--font-size-md);">Premier contact &lt; 3h</span>
+                  <span style="font-size:var(--font-size-md); font-weight:600; color:var(--color-success);">91 %</span>
+                </div>
+                <div class="gauge-bar"><div class="fill" style="width:91%; background:var(--color-success);"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLA by agency table (NEW V2) -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">SLA par agence</div>
+              <div class="card-subtitle">Conformit&eacute; par engagement et par agence</div>
+            </div>
+          </div>
+          <div class="card-body flush">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Agence</th>
+                  <th class="text-center">Enreg. &lt; 1h</th>
+                  <th class="text-center">Attrib. &lt; 4h</th>
+                  <th class="text-center">RDV &lt; 3j</th>
+                  <th class="text-center">Contact &lt; 3h</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Poitiers Centre</td>
+                  <td class="text-center"><span class="badge success">97 %</span></td>
+                  <td class="text-center"><span class="badge success">94 %</span></td>
+                  <td class="text-center"><span class="badge success">85 %</span></td>
+                  <td class="text-center"><span class="badge success">96 %</span></td>
+                </tr>
+                <tr>
+                  <td>Niort</td>
+                  <td class="text-center"><span class="badge success">95 %</span></td>
+                  <td class="text-center"><span class="badge success">89 %</span></td>
+                  <td class="text-center"><span class="badge neutral">75 %</span></td>
+                  <td class="text-center"><span class="badge success">93 %</span></td>
+                </tr>
+                <tr>
+                  <td>La Rochelle</td>
+                  <td class="text-center"><span class="badge warning">88 %</span></td>
+                  <td class="text-center"><span class="badge warning">78 %</span></td>
+                  <td class="text-center"><span class="badge error">58 %</span></td>
+                  <td class="text-center"><span class="badge warning">84 %</span></td>
+                </tr>
+                <tr>
+                  <td>Angoul&ecirc;me</td>
+                  <td class="text-center"><span class="badge success">93 %</span></td>
+                  <td class="text-center"><span class="badge success">85 %</span></td>
+                  <td class="text-center"><span class="badge warning">70 %</span></td>
+                  <td class="text-center"><span class="badge success">90 %</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    // Inject filters
+    document.getElementById('filtersBar').replaceWith(buildFilters({ showViewToggle: true, showEntity: true, showReseau: false }));
+
+    // Chart — Évolution des délais clés (line)
+    new Chart(document.getElementById('chartDelais'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'D\u00e9c.', 'Janv.', 'F\u00e9v.', 'Mars', 'Avr.'],
+        datasets: [
+          { label: 'Attribution', data: [3.2, 3.0, 2.8, 2.7, 2.5, 2.4], borderColor: '#03c5b8', tension: 0.35, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#03c5b8', fill: false },
+          { label: 'RDV', data: [5.1, 4.9, 4.7, 4.5, 4.3, 4.2], borderColor: '#6778ed', tension: 0.35, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#6778ed', fill: false },
+          { label: 'Devis', data: [7.8, 7.5, 7.0, 6.8, 6.3, 6.1], borderColor: '#ffc114', tension: 0.35, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#ffc114', fill: false },
+          { label: 'R\u00e9paration', data: [4.8, 4.5, 4.2, 4.0, 3.7, 3.5], borderColor: '#3faf38', tension: 0.35, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#3faf38', fill: false }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 16, usePointStyle: true, pointStyle: 'circle' } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } },
+          y: { grid: { color: '#f5f5f5' }, ticks: { callback: function(v) { return v + 'j'; }, font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' }, beginAtZero: true }
+        }
+      }
+    });
+
+    // Chart — Délai attribution par agence (bar)
+    new Chart(document.getElementById('chartAttribAgence'), {
+      type: 'bar',
+      data: {
+        labels: ['Poitiers Centre', 'Niort', 'La Rochelle', 'Angoul\u00eame'],
+        datasets: [{
+          label: 'D\u00e9lai attribution (jours)',
+          data: [1.8, 2.3, 3.2, 2.5],
+          backgroundColor: ['#03c5b8', '#03c5b8', '#c27b30', '#6778ed'],
+          borderRadius: 6,
+          barPercentage: 0.5
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: 'Poppins', size: 12 }, color: '#404040' } },
+          y: { grid: { color: '#f5f5f5' }, ticks: { callback: function(v) { return v + 'j'; }, font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' }, beginAtZero: true }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

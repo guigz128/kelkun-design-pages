@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataRoom Kelcare — Synthèse</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="dataroom.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="synthese" data-title="DataRoom" data-subtitle="Synthèse globale — Vue parent consolidée">
+
+  <div class="main">
+    <main class="content">
+
+      <!-- HERO BANNER — Score santé global -->
+      <div class="hero-banner">
+        <div class="hero-score-ring" data-score="74">
+          <svg viewBox="0 0 108 108" width="120" height="120">
+            <circle class="ring-bg" cx="54" cy="54" r="50"/>
+            <circle class="ring-fill" cx="54" cy="54" r="50"/>
+          </svg>
+          <div class="ring-center">
+            <div class="ring-value">74</div>
+            <div class="ring-max">/100</div>
+          </div>
+        </div>
+        <div class="hero-info">
+          <div class="hero-title">État de santé du dispositif</div>
+          <div class="hero-insight">Performance en progression. Poitiers Centre tire le réseau vers le haut. Attention : La Rochelle concentre 32 % des incidences hors SLA.</div>
+          <div class="hero-axes">
+            <div class="hero-axis-badge"><span class="dot green"></span> Déploiement 72</div>
+            <div class="hero-axis-badge"><span class="dot green"></span> Excellence 78</div>
+            <div class="hero-axis-badge"><span class="dot orange"></span> Financier 68</div>
+            <div class="hero-axis-badge"><span class="dot orange"></span> Incidences 71</div>
+            <div class="hero-axis-badge" style="margin-left:auto;">+3 pts vs période préc.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALERTE PRÉDICTIVE -->
+      <div class="alert-predictive">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/></svg>
+        <div>
+          <strong>Alerte prédictive</strong>
+          La Rochelle : 3 artisans plombiers indisponibles cette semaine. Risque de dépassement SLA attribution sur les urgences plomberie. <a href="incidences.html">Voir le détail</a>
+        </div>
+      </div>
+
+      <!-- ALERTE INCIDENCES CRITIQUES -->
+      <div class="alert-critical">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div>
+          <strong>2 incidences critiques ouvertes</strong>
+          INC-2033 Poitiers Centre (attribution &gt; 1h) — INC-2041 La Rochelle (check-in non réalisé). <a href="incidences.html">Voir les incidences</a>
+        </div>
+      </div>
+
+      <!-- FILTRES -->
+      <div class="filters-bar" id="filtersBar"></div>
+
+      <!-- KPI HÉROS — 2 colonnes larges -->
+      <div class="kpi-grid cols-2" style="margin-bottom: var(--space-4);">
+        <div class="kpi-card hero">
+          <div class="kpi-header">
+            <div class="kpi-icon primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="kpi-trend up">+12 %</span>
+          </div>
+          <div class="kpi-value">184</div>
+          <div class="kpi-label">Artisans certifiés actifs</div>
+          <div class="kpi-sub">vs. 164 période préc. — 60 % du réseau total</div>
+          <div class="sparkline" id="spark-artisans"></div>
+        </div>
+
+        <div class="kpi-card hero">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="kpi-trend up">+8 %</span>
+          </div>
+          <div class="kpi-value">342</div>
+          <div class="kpi-label">Interventions gérées</div>
+          <div class="kpi-sub">dont 289 via Kelcare (84,5 %) — 53 hors logiciel</div>
+          <div class="sparkline" id="spark-interventions"></div>
+        </div>
+      </div>
+
+      <!-- KPI SECONDAIRES — 3 colonnes -->
+      <div class="kpi-grid cols-3">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="kpi-trend down">-5 %</span>
+          </div>
+          <div class="kpi-value">2,4<span class="unit">j</span></div>
+          <div class="kpi-label">Délai moyen d'attribution</div>
+          <div class="kpi-sub">vs. 2,5j période préc.</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+            </div>
+            <span class="kpi-trend neutral">0 %</span>
+          </div>
+          <div class="kpi-value">487<span class="unit">&euro;</span></div>
+          <div class="kpi-label">Panier moyen REN</div>
+          <div class="kpi-sub">certifiés : 462 &euro; / non certifiés : 521 &euro;</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <span class="kpi-trend down">+3</span>
+          </div>
+          <div class="kpi-value">18</div>
+          <div class="kpi-label">Incidences ouvertes</div>
+          <div class="kpi-sub">dont 5 hors SLA — taux résolution : 72 %</div>
+        </div>
+      </div>
+
+      <!-- 4 CARTES AXES avec état santé -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        Axes de pilotage
+      </h2>
+
+      <div class="axis-cards">
+        <a href="deploiement.html" class="axis-card">
+          <div class="axis-card-icon" style="background: var(--color-primary-25); color: var(--color-primary-600);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="axis-card-title">Déploiement</div>
+          <div class="axis-card-desc">Adoption, formation, activation des artisans et couverture réseau</div>
+          <div class="axis-card-kpis">
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value" style="color:var(--color-primary);">78 %</div><div class="axis-mini-kpi-label">Taux formation</div></div>
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value" style="color:var(--color-success);">65 %</div><div class="axis-mini-kpi-label">Activation</div></div>
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value">72</div><div class="axis-mini-kpi-label">Score</div></div>
+          </div>
+        </a>
+
+        <a href="excellence.html" class="axis-card">
+          <div class="axis-card-icon" style="background: var(--color-info-50); color: var(--color-info-500);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="axis-card-title">Excellence opérationnelle</div>
+          <div class="axis-card-desc">Rapidité, fluidité et qualité du cycle opérationnel</div>
+          <div class="axis-card-kpis">
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value" style="color:var(--color-info-500);">2,4j</div><div class="axis-mini-kpi-label">Délai attrib.</div></div>
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value" style="color:var(--color-success);">92 %</div><div class="axis-mini-kpi-label">SLA devis</div></div>
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value">78</div><div class="axis-mini-kpi-label">Score</div></div>
+          </div>
+        </a>
+
+        <a href="impact.html" class="axis-card state-warning">
+          <div class="axis-card-icon" style="background: var(--color-warning-50); color: var(--color-warning-500);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+          </div>
+          <div class="axis-card-title">Impact financier</div>
+          <div class="axis-card-desc">Paniers moyens, coûts de traitement et effets économiques</div>
+          <div class="axis-card-kpis">
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value" style="color:var(--color-warning-500);">487 &euro;</div><div class="axis-mini-kpi-label">Panier REN</div></div>
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value" style="color:var(--color-success);">-11 %</div><div class="axis-mini-kpi-label">Écart cert.</div></div>
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value">68</div><div class="axis-mini-kpi-label">Score</div></div>
+          </div>
+        </a>
+
+        <a href="incidences.html" class="axis-card state-warning">
+          <div class="axis-card-icon" style="background: var(--color-error-50); color: var(--color-error-500);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="axis-card-title">Incidences opérationnelles</div>
+          <div class="axis-card-desc">Écarts au fonctionnement cible, ruptures et marges de progression</div>
+          <div class="axis-card-kpis">
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value" style="color:var(--color-error);">18</div><div class="axis-mini-kpi-label">Ouvertes</div></div>
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value" style="color:var(--color-success);">72 %</div><div class="axis-mini-kpi-label">Résolues SLA</div></div>
+            <div class="axis-mini-kpi"><div class="axis-mini-kpi-value">71</div><div class="axis-mini-kpi-label">Score</div></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- CHARTS — 2 colonnes -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Évolution des interventions</div><div class="card-subtitle">6 derniers mois — consolidé parent</div></div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartInterventions"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Répartition par réseau</div><div class="card-subtitle">Interventions du mois en cours</div></div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartReseau"></canvas></div></div>
+        </div>
+      </div>
+
+      <!-- COMPARAISON INTER-AGENCES -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8" rx="1"/><rect x="14" y="6" width="3" height="12" rx="1"/></svg>
+        Comparaison inter-agences
+      </h2>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Taux de formation certifiés (30j)</div></div>
+          <div class="card-body">
+            <div class="comparison-row">
+              <div class="comparison-label">Poitiers Centre</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:92%;"></div><div class="target-line" style="left:80%;"></div></div>
+              <div class="comparison-value">92 %</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">Lyon</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:85%;"></div><div class="target-line" style="left:80%;"></div></div>
+              <div class="comparison-value">85 %</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">La Rochelle</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:68%;background:var(--color-warning-500);"></div><div class="target-line" style="left:80%;"></div></div>
+              <div class="comparison-value" style="color:var(--color-warning-500);">68 %</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">Angoulême</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:74%;background:var(--color-warning-500);"></div><div class="target-line" style="left:80%;"></div></div>
+              <div class="comparison-value" style="color:var(--color-warning-500);">74 %</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Délai moyen d'attribution (jours)</div></div>
+          <div class="card-body">
+            <div class="comparison-row">
+              <div class="comparison-label">Poitiers Centre</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:30%;background:var(--color-success);"></div></div>
+              <div class="comparison-value" style="color:var(--color-success);">1,8j</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">Niort</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:45%;background:var(--color-info-500);"></div></div>
+              <div class="comparison-value">2,3j</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">La Rochelle</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:65%;background:var(--color-warning-500);"></div></div>
+              <div class="comparison-value" style="color:var(--color-warning-500);">3,2j</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">Angoulême</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:50%;background:var(--color-info-500);"></div></div>
+              <div class="comparison-value">2,5j</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NPS WIDGET -->
+      <div class="grid-3">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="kpi-trend up">+4 pts</span>
+          </div>
+          <div class="kpi-value">72</div>
+          <div class="kpi-label">Score NPS</div>
+          <div class="kpi-sub">34 % de taux de réponse SMS</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+          </div>
+          <div class="kpi-value">78<span class="unit">%</span></div>
+          <div class="kpi-label">Couverture qualité post-intervention</div>
+          <div class="kpi-sub">Appels qualité réalisés / interventions terminées</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+            </div>
+            <span class="kpi-trend up">+1 820 &euro;</span>
+          </div>
+          <div class="kpi-value">17 220<span class="unit">&euro;</span></div>
+          <div class="kpi-label">Économie estimée ce mois</div>
+          <div class="kpi-sub">Écart panier certifié vs non certifié sur le volume</div>
+        </div>
+      </div>
+
+      <!-- TABLE INCIDENCES -->
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">Dernières incidences opérationnelles</div><div class="card-subtitle">5 dernières incidences ouvertes</div></div>
+          <a href="incidences.html" class="drill-down">Voir tout <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+        <div class="card-body flush">
+          <table class="data-table">
+            <thead>
+              <tr><th>Type</th><th>Réf.</th><th>Agence</th><th>Statut</th><th>Priorité</th><th class="text-right">Créée le</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Check-in non réalisé</td><td class="ref-link">INC-2041</td><td>La Rochelle</td><td><span class="badge error">Hors SLA</span></td><td><span class="badge warning">Haute</span></td><td class="text-right">10/04/2026</td></tr>
+              <tr><td>Artisan en retard</td><td class="ref-link">INC-2039</td><td>La Rochelle</td><td><span class="badge warning">En cours</span></td><td><span class="badge warning">Haute</span></td><td class="text-right">09/04/2026</td></tr>
+              <tr><td>PV non envoyé</td><td class="ref-link">INC-2037</td><td>Niort</td><td><span class="badge info">Nouvelle</span></td><td><span class="badge neutral">Moyenne</span></td><td class="text-right">09/04/2026</td></tr>
+              <tr><td>Alerte devis — QuoteGuard IA</td><td class="ref-link">INC-2035</td><td>Angoulême</td><td><span class="badge success">Résolue</span></td><td><span class="badge neutral">Basse</span></td><td class="text-right">08/04/2026</td></tr>
+              <tr><td>Intervention non attribuée 1h</td><td class="ref-link">INC-2033</td><td>Poitiers Centre</td><td><span class="badge error">Hors SLA</span></td><td><span class="badge error">Critique</span></td><td class="text-right">08/04/2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    // Inject filters
+    document.getElementById('filtersBar').replaceWith(buildFilters({ showViewToggle: true, showEntity: true, showReseau: true }));
+
+    // Chart — Interventions
+    new Chart(document.getElementById('chartInterventions'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'Déc.', 'Janv.', 'Fév.', 'Mars', 'Avr.'],
+        datasets: [
+          { label: 'Via Kelcare', data: [210,235,248,267,280,289], borderColor: '#03c5b8', backgroundColor: 'rgba(3,197,184,0.08)', fill: true, tension: 0.35, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#03c5b8' },
+          { label: 'Hors logiciel', data: [82,70,63,58,55,53], borderColor: '#fa4a57', backgroundColor: 'rgba(250,74,87,0.06)', fill: true, tension: 0.35, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#fa4a57' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 20, usePointStyle: true, pointStyle: 'circle' } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } },
+          y: { grid: { color: '#f5f5f5' }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' }, beginAtZero: true }
+        }
+      }
+    });
+
+    // Sparklines
+    createSparkline(document.getElementById('spark-artisans'), [142, 148, 155, 160, 168, 174, 184]);
+    createSparkline(document.getElementById('spark-interventions'), [210, 235, 248, 267, 280, 310, 342]);
+
+    // Chart — Réseau
+    new Chart(document.getElementById('chartReseau'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Certifiés', 'Non certifiés agence', 'Kelkun'],
+        datasets: [{ data: [58,27,15], backgroundColor: ['#03c5b8','#6778ed','#ffc114'], borderWidth: 0, hoverOffset: 6 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '65%',
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 16, usePointStyle: true, pointStyle: 'circle' } } }
+      }
+    });
+  </script>
+
+</body>
+</html>

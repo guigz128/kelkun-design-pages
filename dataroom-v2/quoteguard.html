@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataRoom Kelcare — QuoteGuard IA</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="dataroom.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="quoteguard" data-title="QuoteGuard IA" data-subtitle="Analyse intelligente des devis">
+
+  <div class="main">
+    <main class="content" data-axis="quoteguard">
+
+      <!-- AXIS SUMMARY -->
+      <div class="axis-summary">
+        <div class="axis-summary-icon" style="background:var(--color-accent-50);color:var(--color-accent-500);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div class="axis-summary-text">
+          <div class="axis-summary-title">QuoteGuard IA</div>
+          <div class="axis-summary-insight">QuoteGuard IA a analysé 287 devis ce mois. 31 alertes générées (10,8 %). 84 % des alertes traitées dans le SLA. Économie estimée : 4 820 &euro;.</div>
+        </div>
+      </div>
+
+      <!-- FILTRES -->
+      <div class="filters-bar" id="filtersBar"></div>
+
+      <!-- KPI — 5 colonnes -->
+      <div class="kpi-grid cols-5">
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 18v-1"/><path d="M14 18v-3"/></svg>
+            </div>
+          </div>
+          <div class="kpi-value">287</div>
+          <div class="kpi-label">Devis analysés</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+          </div>
+          <div class="kpi-value">31</div>
+          <div class="kpi-label">Alertes générées</div>
+          <div class="kpi-sub">10,8 % des devis</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="kpi-trend up">+6 pts</span>
+          </div>
+          <div class="kpi-value">84<span class="unit">%</span></div>
+          <div class="kpi-label">Dans le SLA</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="kpi-trend up">-15 min</span>
+          </div>
+          <div class="kpi-value">1,8<span class="unit">h</span></div>
+          <div class="kpi-label">Temps moyen traitement</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+            </div>
+            <span class="kpi-trend up">+820 &euro;</span>
+          </div>
+          <div class="kpi-value">4 820<span class="unit">&euro;</span></div>
+          <div class="kpi-label">Économies estimées</div>
+        </div>
+
+      </div>
+
+      <!-- SECTION : Alertes actives -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Alertes actives
+      </h2>
+
+      <div class="card" style="margin-bottom: var(--space-6);">
+        <div class="card-body flush">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Réf.</th>
+                <th>Agence</th>
+                <th>Artisan</th>
+                <th class="text-right">Montant devis</th>
+                <th class="text-right">Montant réf.</th>
+                <th class="text-right">Écart</th>
+                <th>Type alerte</th>
+                <th>Statut</th>
+                <th class="text-right">Créée le</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ref-link">QG-0142</td>
+                <td>La Rochelle</td>
+                <td>Dupont P.</td>
+                <td class="text-right cell-value">1 240 &euro;</td>
+                <td class="text-right">487 &euro;</td>
+                <td class="text-right cell-value" style="color:var(--color-error);">+155 %</td>
+                <td><span class="badge accent">Panier élevé</span></td>
+                <td><span class="badge warning">En cours</span></td>
+                <td class="text-right">10/04/2026</td>
+              </tr>
+              <tr>
+                <td class="ref-link">QG-0139</td>
+                <td>Angoulême</td>
+                <td>Leroy M.</td>
+                <td class="text-right cell-value">890 &euro;</td>
+                <td class="text-right">462 &euro;</td>
+                <td class="text-right cell-value" style="color:var(--color-error);">+93 %</td>
+                <td><span class="badge accent">Ligne suspecte</span></td>
+                <td><span class="badge warning">En cours</span></td>
+                <td class="text-right">09/04/2026</td>
+              </tr>
+              <tr>
+                <td class="ref-link">QG-0137</td>
+                <td>Niort</td>
+                <td>Martin J.</td>
+                <td class="text-right cell-value">720 &euro;</td>
+                <td class="text-right">455 &euro;</td>
+                <td class="text-right cell-value" style="color:var(--color-warning-500);">+58 %</td>
+                <td><span class="badge warning">Historique</span></td>
+                <td><span class="badge error">Escaladée</span></td>
+                <td class="text-right">09/04/2026</td>
+              </tr>
+              <tr>
+                <td class="ref-link">QG-0134</td>
+                <td>La Rochelle</td>
+                <td>Bernard S.</td>
+                <td class="text-right cell-value">650 &euro;</td>
+                <td class="text-right">462 &euro;</td>
+                <td class="text-right cell-value" style="color:var(--color-warning-500);">+41 %</td>
+                <td><span class="badge neutral">Doublon</span></td>
+                <td><span class="badge success">Résolue</span></td>
+                <td class="text-right">08/04/2026</td>
+              </tr>
+              <tr>
+                <td class="ref-link">QG-0131</td>
+                <td>Poitiers Centre</td>
+                <td>Petit A.</td>
+                <td class="text-right cell-value">580 &euro;</td>
+                <td class="text-right">438 &euro;</td>
+                <td class="text-right cell-value" style="color:var(--color-warning-500);">+32 %</td>
+                <td><span class="badge accent">Panier élevé</span></td>
+                <td><span class="badge success">Résolue</span></td>
+                <td class="text-right">07/04/2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CHARTS — 2 colonnes -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Évolution mensuelle des alertes</div><div class="card-subtitle">6 derniers mois — par statut</div></div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartAlertesEvolution"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Distribution des types d'alerte</div><div class="card-subtitle">Répartition sur la période</div></div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartAlertesTypes"></canvas></div></div>
+        </div>
+      </div>
+
+      <!-- SECTION : Impact financier QuoteGuard -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+        Impact financier QuoteGuard
+      </h2>
+
+      <div class="grid-2-1">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Économies cumulées par mois</div><div class="card-subtitle">Depuis le lancement</div></div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartEconomies"></canvas></div></div>
+        </div>
+        <div class="kpi-card hero" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+          <div class="kpi-header" style="justify-content:center;">
+            <div class="kpi-icon accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+            </div>
+          </div>
+          <div class="kpi-value" style="font-size:var(--font-size-5xl);">17 620<span class="unit">&euro;</span></div>
+          <div class="kpi-label">Économie totale depuis le lancement</div>
+          <div class="kpi-sub">Montants évités grâce aux alertes QuoteGuard IA</div>
+        </div>
+      </div>
+
+      <!-- SECTION : Performance par agence -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8" rx="1"/><rect x="14" y="6" width="3" height="12" rx="1"/></svg>
+        Performance par agence
+      </h2>
+
+      <div class="card">
+        <div class="card-body flush">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Agence</th>
+                <th class="text-right">Devis analysés</th>
+                <th class="text-right">Alertes</th>
+                <th class="text-right">Taux d'alertes</th>
+                <th class="text-right">Temps moyen</th>
+                <th class="text-right">Taux de correction</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="cell-value">Poitiers Centre</td>
+                <td class="text-right">82</td>
+                <td class="text-right">5</td>
+                <td class="text-right"><span class="badge success">6,1 %</span></td>
+                <td class="text-right"><span class="badge success">1,2h</span></td>
+                <td class="text-right"><span class="badge success">100 %</span></td>
+              </tr>
+              <tr>
+                <td class="cell-value">Niort</td>
+                <td class="text-right">71</td>
+                <td class="text-right">8</td>
+                <td class="text-right"><span class="badge warning">11,3 %</span></td>
+                <td class="text-right"><span class="badge warning">1,6h</span></td>
+                <td class="text-right"><span class="badge warning">88 %</span></td>
+              </tr>
+              <tr>
+                <td class="cell-value">La Rochelle</td>
+                <td class="text-right">78</td>
+                <td class="text-right">12</td>
+                <td class="text-right"><span class="badge error">15,4 %</span></td>
+                <td class="text-right"><span class="badge error">2,4h</span></td>
+                <td class="text-right"><span class="badge error">75 %</span></td>
+              </tr>
+              <tr>
+                <td class="cell-value">Angoulême</td>
+                <td class="text-right">56</td>
+                <td class="text-right">6</td>
+                <td class="text-right"><span class="badge warning">10,7 %</span></td>
+                <td class="text-right"><span class="badge warning">1,8h</span></td>
+                <td class="text-right"><span class="badge warning">83 %</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    // Inject filters
+    document.getElementById('filtersBar').replaceWith(buildFilters({ showViewToggle: false, showEntity: true, showReseau: false }));
+
+    // Chart — Évolution mensuelle des alertes (stacked bar)
+    new Chart(document.getElementById('chartAlertesEvolution'), {
+      type: 'bar',
+      data: {
+        labels: ['Nov.', 'Déc.', 'Janv.', 'Fév.', 'Mars', 'Avr.'],
+        datasets: [
+          { label: 'Résolues', data: [18, 22, 20, 25, 24, 26], backgroundColor: '#03c5b8', borderRadius: 4 },
+          { label: 'Escaladées', data: [3, 4, 3, 4, 3, 3], backgroundColor: '#c27b30', borderRadius: 4 },
+          { label: 'Ignorées', data: [2, 1, 2, 1, 2, 2], backgroundColor: '#a3a3a3', borderRadius: 4 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 20, usePointStyle: true, pointStyle: 'circle' } }
+        },
+        scales: {
+          x: { stacked: true, grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } },
+          y: { stacked: true, grid: { color: '#f5f5f5' }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' }, beginAtZero: true }
+        }
+      }
+    });
+
+    // Chart — Distribution des types d'alerte (doughnut)
+    new Chart(document.getElementById('chartAlertesTypes'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Panier élevé', 'Ligne suspecte', 'Historique incohérent', 'Doublon potentiel'],
+        datasets: [{
+          data: [45, 26, 19, 10],
+          backgroundColor: ['#6778ed', '#c27b30', '#3cb0f5', '#a3a3a3'],
+          borderWidth: 0,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '65%',
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 16, usePointStyle: true, pointStyle: 'circle' } },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) { return ctx.label + ' : ' + ctx.parsed + ' %'; }
+            }
+          }
+        }
+      }
+    });
+
+    // Chart — Économies cumulées (line)
+    new Chart(document.getElementById('chartEconomies'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'Déc.', 'Janv.', 'Fév.', 'Mars', 'Avr.'],
+        datasets: [{
+          label: 'Économies cumulées',
+          data: [1200, 3100, 5400, 8200, 12800, 17620],
+          borderColor: '#6778ed',
+          backgroundColor: 'rgba(103,120,237,0.08)',
+          fill: true,
+          tension: 0.35,
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: '#6778ed'
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) { return ctx.parsed.y.toLocaleString('fr-FR') + ' €'; }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } },
+          y: { grid: { color: '#f5f5f5' }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3', callback: function(v) { return v.toLocaleString('fr-FR') + ' €'; } }, beginAtZero: true }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

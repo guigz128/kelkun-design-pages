@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="dataroom.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
-<body data-page="deploiement" data-title="Déploiement" data-subtitle="Certification, documents, attribution et utilisation Kelcare">
+<body data-page="deploiement" data-title="Déploiement" data-subtitle="Formation, documents, attribution et utilisation Kelcare">
 
   <div class="main">
     <main class="content" data-axis="deploy">
@@ -20,7 +20,7 @@
         </div>
         <div class="axis-summary-text">
           <div class="axis-summary-title">Déploiement</div>
-          <div class="axis-summary-insight">184 artisans certifiés sur 308 (60 %). 81 % des dossiers complets. Réseau MDPA traite 70 % des interventions, Kelcare 30 %. Point d'attention : La Rochelle — formation basse et 12 dossiers incomplets.</div>
+          <div class="axis-summary-insight">184 artisans formés Kelcare sur 308 (60 %), dont 212 ajoutés par MDPA et 96 par Kelcare. Documents vérifiés : 81 %. Réseau MDPA traite 70 % des interventions, Kelcare 30 %. Point d'attention : La Rochelle — formation basse et 12 dossiers non vérifiés.</div>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
 
       <!-- Sommaire -->
       <div class="page-toc">
-        <a href="#section-certif">Certification</a>
+        <a href="#section-certif">Formation</a>
         <a href="#section-docs">Documents</a>
         <a href="#section-attrib">Attribution</a>
         <a href="#section-usage">Utilisation Kelcare</a>
@@ -44,7 +44,7 @@
             <div class="section-card-header-icon" style="background:var(--color-primary-25);color:var(--color-primary-600);">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 8 3 12 0v-5"/></svg>
             </div>
-            <h2>Certification des artisans</h2>
+            <h2>Formation des artisans</h2>
           </div>
           <a href="artisans-detail.html?filter=certification" class="see-details">Voir tous les artisans →</a>
         </div>
@@ -59,7 +59,7 @@
             </div>
             <div class="kpi-value">308</div>
             <div class="kpi-label">Artisans enregistrés</div>
-            <div class="kpi-sub">tous réseaux confondus</div>
+            <div class="kpi-sub">212 ajoutés par MDPA · 96 par Kelcare</div>
           </div>
 
           <div class="kpi-card">
@@ -70,8 +70,8 @@
               <span class="kpi-trend up">+12</span>
             </div>
             <div class="kpi-value">184</div>
-            <div class="kpi-label">Artisans certifiés</div>
-            <div class="kpi-sub">formés par un agent Kelcare</div>
+            <div class="kpi-label">Artisans formés</div>
+            <div class="kpi-sub">validation manuelle par un admin Kelcare</div>
           </div>
 
           <div class="kpi-card">
@@ -82,7 +82,7 @@
               <span class="kpi-trend up">+3 pts</span>
             </div>
             <div class="kpi-value">60<span class="unit">%</span></div>
-            <div class="kpi-label">Taux de certification</div>
+            <div class="kpi-label">Taux de formation</div>
             <div class="kpi-sub">184 / 308 artisans</div>
           </div>
 
@@ -94,7 +94,7 @@
               <span class="kpi-trend down">-6</span>
             </div>
             <div class="kpi-value">124</div>
-            <div class="kpi-label">Artisans non certifiés</div>
+            <div class="kpi-label">Artisans non formés</div>
             <div class="kpi-sub">ne peuvent pas prendre d'interventions Kelcare</div>
           </div>
         </div>
@@ -102,7 +102,7 @@
         <div class="card" style="margin-top: var(--space-4);">
           <div class="card-header">
             <div>
-              <div class="card-title">Taux de certification par agence</div>
+              <div class="card-title">Taux de formation par agence</div>
               <div class="card-subtitle">Top 10 des 20 agences — cible 80 %</div>
             </div>
             <a href="artisans-detail.html" class="see-details">Voir toutes les agences →</a>
@@ -138,8 +138,8 @@
               <span class="kpi-trend up">+4 pts</span>
             </div>
             <div class="kpi-value">81<span class="unit">%</span></div>
-            <div class="kpi-label">Dossiers complets</div>
-            <div class="kpi-sub">149 artisans sur 184 certifiés</div>
+            <div class="kpi-label">Documents vérifiés</div>
+            <div class="kpi-sub">149 artisans sur 184 formés</div>
           </div>
 
           <div class="kpi-card">
@@ -269,7 +269,7 @@
             </div>
             <div class="versus-row">
               <div class="v-val left mdpa">184</div>
-              <div class="v-label">Artisans attribuables<small>certifiés et dossier complet</small></div>
+              <div class="v-label">Artisans attribuables<small>formés et documents vérifiés</small></div>
               <div class="v-val right kelkun">62</div>
             </div>
             <div class="versus-row">

@@ -37,7 +37,7 @@
           <div class="hero-title">Score de santé — Agence La Rochelle</div>
           <div class="hero-insight">Score inférieur à la moyenne réseau (74 /100). Gains possibles : documents (58 vs 78 moy.) et certification (68 vs 78 moy.).</div>
           <div class="hero-axes">
-            <div class="hero-axis-badge"><span class="dot orange"></span> Certification 68</div>
+            <div class="hero-axis-badge"><span class="dot orange"></span> Formation 68</div>
             <div class="hero-axis-badge"><span class="dot red"></span> Documents 58</div>
             <div class="hero-axis-badge"><span class="dot green"></span> Attribution 76</div>
             <div class="hero-axis-badge" style="margin-left:auto;">+6 pts vs période préc.</div>
@@ -79,8 +79,8 @@
             <span class="kpi-trend up">+2</span>
           </div>
           <div class="kpi-value">8</div>
-          <div class="kpi-label">Artisans certifiés actifs</div>
-          <div class="kpi-sub">sur 12 artisans enregistrés — 67 % de certification</div>
+          <div class="kpi-label">Artisans formés Kelcare</div>
+          <div class="kpi-sub">sur 12 enregistrés (9 MDPA · 3 Kelcare) — 67 % formés</div>
           <div class="vs-average worse">↓ 7 pts vs moyenne réseau (74 %)</div>
         </div>
 
@@ -110,8 +110,8 @@
             <span class="kpi-trend down">-2 pts</span>
           </div>
           <div class="kpi-value">58<span class="unit">%</span></div>
-          <div class="kpi-label">Artisans dossier complet</div>
-          <div class="kpi-sub">7 complets · 2 incomplets · 3 expirés</div>
+          <div class="kpi-label">Documents vérifiés</div>
+          <div class="kpi-sub">7 vérifiés · 2 non vérifiés · 3 expirés</div>
           <div class="vs-average worse">↓ 23 pts vs moyenne réseau (81 %)</div>
         </div>
 
@@ -158,8 +158,10 @@
                 <tr>
                   <th>Artisan</th>
                   <th>Métier</th>
-                  <th>Statut</th>
-                  <th class="text-right">Interv. / mois</th>
+                  <th>Ajouté par</th>
+                  <th>Formation</th>
+                  <th>Documents</th>
+                  <th class="text-right">Interv.</th>
                   <th class="text-right">Panier moyen</th>
                 </tr>
               </thead>
@@ -167,35 +169,45 @@
                 <tr>
                   <td><a href="artisan-fiche.html" class="ref-link">Bernard Sébastien</a></td>
                   <td>Plomberie</td>
-                  <td><span class="doc-status expired"><span class="doc-status-dot"></span>Expiré</span></td>
+                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
+                  <td><span class="doc-status expired"><span class="doc-status-dot"></span>Non vérifié</span></td>
                   <td class="text-right cell-value">9</td>
                   <td class="text-right">518 &euro;</td>
                 </tr>
                 <tr>
                   <td class="ref-link">Morel Christophe</td>
                   <td>Électricité</td>
-                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Valide</span></td>
+                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Vérifié</span></td>
                   <td class="text-right cell-value">7</td>
                   <td class="text-right">445 &euro;</td>
                 </tr>
                 <tr>
                   <td class="ref-link">Fontaine Julien</td>
                   <td>Menuiserie</td>
-                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Valide</span></td>
+                  <td><span class="badge accent">Kelcare</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Vérifié</span></td>
                   <td class="text-right cell-value">4</td>
                   <td class="text-right">680 &euro;</td>
                 </tr>
                 <tr>
                   <td class="ref-link">Rivière Pascale</td>
                   <td>Serrurerie</td>
-                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Valide</span></td>
+                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Vérifié</span></td>
                   <td class="text-right cell-value">3</td>
                   <td class="text-right">295 &euro;</td>
                 </tr>
                 <tr>
                   <td class="ref-link">Chauvet Marc</td>
                   <td>Plomberie</td>
-                  <td><span class="doc-status incomplete"><span class="doc-status-dot"></span>Incomplet</span></td>
+                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="doc-status missing"><span class="doc-status-dot"></span>Non formé</span></td>
+                  <td><span class="doc-status incomplete"><span class="doc-status-dot"></span>Non vérifié</span></td>
                   <td class="text-right cell-value">1</td>
                   <td class="text-right">—</td>
                 </tr>

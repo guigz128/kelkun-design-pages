@@ -232,6 +232,9 @@ function animateCounters() {
   const kpiValues = document.querySelectorAll('.kpi-value, .v-val');
 
   kpiValues.forEach(el => {
+    const originalHTML = el.innerHTML;
+    el.dataset.finalHtml = originalHTML;
+
     const text = el.textContent.trim();
     const match = text.match(/^([\d\s,.]+)/);
     if (!match) return;
@@ -278,6 +281,13 @@ function animateCounters() {
 function formatFr(n) {
   return n.toLocaleString('fr-FR');
 }
+
+/* ---- Avant print : figer valeurs finales des compteurs ---- */
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('[data-final-html]').forEach(el => {
+    el.innerHTML = el.dataset.finalHtml;
+  });
+});
 
 /* ---- Export PDF (filename MDPA + date) ---- */
 function exportPdf() {

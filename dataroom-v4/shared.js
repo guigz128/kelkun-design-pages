@@ -126,7 +126,7 @@ function buildTopbar(title, subtitle, opts) {
       </div>
     </div>
     <div class="topbar-right">
-      <button class="btn" onclick="exportPdf()">${ICONS['download']} Exporter PDF</button>
+      <button class="btn" disabled title="Bientôt disponible">${ICONS['download']} Exporter PDF</button>
     </div>
   `;
 

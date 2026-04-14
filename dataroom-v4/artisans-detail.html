@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataRoom Kelcare V3 — Liste des artisans</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="dataroom.css">
+</head>
+<body data-page="deploiement" data-title="Liste des artisans" data-subtitle="Drill-down — Filtres avancés sur les 308 artisans">
+
+  <div class="main">
+    <main class="content">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="synthese.html">DataRoom</a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <a href="deploiement.html">Déploiement</a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <span class="current">Liste des artisans</span>
+      </nav>
+
+      <!-- KPI top -->
+      <div class="kpi-grid cols-4" style="margin-bottom: var(--space-5);">
+        <div class="kpi-card">
+          <div class="kpi-value">308</div>
+          <div class="kpi-label">Total artisans</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-value" style="color:var(--color-primary-600);">184</div>
+          <div class="kpi-label">Certifiés</div>
+          <div class="kpi-sub">60 % du total</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-value" style="color:var(--color-success);">149</div>
+          <div class="kpi-label">Dossier complet</div>
+          <div class="kpi-sub">81 % des certifiés</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-value" style="color:var(--color-error);">35</div>
+          <div class="kpi-label">À relancer</div>
+          <div class="kpi-sub">incomplets ou expirés</div>
+        </div>
+      </div>
+
+      <!-- Search + filters -->
+      <div class="card">
+        <!-- Chips filters -->
+        <div class="table-filters">
+          <button class="filter-chip active">Tous <span class="filter-chip-count">308</span></button>
+          <button class="filter-chip">Certifiés <span class="filter-chip-count">184</span></button>
+          <button class="filter-chip">Non certifiés <span class="filter-chip-count">124</span></button>
+          <button class="filter-chip">Dossier complet <span class="filter-chip-count">149</span></button>
+          <button class="filter-chip">Dossier incomplet <span class="filter-chip-count">28</span></button>
+          <button class="filter-chip">Dossier expiré <span class="filter-chip-count">7</span></button>
+          <div style="flex:1;"></div>
+          <select class="filter-select">
+            <option>Toutes les agences</option><option>Poitiers Centre</option><option>Niort</option><option>La Rochelle</option><option>Angoulême</option>
+          </select>
+          <select class="filter-select">
+            <option>Tous les métiers</option><option>Plomberie</option><option>Électricité</option><option>Chauffage</option><option>Serrurerie</option>
+          </select>
+          <select class="filter-select">
+            <option>Tous les réseaux</option><option>Réseau MDPA</option><option>Réseau Kelcare</option>
+          </select>
+        </div>
+
+        <!-- Table -->
+        <div class="card-body flush">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Artisan</th>
+                <th>Métier</th>
+                <th>Agence</th>
+                <th>Réseau</th>
+                <th>Certification</th>
+                <th>Dossier</th>
+                <th class="text-center">Interventions</th>
+                <th class="text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-001" class="ref-link">Martin J.</a></td>
+                <td>Plomberie</td>
+                <td>Poitiers Centre</td>
+                <td><span class="badge primary">MDPA</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Certifié</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Complet</span></td>
+                <td class="text-center">18</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-001" class="see-details">Fiche →</a></td>
+              </tr>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-002" class="ref-link">Dupont P.</a></td>
+                <td>Électricité</td>
+                <td>Poitiers Centre</td>
+                <td><span class="badge primary">MDPA</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Certifié</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Complet</span></td>
+                <td class="text-center">14</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-002" class="see-details">Fiche →</a></td>
+              </tr>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-003" class="ref-link">Leroy M.</a></td>
+                <td>Chauffage</td>
+                <td>Niort</td>
+                <td><span class="badge primary">MDPA</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Certifié</span></td>
+                <td><span class="doc-status incomplete"><span class="doc-status-dot"></span>RCP manquante</span></td>
+                <td class="text-center">11</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-003" class="see-details">Fiche →</a></td>
+              </tr>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-042" class="ref-link">Bernard S.</a></td>
+                <td>Plomberie</td>
+                <td>La Rochelle</td>
+                <td><span class="badge primary">MDPA</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Certifié</span></td>
+                <td><span class="doc-status expired"><span class="doc-status-dot"></span>Décennale expirée</span></td>
+                <td class="text-center">9</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-042" class="see-details">Fiche →</a></td>
+              </tr>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-028" class="ref-link">Petit A.</a></td>
+                <td>Serrurerie</td>
+                <td>La Rochelle</td>
+                <td><span class="badge primary">MDPA</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Certifié</span></td>
+                <td><span class="doc-status incomplete"><span class="doc-status-dot"></span>Kbis manquant</span></td>
+                <td class="text-center">7</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-028" class="see-details">Fiche →</a></td>
+              </tr>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-056" class="ref-link">Garnier L.</a></td>
+                <td>Vitrerie</td>
+                <td>Angoulême</td>
+                <td><span class="badge accent">Kelcare</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Certifié</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Complet</span></td>
+                <td class="text-center">12</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-056" class="see-details">Fiche →</a></td>
+              </tr>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-071" class="ref-link">Moreau C.</a></td>
+                <td>Plomberie</td>
+                <td>Niort</td>
+                <td><span class="badge accent">Kelcare</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Certifié</span></td>
+                <td><span class="doc-status expired"><span class="doc-status-dot"></span>CNI expirée</span></td>
+                <td class="text-center">8</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-071" class="see-details">Fiche →</a></td>
+              </tr>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-089" class="ref-link">Durand E.</a></td>
+                <td>Peinture</td>
+                <td>La Rochelle</td>
+                <td><span class="badge primary">MDPA</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Certifié</span></td>
+                <td><span class="doc-status incomplete"><span class="doc-status-dot"></span>Décennale manquante</span></td>
+                <td class="text-center">3</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-089" class="see-details">Fiche →</a></td>
+              </tr>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-103" class="ref-link">Rousseau D.</a></td>
+                <td>Électricité</td>
+                <td>Poitiers Centre</td>
+                <td><span class="badge accent">Kelcare</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Certifié</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Complet</span></td>
+                <td class="text-center">15</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-103" class="see-details">Fiche →</a></td>
+              </tr>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-128" class="ref-link">Lefèvre N.</a></td>
+                <td>Chauffage</td>
+                <td>Angoulême</td>
+                <td><span class="badge primary">MDPA</span></td>
+                <td><span class="doc-status missing"><span class="doc-status-dot"></span>Non certifié</span></td>
+                <td><span class="doc-status missing"><span class="doc-status-dot"></span>À traiter</span></td>
+                <td class="text-center">0</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-128" class="see-details">Fiche →</a></td>
+              </tr>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-152" class="ref-link">Fournier V.</a></td>
+                <td>Serrurerie</td>
+                <td>Niort</td>
+                <td><span class="badge primary">MDPA</span></td>
+                <td><span class="doc-status missing"><span class="doc-status-dot"></span>Non certifié</span></td>
+                <td><span class="doc-status missing"><span class="doc-status-dot"></span>À traiter</span></td>
+                <td class="text-center">0</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-152" class="see-details">Fiche →</a></td>
+              </tr>
+              <tr>
+                <td><a href="artisan-fiche.html?id=art-177" class="ref-link">Mercier H.</a></td>
+                <td>Plomberie</td>
+                <td>Poitiers Centre</td>
+                <td><span class="badge accent">Kelcare</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Certifié</span></td>
+                <td><span class="doc-status valid"><span class="doc-status-dot"></span>Complet</span></td>
+                <td class="text-center">10</td>
+                <td class="text-right"><a href="artisan-fiche.html?id=art-177" class="see-details">Fiche →</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <div>Affichage de <strong>1</strong> à <strong>12</strong> sur <strong>308</strong> artisans</div>
+          <div class="pagination-controls">
+            <button class="pagination-btn" disabled>‹</button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">4</button>
+            <button class="pagination-btn">…</button>
+            <button class="pagination-btn">26</button>
+            <button class="pagination-btn">›</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    // Filter chips toggle
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', function() {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

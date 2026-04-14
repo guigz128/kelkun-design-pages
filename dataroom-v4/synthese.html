@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataRoom Kelcare V3 — Synthèse</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="dataroom.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="synthese" data-title="DataRoom" data-subtitle="Synthèse globale — Vue parent consolidée">
+
+  <div class="main">
+    <main class="content">
+
+      <!-- PRINT COVER (PDF uniquement) -->
+      <section class="print-cover">
+        <div class="print-cover-inner">
+          <img src="mdpa-logo.svg" alt="Mutuelle de Poitiers Assurances">
+          <h1>DataRoom Kelcare — Synthèse</h1>
+          <p>Mutuelle de Poitiers Assurances · 20 agences · Rapport du 14 avril 2026</p>
+        </div>
+      </section>
+
+      <!-- INSIGHT IA NOMINATIF -->
+      <div class="ai-insight">
+        <div class="ai-insight-avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="ai-insight-body">
+          <div class="ai-insight-title">Bonjour Monsieur Dubois,</div>
+          <div class="ai-insight-text">vos agences <strong>Poitiers Centre</strong> et <strong>Niort</strong> tirent le réseau vers le haut (+12 % d'interventions validées). Point de vigilance : <strong>La Rochelle</strong> et <strong>Angoulême</strong> restent sous la cible réseau. Impact projeté si alignement : <strong>+48 interventions / mois</strong>.</div>
+        </div>
+        <button class="btn btn-primary" onclick="window.print()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export PDF
+        </button>
+      </div>
+
+      <!-- HERO BANNER -->
+      <div class="hero-banner">
+        <div class="hero-score-ring" data-score="74">
+          <svg viewBox="0 0 108 108" width="120" height="120">
+            <circle class="ring-bg" cx="54" cy="54" r="50"/>
+            <circle class="ring-fill" cx="54" cy="54" r="50"/>
+          </svg>
+          <div class="ring-center">
+            <div class="ring-value">74</div>
+            <div class="ring-max">/100</div>
+          </div>
+        </div>
+        <div class="hero-info">
+          <div class="hero-title">État de santé du déploiement Kelcare</div>
+          <div class="hero-insight">Performance en progression. 184 artisans certifiés actifs sur 308 enregistrés. Poitiers Centre tire le réseau vers le haut, La Rochelle nécessite un plan d'action sur la formation et les documents.</div>
+          <div class="hero-axes">
+            <div class="hero-axis-badge"><span class="dot green"></span> Certification 78</div>
+            <div class="hero-axis-badge"><span class="dot orange"></span> Documents 66</div>
+            <div class="hero-axis-badge"><span class="dot green"></span> Attribution 72</div>
+            <div class="hero-axis-badge" style="margin-left:auto;">+3 pts vs période préc.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTRES -->
+      <div class="filters-bar" id="filtersBar"></div>
+
+      <!-- KPI HÉROS (2 cols) -->
+      <div class="kpi-grid cols-2" style="margin-bottom: var(--space-4);">
+        <div class="kpi-card hero">
+          <div class="kpi-header">
+            <div class="kpi-icon primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="kpi-trend up">+12 %</span>
+          </div>
+          <div class="kpi-value">184</div>
+          <div class="kpi-label">Artisans certifiés actifs</div>
+          <div class="kpi-sub">sur 308 artisans enregistrés — 60 % de certification</div>
+          <div class="kpi-note">
+            <span class="kpi-note-author">M. Dubois</span>
+            <span class="kpi-note-text">"Objectif 75 % fin Q2. Voir plan formation avec Leana."</span>
+            <span class="kpi-note-date">hier, 16 h 42</span>
+          </div>
+        </div>
+
+        <div class="kpi-card hero">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="kpi-trend up">+8 %</span>
+          </div>
+          <div class="kpi-value">342</div>
+          <div class="kpi-label">Interventions Kelcare ce mois</div>
+          <div class="kpi-versus">
+            <span class="kpi-versus-pill mdpa"><span class="pill-label">MDPA</span><span class="pill-value">241 (70 %)</span></span>
+            <span class="kpi-versus-pill kelcare"><span class="pill-label">Kelcare</span><span class="pill-value">101 (30 %)</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI SECONDAIRES (3 cols) -->
+      <div class="kpi-grid cols-3">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+            </div>
+            <span class="kpi-trend up">+4 %</span>
+          </div>
+          <div class="kpi-value">81<span class="unit">%</span></div>
+          <div class="kpi-label">Artisans dossier complet</div>
+          <div class="kpi-sub">149 complets · 28 incomplets · 7 expirés</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="kpi-trend down">-12 %</span>
+          </div>
+          <div class="kpi-value">2,4<span class="unit">j</span></div>
+          <div class="kpi-label">Délai moyen d'attribution</div>
+          <div class="kpi-versus">
+            <span class="kpi-versus-pill mdpa"><span class="pill-label">MDPA</span><span class="pill-value">2,1 j</span></span>
+            <span class="kpi-versus-pill kelcare"><span class="pill-label">Kelcare</span><span class="pill-value">3,2 j</span></span>
+          </div>
+          <a href="#" class="kpi-note-add">+ Ajouter une note</a>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+            </div>
+            <span class="kpi-trend neutral">0 %</span>
+          </div>
+          <div class="kpi-value">487<span class="unit">&euro;</span></div>
+          <div class="kpi-label">Panier moyen validé</div>
+          <div class="kpi-versus">
+            <span class="kpi-versus-pill mdpa"><span class="pill-label">MDPA</span><span class="pill-value">472 &euro;</span></span>
+            <span class="kpi-versus-pill kelcare"><span class="pill-label">Kelcare</span><span class="pill-value">518 &euro;</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AXIS CARD déploiement (lien vers page) -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        Pilotage du déploiement
+      </h2>
+
+      <a href="deploiement.html" class="deploy-overview">
+        <div class="deploy-overview-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="deploy-overview-text">
+          <div class="deploy-overview-title">Déploiement complet</div>
+          <div class="deploy-overview-desc">Certification, documents, attribution (MDPA vs Kelcare) et utilisation Kelcare</div>
+        </div>
+        <div class="deploy-overview-kpis">
+          <div class="deploy-mini-kpi">
+            <div class="deploy-mini-kpi-value" style="color:var(--color-primary-600);">60<span>%</span></div>
+            <div class="deploy-mini-kpi-label">Certifiés</div>
+          </div>
+          <div class="deploy-mini-kpi">
+            <div class="deploy-mini-kpi-value" style="color:var(--color-success);">81<span>%</span></div>
+            <div class="deploy-mini-kpi-label">Dossiers OK</div>
+          </div>
+          <div class="deploy-mini-kpi">
+            <div class="deploy-mini-kpi-value">70<span>/</span>30</div>
+            <div class="deploy-mini-kpi-label">MDPA / Kelcare</div>
+          </div>
+        </div>
+        <div class="deploy-overview-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </a>
+
+      <!-- CHARTS -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Évolution des interventions Kelcare</div><div class="card-subtitle">6 derniers mois — MDPA vs Kelcare</div></div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartInterventions"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Répartition par réseau</div><div class="card-subtitle">Interventions du mois en cours</div></div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartReseau"></canvas></div></div>
+        </div>
+      </div>
+
+      <!-- COMPARAISON INTER-AGENCES -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8" rx="1"/><rect x="14" y="6" width="3" height="12" rx="1"/></svg>
+        Comparaison inter-agences — Top 4 / 20
+      </h2>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Taux de certification</div>
+            <a href="comparative.html" class="see-details">Toutes les agences →</a>
+          </div>
+          <div class="card-body">
+            <div class="comparison-row">
+              <div class="comparison-label">Poitiers Centre</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:92%;"></div><div class="target-line" style="left:80%;"></div></div>
+              <div class="comparison-value">92 %</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">Niort</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:85%;"></div><div class="target-line" style="left:80%;"></div></div>
+              <div class="comparison-value">85 %</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">La Rochelle</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:68%;background:var(--color-warning-500);"></div><div class="target-line" style="left:80%;"></div></div>
+              <div class="comparison-value" style="color:var(--color-warning-500);">68 %</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">Angoulême</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:74%;background:var(--color-warning-500);"></div><div class="target-line" style="left:80%;"></div></div>
+              <div class="comparison-value" style="color:var(--color-warning-500);">74 %</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Dossiers complets</div>
+            <a href="comparative.html" class="see-details">Toutes les agences →</a>
+          </div>
+          <div class="card-body">
+            <div class="comparison-row">
+              <div class="comparison-label">Poitiers Centre</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:94%;background:var(--color-success);"></div></div>
+              <div class="comparison-value" style="color:var(--color-success);">94 %</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">Niort</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:88%;background:var(--color-success);"></div></div>
+              <div class="comparison-value">88 %</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">La Rochelle</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:58%;background:var(--color-error);"></div></div>
+              <div class="comparison-value" style="color:var(--color-error);">58 %</div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-label">Angoulême</div>
+              <div class="comparison-bar-track"><div class="comparison-bar-fill" style="width:76%;background:var(--color-warning-500);"></div></div>
+              <div class="comparison-value" style="color:var(--color-warning-500);">76 %</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEADERBOARD AGENCE DU MOIS + RAPPORT HEBDO -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        Leaderboard réseau — Avril 2026
+      </h2>
+
+      <div class="grid-2-1" style="margin-bottom: var(--space-5);">
+        <!-- Podium -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Agence du mois</div>
+              <div class="card-subtitle">Score composite : certification × dossiers × attribution × panier</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="leaderboard">
+              <div class="leaderboard-row gold">
+                <div class="leaderboard-rank">1</div>
+                <div class="leaderboard-body">
+                  <div class="leaderboard-name">Poitiers Centre <span class="badge badge-gold">Agence du mois</span></div>
+                  <div class="leaderboard-meta">Score 92 /100 · 68 interventions · 94 % dossiers complets</div>
+                </div>
+                <div class="leaderboard-manager">M. Valentin Morel</div>
+              </div>
+              <div class="leaderboard-row silver">
+                <div class="leaderboard-rank">2</div>
+                <div class="leaderboard-body">
+                  <div class="leaderboard-name">Niort</div>
+                  <div class="leaderboard-meta">Score 85 /100 · 52 interventions · 88 % dossiers complets</div>
+                </div>
+                <div class="leaderboard-manager">Mme Claire Petit</div>
+              </div>
+              <div class="leaderboard-row bronze">
+                <div class="leaderboard-rank">3</div>
+                <div class="leaderboard-body">
+                  <div class="leaderboard-name">Saintes</div>
+                  <div class="leaderboard-meta">Score 79 /100 · 41 interventions · 84 % dossiers complets</div>
+                </div>
+                <div class="leaderboard-manager">M. Julien Faure</div>
+              </div>
+              <div class="leaderboard-row">
+                <div class="leaderboard-rank">4</div>
+                <div class="leaderboard-body">
+                  <div class="leaderboard-name">Angoulême</div>
+                  <div class="leaderboard-meta">Score 74 /100 · 36 interventions · 76 % dossiers complets</div>
+                </div>
+                <div class="leaderboard-manager">Mme Sophie Giraud</div>
+              </div>
+              <div class="leaderboard-row warning">
+                <div class="leaderboard-rank">18</div>
+                <div class="leaderboard-body">
+                  <div class="leaderboard-name">La Rochelle <span class="badge warning">À soutenir</span></div>
+                  <div class="leaderboard-meta">Score 68 /100 · 24 interventions · 58 % dossiers complets</div>
+                </div>
+                <div class="leaderboard-manager">Mme Isabelle Lefèvre</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rapport hebdo auto -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Rapport hebdo automatisé</div>
+              <div class="card-subtitle">Envoyé chaque lundi à 8 h</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="weekly-report">
+              <div class="weekly-report-preview">
+                <div class="weekly-report-header">
+                  <img src="mdpa-logo.svg" alt="MDPA" style="width:28px;height:28px;">
+                  <div>
+                    <strong>DataRoom Kelcare — Semaine 15</strong>
+                    <span>Lundi 13 avril 2026</span>
+                  </div>
+                </div>
+                <div class="weekly-report-body">
+                  <div class="weekly-report-line"><strong>+18</strong> interventions validées cette semaine</div>
+                  <div class="weekly-report-line"><strong>3</strong> dossiers expirés à renouveler</div>
+                  <div class="weekly-report-line"><strong>Poitiers Centre</strong> reste en tête du réseau</div>
+                </div>
+              </div>
+              <div class="weekly-report-config">
+                <div class="weekly-report-config-title">Destinataires</div>
+                <div class="weekly-report-chips">
+                  <span class="chip">M. Dubois (DG)</span>
+                  <span class="chip">Mme Lefèvre (La Rochelle)</span>
+                  <span class="chip">+ 18 managers</span>
+                </div>
+                <label class="switch-row">
+                  <span>Rapport hebdo actif</span>
+                  <span class="switch on"><span class="switch-handle"></span></span>
+                </label>
+                <label class="switch-row">
+                  <span>Alerte dossiers expirés (temps réel)</span>
+                  <span class="switch on"><span class="switch-handle"></span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHAT-IF 4 AXES -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/><path d="M12 7v5l3 3"/></svg>
+        Simulateur what-if — Projection 20 agences
+      </h2>
+
+      <div class="card" style="margin-bottom: var(--space-5);">
+        <div class="card-body">
+          <div class="whatif">
+            <div class="whatif-controls">
+              <div class="whatif-slider">
+                <div class="whatif-slider-label">
+                  <span>Formation Kelcare</span>
+                  <span class="whatif-slider-value" id="valFormation">60 %</span>
+                </div>
+                <input type="range" min="0" max="100" value="60" id="rngFormation" class="whatif-range">
+                <div class="whatif-slider-hint">% artisans certifiés</div>
+              </div>
+              <div class="whatif-slider">
+                <div class="whatif-slider-label">
+                  <span>Activation documents</span>
+                  <span class="whatif-slider-value" id="valDocs">81 %</span>
+                </div>
+                <input type="range" min="0" max="100" value="81" id="rngDocs" class="whatif-range">
+                <div class="whatif-slider-hint">% dossiers complets</div>
+              </div>
+              <div class="whatif-slider">
+                <div class="whatif-slider-label">
+                  <span>Mix artisans certifiés</span>
+                  <span class="whatif-slider-value" id="valMix">67 %</span>
+                </div>
+                <input type="range" min="0" max="100" value="67" id="rngMix" class="whatif-range">
+                <div class="whatif-slider-hint">% demandes sur certifiés</div>
+              </div>
+              <div class="whatif-slider">
+                <div class="whatif-slider-label">
+                  <span>Mix MDPA / Kelcare</span>
+                  <span class="whatif-slider-value" id="valReseau">70 %</span>
+                </div>
+                <input type="range" min="0" max="100" value="70" id="rngReseau" class="whatif-range">
+                <div class="whatif-slider-hint">% demandes sur réseau MDPA</div>
+              </div>
+            </div>
+
+            <div class="whatif-output">
+              <div class="whatif-output-title">Projection 12 prochains mois</div>
+              <div class="whatif-output-value" id="whatifInterv">4 104</div>
+              <div class="whatif-output-label">Interventions attendues</div>
+              <div class="whatif-output-kpis">
+                <div><div class="whatif-kpi-value" id="whatifCa">2,00 M&euro;</div><div class="whatif-kpi-label">CA projeté</div></div>
+                <div><div class="whatif-kpi-value" id="whatifDossiers">±5 %</div><div class="whatif-kpi-label">Dossiers à jour</div></div>
+              </div>
+              <div class="whatif-delta" id="whatifDelta">Référence actuelle</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    document.getElementById('filtersBar').replaceWith(buildFilters({ showEntity: true, showReseau: true }));
+
+    // Score ring animation
+    setTimeout(() => {
+      const fill = document.querySelector('.ring-fill');
+      if (fill) {
+        const offset = 314 - (314 * 74 / 100);
+        fill.style.strokeDashoffset = offset;
+      }
+    }, 300);
+
+    new Chart(document.getElementById('chartInterventions'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'Déc.', 'Janv.', 'Fév.', 'Mars', 'Avr.'],
+        datasets: [
+          { label: 'Réseau MDPA', data: [150,170,185,205,225,241], borderColor: '#0e2f58', backgroundColor: 'rgba(14,47,88,0.08)', fill: true, tension: 0.35, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#0e2f58' },
+          { label: 'Réseau Kelcare', data: [60,65,63,62,55,101], borderColor: '#03c5b8', backgroundColor: 'rgba(3,197,184,0.08)', fill: true, tension: 0.35, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#03c5b8' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 20, usePointStyle: true, pointStyle: 'circle' } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } },
+          y: { grid: { color: '#f5f5f5' }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' }, beginAtZero: true }
+        }
+      }
+    });
+
+    new Chart(document.getElementById('chartReseau'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Réseau MDPA', 'Réseau Kelcare'],
+        datasets: [{ data: [70, 30], backgroundColor: ['#0e2f58','#03c5b8'], borderWidth: 0, hoverOffset: 6 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '65%',
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 16, usePointStyle: true, pointStyle: 'circle' } } }
+      }
+    });
+
+    /* ---- WHAT-IF simulator ---- */
+    const BASE = { formation: 60, docs: 81, mix: 67, reseau: 70, intervAnnuel: 4104, panier: 487 };
+    const ctrls = ['Formation','Docs','Mix','Reseau'];
+    const baseKeys = { Formation: 'formation', Docs: 'docs', Mix: 'mix', Reseau: 'reseau' };
+
+    function fmt(n) { return n.toLocaleString('fr-FR'); }
+
+    function recomputeWhatif() {
+      const f = +document.getElementById('rngFormation').value;
+      const d = +document.getElementById('rngDocs').value;
+      const m = +document.getElementById('rngMix').value;
+      const r = +document.getElementById('rngReseau').value;
+      document.getElementById('valFormation').textContent = f + ' %';
+      document.getElementById('valDocs').textContent = d + ' %';
+      document.getElementById('valMix').textContent = m + ' %';
+      document.getElementById('valReseau').textContent = r + ' %';
+
+      const multFormation = 0.6 + (f / 100) * 0.7;
+      const multDocs = 0.7 + (d / 100) * 0.4;
+      const multMix = 0.8 + (m / 100) * 0.35;
+      const multReseau = 1 - Math.abs(r - 70) / 300;
+      const projectedInterv = Math.round(BASE.intervAnnuel * multFormation * multDocs * multMix * multReseau);
+      const projectedCa = Math.round(projectedInterv * BASE.panier);
+
+      document.getElementById('whatifInterv').textContent = fmt(projectedInterv);
+      const caM = (projectedCa / 1000000).toFixed(2).replace('.', ',');
+      document.getElementById('whatifCa').innerHTML = caM + ' M&euro;';
+      document.getElementById('whatifDossiers').textContent = (d >= 85 ? '+' : (d >= 75 ? '±' : '-')) + Math.abs(d - 81) + ' %';
+
+      const delta = projectedInterv - BASE.intervAnnuel;
+      const deltaEl = document.getElementById('whatifDelta');
+      if (delta > 50) { deltaEl.textContent = '+' + fmt(delta) + ' interventions vs ref.'; deltaEl.className = 'whatif-delta up'; }
+      else if (delta < -50) { deltaEl.textContent = fmt(delta) + ' interventions vs ref.'; deltaEl.className = 'whatif-delta down'; }
+      else { deltaEl.textContent = 'Référence actuelle'; deltaEl.className = 'whatif-delta'; }
+    }
+
+    ['rngFormation','rngDocs','rngMix','rngReseau'].forEach(id => {
+      document.getElementById(id).addEventListener('input', recomputeWhatif);
+    });
+    recomputeWhatif();
+  </script>
+
+</body>
+</html>

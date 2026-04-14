@@ -1,6 +1,7 @@
 /* ================================================
-   DATAROOM KELCARE V3 — SHARED.JS
-   Nav simplifiée : Synthèse / Déploiement / Comparative
+   DATAROOM KELCARE V4 — SHARED.JS
+   Nav : Synthèse / Déploiement / Comparative
+   + switch scope Maison mère / Agence (bas sidebar)
    ================================================ */
 
 /* ---- Lucide SVG icons ---- */
@@ -22,21 +23,35 @@ const ICONS = {
   'bar-chart':   '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8" rx="1"/><rect x="14" y="6" width="3" height="12" rx="1"/></svg>',
 };
 
-/* ---- Nav simplifiée V3 ---- */
-const NAV = [
-  { section: 'Navigation', items: [
+/* ---- Nav V4 (parent/maison mère) ---- */
+const NAV_PARENT = [
+  { section: 'Maison mère', items: [
     { id: 'synthese',    label: 'Synthèse',       href: 'synthese.html',    icon: 'grid-2x2' },
     { id: 'deploiement', label: 'Déploiement',    href: 'deploiement.html', icon: 'users' },
     { id: 'comparative', label: 'Vue comparative', href: 'comparative.html', icon: 'search' },
   ]}
 ];
 
+/* ---- Nav V4 (enfant/agence) ---- */
+const NAV_ENFANT = [
+  { section: 'Agence', items: [
+    { id: 'agence', label: 'Tableau de bord', href: 'agence.html', icon: 'grid-2x2' },
+  ]}
+];
+
+const PARENT_PAGES = new Set(['synthese', 'deploiement', 'comparative', 'artisans-detail', 'artisan-fiche']);
+const ENFANT_PAGES = new Set(['agence']);
+
 const ENTITY = { avatar: 'MP', name: 'Mutuelle de Poitiers', role: 'Parent — 20 agences' };
+const AGENCE = { code: 'LR', name: 'Agence La Rochelle', role: 'Enfant — 12 artisans' };
 
 /* ---- Build sidebar ---- */
 function buildSidebar(currentPage) {
   const aside = document.createElement('aside');
   aside.className = 'sidebar';
+
+  const isEnfant = ENFANT_PAGES.has(currentPage);
+  const nav = isEnfant ? NAV_ENFANT : NAV_PARENT;
 
   aside.innerHTML = `
     <div class="sidebar-logo">
@@ -46,7 +61,7 @@ function buildSidebar(currentPage) {
     </div>
   `;
 
-  NAV.forEach(section => {
+  nav.forEach(section => {
     const div = document.createElement('div');
     div.className = 'sidebar-section';
     div.innerHTML = `<div class="sidebar-section-title">${section.section}</div>`;
@@ -65,17 +80,28 @@ function buildSidebar(currentPage) {
     aside.appendChild(div);
   });
 
-  const entity = document.createElement('div');
-  entity.className = 'sidebar-entity';
-  entity.innerHTML = `
-    <div class="sidebar-entity-avatar"><img src="mdpa-logo.svg" alt="MDPA" style="width:22px;height:22px;"></div>
-    <div class="sidebar-entity-info">
-      <div class="sidebar-entity-name">${ENTITY.name}</div>
-      <div class="sidebar-entity-role">${ENTITY.role}</div>
-    </div>
-    ${ICONS['chevron-down']}
+  const scope = document.createElement('div');
+  scope.className = 'scope-switch';
+  scope.innerHTML = `
+    <div class="scope-switch-label">Vue en cours</div>
+    <a href="synthese.html" class="scope-switch-item${!isEnfant ? ' active' : ''}">
+      <div class="scope-switch-avatar mdpa"><img src="mdpa-logo.svg" alt="MDPA"></div>
+      <div class="scope-switch-info">
+        <div class="scope-switch-name">${ENTITY.name}</div>
+        <div class="scope-switch-role">${ENTITY.role}</div>
+      </div>
+      ${!isEnfant ? '<span class="scope-switch-dot"></span>' : ''}
+    </a>
+    <a href="agence.html" class="scope-switch-item${isEnfant ? ' active' : ''}">
+      <div class="scope-switch-avatar agence">${AGENCE.code}</div>
+      <div class="scope-switch-info">
+        <div class="scope-switch-name">${AGENCE.name}</div>
+        <div class="scope-switch-role">${AGENCE.role}</div>
+      </div>
+      ${isEnfant ? '<span class="scope-switch-dot"></span>' : ''}
+    </a>
   `;
-  aside.appendChild(entity);
+  aside.appendChild(scope);
 
   return aside;
 }
@@ -100,7 +126,7 @@ function buildTopbar(title, subtitle, opts) {
       </div>
     </div>
     <div class="topbar-right">
-      <button class="btn">${ICONS['download']} Exporter</button>
+      <button class="btn" onclick="window.print()">${ICONS['download']} Exporter PDF</button>
     </div>
   `;
 

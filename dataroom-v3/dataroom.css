@@ -660,6 +660,54 @@ a { color: inherit; text-decoration: none; }
   margin-top: var(--space-2);
 }
 
+/* Comparaison réseau (MDPA vs Kelcare) — pills colorées plus visibles */
+.kpi-versus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.kpi-versus-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--rounded-full);
+  line-height: 1.2;
+}
+
+.kpi-versus-pill::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: var(--rounded-full);
+  flex-shrink: 0;
+}
+
+.kpi-versus-pill .pill-label {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.kpi-versus-pill .pill-value {
+  font-weight: 700;
+}
+
+.kpi-versus-pill.mdpa {
+  background: color-mix(in srgb, var(--color-secondary) 12%, transparent);
+  color: var(--color-secondary);
+}
+.kpi-versus-pill.mdpa::before { background: var(--color-secondary); }
+
+.kpi-versus-pill.kelcare {
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: var(--color-primary-600);
+}
+.kpi-versus-pill.kelcare::before { background: var(--color-primary); }
+
 /* ================================================
    CARDS / PANELS
    ================================================ */
@@ -1457,39 +1505,94 @@ a { color: inherit; text-decoration: none; }
 
 .versus-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--space-2);
+  grid-template-columns: minmax(110px, auto) 1fr minmax(110px, auto);
+  gap: var(--space-5);
   align-items: center;
   padding: var(--space-3) var(--space-5);
   border-bottom: 1px solid var(--color-neutral-100);
+  transition: background-color 0.15s ease;
 }
 
+.versus-row:hover { background: var(--color-neutral-50); }
 .versus-row:last-child { border-bottom: none; }
 
 .versus-row .v-val {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
   text-align: center;
+  line-height: 1;
+  padding: 6px 14px;
+  border-radius: var(--rounded-lg);
+  white-space: nowrap;
+  display: inline-block;
 }
 
-.versus-row .v-val.left { text-align: left; }
-.versus-row .v-val.right { text-align: right; }
-.versus-row .v-val.mdpa { color: var(--color-secondary); }
-.versus-row .v-val.kelkun { color: var(--color-primary-600); }
+.versus-row .v-val.left { text-align: center; justify-self: start; }
+.versus-row .v-val.right { text-align: center; justify-self: end; }
+
+.versus-row .v-val.mdpa {
+  color: var(--color-secondary);
+  background: color-mix(in srgb, var(--color-secondary) 10%, transparent);
+}
+.versus-row .v-val.kelkun {
+  color: var(--color-primary-600);
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+
+/* Mise en avant du "gagnant" de la ligne */
+.versus-row .v-val.is-best {
+  position: relative;
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  box-shadow: 0 4px 14px -4px color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.versus-row .v-val.is-best.mdpa {
+  background: var(--color-secondary);
+  color: var(--color-white);
+}
+.versus-row .v-val.is-best.kelkun {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.versus-row .v-val.is-best::after {
+  content: "▲";
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 18px;
+  height: 18px;
+  font-size: 9px;
+  line-height: 18px;
+  text-align: center;
+  border-radius: var(--rounded-full);
+  background: var(--color-white);
+  color: inherit;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  font-weight: 700;
+}
+
+/* Le perdant garde sa pleine visibilité — c'est le gagnant qui est amplifié */
 
 .versus-row .v-label {
   text-align: center;
-  font-size: var(--font-size-md);
-  color: var(--color-neutral-600);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-500);
   font-weight: 500;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 }
 
 .versus-row .v-label small {
   display: block;
-  font-size: var(--font-size-xs);
+  font-size: 11px;
   font-weight: 400;
   color: var(--color-neutral-400);
   margin-top: 2px;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 /* ================================================

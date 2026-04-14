@@ -15,26 +15,33 @@
 
       <!-- PRINT COVER (PDF uniquement) -->
       <section class="print-cover">
-        <div class="print-cover-inner">
-          <img src="mdpa-logo.svg" alt="Mutuelle de Poitiers Assurances">
-          <h1>DataRoom Kelcare — Synthèse</h1>
-          <p>Mutuelle de Poitiers Assurances · 20 agences · Rapport du 14 avril 2026</p>
+        <div class="print-cover-kicker">Rapport confidentiel</div>
+        <img class="print-cover-logo" src="mdpa-logo.svg" alt="Mutuelle de Poitiers Assurances">
+        <div class="print-cover-tagline">Votre assureur vous connaît — et pour vous ça change tout !</div>
+        <div class="print-cover-title-block">
+          <div class="print-cover-eyebrow">DataRoom Kelcare</div>
+          <h1 class="print-cover-title">Synthèse de déploiement</h1>
+          <div class="print-cover-sub">Mutuelle de Poitiers Assurances · 20 agences</div>
+        </div>
+        <div class="print-cover-meta">
+          <div><span>Destinataire</span><strong>Monsieur Dubois · Direction Générale</strong></div>
+          <div><span>Date du rapport</span><strong id="printCoverDate">14 avril 2026</strong></div>
+          <div><span>Préparé par</span><strong>Kelcare · équipe Pilotage</strong></div>
+        </div>
+        <div class="print-cover-footer">
+          <div class="print-cover-kelcare">
+            <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#03c5b8"/><path d="M10 10h4v12h-4zM18 14h4v8h-4z" fill="#fff"/></svg>
+            <span>Kelcare · DataRoom</span>
+          </div>
         </div>
       </section>
 
       <!-- INSIGHT IA NOMINATIF -->
       <div class="ai-insight">
-        <div class="ai-insight-avatar">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        </div>
         <div class="ai-insight-body">
           <div class="ai-insight-title">Bonjour Monsieur Dubois,</div>
           <div class="ai-insight-text">vos agences <strong>Poitiers Centre</strong> et <strong>Niort</strong> tirent le réseau vers le haut (+12 % d'interventions validées). Point de vigilance : <strong>La Rochelle</strong> et <strong>Angoulême</strong> restent sous la cible réseau. Impact projeté si alignement : <strong>+48 interventions / mois</strong>.</div>
         </div>
-        <button class="btn btn-primary" onclick="window.print()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Export PDF
-        </button>
       </div>
 
       <!-- HERO BANNER -->

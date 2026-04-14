@@ -126,7 +126,7 @@ function buildTopbar(title, subtitle, opts) {
       </div>
     </div>
     <div class="topbar-right">
-      <button class="btn" onclick="window.print()">${ICONS['download']} Exporter PDF</button>
+      <button class="btn" onclick="exportPdf()">${ICONS['download']} Exporter PDF</button>
     </div>
   `;
 
@@ -277,4 +277,41 @@ function animateCounters() {
 /* ---- Utilities ---- */
 function formatFr(n) {
   return n.toLocaleString('fr-FR');
+}
+
+/* ---- Export PDF (filename MDPA + date) ---- */
+function exportPdf() {
+  const page = document.body.dataset.page || 'synthese';
+  const pageLabel = {
+    synthese: 'synthese',
+    agence: 'agence-la-rochelle',
+    deploiement: 'deploiement',
+    comparative: 'comparative'
+  }[page] || page;
+
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  const stamp = `${yyyy}-${mm}-${dd}`;
+
+  const filename = `mutuelle-de-poitiers-kelcare-${pageLabel}-${stamp}`;
+
+  // Update print cover date if present
+  const coverDate = document.getElementById('printCoverDate');
+  if (coverDate) {
+    const dateLabel = d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    coverDate.textContent = dateLabel;
+  }
+
+  const originalTitle = document.title;
+  document.title = filename;
+
+  const afterPrint = () => {
+    document.title = originalTitle;
+    window.removeEventListener('afterprint', afterPrint);
+  };
+  window.addEventListener('afterprint', afterPrint);
+
+  setTimeout(() => window.print(), 50);
 }

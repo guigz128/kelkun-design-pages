@@ -49,11 +49,7 @@ body{margin:0;padding:0;width:100%!important;background-color:#f5f5f5}
 <div style="background-color:#fafafa;border-radius:12px;padding:24px;">
 <p style="font-size:12px;font-weight:600;color:#a3a3a3;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 16px 0;">Facture en attente</p>
 <div style="font-size:14px;color:#737373;padding:12px 0;border-bottom:1px solid #e5e5e5;">Référence <span style="float:right;font-weight:600;color:#0e2f58;">{{ params.reference_mission }}</span></div>
-<div style="font-size:14px;color:#737373;padding:12px 0;border-bottom:1px solid #e5e5e5;">Artisan <span style="float:right;font-weight:600;color:#0e2f58;">{{ params.nom_artisan }}</span></div>
-<div style="font-size:14px;color:#737373;padding:12px 0;border-bottom:1px solid #e5e5e5;">Métier <span style="float:right;font-weight:600;color:#0e2f58;">{{ params.metier }}</span></div>
-<div style="font-size:14px;color:#737373;padding:12px 0;border-bottom:1px solid #e5e5e5;">Date d'intervention <span style="float:right;font-weight:600;color:#0e2f58;">{{ params.date_intervention }}</span></div>
-<div style="font-size:14px;color:#737373;padding:12px 0;border-bottom:1px solid #e5e5e5;">En attente depuis <span style="float:right;font-weight:600;color:#d97706;">{{ params.jours_retard }} jours</span></div>
-<div style="font-size:15px;color:#0e2f58;font-weight:700;padding:16px 0 4px 0;">Montant à régler <span style="float:right;font-size:20px;font-weight:700;color:#d97706;">{{ params.montant }}</span></div>
+<div style="font-size:15px;color:#0e2f58;font-weight:700;padding:16px 0 4px 0;">Montant à régler TTC <span style="float:right;font-size:20px;font-weight:700;color:#d97706;">{{ params.montant }}</span></div>
 </div>
 </div>
 </td></tr>
@@ -76,7 +72,7 @@ body{margin:0;padding:0;width:100%!important;background-color:#f5f5f5}
 <!-- INFO PAIEMENT DEJA EFFECTUE -->
 <tr><td>
 <div style="padding:24px 20px 8px 20px;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-<div style="background-color:#fff5c6;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;color:#0e2f58;line-height:1.6;"><strong>Déjà payé ?</strong> Si vous avez déjà réglé cette facture directement auprès de l'artisan ou par un autre moyen, merci de ne pas tenir compte de ce message. Nos relances s'arrêteront dès réception du paiement.</div>
+<div style="background-color:#fff5c6;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;color:#0e2f58;line-height:1.6;"><strong>Déjà payé via Kelkun ?</strong> Si vous avez déjà réglé cette facture via notre plateforme, merci de ne pas tenir compte de ce message. Nos relances s'arrêteront automatiquement dès la confirmation du paiement.</div>
 </div>
 </div>
 </td></tr>

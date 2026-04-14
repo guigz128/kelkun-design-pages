@@ -89,9 +89,18 @@ function buildTopbar(title, subtitle, isEnfant) {
   const header = document.createElement('header');
   header.className = 'topbar';
 
-  const levelBadge = isEnfant
-    ? `<span class="badge-level enfant">${ICONS['user']} Enfant</span>`
-    : `<span class="badge-level parent">${ICONS['user']} Parent</span>`;
+  const parentActive = isEnfant ? '' : ' active';
+  const enfantActive = isEnfant ? ' active' : '';
+  const levelToggle = `
+    <div class="level-toggle">
+      <button class="level-toggle-btn${parentActive}" onclick="window.location.href='synthese.html'">
+        ${ICONS['user']} Parent
+      </button>
+      <button class="level-toggle-btn${enfantActive}" onclick="window.location.href='enfant.html'">
+        ${ICONS['user']} Enfant
+      </button>
+    </div>
+  `;
 
   header.innerHTML = `
     <div class="topbar-left">
@@ -99,7 +108,7 @@ function buildTopbar(title, subtitle, isEnfant) {
       <div class="topbar-subtitle">${subtitle}</div>
     </div>
     <div class="topbar-right">
-      ${levelBadge}
+      ${levelToggle}
       <button class="btn">${ICONS['download']} Exporter</button>
     </div>
   `;

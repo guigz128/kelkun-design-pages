@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rappel — Facture Kelkun en attente de paiement</title>
+<!--
+  EMAIL : 07 — Lien de paiement (rappel hebdomadaire)
+  TRIGGER : Tous les lundis tant que la facture n'est pas réglée
+  DESTINATAIRE : Le client
+
+  VARIABLES BREVO (params) :
+  - params.prenom              → Prénom du client
+  - params.nom_artisan         → Nom de l'entreprise artisan
+  - params.metier              → Métier principal de l'artisan
+  - params.reference_mission   → Référence / numéro de la mission
+  - params.date_intervention   → Date de l'intervention
+  - params.montant             → Montant TTC à régler (ex : "245,00 €")
+  - params.jours_retard        → Nombre de jours depuis l'émission de la facture
+  - params.lien_paiement       → Lien de paiement sécurisé
+-->
+<style type="text/css">
+body,table,td,a{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+table,td{border-collapse:collapse;border-spacing:0}
+img{-ms-interpolation-mode:bicubic;border:0;height:auto;line-height:100%;outline:none;text-decoration:none}
+body{margin:0;padding:0;width:100%!important;background-color:#f5f5f5}
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:#f5f5f5;">
+<center>
+<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f5f5f5;">
+<tr><td style="padding:32px 16px;">
+<table role="presentation" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06);">
+
+<!-- HEADER -->
+<tr><td>
+<div style="background:linear-gradient(135deg,#f59e0b 0%,#d97706 100%);background-color:#f59e0b;padding:40px;text-align:center;border-radius:16px 16px 0 0;">
+<div style="text-align:center;padding-bottom:20px;"><img src="https://img.mailinblue.com/7795295/images/content_library/original/69bd5c912a1c09c41f6b19c1.png" width="160" height="59" alt="Kelkun" style="display:inline-block;"></div>
+<div style="font-size:24px;font-weight:700;color:#ffffff;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Facture en attente de paiement</div>
+</div>
+</td></tr>
+
+<!-- CONTENT -->
+<tr><td>
+<div style="padding:24px 20px 0 20px;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><p style="font-size:14px;color:#737373;margin:0 0 8px 0;">Bonjour {{ params.prenom }},</p>
+<h2 style="font-size:24px;font-weight:700;color:#0e2f58;margin:0 0 24px 0;line-height:1.2;">Un petit rappel pour votre facture</h2>
+<p style="font-size:16px;line-height:1.75;color:#525252;margin:0 0 16px 0;">Nous n'avons pas encore reçu le règlement de votre facture concernant l'intervention réalisée par <strong style="color:#0e2f58;">{{ params.nom_artisan }}</strong>.</p>
+<p style="font-size:16px;line-height:1.75;color:#525252;margin:0 0 24px 0;">Vous pouvez la régler en quelques secondes via le lien de paiement sécurisé ci-dessous.</p>
+<div style="background-color:#fafafa;border-radius:12px;padding:24px;">
+<p style="font-size:12px;font-weight:600;color:#a3a3a3;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 16px 0;">Facture en attente</p>
+<div style="font-size:14px;color:#737373;padding:12px 0;border-bottom:1px solid #e5e5e5;">Référence <span style="float:right;font-weight:600;color:#0e2f58;">{{ params.reference_mission }}</span></div>
+<div style="font-size:14px;color:#737373;padding:12px 0;border-bottom:1px solid #e5e5e5;">Artisan <span style="float:right;font-weight:600;color:#0e2f58;">{{ params.nom_artisan }}</span></div>
+<div style="font-size:14px;color:#737373;padding:12px 0;border-bottom:1px solid #e5e5e5;">Métier <span style="float:right;font-weight:600;color:#0e2f58;">{{ params.metier }}</span></div>
+<div style="font-size:14px;color:#737373;padding:12px 0;border-bottom:1px solid #e5e5e5;">Date d'intervention <span style="float:right;font-weight:600;color:#0e2f58;">{{ params.date_intervention }}</span></div>
+<div style="font-size:14px;color:#737373;padding:12px 0;border-bottom:1px solid #e5e5e5;">En attente depuis <span style="float:right;font-weight:600;color:#d97706;">{{ params.jours_retard }} jours</span></div>
+<div style="font-size:15px;color:#0e2f58;font-weight:700;padding:16px 0 4px 0;">Montant à régler <span style="float:right;font-size:20px;font-weight:700;color:#d97706;">{{ params.montant }}</span></div>
+</div>
+</div>
+</td></tr>
+
+<!-- CTA -->
+<tr><td>
+<div style="text-align:center;padding:28px 40px 8px 40px;">
+<a href="{{ params.lien_paiement }}" style="display:inline-block;background:linear-gradient(135deg,#03c5b8 0%,#029284 100%);background-color:#029284;color:#ffffff;font-size:15px;font-weight:700;text-decoration:none;padding:16px 36px;border-radius:8px;text-align:center;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Régler ma facture maintenant →</a>
+</div>
+<div style="text-align:center;padding:0 40px 24px 40px;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+<p style="font-size:12px;color:#a3a3a3;margin:0;">Paiement sécurisé — CB, Apple Pay, Google Pay</p>
+</div>
+</td></tr>
+
+<!-- DIVIDER -->
+<tr><td>
+<div style="height:1px;background-color:#e5e5e5;margin:0 40px;"></div>
+</td></tr>
+
+<!-- INFO PAIEMENT DEJA EFFECTUE -->
+<tr><td>
+<div style="padding:24px 20px 8px 20px;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+<div style="background-color:#fff5c6;border-radius:10px;padding:14px 16px;"><div style="font-size:13px;color:#0e2f58;line-height:1.6;"><strong>Déjà payé ?</strong> Si vous avez déjà réglé cette facture directement auprès de l'artisan ou par un autre moyen, merci de ne pas tenir compte de ce message. Nos relances s'arrêteront dès réception du paiement.</div>
+</div>
+</div>
+</td></tr>
+
+<!-- REASSURANCE -->
+<tr><td>
+<div style="padding:16px 20px 24px 20px;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+<div style="background-color:#f1fefc;border:1.5px solid #d5fbf6;border-radius:12px;padding:20px;">
+<div style="font-size:14px;font-weight:600;color:#0e2f58;margin:0 0 12px 0;">Un souci avec votre facture ?</div>
+<div style="font-size:13px;color:#525252;line-height:1.6;margin-bottom:12px;">Un désaccord sur la prestation, une question sur le montant ou un délai nécessaire ? Notre équipe est là pour vous accompagner.</div>
+<div style="font-size:13px;color:#525252;line-height:1.6;">
+<span style="color:#029284;font-weight:600;">&rarr;</span>&nbsp; <a href="mailto:support@kelkun.app" style="color:#029284;font-weight:600;text-decoration:underline;">Contactez notre support</a>
+</div>
+</div>
+</div>
+</td></tr>
+
+<!-- FOOTER -->
+<tr><td>
+<div style="background-color:#fafafa;padding:24px 20px;text-align:center;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;border-radius:0 0 16px 16px;">
+<p style="font-size:13px;color:#525252;margin:0 0 12px 0;">Une question ? <a href="mailto:support@kelkun.app" style="color:#029284;font-weight:600;text-decoration:underline;">Contactez notre support</a></p>
+<p style="font-size:11px;color:#a3a3a3;margin:0 0 4px 0;line-height:1.6;">Kelkun &nbsp; 370 rue du Trident &nbsp; 34740 Vendargues &nbsp; Occitanie – France</p>
+<p style="font-size:11px;margin:0;"><a href="mailto:support@kelkun.app" style="color:#a3a3a3;text-decoration:none;">support@kelkun.app</a></p>
+</div>
+</td></tr>
+
+</table>
+</td></tr>
+</table>
+</center>
+</body>
+</html>

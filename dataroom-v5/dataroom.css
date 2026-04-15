@@ -2722,6 +2722,15 @@ a { color: inherit; text-decoration: none; }
 .vs-average.worse { color: var(--color-error-600); }
 .vs-average.equal { color: var(--color-neutral-500); }
 
+.axis-vs {
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 4px;
+}
+.axis-vs.better { color: var(--color-success-600); }
+.axis-vs.worse { color: var(--color-warning-600, #c27b30); }
+.axis-vs.equal { color: var(--color-neutral-500); }
+
 .vs-average svg { width: 12px; height: 12px; }
 
 /* ================================================

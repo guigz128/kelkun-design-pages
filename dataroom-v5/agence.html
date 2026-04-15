@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataRoom Kelcare V5 — Agence La Rochelle</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="dataroom.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="agence" data-title="Agence La Rochelle" data-subtitle="Tableau de bord agence — Vue enfant scopée">
+
+  <div class="main">
+    <main class="content">
+
+      <!-- INSIGHT NOMINATIF -->
+      <div class="ai-insight">
+        <div class="ai-insight-body">
+          <div class="ai-insight-title">Bonjour Madame Lefèvre,</div>
+          <div class="ai-insight-text">votre agence <strong>La Rochelle</strong> est sur la pente ascendante : <strong>+6 points</strong> de certification ce mois. Priorité n° 1 : <strong>3 dossiers expirés</strong> à renouveler avant fin avril. Priorité n° 2 : relancer les <strong>4 artisans non certifiés</strong> pour atteindre la cible réseau de 80 %.</div>
+        </div>
+      </div>
+
+      <!-- HERO AGENCE -->
+      <div class="hero-banner">
+        <div class="hero-score-ring" data-score="68">
+          <svg viewBox="0 0 108 108" width="120" height="120">
+            <circle class="ring-bg" cx="54" cy="54" r="50"/>
+            <circle class="ring-fill" cx="54" cy="54" r="50"/>
+          </svg>
+          <div class="ring-center">
+            <div class="ring-value">68</div>
+            <div class="ring-max">/100</div>
+          </div>
+        </div>
+        <div class="hero-info">
+          <div class="hero-title">Score de santé — Agence La Rochelle</div>
+          <div class="hero-insight">Score inférieur à la moyenne réseau (74 /100). Gains possibles : documents (58 vs 78 moy.) et certification (68 vs 78 moy.).</div>
+          <div class="hero-axes">
+            <div class="hero-axis-badge"><span class="dot orange"></span> Formation 68</div>
+            <div class="hero-axis-badge"><span class="dot red"></span> Documents 58</div>
+            <div class="hero-axis-badge"><span class="dot green"></span> Attribution 76</div>
+            <div class="hero-axis-badge" style="margin-left:auto;">+6 pts vs période préc.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTRES scopés agence -->
+      <div class="filters-bar">
+        <div class="filter-group">
+          <span class="filter-label">Période</span>
+          <select class="filter-select">
+            <option>Ce mois</option><option>Ce trimestre</option><option>Cette année</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Métier</span>
+          <select class="filter-select">
+            <option>Tous</option><option>Plomberie</option><option>Électricité</option><option>Menuiserie</option><option>Serrurerie</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Réseau</span>
+          <select class="filter-select">
+            <option>Tous</option><option>Réseau MDPA</option><option>Réseau Kelkun</option>
+          </select>
+        </div>
+        <div class="filters-spacer"></div>
+        <span class="badge primary">Agence · 12 artisans</span>
+      </div>
+
+      <!-- KPI HÉROS -->
+      <div class="kpi-grid cols-2" style="margin-bottom: var(--space-4);">
+        <div class="kpi-card hero">
+          <div class="kpi-header">
+            <div class="kpi-icon primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="kpi-trend up">+2</span>
+          </div>
+          <div class="kpi-value">8</div>
+          <div class="kpi-label">Artisans formés Kelcare</div>
+          <div class="kpi-sub">sur 12 enregistrés (9 MDPA · 3 Kelcare) — 67 % formés</div>
+          <div class="vs-average worse">↓ 7 pts vs moyenne réseau (74 %)</div>
+        </div>
+
+        <div class="kpi-card hero">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="kpi-trend up">+14 %</span>
+          </div>
+          <div class="kpi-value">24</div>
+          <div class="kpi-label">Interventions Kelcare ce mois</div>
+          <div class="kpi-versus">
+            <span class="kpi-versus-pill mdpa"><span class="pill-label">MDPA</span><span class="pill-value">17 (71 %)</span></span>
+            <span class="kpi-versus-pill kelcare"><span class="pill-label">Kelkun</span><span class="pill-value">7 (29 %)</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI secondaires -->
+      <div class="kpi-grid cols-3">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+            </div>
+            <span class="kpi-trend down">-2 pts</span>
+          </div>
+          <div class="kpi-value">58<span class="unit">%</span></div>
+          <div class="kpi-label">Documents vérifiés</div>
+          <div class="kpi-sub">7 vérifiés · 2 non vérifiés · 3 expirés</div>
+          <div class="vs-average worse">↓ 23 pts vs moyenne réseau (81 %)</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="kpi-trend up">-10 %</span>
+          </div>
+          <div class="kpi-value">2,1<span class="unit">j</span></div>
+          <div class="kpi-label">Délai moyen d'attribution</div>
+          <div class="vs-average better">↑ 0,3 j vs moyenne réseau (2,4 j)</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+            </div>
+            <span class="kpi-trend up">+3 %</span>
+          </div>
+          <div class="kpi-value">512<span class="unit">&euro;</span></div>
+          <div class="kpi-label">Panier moyen validé</div>
+          <div class="vs-average better">↑ 25 € vs moyenne réseau (487 €)</div>
+        </div>
+      </div>
+
+      <!-- ALERTES + ARTISANS -->
+      <div class="grid-2-1" style="margin-top: var(--space-5);">
+
+        <!-- Artisans actifs -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Artisans de l'agence</div>
+              <div class="card-subtitle">12 artisans · tri par interventions ce mois</div>
+            </div>
+            <a href="artisans-detail.html" class="see-details">Liste complète →</a>
+          </div>
+          <div class="card-body flush">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Artisan</th>
+                  <th>Métier</th>
+                  <th>Ajouté par</th>
+                  <th>Formation</th>
+                  <th>Documents</th>
+                  <th class="text-right">Interv.</th>
+                  <th class="text-right">Panier moyen</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="artisan-fiche.html" class="ref-link">Bernard Sébastien</a></td>
+                  <td>Plomberie</td>
+                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
+                  <td><span class="doc-status expired"><span class="doc-status-dot"></span>Non vérifié</span></td>
+                  <td class="text-right cell-value">9</td>
+                  <td class="text-right">518 &euro;</td>
+                </tr>
+                <tr>
+                  <td class="ref-link">Morel Christophe</td>
+                  <td>Électricité</td>
+                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Vérifié</span></td>
+                  <td class="text-right cell-value">7</td>
+                  <td class="text-right">445 &euro;</td>
+                </tr>
+                <tr>
+                  <td class="ref-link">Fontaine Julien</td>
+                  <td>Menuiserie</td>
+                  <td><span class="badge accent">Kelkun</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Vérifié</span></td>
+                  <td class="text-right cell-value">4</td>
+                  <td class="text-right">680 &euro;</td>
+                </tr>
+                <tr>
+                  <td class="ref-link">Rivière Pascale</td>
+                  <td>Serrurerie</td>
+                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
+                  <td><span class="doc-status valid"><span class="doc-status-dot"></span>Vérifié</span></td>
+                  <td class="text-right cell-value">3</td>
+                  <td class="text-right">295 &euro;</td>
+                </tr>
+                <tr>
+                  <td class="ref-link">Chauvet Marc</td>
+                  <td>Plomberie</td>
+                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="doc-status missing"><span class="doc-status-dot"></span>Non formé</span></td>
+                  <td><span class="doc-status incomplete"><span class="doc-status-dot"></span>Non vérifié</span></td>
+                  <td class="text-right cell-value">1</td>
+                  <td class="text-right">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Actions prioritaires -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Actions prioritaires</div>
+              <div class="card-subtitle">Recommandées par l'équipe Kelcare</div>
+            </div>
+          </div>
+          <div class="card-body" style="display:flex; flex-direction:column; gap: var(--space-3);">
+            <div class="action-item">
+              <div class="action-item-icon warning">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <div class="action-item-body">
+                <div class="action-item-title">3 décennales expirées</div>
+                <div class="action-item-desc">Bernard S., Leclerc P., Dumas J.</div>
+              </div>
+              <a href="#" class="action-item-link">Relancer</a>
+            </div>
+
+            <div class="action-item">
+              <div class="action-item-icon info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 8 3 12 0v-5"/></svg>
+              </div>
+              <div class="action-item-body">
+                <div class="action-item-title">4 artisans non certifiés</div>
+                <div class="action-item-desc">Session formation Kelcare le 22/04</div>
+              </div>
+              <a href="#" class="action-item-link">Inscrire</a>
+            </div>
+
+            <div class="action-item">
+              <div class="action-item-icon success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="action-item-body">
+                <div class="action-item-title">Mix MDPA 71 % · cible 60 %</div>
+                <div class="action-item-desc">Bonne diversification du réseau</div>
+              </div>
+              <span class="badge success">OK</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHART évolution agence -->
+      <div class="grid-2" style="margin-top: var(--space-5);">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Évolution La Rochelle vs réseau</div><div class="card-subtitle">Interventions — 6 derniers mois</div></div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartEvolution"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Répartition métiers</div><div class="card-subtitle">Interventions du mois</div></div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartMetiers"></canvas></div></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    setTimeout(() => {
+      const fill = document.querySelector('.ring-fill');
+      if (fill) fill.style.strokeDashoffset = 314 - (314 * 68 / 100);
+    }, 300);
+
+    new Chart(document.getElementById('chartEvolution'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'Déc.', 'Janv.', 'Fév.', 'Mars', 'Avr.'],
+        datasets: [
+          { label: 'La Rochelle', data: [14,16,17,19,21,24], borderColor: '#6778ed', backgroundColor: 'rgba(103,120,237,0.1)', fill: true, tension: 0.35, borderWidth: 2, pointRadius: 3 },
+          { label: 'Moyenne réseau', data: [15,17,18,19,20,22], borderColor: '#a3a3a3', backgroundColor: 'transparent', fill: false, tension: 0.35, borderWidth: 2, borderDash: [4,4], pointRadius: 2 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 20, usePointStyle: true, pointStyle: 'circle' } } },
+        scales: { x: { grid: { display: false }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' } }, y: { grid: { color: '#f5f5f5' }, ticks: { font: { family: 'Poppins', size: 11 }, color: '#a3a3a3' }, beginAtZero: true } }
+      }
+    });
+
+    new Chart(document.getElementById('chartMetiers'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Plomberie', 'Électricité', 'Menuiserie', 'Serrurerie'],
+        datasets: [{ data: [10, 7, 4, 3], backgroundColor: ['#03c5b8','#0e2f58','#6778ed','#ffc114'], borderWidth: 0, hoverOffset: 6 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, cutout: '65%',
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: 'Poppins', size: 12 }, padding: 16, usePointStyle: true, pointStyle: 'circle' } } }
+      }
+    });
+  </script>
+
+</body>
+</html>

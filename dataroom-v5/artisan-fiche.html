@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataRoom Kelcare V5 — Fiche artisan</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="dataroom.css">
+</head>
+<body data-page="deploiement" data-title="Fiche artisan" data-subtitle="Détail complet — Certification et documents">
+
+  <div class="main">
+    <main class="content">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="synthese.html">DataRoom</a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <a href="deploiement.html">Déploiement</a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <a href="artisans-detail.html">Liste des artisans</a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <span class="current">Bernard S.</span>
+      </nav>
+
+      <!-- Header artisan -->
+      <div class="card" style="margin-bottom: var(--space-4);">
+        <div class="card-body" style="padding: var(--space-5); display: flex; align-items: center; gap: var(--space-5);">
+          <div style="width:72px; height:72px; border-radius: var(--rounded-full); background: var(--color-primary-25); color: var(--color-primary-600); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 28px; flex-shrink: 0;">BS</div>
+          <div style="flex: 1;">
+            <div style="font-size: var(--font-size-2xl); font-weight: 700; margin-bottom: 4px;">Bernard Sébastien</div>
+            <div style="display: flex; gap: var(--space-4); align-items: center; color: var(--color-neutral-500); font-size: var(--font-size-base);">
+              <span style="display: inline-flex; align-items: center; gap: 6px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8" rx="1"/><rect x="14" y="6" width="3" height="12" rx="1"/></svg>
+                Plomberie
+              </span>
+              <span>·</span>
+              <span>Agence <strong style="color: var(--color-secondary);">La Rochelle</strong></span>
+              <span>·</span>
+              <span class="badge primary">Ajouté par MDPA</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: var(--font-size-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-neutral-500); font-weight: 600; width: 96px; text-align: right;">Formation</span>
+              <span class="doc-status valid"><span class="doc-status-dot"></span>Formé · 12/03/2026</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: var(--font-size-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-neutral-500); font-weight: 600; width: 96px; text-align: right;">Documents</span>
+              <span class="doc-status expired"><span class="doc-status-dot"></span>Non vérifié · 1 doc expiré</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI artisan -->
+      <div class="kpi-grid cols-4" style="margin-bottom: var(--space-5);">
+        <div class="kpi-card">
+          <div class="kpi-value">9</div>
+          <div class="kpi-label">Interventions ce mois</div>
+          <div class="kpi-sub">vs. 7 période préc.</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-value">518<span class="unit">&euro;</span></div>
+          <div class="kpi-label">Panier moyen validé</div>
+          <div class="kpi-sub">au-dessus de la moyenne agence</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-value">2,3<span class="unit">j</span></div>
+          <div class="kpi-label">Temps moyen d'attribution</div>
+          <div class="kpi-sub">moyenne agence : 2,1j</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-value">94<span class="unit">%</span></div>
+          <div class="kpi-label">Taux de validation devis</div>
+          <div class="kpi-sub">48 devis / 51 soumis</div>
+        </div>
+      </div>
+
+      <!-- Documents -->
+      <div class="card" style="margin-bottom: var(--space-4);">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Documents administratifs</div>
+            <div class="card-subtitle">5 documents requis pour valider le dossier</div>
+          </div>
+          <span class="doc-status expired"><span class="doc-status-dot"></span>1 document expiré</span>
+        </div>
+        <div class="card-body">
+          <!-- Document 1 : Kbis -->
+          <div class="doc-card valid">
+            <div class="doc-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+            </div>
+            <div class="doc-card-info">
+              <div class="doc-card-title">Kbis ou Avis de Situation au Répertoire SIRENE (-3 mois)</div>
+              <div class="doc-card-meta">
+                <span>Importé le <strong>13/04/2026 à 08:11</strong></span>
+                <span>Expire le <strong>15/06/2026</strong></span>
+                <span>Vérifié par <strong>Leana Durakovic</strong> le 13/04/2026 à 14:50</span>
+              </div>
+            </div>
+            <span class="doc-status valid"><span class="doc-status-dot"></span>Valide</span>
+          </div>
+
+          <!-- Document 2 : Décennale -->
+          <div class="doc-card expired">
+            <div class="doc-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            </div>
+            <div class="doc-card-info">
+              <div class="doc-card-title">Attestation d'assurance décennale</div>
+              <div class="doc-card-meta">
+                <span>Importé le <strong>15/01/2025 à 10:22</strong></span>
+                <span style="color: var(--color-error-600);">Expiré le <strong>01/04/2026</strong></span>
+                <span>Vérifié par <strong>Leana Durakovic</strong></span>
+              </div>
+            </div>
+            <span class="doc-status expired"><span class="doc-status-dot"></span>Expiré — à renouveler</span>
+          </div>
+
+          <!-- Document 3 : RCP -->
+          <div class="doc-card valid">
+            <div class="doc-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+            </div>
+            <div class="doc-card-info">
+              <div class="doc-card-title">Attestation d'assurance RCP</div>
+              <div class="doc-card-meta">
+                <span>Importé le <strong>13/04/2026 à 08:11</strong></span>
+                <span>Expire le <strong>01/01/2027</strong></span>
+                <span>Vérifié par <strong>Leana Durakovic</strong> le 13/04/2026 à 15:06</span>
+              </div>
+            </div>
+            <span class="doc-status valid"><span class="doc-status-dot"></span>Valide</span>
+          </div>
+
+          <!-- Document 4 : CNI recto -->
+          <div class="doc-card valid">
+            <div class="doc-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="9" cy="12" r="2"/><line x1="14" y1="10" x2="19" y2="10"/><line x1="14" y1="14" x2="17" y2="14"/></svg>
+            </div>
+            <div class="doc-card-info">
+              <div class="doc-card-title">Recto carte d'identité / passeport en cours de validité</div>
+              <div class="doc-card-meta">
+                <span>Importé le <strong>13/04/2026 à 08:13</strong></span>
+                <span>Expire le <strong>30/05/2033</strong></span>
+                <span>Vérifié par <strong>Leana Durakovic</strong> le 13/04/2026 à 14:51</span>
+              </div>
+            </div>
+            <span class="doc-status valid"><span class="doc-status-dot"></span>Valide</span>
+          </div>
+
+          <!-- Document 5 : CNI verso -->
+          <div class="doc-card valid">
+            <div class="doc-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 10h12M6 14h8"/></svg>
+            </div>
+            <div class="doc-card-info">
+              <div class="doc-card-title">Verso carte d'identité / passeport en cours de validité</div>
+              <div class="doc-card-meta">
+                <span>Importé le <strong>13/04/2026 à 08:13</strong></span>
+                <span>Expire le <strong>30/05/2033</strong></span>
+                <span>Vérifié par <strong>Leana Durakovic</strong> le 13/04/2026 à 14:51</span>
+              </div>
+            </div>
+            <span class="doc-status valid"><span class="doc-status-dot"></span>Valide</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Historique interventions -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">5 dernières interventions</div>
+            <div class="card-subtitle">Historique complet sur la plateforme</div>
+          </div>
+        </div>
+        <div class="card-body flush">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Réf.</th>
+                <th>Type</th>
+                <th>Client</th>
+                <th class="text-right">Montant</th>
+                <th>Statut</th>
+                <th class="text-right">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ref-link">INT-8421</td>
+                <td>Fuite canalisation</td>
+                <td>M. Dubois</td>
+                <td class="text-right cell-value">548 &euro;</td>
+                <td><span class="badge success">Validé</span></td>
+                <td class="text-right">10/04/2026</td>
+              </tr>
+              <tr>
+                <td class="ref-link">INT-8389</td>
+                <td>Remplacement chauffe-eau</td>
+                <td>Mme Lambert</td>
+                <td class="text-right cell-value">1 240 &euro;</td>
+                <td><span class="badge success">Validé</span></td>
+                <td class="text-right">07/04/2026</td>
+              </tr>
+              <tr>
+                <td class="ref-link">INT-8356</td>
+                <td>Débouchage</td>
+                <td>M. Renard</td>
+                <td class="text-right cell-value">380 &euro;</td>
+                <td><span class="badge success">Validé</span></td>
+                <td class="text-right">04/04/2026</td>
+              </tr>
+              <tr>
+                <td class="ref-link">INT-8321</td>
+                <td>Réparation robinetterie</td>
+                <td>M. et Mme Girard</td>
+                <td class="text-right cell-value">215 &euro;</td>
+                <td><span class="badge success">Validé</span></td>
+                <td class="text-right">01/04/2026</td>
+              </tr>
+              <tr>
+                <td class="ref-link">INT-8294</td>
+                <td>Fuite évier</td>
+                <td>Mme Blanchard</td>
+                <td class="text-right cell-value">165 &euro;</td>
+                <td><span class="badge warning">En attente</span></td>
+                <td class="text-right">28/03/2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="shared.js"></script>
+</body>
+</html>

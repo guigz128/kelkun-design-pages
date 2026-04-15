@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataRoom Kelcare V5 — Déploiement</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="dataroom.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="deploiement" data-title="Déploiement" data-subtitle="Formation, documents, attribution et utilisation Kelcare">
+
+  <div class="main">
+    <main class="content" data-axis="deploy">
+
+      <!-- Résumé axe -->
+      <div class="axis-summary">
+        <div class="axis-summary-icon" style="background:var(--color-primary-25);color:var(--color-primary-600);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="axis-summary-text">
+          <div class="axis-summary-title">Déploiement</div>
+          <div class="axis-summary-insight">184 artisans formés Kelcare sur 308 (60 %), dont 212 ajoutés par MDPA et 96 par Kelkun. Documents vérifiés : 81 %. Réseau MDPA traite 70 % des interventions, Réseau Kelkun 30 %. Point d'attention : La Rochelle — formation basse et 12 dossiers non vérifiés.</div>
+        </div>
+      </div>
+
+      <!-- Filtres -->
+      <div class="filters-bar" id="filtersBar"></div>
+
+      <!-- Sommaire -->
+      <div class="page-toc">
+        <a href="#section-certif">Formation</a>
+        <a href="#section-docs">Documents</a>
+        <a href="#section-attrib">Attribution</a>
+        <a href="#section-usage">Utilisation Kelcare</a>
+      </div>
+
+      <!-- ====================================
+           SECTION 1 — CERTIFICATION
+           ==================================== -->
+      <section class="section-card" id="section-certif">
+        <div class="section-card-header">
+          <div class="section-card-header-left">
+            <div class="section-card-header-icon" style="background:var(--color-primary-25);color:var(--color-primary-600);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 8 3 12 0v-5"/></svg>
+            </div>
+            <h2>Formation des artisans</h2>
+          </div>
+          <a href="artisans-detail.html?filter=certification" class="see-details">Voir tous les artisans →</a>
+        </div>
+
+        <div class="kpi-grid cols-4">
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-icon primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <span class="kpi-trend up">+18</span>
+            </div>
+            <div class="kpi-value">308</div>
+            <div class="kpi-label">Artisans enregistrés</div>
+            <div class="kpi-sub">212 ajoutés par MDPA · 96 par Kelcare</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-icon success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <span class="kpi-trend up">+12</span>
+            </div>
+            <div class="kpi-value">184</div>
+            <div class="kpi-label">Artisans formés</div>
+            <div class="kpi-sub">validation manuelle par un admin Kelcare</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-icon info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 11V7a3 3 0 0 1 6 0v4"/><rect x="9" y="11" width="6" height="6" rx="1"/></svg>
+              </div>
+              <span class="kpi-trend up">+3 pts</span>
+            </div>
+            <div class="kpi-value">60<span class="unit">%</span></div>
+            <div class="kpi-label">Taux de formation</div>
+            <div class="kpi-sub">184 / 308 artisans</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-icon warning">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <span class="kpi-trend down">-6</span>
+            </div>
+            <div class="kpi-value">124</div>
+            <div class="kpi-label">Artisans non formés</div>
+            <div class="kpi-sub">ne peuvent pas prendre d'interventions Kelcare</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: var(--space-4);">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Taux de formation par agence</div>
+              <div class="card-subtitle">Top 10 des 20 agences — cible 80 %</div>
+            </div>
+            <a href="artisans-detail.html" class="see-details">Voir toutes les agences →</a>
+          </div>
+          <div class="card-body">
+            <div class="chart-wrap lg">
+              <canvas id="chartCertifAgence"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================
+           SECTION 2 — DOCUMENTS
+           ==================================== -->
+      <section class="section-card" id="section-docs" style="margin-top: var(--space-12);">
+        <div class="section-card-header">
+          <div class="section-card-header-left">
+            <div class="section-card-header-icon" style="background:var(--color-success-50);color:var(--color-success-600);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+            </div>
+            <h2>Validation des documents</h2>
+          </div>
+          <a href="artisans-detail.html?filter=documents" class="see-details">Voir tous les artisans →</a>
+        </div>
+
+        <div class="kpi-grid cols-4">
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-icon success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+              </div>
+              <span class="kpi-trend up">+4 pts</span>
+            </div>
+            <div class="kpi-value">81<span class="unit">%</span></div>
+            <div class="kpi-label">Documents vérifiés</div>
+            <div class="kpi-sub">149 artisans sur 184 formés</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-icon warning">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+              </div>
+              <span class="kpi-trend down">-3</span>
+            </div>
+            <div class="kpi-value">28</div>
+            <div class="kpi-label">Dossiers incomplets</div>
+            <div class="kpi-sub">au moins un document manquant</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-icon error">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+              </div>
+              <span class="kpi-trend up">+2</span>
+            </div>
+            <div class="kpi-value">7</div>
+            <div class="kpi-label">Dossiers expirés</div>
+            <div class="kpi-sub">au moins un document à renouveler</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-icon info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value">14</div>
+            <div class="kpi-label">Documents expirent &lt; 30 j</div>
+            <div class="kpi-sub">à relancer rapidement</div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: var(--space-4);">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Statut dossier par type de document</div>
+            </div>
+            <div class="card-body">
+              <div class="chart-wrap"><canvas id="chartDocsType"></canvas></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Artisans à relancer en priorité</div>
+              <a href="artisans-detail.html?filter=expires-soon" class="see-details">Voir tous →</a>
+            </div>
+            <div class="card-body flush">
+              <table class="data-table">
+                <thead>
+                  <tr><th>Artisan</th><th>Agence</th><th>Statut</th><th class="text-right">Action</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a href="artisan-fiche.html?id=art-042" class="ref-link">Martin J.</a></td>
+                    <td>La Rochelle</td>
+                    <td><span class="doc-status expired"><span class="doc-status-dot"></span>Décennale expirée</span></td>
+                    <td class="text-right"><a href="artisan-fiche.html?id=art-042" class="see-details">Relancer</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="artisan-fiche.html?id=art-028" class="ref-link">Dupont P.</a></td>
+                    <td>La Rochelle</td>
+                    <td><span class="doc-status incomplete"><span class="doc-status-dot"></span>Kbis manquant</span></td>
+                    <td class="text-right"><a href="artisan-fiche.html?id=art-028" class="see-details">Relancer</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="artisan-fiche.html?id=art-056" class="ref-link">Leroy M.</a></td>
+                    <td>Angoulême</td>
+                    <td><span class="doc-status incomplete"><span class="doc-status-dot"></span>RCP manquante</span></td>
+                    <td class="text-right"><a href="artisan-fiche.html?id=art-056" class="see-details">Relancer</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="artisan-fiche.html?id=art-071" class="ref-link">Bernard S.</a></td>
+                    <td>Niort</td>
+                    <td><span class="doc-status expired"><span class="doc-status-dot"></span>CNI expirée</span></td>
+                    <td class="text-right"><a href="artisan-fiche.html?id=art-071" class="see-details">Relancer</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="artisan-fiche.html?id=art-089" class="ref-link">Petit A.</a></td>
+                    <td>La Rochelle</td>
+                    <td><span class="doc-status incomplete"><span class="doc-status-dot"></span>Décennale manquante</span></td>
+                    <td class="text-right"><a href="artisan-fiche.html?id=art-089" class="see-details">Relancer</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================
+           SECTION 3 — ATTRIBUTION (Réseau MDPA vs Kelkun)
+           ==================================== -->
+      <section class="section-card" id="section-attrib" style="margin-top: var(--space-12);">
+        <div class="section-card-header">
+          <div class="section-card-header-left">
+            <div class="section-card-header-icon" style="background:var(--color-info-50);color:var(--color-info-500);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
+            </div>
+            <h2>Attribution des artisans</h2>
+          </div>
+        </div>
+
+        <div class="versus-card" style="margin-bottom: var(--space-4);">
+          <div class="versus-header">
+            <div class="versus-side left mdpa">
+              <span class="versus-side-dot"></span>
+              Réseau MDPA
+            </div>
+            <div class="versus-vs">VS</div>
+            <div class="versus-side right kelkun">
+              Réseau Kelkun
+              <span class="versus-side-dot"></span>
+            </div>
+          </div>
+          <div class="versus-body">
+            <div class="versus-row">
+              <div class="v-val left mdpa">241</div>
+              <div class="v-label">Interventions ce mois<small>70 % / 30 %</small></div>
+              <div class="v-val right kelkun">101</div>
+            </div>
+            <div class="versus-row">
+              <div class="v-val left mdpa">184</div>
+              <div class="v-label">Artisans attribuables<small>formés et documents vérifiés</small></div>
+              <div class="v-val right kelkun">62</div>
+            </div>
+            <div class="versus-row">
+              <div class="v-val left mdpa">1,3</div>
+              <div class="v-label">Interventions / artisan<small>moyenne mensuelle</small></div>
+              <div class="v-val right kelkun">1,6</div>
+            </div>
+            <div class="versus-row">
+              <div class="v-val left mdpa">83 <span style="font-size:var(--font-size-md);font-weight:500;opacity:0.7;">%</span></div>
+              <div class="v-label">Taux d'acceptation<small>propositions acceptées</small></div>
+              <div class="v-val right kelkun">91 <span style="font-size:var(--font-size-md);font-weight:500;opacity:0.7;">%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Perf opérationnelle vs financière -->
+        <div class="grid-2">
+          <div class="versus-card">
+            <div class="versus-header">
+              <div class="versus-side left mdpa"><span class="versus-side-dot"></span>Réseau MDPA</div>
+              <div class="versus-vs">OPS</div>
+              <div class="versus-side right kelkun">Réseau Kelkun<span class="versus-side-dot"></span></div>
+            </div>
+            <div class="versus-body">
+              <div class="versus-row">
+                <div class="v-val left mdpa">2,1<span style="font-size:var(--font-size-md);font-weight:500;color:var(--color-neutral-500);">j</span></div>
+                <div class="v-label">Temps d'attribution</div>
+                <div class="v-val right kelkun">3,2<span style="font-size:var(--font-size-md);font-weight:500;color:var(--color-neutral-500);">j</span></div>
+              </div>
+              <div class="versus-row">
+                <div class="v-val left mdpa">1,6<span style="font-size:var(--font-size-md);font-weight:500;opacity:0.7;">j</span></div>
+                <div class="v-label">Temps pour poser un RDV</div>
+                <div class="v-val right kelkun">1,2<span style="font-size:var(--font-size-md);font-weight:500;opacity:0.7;">j</span></div>
+              </div>
+              <div class="versus-row">
+                <div class="v-val left mdpa">4,3<span style="font-size:var(--font-size-md);font-weight:500;opacity:0.7;">j</span></div>
+                <div class="v-label">Temps pour réaliser un devis</div>
+                <div class="v-val right kelkun">3,8<span style="font-size:var(--font-size-md);font-weight:500;opacity:0.7;">j</span></div>
+              </div>
+              <div class="versus-row">
+                <div class="v-val left mdpa">92<span style="font-size:var(--font-size-md);font-weight:500;opacity:0.7;">%</span></div>
+                <div class="v-label">Taux de validation devis</div>
+                <div class="v-val right kelkun">96<span style="font-size:var(--font-size-md);font-weight:500;opacity:0.7;">%</span></div>
+              </div>
+              <div class="versus-row">
+                <div class="v-val left mdpa">1,8<span style="font-size:var(--font-size-md);font-weight:500;color:var(--color-neutral-500);">j</span></div>
+                <div class="v-label">Temps validation devis<small>côté agence</small></div>
+                <div class="v-val right kelkun">1,8<span style="font-size:var(--font-size-md);font-weight:500;color:var(--color-neutral-500);">j</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="versus-card">
+            <div class="versus-header">
+              <div class="versus-side left mdpa"><span class="versus-side-dot"></span>Réseau MDPA</div>
+              <div class="versus-vs">FINANCE</div>
+              <div class="versus-side right kelkun">Réseau Kelkun<span class="versus-side-dot"></span></div>
+            </div>
+            <div class="versus-body">
+              <div class="versus-row">
+                <div class="v-val left mdpa">113 752<span style="font-size:var(--font-size-md);font-weight:500;color:var(--color-neutral-500);">&euro;</span></div>
+                <div class="v-label">CA devis validés<small>ce mois</small></div>
+                <div class="v-val right kelkun">52 318<span style="font-size:var(--font-size-md);font-weight:500;color:var(--color-neutral-500);">&euro;</span></div>
+              </div>
+              <div class="versus-row">
+                <div class="v-val left mdpa">241</div>
+                <div class="v-label">Nombre d'interventions</div>
+                <div class="v-val right kelkun">101</div>
+              </div>
+              <div class="versus-row">
+                <div class="v-val left mdpa">472<span style="font-size:var(--font-size-md);font-weight:500;opacity:0.7;">&euro;</span></div>
+                <div class="v-label">Panier moyen validé</div>
+                <div class="v-val right kelkun">518<span style="font-size:var(--font-size-md);font-weight:500;opacity:0.7;">&euro;</span></div>
+              </div>
+              <div class="versus-row">
+                <div class="v-val left mdpa">7</div>
+                <div class="v-label">Métiers couverts</div>
+                <div class="v-val right kelkun">10</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================
+           SECTION 4 — UTILISATION KELCARE (panier par métier, top 10)
+           ==================================== -->
+      <section class="section-card" id="section-usage" style="margin-top: var(--space-12);">
+        <div class="section-card-header">
+          <div class="section-card-header-left">
+            <div class="section-card-header-icon" style="background:var(--color-warning-50);color:var(--color-warning-500);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h2>Utilisation Kelcare — Répartition des interventions</h2>
+          </div>
+          <a href="artisans-detail.html?filter=usage" class="see-details">Voir le détail →</a>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Top 10 métiers — Panier moyen et volume</div>
+              <div class="card-subtitle">Comparaison Réseau MDPA vs Réseau Kelkun</div>
+            </div>
+          </div>
+          <div class="card-body flush">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Métier</th>
+                  <th class="text-center">Nb interventions MDPA</th>
+                  <th class="text-center">Nb interventions Kelcare</th>
+                  <th class="text-right">Panier moyen MDPA</th>
+                  <th class="text-right">Panier moyen Kelcare</th>
+                  <th class="text-right">Écart</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="cell-value">Plomberie</td>
+                  <td class="text-center">64</td>
+                  <td class="text-center">28</td>
+                  <td class="text-right">518 &euro;</td>
+                  <td class="text-right">562 &euro;</td>
+                  <td class="text-right" style="color:var(--color-warning-500);">+8,5 %</td>
+                </tr>
+                <tr>
+                  <td class="cell-value">Électricité</td>
+                  <td class="text-center">52</td>
+                  <td class="text-center">22</td>
+                  <td class="text-right">485 &euro;</td>
+                  <td class="text-right">524 &euro;</td>
+                  <td class="text-right" style="color:var(--color-warning-500);">+8,0 %</td>
+                </tr>
+                <tr>
+                  <td class="cell-value">Chauffage</td>
+                  <td class="text-center">41</td>
+                  <td class="text-center">18</td>
+                  <td class="text-right">612 &euro;</td>
+                  <td class="text-right">648 &euro;</td>
+                  <td class="text-right" style="color:var(--color-warning-500);">+5,9 %</td>
+                </tr>
+                <tr>
+                  <td class="cell-value">Serrurerie</td>
+                  <td class="text-center">28</td>
+                  <td class="text-center">12</td>
+                  <td class="text-right">324 &euro;</td>
+                  <td class="text-right">358 &euro;</td>
+                  <td class="text-right" style="color:var(--color-warning-500);">+10,5 %</td>
+                </tr>
+                <tr>
+                  <td class="cell-value">Vitrerie</td>
+                  <td class="text-center">22</td>
+                  <td class="text-center">8</td>
+                  <td class="text-right">398 &euro;</td>
+                  <td class="text-right">412 &euro;</td>
+                  <td class="text-right" style="color:var(--color-warning-500);">+3,5 %</td>
+                </tr>
+                <tr>
+                  <td class="cell-value">Menuiserie</td>
+                  <td class="text-center">18</td>
+                  <td class="text-center">6</td>
+                  <td class="text-right">468 &euro;</td>
+                  <td class="text-right">495 &euro;</td>
+                  <td class="text-right" style="color:var(--color-warning-500);">+5,8 %</td>
+                </tr>
+                <tr>
+                  <td class="cell-value">Peinture</td>
+                  <td class="text-center">7</td>
+                  <td class="text-center">3</td>
+                  <td class="text-right">385 &euro;</td>
+                  <td class="text-right">412 &euro;</td>
+                  <td class="text-right" style="color:var(--color-warning-500);">+7,0 %</td>
+                </tr>
+                <tr>
+                  <td class="cell-value">Carrelage</td>
+                  <td class="text-center">5</td>
+                  <td class="text-center">2</td>
+                  <td class="text-right">522 &euro;</td>
+                  <td class="text-right">548 &euro;</td>
+                  <td class="text-right" style="color:var(--color-warning-500);">+5,0 %</td>
+                </tr>
+                <tr>
+                  <td class="cell-value">Couverture</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center">1</td>
+                  <td class="text-right">842 &euro;</td>
+                  <td class="text-right">912 &euro;</td>
+                  <td class="text-right" style="color:var(--color-warning-500);">+8,3 %</td>
+                </tr>
+                <tr>
+                  <td class="cell-value">Maçonnerie</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">1</td>
+                  <td class="text-right">—</td>
+                  <td class="text-right">645 &euro;</td>
+                  <td class="text-right" style="color:var(--color-neutral-400);">n/a</td>
+                </tr>
+                <tr style="background:var(--color-secondary-1);font-weight:600;">
+                  <td>Consolidé</td>
+                  <td class="text-center">241</td>
+                  <td class="text-center">101</td>
+                  <td class="text-right">472 &euro;</td>
+                  <td class="text-right">518 &euro;</td>
+                  <td class="text-right" style="color:var(--color-warning-500);">+9,7 %</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: var(--space-4);">
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">Volume par métier</div><div class="card-subtitle">Cumul MDPA + Kelcare ce mois</div></div>
+            </div>
+            <div class="card-body"><div class="chart-wrap"><canvas id="chartMetiers"></canvas></div></div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">CA devis validés — 6 mois</div><div class="card-subtitle">Évolution cumulée</div></div>
+            </div>
+            <div class="card-body"><div class="chart-wrap"><canvas id="chartCA"></canvas></div></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    document.getElementById('filtersBar').replaceWith(buildFilters({ showEntity: true, showReseau: true }));
+
+    // Taux certification par agence (top 10)
+    new Chart(document.getElementById('chartCertifAgence'), {
+      type: 'bar',
+      data: {
+        labels: ['Poitiers Centre','Niort','Châtellerault','Parthenay','Angoulême','Saintes','La Rochelle','Rochefort','Royan','Cognac'],
+        datasets: [{
+          label: 'Taux de certification',
+          data: [92, 85, 82, 79, 76, 75, 68, 72, 70, 65],
+          backgroundColor: ['#03c5b8','#03c5b8','#03c5b8','#c27b30','#c27b30','#c27b30','#fa4a57','#c27b30','#c27b30','#fa4a57'],
+          borderRadius: 6, barPercentage: 0.6
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { max: 100, grid: { color: '#f5f5f5' }, ticks: { callback: v => v+' %', font: { family:'Poppins', size:11 }, color:'#a3a3a3' } },
+          y: { grid: { display:false }, ticks: { font: { family:'Poppins', size:12 }, color:'#404040' } }
+        }
+      }
+    });
+
+    // Statut docs par type
+    new Chart(document.getElementById('chartDocsType'), {
+      type: 'bar',
+      data: {
+        labels: ['Kbis', 'Décennale', 'RCP', 'CNI recto', 'CNI verso'],
+        datasets: [
+          { label: 'Valide', data: [165, 158, 170, 175, 175], backgroundColor: '#10b981', borderRadius: 4 },
+          { label: 'Expiré', data: [8, 12, 5, 4, 4], backgroundColor: '#f97316', borderRadius: 4 },
+          { label: 'Manquant', data: [11, 14, 9, 5, 5], backgroundColor: '#94a3b8', borderRadius: 4 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family:'Poppins', size:11 }, padding:14, usePointStyle:true, pointStyle:'rectRounded' } } },
+        scales: {
+          x: { stacked: true, grid: { display: false }, ticks: { font: { family:'Poppins', size:11 }, color:'#404040' } },
+          y: { stacked: true, grid: { color: '#f5f5f5' }, ticks: { font: { family:'Poppins', size:11 }, color:'#a3a3a3' } }
+        }
+      }
+    });
+
+    // Volume par métier
+    new Chart(document.getElementById('chartMetiers'), {
+      type: 'bar',
+      data: {
+        labels: ['Plomberie','Électricité','Chauffage','Serrurerie','Vitrerie','Menuiserie','Peinture','Carrelage','Couverture','Maçonnerie'],
+        datasets: [
+          { label: 'MDPA', data: [64,52,41,28,22,18,7,5,3,1], backgroundColor: '#0e2f58', borderRadius: 4 },
+          { label: 'Kelkun', data: [28,22,18,12,8,6,3,2,1,1], backgroundColor: '#03c5b8', borderRadius: 4 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family:'Poppins', size:11 }, padding:14, usePointStyle:true, pointStyle:'rectRounded' } } },
+        scales: {
+          x: { stacked: true, grid: { display: false }, ticks: { font: { family:'Poppins', size:10 }, color:'#404040', maxRotation: 45, minRotation: 30 } },
+          y: { stacked: true, grid: { color: '#f5f5f5' }, ticks: { font: { family:'Poppins', size:11 }, color:'#a3a3a3' } }
+        }
+      }
+    });
+
+    // CA 6 mois
+    new Chart(document.getElementById('chartCA'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.','Déc.','Janv.','Fév.','Mars','Avr.'],
+        datasets: [
+          { label: 'Réseau MDPA', data: [72000, 85000, 92000, 103000, 108000, 113752], borderColor: '#0e2f58', backgroundColor: 'rgba(14,47,88,0.08)', fill: true, tension: 0.35, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#0e2f58' },
+          { label: 'Réseau Kelkun', data: [22000, 28000, 32000, 36000, 44000, 52318], borderColor: '#03c5b8', backgroundColor: 'rgba(3,197,184,0.08)', fill: true, tension: 0.35, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#03c5b8' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family:'Poppins', size:11 }, padding:14, usePointStyle:true, pointStyle:'circle' } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family:'Poppins', size:11 }, color:'#a3a3a3' } },
+          y: { grid: { color: '#f5f5f5' }, ticks: { callback: v => (v/1000)+'k €', font: { family:'Poppins', size:11 }, color:'#a3a3a3' }, beginAtZero: true }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

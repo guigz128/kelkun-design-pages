@@ -6,7 +6,12 @@
   <title>DataRoom Kelcare V5 — Synthèse</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="dataroom.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 </head>
 <body data-page="synthese" data-title="DataRoom" data-subtitle="Synthèse globale — Vue parent consolidée">
 
@@ -44,27 +49,65 @@
         </div>
       </div>
 
-      <!-- HERO BANNER -->
-      <div class="hero-banner">
-        <div class="hero-score-ring" data-score="74">
-          <svg viewBox="0 0 108 108" width="120" height="120">
-            <circle class="ring-bg" cx="54" cy="54" r="50"/>
-            <circle class="ring-fill" cx="54" cy="54" r="50"/>
-          </svg>
-          <div class="ring-center">
-            <div class="ring-value">74</div>
-            <div class="ring-max">/100</div>
+      <!-- HERO BANNER avec scoring intégré -->
+      <div class="hero-banner" id="heroBanner">
+        <div class="hero-banner-top">
+          <div class="hero-score-ring" data-score="74">
+            <svg viewBox="0 0 108 108" width="120" height="120">
+              <circle class="ring-bg" cx="54" cy="54" r="50"/>
+              <circle class="ring-fill" cx="54" cy="54" r="50"/>
+            </svg>
+            <div class="ring-center">
+              <div class="ring-value" id="heroScoreValue">74</div>
+              <div class="ring-max">/100</div>
+            </div>
+          </div>
+          <div class="hero-info">
+            <div class="hero-title">État de santé du déploiement Kelcare</div>
+            <div class="hero-insight">Performance en progression. 184 artisans certifiés actifs sur 308 enregistrés. Poitiers Centre tire le réseau vers le haut, La Rochelle nécessite un plan d'action sur la formation et les documents.</div>
+            <div class="hero-axes">
+              <div class="hero-axis-badge">+3 pts vs période préc.</div>
+              <button class="hero-axis-info" type="button" id="toggleScoringPanel">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span id="scoringToggleLabel">Comment ce score est calculé ?</span>
+              </button>
+            </div>
           </div>
         </div>
-        <div class="hero-info">
-          <div class="hero-title">État de santé du déploiement Kelcare</div>
-          <div class="hero-insight">Performance en progression. 184 artisans certifiés actifs sur 308 enregistrés. Poitiers Centre tire le réseau vers le haut, La Rochelle nécessite un plan d'action sur la formation et les documents.</div>
-          <div class="hero-axes">
-            <div class="hero-axis-badge" style="margin-left:auto;">+3 pts vs période préc.</div>
-            <button class="hero-axis-info" type="button" onclick="document.getElementById('scoringMethod').scrollIntoView({behavior:'smooth'})">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              Comment ce score est calculé ?
-            </button>
+
+        <!-- Panel scoring statique (collapsible) -->
+        <div class="hero-scoring" id="heroScoring" hidden>
+          <div class="hero-scoring-divider"></div>
+          <div class="hero-scoring-header">
+            <div>
+              <div class="hero-scoring-title">Méthode de calcul du score</div>
+              <div class="hero-scoring-sub">Pondération de référence définie avec l'équipe Pilotage Kelcare — identique pour les 20 agences</div>
+            </div>
+          </div>
+          <div class="hero-scoring-axes">
+            <div class="hero-axis-static">
+              <div class="hero-axis-static-head"><span class="hero-axis-label">Formation</span><span class="hero-axis-weight-static">35 %</span></div>
+              <div class="hero-axis-static-score">Score réseau : <strong>78</strong> /100</div>
+              <div class="hero-axis-foot">Part d'artisans formés Kelcare sur le total enregistré</div>
+            </div>
+            <div class="hero-axis-static">
+              <div class="hero-axis-static-head"><span class="hero-axis-label">Documents</span><span class="hero-axis-weight-static">30 %</span></div>
+              <div class="hero-axis-static-score">Score réseau : <strong>66</strong> /100</div>
+              <div class="hero-axis-foot">Part d'artisans Documents vérifiés sur le total formé</div>
+            </div>
+            <div class="hero-axis-static">
+              <div class="hero-axis-static-head"><span class="hero-axis-label">Attribution</span><span class="hero-axis-weight-static">20 %</span></div>
+              <div class="hero-axis-static-score">Score réseau : <strong>72</strong> /100</div>
+              <div class="hero-axis-foot">Taux d'acceptation devis &lt; 48 h</div>
+            </div>
+            <div class="hero-axis-static">
+              <div class="hero-axis-static-head"><span class="hero-axis-label">Panier moyen</span><span class="hero-axis-weight-static">15 %</span></div>
+              <div class="hero-axis-static-score">Score réseau : <strong>82</strong> /100</div>
+              <div class="hero-axis-foot">Écart relatif au panier moyen réseau (487 €)</div>
+            </div>
+          </div>
+          <div class="hero-scoring-footer">
+            <span>Calcul : (78 × 0,35) + (66 × 0,30) + (72 × 0,20) + (82 × 0,15) = <strong>74 /100</strong></span>
           </div>
         </div>
       </div>
@@ -73,7 +116,7 @@
       <div class="filters-bar" id="filtersBar"></div>
 
       <!-- KPI HÉROS (2 cols) -->
-      <div class="kpi-grid cols-2" style="margin-bottom: var(--space-4);">
+      <div class="kpi-grid cols-2">
         <div class="kpi-card hero">
           <div class="kpi-header">
             <div class="kpi-icon primary">
@@ -114,7 +157,7 @@
           <div class="kpi-value">81<span class="unit">%</span></div>
           <div class="kpi-label">Documents vérifiés</div>
           <div class="kpi-sub">149 vérifiés · 28 non vérifiés · 7 expirés</div>
-          <a href="artisans-detail.html?filter=non-verifies" class="kpi-action">
+          <a href="artisans-detail.html?filter=a-relancer" class="kpi-action">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             Visualiser les 35 à relancer
           </a>
@@ -162,37 +205,52 @@
         <div class="pec-block">
           <div class="pec-block-header">
             <div class="pec-block-label">Tous réseaux</div>
-            <div class="pec-block-total">342 interventions</div>
+            <span class="pec-block-trend up" title="vs mois précédent">+4 pts vs M-1</span>
           </div>
+          <div class="pec-block-total">342 interventions ce mois</div>
           <div class="pec-bar">
             <div class="pec-bar-pec" style="width:64%;"><span>219 · PEC</span></div>
             <div class="pec-bar-no" style="width:36%;"><span>123 · sans PEC</span></div>
           </div>
           <div class="pec-block-meta"><strong>64 %</strong> avec prise en charge</div>
+          <a href="artisans-detail.html?filter=pec-all" class="pec-block-cta">
+            Voir les 342 interventions
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
         </div>
 
         <div class="pec-block">
           <div class="pec-block-header">
             <div class="pec-block-label"><span class="badge primary">Réseau MDPA</span></div>
-            <div class="pec-block-total">241 interventions</div>
+            <span class="pec-block-trend up" title="vs mois précédent">+2 pts vs M-1</span>
           </div>
+          <div class="pec-block-total">241 interventions ce mois</div>
           <div class="pec-bar">
             <div class="pec-bar-pec" style="width:78%;"><span>188</span></div>
             <div class="pec-bar-no" style="width:22%;"><span>53</span></div>
           </div>
           <div class="pec-block-meta"><strong>78 %</strong> avec prise en charge</div>
+          <a href="artisans-detail.html?filter=pec-mdpa" class="pec-block-cta">
+            Voir les 241 interventions MDPA
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
         </div>
 
         <div class="pec-block">
           <div class="pec-block-header">
             <div class="pec-block-label"><span class="badge accent">Réseau Kelkun</span></div>
-            <div class="pec-block-total">101 interventions</div>
+            <span class="pec-block-trend up" title="vs mois précédent">+6 pts vs M-1</span>
           </div>
+          <div class="pec-block-total">101 interventions ce mois</div>
           <div class="pec-bar">
             <div class="pec-bar-pec" style="width:31%;"><span>31</span></div>
             <div class="pec-bar-no" style="width:69%;"><span>70</span></div>
           </div>
           <div class="pec-block-meta"><strong>31 %</strong> avec prise en charge</div>
+          <a href="artisans-detail.html?filter=pec-kelkun" class="pec-block-cta">
+            Voir les 101 interventions Kelkun
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
 
@@ -275,35 +333,13 @@
         </div>
       </div>
 
-      <!-- MÉTHODE DE CALCUL DU SCORE -->
-      <div class="card scoring-card" id="scoringMethod">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Comment le score agence est calculé</div>
-            <div class="card-subtitle">Pondération transparente, identique pour les 20 agences</div>
-          </div>
-          <span class="badge primary">Score sur 100</span>
-        </div>
-        <div class="card-body">
-          <div class="scoring-formula">
-            <div class="scoring-axis"><span class="scoring-weight">35 %</span><div class="scoring-axis-text"><strong>Formation</strong>part d'artisans Formés Kelcare sur le total enregistré dans l'agence</div></div>
-            <div class="scoring-axis"><span class="scoring-weight">30 %</span><div class="scoring-axis-text"><strong>Documents</strong>part d'artisans Documents vérifiés sur le total formé</div></div>
-            <div class="scoring-axis"><span class="scoring-weight">20 %</span><div class="scoring-axis-text"><strong>Attribution</strong>taux de propositions acceptées par les artisans &lt; 48 h</div></div>
-            <div class="scoring-axis"><span class="scoring-weight">15 %</span><div class="scoring-axis-text"><strong>Panier moyen</strong>écart relatif au panier moyen réseau (487 €)</div></div>
-          </div>
-          <div class="scoring-example">
-            <strong>Exemple Poitiers Centre :</strong> 92 × 0,35 + 94 × 0,3 + 88 × 0,2 + 95 × 0,15 = <strong>92 /100</strong>
-          </div>
-        </div>
-      </div>
-
       <!-- LEADERBOARD AGENCE DU MOIS + RAPPORT HEBDO -->
       <h2 class="section-title">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
         Leaderboard réseau — Avril 2026
       </h2>
 
-      <div class="grid-2-1" style="margin-bottom: var(--space-5);">
+      <div class="grid-2-1">
         <!-- Podium -->
         <div class="card">
           <div class="card-header">
@@ -313,28 +349,40 @@
             </div>
           </div>
           <div class="card-body">
+            <!-- Hall of fame annuel -->
+            <div class="hall-of-fame">
+              <div class="hall-of-fame-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+              </div>
+              <div class="hall-of-fame-body">
+                <div class="hall-of-fame-label">Champion 2025</div>
+                <div class="hall-of-fame-name"><strong>Poitiers Centre</strong> · 11 mois sur 12 sur le podium</div>
+              </div>
+              <a href="comparative.html" class="hall-of-fame-link">Voir le palmarès →</a>
+            </div>
+
             <div class="leaderboard">
               <div class="leaderboard-row gold">
                 <div class="leaderboard-rank">1</div>
                 <div class="leaderboard-body">
-                  <div class="leaderboard-name">Poitiers Centre <span class="badge badge-gold">Agence du mois</span></div>
-                  <div class="leaderboard-meta">Score 92 /100 · 68 interventions · 94 % documents vérifiés</div>
+                  <div class="leaderboard-name">Poitiers Centre <span class="badge badge-gold">Agence du mois</span> <span class="streak-badge">🔥 5 mois en top 3</span></div>
+                  <div class="leaderboard-meta">Score <strong>92</strong> /100 · 68 interventions · 94 % documents vérifiés</div>
                 </div>
                 <div class="leaderboard-manager">M. Valentin Morel</div>
               </div>
               <div class="leaderboard-row silver">
                 <div class="leaderboard-rank">2</div>
                 <div class="leaderboard-body">
-                  <div class="leaderboard-name">Niort</div>
-                  <div class="leaderboard-meta">Score 85 /100 · 52 interventions · 88 % documents vérifiés</div>
+                  <div class="leaderboard-name">Niort <span class="streak-badge">📈 +2 places</span></div>
+                  <div class="leaderboard-meta">Score <strong>85</strong> /100 · 52 interventions · 88 % documents vérifiés</div>
                 </div>
                 <div class="leaderboard-manager">Mme Claire Petit</div>
               </div>
               <div class="leaderboard-row bronze">
                 <div class="leaderboard-rank">3</div>
                 <div class="leaderboard-body">
-                  <div class="leaderboard-name">Saintes</div>
-                  <div class="leaderboard-meta">Score 79 /100 · 41 interventions · 84 % documents vérifiés</div>
+                  <div class="leaderboard-name">Saintes <span class="streak-badge progression">🚀 Plus belle progression · +12 places</span></div>
+                  <div class="leaderboard-meta">Score <strong>79</strong> /100 · 41 interventions · 84 % documents vérifiés</div>
                 </div>
                 <div class="leaderboard-manager">M. Julien Faure</div>
               </div>
@@ -342,17 +390,37 @@
                 <div class="leaderboard-rank">4</div>
                 <div class="leaderboard-body">
                   <div class="leaderboard-name">Angoulême</div>
-                  <div class="leaderboard-meta">Score 74 /100 · 36 interventions · 76 % documents vérifiés</div>
+                  <div class="leaderboard-meta">Score <strong>74</strong> /100 · 36 interventions · 76 % documents vérifiés</div>
                 </div>
                 <div class="leaderboard-manager">Mme Sophie Giraud</div>
               </div>
               <div class="leaderboard-row warning">
                 <div class="leaderboard-rank">18</div>
                 <div class="leaderboard-body">
-                  <div class="leaderboard-name">La Rochelle <span class="badge warning">À soutenir</span></div>
-                  <div class="leaderboard-meta">Score 68 /100 · 24 interventions · 58 % documents vérifiés</div>
+                  <div class="leaderboard-name">La Rochelle <span class="badge warning">À soutenir</span> <span class="streak-badge declining">📉 -3 places</span></div>
+                  <div class="leaderboard-meta">Score <strong>68</strong> /100 · 24 interventions · 58 % documents vérifiés</div>
                 </div>
                 <div class="leaderboard-manager">Mme Isabelle Lefèvre</div>
+              </div>
+            </div>
+
+            <!-- Défi du mois -->
+            <div class="monthly-challenge">
+              <div class="monthly-challenge-head">
+                <div class="monthly-challenge-icon">🎯</div>
+                <div class="monthly-challenge-info">
+                  <div class="monthly-challenge-title">Défi avril 2026 — Documents vérifiés</div>
+                  <div class="monthly-challenge-sub">Atteindre <strong>80 %</strong> de docs vérifiés sur l'ensemble du réseau</div>
+                </div>
+                <div class="monthly-challenge-stat"><strong>78</strong> /80 %</div>
+              </div>
+              <div class="monthly-challenge-bar">
+                <div class="monthly-challenge-fill" style="width:97.5%"></div>
+                <div class="monthly-challenge-target" style="left:100%"></div>
+              </div>
+              <div class="monthly-challenge-foot">
+                <span><strong>3 dossiers</strong> à vérifier pour décrocher l'objectif collectif</span>
+                <a href="artisans-detail.html?filter=a-relancer" class="monthly-challenge-cta">Voir la liste →</a>
               </div>
             </div>
           </div>
@@ -409,71 +477,77 @@
         Cartographie du réseau
       </h2>
 
-      <div class="card">
+      <div class="card" id="mapCard">
         <div class="card-header">
           <div>
             <div class="card-title">Vue géographique des agences et artisans</div>
-            <div class="card-subtitle">Région Nouvelle-Aquitaine · 20 agences MDPA · 308 artisans</div>
+            <div class="card-subtitle">France entière · 20 agences MDPA · 328 artisans positionnés</div>
           </div>
           <div class="map-filters">
-            <select class="filter-select"><option>Tous métiers</option><option>Plomberie</option><option>Électricité</option><option>Menuiserie</option><option>Serrurerie</option></select>
-            <select class="filter-select"><option>Tous réseaux</option><option>MDPA</option><option>Kelkun</option></select>
-            <button class="btn">Plein écran</button>
+            <select class="filter-select" id="mapMetier">
+              <option value="all">Tous métiers</option>
+              <option>Plomberie</option><option>Électricité</option><option>Menuiserie</option><option>Serrurerie</option><option>Chauffage</option><option>Vitrerie</option><option>Peinture</option><option>Maçonnerie</option>
+            </select>
+            <select class="filter-select" id="mapReseau">
+              <option value="all">Tous réseaux</option><option>MDPA</option><option>Kelkun</option>
+            </select>
+            <select class="filter-select" id="mapStatut">
+              <option value="all">Tous statuts</option>
+              <option value="ok">Conformes</option>
+              <option value="a-relancer">À relancer</option>
+              <option value="expire">Expirés</option>
+            </select>
+            <button class="btn" id="mapToggleAgences">Afficher / masquer agences</button>
+            <button class="btn" id="mapReset" hidden>Voir tout le réseau</button>
+            <button class="btn" id="mapFullscreen" title="Plein écran">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+              Plein écran
+            </button>
           </div>
         </div>
         <div class="card-body" style="padding:0;">
-          <div class="map-mockup">
-            <div class="map-mockup-bg"></div>
-            <div class="map-pin" style="top:32%;left:46%;" data-name="Poitiers Centre" data-stats="28 artisans · score 92"><span class="map-pin-dot gold"></span><span class="map-pin-label">Poitiers Centre</span></div>
-            <div class="map-pin" style="top:48%;left:38%;" data-name="Niort"><span class="map-pin-dot silver"></span><span class="map-pin-label">Niort</span></div>
-            <div class="map-pin" style="top:58%;left:24%;" data-name="La Rochelle"><span class="map-pin-dot warning"></span><span class="map-pin-label">La Rochelle</span></div>
-            <div class="map-pin" style="top:68%;left:42%;" data-name="Angoulême"><span class="map-pin-dot"></span><span class="map-pin-label">Angoulême</span></div>
-            <div class="map-pin" style="top:62%;left:30%;" data-name="Saintes"><span class="map-pin-dot bronze"></span><span class="map-pin-label">Saintes</span></div>
-            <div class="map-pin" style="top:42%;left:54%;" data-name="Limoges"><span class="map-pin-dot"></span><span class="map-pin-label">Limoges</span></div>
-            <div class="map-pin" style="top:78%;left:50%;" data-name="Périgueux"><span class="map-pin-dot"></span><span class="map-pin-label">Périgueux</span></div>
-            <div class="map-pin" style="top:24%;left:36%;" data-name="Nantes"><span class="map-pin-dot"></span><span class="map-pin-label">Nantes</span></div>
-            <div class="map-legend">
-              <span class="map-legend-item"><span class="map-pin-dot gold"></span> Top 3</span>
-              <span class="map-legend-item"><span class="map-pin-dot"></span> Score &gt; 75</span>
-              <span class="map-legend-item"><span class="map-pin-dot warning"></span> À soutenir</span>
+          <div id="agencyMap" class="agency-map"></div>
+          <div class="map-legend map-legend-overlay">
+            <div class="map-legend-group">
+              <div class="map-legend-title">Agences</div>
+              <div class="map-legend-row">
+                <span class="map-legend-item"><span class="map-legend-square gold"></span> Top 3</span>
+                <span class="map-legend-item"><span class="map-legend-square mdpa"></span> Standard</span>
+                <span class="map-legend-item"><span class="map-legend-square warn"></span> À soutenir</span>
+              </div>
             </div>
+            <div class="map-legend-sep"></div>
+            <div class="map-legend-group">
+              <div class="map-legend-title">Artisans</div>
+              <div class="map-legend-row">
+                <span class="map-legend-item"><span class="map-legend-dot ok"></span> Conforme</span>
+                <span class="map-legend-item"><span class="map-legend-dot warn"></span> À relancer</span>
+                <span class="map-legend-item"><span class="map-legend-dot err"></span> Doc expiré</span>
+              </div>
+            </div>
+            <div class="map-legend-sep"></div>
+            <div class="map-legend-meta" id="mapStats">328 artisans · 20 agences</div>
           </div>
         </div>
       </div>
 
-      <!-- INCIDENCES OPÉRATIONNELLES -->
+      <!-- INCIDENCES OPÉRATIONNELLES — A. Temps & SLA -->
       <h2 class="section-title">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        Incidences opérationnelles
-        <span class="section-title-sub">qualité du service · 30 derniers jours</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Incidences opérationnelles — Temps &amp; SLA
+        <span class="section-title-sub">6 indicateurs de réactivité · 7 derniers jours</span>
       </h2>
 
-      <div class="kpi-grid cols-4">
-        <div class="kpi-card">
-          <div class="kpi-header"><div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span class="kpi-trend down">-22 %</span></div>
-          <div class="kpi-value">14</div>
-          <div class="kpi-label">Devis hors délai</div>
-          <div class="kpi-sub">&gt; 72 h après attribution</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-header"><div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><span class="kpi-trend up">+3</span></div>
-          <div class="kpi-value">8</div>
-          <div class="kpi-label">Refus client</div>
-          <div class="kpi-sub">après réception devis</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-header"><div class="kpi-icon info"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7"/><path d="m9 9 5 5"/><path d="m14 9-5 5"/></svg></div><span class="kpi-trend down">-15 %</span></div>
-          <div class="kpi-value">11</div>
-          <div class="kpi-label">Réclamations</div>
-          <div class="kpi-sub">après intervention</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-header"><div class="kpi-icon success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="kpi-trend up">+4 pts</span></div>
-          <div class="kpi-value">94<span class="unit">%</span></div>
-          <div class="kpi-label">Satisfaction client</div>
-          <div class="kpi-sub">notation moyenne 4,7 /5</div>
-        </div>
-      </div>
+      <div class="ops-grid" id="opsTime"></div>
+
+      <!-- INCIDENCES OPÉRATIONNELLES — B. Qualité & Conformité -->
+      <h2 class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+        Incidences opérationnelles — Qualité &amp; Conformité
+        <span class="section-title-sub">6 indicateurs de qualité · 7 derniers jours</span>
+      </h2>
+
+      <div class="ops-grid" id="opsQuality"></div>
 
     </main>
   </div>
@@ -482,14 +556,181 @@
   <script>
     document.getElementById('filtersBar').replaceWith(buildFilters({ showEntity: true, showReseau: false }));
 
-    // Score ring animation
+    // Score ring : animation initiale (74/100, statique)
     setTimeout(() => {
       const fill = document.querySelector('.ring-fill');
-      if (fill) {
-        const offset = 314 - (314 * 74 / 100);
-        fill.style.strokeDashoffset = offset;
-      }
-    }, 300);
+      if (fill) fill.style.strokeDashoffset = 314 - (314 * 74 / 100);
+    }, 200);
+
+    // ===== 12 KPIs d'incidence opérationnelle =====
+    const OPS_DAYS = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+    // goodDir: 'down' = une baisse est bonne (vert), 'up' = une hausse est bonne
+    const opsKpis = {
+      time: [
+        { id:'accept', icon:'clock', title:"Temps moyen d'acceptation d'une intervention", sub:"Mesurer la réactivité du réseau face à un dispatch",
+          value:'30', unit:'min', target:'< 45 min', goodDir:'down',
+          values:[34,33,32,31,30,30,30],
+          mdpa:{v:'28 min', d:-18}, kelkun:{v:'35 min', d:-5}, total:{v:'30 min', d:-12} },
+        { id:'contact', icon:'phone', title:"Temps moyen de premier contact client / sociétaire", sub:"Suivre la vitesse de prise d'appel après assignation",
+          value:'15', unit:'min', target:'< 20 min', goodDir:'down',
+          values:[18,17,16,16,15,15,15],
+          mdpa:{v:'13 min', d:+7}, kelkun:{v:'22 min', d:-8}, total:{v:'15 min', d:-5} },
+        { id:'rdv2interv', icon:'calendar', title:"Délai moyen entre la prise de rendez-vous et la date d'intervention", sub:"Évaluer la capacité de planification du réseau",
+          value:'3,8', unit:'j', target:'< 4 j', goodDir:'down',
+          values:[3.4,3.5,3.6,3.7,3.8,3.8,3.8],
+          mdpa:{v:'3,5 j', d:-3}, kelkun:{v:'4,6 j', d:+12}, total:{v:'3,8 j', d:+5} },
+        { id:'ponctu', icon:'mapPin', title:"Délai entre heure de RDV et heure réelle d'arrivée sur site", sub:"Mesurer la ponctualité terrain",
+          value:'4', unit:'min', target:'< 10 min', goodDir:'down',
+          values:[7,6,5,5,4,4,4],
+          mdpa:{v:'3 min', d:-10}, kelkun:{v:'6 min', d:+30}, total:{v:'4 min', d:+8} },
+        { id:'reprog', icon:'repeat', title:"Taux d'interventions nécessitant une reprogrammation", sub:"Identifier les reports et leurs causes racines",
+          value:'4,8', unit:'%', target:'< 6 %', goodDir:'down',
+          values:[6.5,6.0,5.5,5.2,5.0,4.9,4.8],
+          mdpa:{v:'3,5 %', d:-15}, kelkun:{v:'8,2 %', d:+8}, total:{v:'4,8 %', d:-5} },
+        { id:'duree', icon:'gauge', title:"Temps moyen d'interventions", sub:"Suivre la durée réelle par typologie d'intervention",
+          value:'67', unit:'min', target:'< 90 min', goodDir:'down',
+          values:[75,72,70,68,67,67,67],
+          mdpa:{v:'62 min', d:-4}, kelkun:{v:'90 min', d:+6}, total:{v:'67 min', d:-2} },
+      ],
+      quality: [
+        { id:'devisVal', icon:'check', title:"Taux de devis validés / reçus", sub:"Mesurer la conformité des devis soumis",
+          value:'96', unit:'%', target:'> 90 %', goodDir:'up',
+          values:[88,90,92,94,95,96,96],
+          mdpa:{v:'98 %', d:+2}, kelkun:{v:'85 %', d:-5}, total:{v:'96 %', d:+1} },
+        { id:'devisMod', icon:'edit', title:"Nombre moyen de devis modifiés avant validation", sub:"Identifier les écarts de conformité",
+          value:'1,5', unit:'modif.', target:'< 2', goodDir:'down',
+          values:[2.2,2.0,1.8,1.6,1.5,1.5,1.5],
+          mdpa:{v:'1,2', d:-15}, kelkun:{v:'3,2', d:+8}, total:{v:'1,5', d:-6} },
+        { id:'relance', icon:'inbox', title:"Taux de dossiers nécessitant une relance pour pièces manquantes", sub:"Suivre la qualité documentaire",
+          value:'8', unit:'%', target:'< 10 %', goodDir:'down',
+          values:[14,12,11,10,9,8,8],
+          mdpa:{v:'5 %', d:-35}, kelkun:{v:'18 %', d:+12}, total:{v:'8 %', d:-25} },
+        { id:'intervDoss', icon:'layers', title:"Nombre moyen d'interventions par dossier", sub:"Mesurer la complexité et la maîtrise de la chaîne",
+          value:'1,2', unit:'interv.', target:'< 1,5', goodDir:'down',
+          values:[1.5,1.4,1.3,1.3,1.2,1.2,1.2],
+          mdpa:{v:'1,1', d:-13}, kelkun:{v:'1,8', d:+10}, total:{v:'1,2', d:-5} },
+        { id:'slaDepass', icon:'alertTriangle', title:"Taux de dépassement des SLA (par typologie)", sub:"Piloter les engagements opérationnels",
+          value:'6', unit:'%', target:'< 8 %', goodDir:'down',
+          values:[12,10,9,8,7,6,6],
+          mdpa:{v:'4 %', d:-30}, kelkun:{v:'12 %', d:+8}, total:{v:'6 %', d:-20} },
+        { id:'retours', icon:'star', title:"Taux de retours Qualité (litiges, non-conformités, SAV)", sub:"Mesurer la qualité de service réelle",
+          value:'2,5', unit:'%', target:'< 3 %', goodDir:'down',
+          values:[4.5,4.0,3.5,3.2,2.8,2.6,2.5],
+          mdpa:{v:'2,0 %', d:-35}, kelkun:{v:'4,5 %', d:+6}, total:{v:'2,5 %', d:-20} },
+      ],
+    };
+
+    const OPS_ICONS = {
+      clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+      phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/>',
+      calendar: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+      mapPin: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+      repeat: '<polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>',
+      gauge: '<path d="M12 14l4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>',
+      check: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+      edit: '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>',
+      inbox: '<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+      layers: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+      alertTriangle: '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+      star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+    };
+
+    function renderOpsCard(k) {
+      const iconPath = OPS_ICONS[k.icon] || '';
+      const breakdown = [
+        { label:'MDPA', ...k.mdpa, cls:'mdpa' },
+        { label:'Kelkun', ...k.kelkun, cls:'kelkun' },
+        { label:'Total', ...k.total, cls:'total' },
+      ].map(b => {
+        const isGood = k.goodDir === 'down' ? b.d < 0 : b.d > 0;
+        const trendCls = b.d === 0 ? 'flat' : (isGood ? 'good' : 'bad');
+        const sign = b.d > 0 ? '+' : '';
+        return `<div class="ops2-break-item">
+          <div class="ops2-break-label ${b.cls}"><span class="ops2-dot"></span>${b.label}</div>
+          <div class="ops2-break-value">${b.v}</div>
+          <div class="ops2-break-delta ${trendCls}">${sign}${b.d} %</div>
+        </div>`;
+      }).join('');
+      return `
+        <div class="ops2-card">
+          <div class="ops2-head">
+            <div class="ops2-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconPath}</svg></div>
+            <div class="ops2-titles">
+              <div class="ops2-title">${k.title}</div>
+              <div class="ops2-sub">${k.sub}</div>
+            </div>
+          </div>
+          <div class="ops2-spark"><canvas data-ops-spark="${k.id}" data-unit="${k.unit}" data-good="${k.goodDir}"></canvas></div>
+          <div class="ops2-value-row">
+            <div class="ops2-value">${k.value}<span class="ops2-unit">${k.unit}</span></div>
+            <div class="ops2-target">Cible ${k.target}</div>
+          </div>
+          <div class="ops2-break">${breakdown}</div>
+        </div>
+      `;
+    }
+
+    document.getElementById('opsTime').innerHTML    = opsKpis.time.map(renderOpsCard).join('');
+    document.getElementById('opsQuality').innerHTML = opsKpis.quality.map(renderOpsCard).join('');
+
+    const OPS_COLORS = {
+      time:    { line: '#6366f1', fill: '#6366f11f' }, // indigo pastel
+      quality: { line: '#2f9029', fill: '#2f90291f' }, // vert pastel
+    };
+    const allOps = [
+      ...opsKpis.time.map(k => ({ ...k, section: 'time' })),
+      ...opsKpis.quality.map(k => ({ ...k, section: 'quality' })),
+    ];
+    allOps.forEach(k => {
+      const canvas = document.querySelector(`canvas[data-ops-spark="${k.id}"]`);
+      if (!canvas) return;
+      const palette = OPS_COLORS[k.section];
+      const color = palette.line;
+      const fillColor = palette.fill;
+      const min = Math.min(...k.values), max = Math.max(...k.values);
+      new Chart(canvas, {
+        type:'line',
+        data:{ labels: OPS_DAYS, datasets:[{
+          data:k.values, borderColor:color, backgroundColor:fillColor,
+          borderWidth:2, fill:true, tension:0.35,
+          pointRadius:k.values.map(v=>v===min||v===max?4:2.5),
+          pointBackgroundColor:k.values.map(v=>v===max?'#b33c2f':(v===min?'#2f9029':'#fff')),
+          pointBorderColor:color, pointBorderWidth:1.5, pointHoverRadius:6
+        }]},
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          layout:{ padding:{ top:4, bottom:4, left:4, right:4 } },
+          plugins:{
+            legend:{ display:false },
+            tooltip:{
+              displayColors:false, backgroundColor:'#0e2f58',
+              titleFont:{ family:'Poppins', size:11, weight:'600' },
+              bodyFont:{ family:'Poppins', size:12 }, padding:8,
+              callbacks:{
+                title:(ctx)=>OPS_DAYS[ctx[0].dataIndex],
+                label:(ctx)=>`${String(ctx.parsed.y).replace('.',',')} ${k.unit}`
+              }
+            }
+          },
+          scales:{
+            x:{ display:true, grid:{ display:false }, ticks:{ font:{ size:9 }, color:'#9ca3af' }, border:{ display:false } },
+            y:{ display:true, grid:{ color:'rgba(0,0,0,0.04)' }, ticks:{ font:{ size:9 }, color:'#9ca3af', maxTicksLimit:3 }, border:{ display:false } }
+          },
+          elements:{ line:{ borderJoinStyle:'round' } },
+          interaction:{ intersect:false, mode:'index' }
+        }
+      });
+    });
+
+    // Toggle du panel "Comment le score est calculé ?"
+    const scoringPanel = document.getElementById('heroScoring');
+    const scoringToggle = document.getElementById('toggleScoringPanel');
+    const scoringLabel = document.getElementById('scoringToggleLabel');
+    scoringToggle.addEventListener('click', () => {
+      const isOpen = !scoringPanel.hidden;
+      scoringPanel.hidden = isOpen;
+      scoringLabel.textContent = isOpen ? 'Comment ce score est calculé ?' : 'Masquer le détail du score';
+    });
 
     new Chart(document.getElementById('chartInterventions'), {
       type: 'line',
@@ -522,6 +763,216 @@
       }
     });
 
+    // ============================================
+    // Leaflet map nationale — agences + 308 artisans
+    // ============================================
+    const map = L.map('agencyMap', { scrollWheelZoom: false }).setView([46.5, 2.5], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    const agences = [
+      { name: 'Poitiers Centre', coords: [46.5802, 0.3404], rank: 'gold', score: 92, manager: 'M. Valentin Morel', artisans: 28 },
+      { name: 'Niort', coords: [46.3239, -0.4636], rank: 'silver', score: 85, manager: 'Mme Claire Petit', artisans: 22 },
+      { name: 'Saintes', coords: [45.7449, -0.6276], rank: 'bronze', score: 79, manager: 'M. Julien Faure', artisans: 14 },
+      { name: 'Angoulême', coords: [45.6484, 0.1562], rank: '', score: 74, manager: 'Mme Sophie Giraud', artisans: 18 },
+      { name: 'Limoges', coords: [45.8336, 1.2611], rank: '', score: 78, manager: 'M. David Rocher', artisans: 20 },
+      { name: 'Périgueux', coords: [45.1840, 0.7220], rank: '', score: 76, manager: 'Mme Catherine Lemoine', artisans: 16 },
+      { name: 'La Rochelle', coords: [46.1591, -1.1520], rank: 'warning', score: 68, manager: 'Mme Isabelle Lefèvre', artisans: 12 },
+      { name: 'Bordeaux Nord', coords: [44.8378, -0.5792], rank: '', score: 81, manager: 'M. Antoine Ribéry', artisans: 24 },
+      { name: 'La Roche-sur-Yon', coords: [46.6705, -1.4269], rank: '', score: 72, manager: 'Mme Hélène Guillot', artisans: 17 },
+      { name: 'Tours', coords: [47.3941, 0.6848], rank: '', score: 77, manager: 'M. Pascal Royer', artisans: 19 },
+      { name: 'Nantes', coords: [47.2184, -1.5536], rank: '', score: 80, manager: 'Mme Anne Mercier', artisans: 21 },
+      { name: 'Bayonne', coords: [43.4929, -1.4748], rank: '', score: 73, manager: 'M. Mikel Etxebeste', artisans: 15 },
+      { name: 'Toulouse Sud', coords: [43.6047, 1.4442], rank: '', score: 79, manager: 'Mme Isabelle Cazes', artisans: 23 },
+      { name: 'Brive', coords: [45.1591, 1.5333], rank: '', score: 71, manager: 'M. Yves Maupin', artisans: 13 },
+      { name: 'Châtellerault', coords: [46.8159, 0.5483], rank: '', score: 75, manager: 'Mme Marine Dubrac', artisans: 14 },
+      { name: 'Cognac', coords: [45.6957, -0.3293], rank: '', score: 74, manager: 'M. François Hennessy', artisans: 12 },
+      { name: 'Royan', coords: [45.6276, -1.0299], rank: '', score: 70, manager: 'Mme Élodie Marchand', artisans: 11 },
+      { name: 'Bressuire', coords: [46.8408, -0.4886], rank: '', score: 76, manager: 'M. Bernard Faye', artisans: 10 },
+      { name: 'Parthenay', coords: [46.6491, -0.2438], rank: '', score: 72, manager: 'Mme Sandrine Augier', artisans: 9 },
+      { name: 'Ruffec', coords: [46.0264, 0.2017], rank: '', score: 73, manager: 'M. Henri Lavoisier', artisans: 10 }
+    ];
+
+    // Génération de 308 artisans dispersés autour de leur agence
+    const metiersList = ['Plomberie','Électricité','Menuiserie','Serrurerie','Chauffage','Vitrerie','Peinture','Maçonnerie'];
+    function statutColor(s) { return s === 'expire' ? '#b33c2f' : (s === 'a-relancer' ? '#c27b30' : '#2f9029'); }
+    function rng(seed) { let x = Math.sin(seed) * 10000; return x - Math.floor(x); }
+
+    const artisans = [];
+    let seed = 1;
+    agences.forEach(a => {
+      for (let i = 0; i < a.artisans; i++) {
+        const angle = rng(seed++) * 2 * Math.PI;
+        const radius = 0.10 + rng(seed++) * 0.35; // 10-45 km env.
+        const lat = a.coords[0] + Math.cos(angle) * radius;
+        const lon = a.coords[1] + Math.sin(angle) * radius * 1.4;
+        const r = rng(seed++);
+        const statut = r > 0.88 ? 'expire' : (r > 0.78 ? 'a-relancer' : 'ok');
+        artisans.push({
+          lat, lon,
+          name: `Artisan ${artisans.length + 1}`,
+          metier: metiersList[Math.floor(rng(seed++) * metiersList.length)],
+          reseau: rng(seed++) > 0.30 ? 'MDPA' : 'Kelkun',
+          statut,
+          agence: a.name
+        });
+      }
+    });
+
+    // Couches : agences (toujours visibles par défaut) + artisans (cluster)
+    const agencesLayer = L.layerGroup();
+    const artisansCluster = L.markerClusterGroup({
+      spiderfyOnMaxZoom: true,
+      showCoverageOnHover: false,
+      maxClusterRadius: 50,
+      iconCreateFunction: (cluster) => {
+        const count = cluster.getChildCount();
+        const size = count > 100 ? 50 : count > 30 ? 42 : 36;
+        return L.divIcon({
+          html: `<div class="map-cluster" style="width:${size}px;height:${size}px;line-height:${size}px;">${count}</div>`,
+          className: 'map-cluster-wrap',
+          iconSize: [size, size]
+        });
+      }
+    });
+
+    function agenceIcon(rank) {
+      const colors = {
+        gold: '#ffa500',
+        silver: '#a3a3a3',
+        bronze: '#a0522d',
+        warning: '#c27b30',
+        '': '#0e2f58'
+      };
+      const c = colors[rank] || '#0e2f58';
+      return L.divIcon({
+        className: 'leaflet-pin-custom',
+        html: `<div class="map-agence-pin" style="background:${c};">A</div>`,
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
+      });
+    }
+
+    let isolatedAgency = null;
+
+    agences.forEach(a => {
+      const m = L.marker(a.coords, { icon: agenceIcon(a.rank) });
+      m.bindPopup(`<strong>${a.name}</strong><br>Score : ${a.score} /100<br>${a.artisans} artisans · ${a.manager}<br><a href="#" class="map-isolate-link" data-agence="${a.name}">Isoler le réseau de cette agence →</a>`);
+      m.on('click', () => map.flyTo(a.coords, 9));
+      agencesLayer.addLayer(m);
+    });
+
+    function refreshArtisans() {
+      const metier = document.getElementById('mapMetier').value;
+      const reseau = document.getElementById('mapReseau').value;
+      const statut = document.getElementById('mapStatut').value;
+      artisansCluster.clearLayers();
+      artisans.forEach(art => {
+        if (metier !== 'all' && art.metier !== metier) return;
+        if (reseau !== 'all' && art.reseau !== reseau) return;
+        if (statut !== 'all' && art.statut !== statut) return;
+        if (isolatedAgency && art.agence !== isolatedAgency) return;
+        const marker = L.circleMarker([art.lat, art.lon], {
+          radius: 8,
+          fillColor: statutColor(art.statut),
+          color: '#fff', weight: 2, fillOpacity: 0.95
+        });
+        marker.statut = art.statut;
+        marker.bindPopup(`<strong>${art.name}</strong><br>${art.metier} · Réseau ${art.reseau}<br>Agence : ${art.agence}`);
+        artisansCluster.addLayer(marker);
+      });
+      updateVisibleStats();
+    }
+
+    // Compteur dynamique selon la viewport visible (zoom, pan, filtres)
+    function updateVisibleStats() {
+      const bounds = map.getBounds();
+      let aVis = 0, ok = 0, warn = 0, err = 0, agVis = 0;
+      artisansCluster.eachLayer(m => {
+        if (bounds.contains(m.getLatLng())) {
+          aVis++;
+          if (m.statut === 'ok') ok++;
+          else if (m.statut === 'a-relancer') warn++;
+          else if (m.statut === 'expire') err++;
+        }
+      });
+      if (map.hasLayer(agencesLayer)) {
+        agencesLayer.eachLayer(m => { if (bounds.contains(m.getLatLng())) agVis++; });
+      }
+      const stats = document.getElementById('mapStats');
+      const parts = [];
+      parts.push(`<strong>${aVis}</strong> artisan${aVis > 1 ? 's' : ''} visible${aVis > 1 ? 's' : ''}`);
+      if (aVis > 0) {
+        const breakdown = [];
+        if (ok)   breakdown.push(`<span style="color:#2f9029;">●</span> ${ok}`);
+        if (warn) breakdown.push(`<span style="color:#c27b30;">●</span> ${warn}`);
+        if (err)  breakdown.push(`<span style="color:#b33c2f;">●</span> ${err}`);
+        if (breakdown.length) parts.push(breakdown.join(' '));
+      }
+      parts.push(`<strong>${agVis}</strong> agence${agVis > 1 ? 's' : ''}`);
+      stats.innerHTML = parts.join(' · ');
+    }
+
+    map.on('moveend zoomend', updateVisibleStats);
+
+    agencesLayer.addTo(map);
+    artisansCluster.addTo(map);
+    refreshArtisans();
+
+    // Filtres réactifs
+    ['mapMetier','mapReseau','mapStatut'].forEach(id => {
+      document.getElementById(id).addEventListener('change', refreshArtisans);
+    });
+
+    // Toggle agences
+    let agencesVisible = true;
+    document.getElementById('mapToggleAgences').addEventListener('click', () => {
+      agencesVisible = !agencesVisible;
+      if (agencesVisible) agencesLayer.addTo(map); else map.removeLayer(agencesLayer);
+      updateVisibleStats();
+    });
+
+    // Isolement d'une agence (depuis popup)
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('.map-isolate-link');
+      if (!link) return;
+      e.preventDefault();
+      isolatedAgency = link.dataset.agence;
+      const a = agences.find(x => x.name === isolatedAgency);
+      if (a) map.flyTo(a.coords, 10);
+      document.getElementById('mapReset').hidden = false;
+      refreshArtisans();
+      map.closePopup();
+    });
+
+    document.getElementById('mapReset').addEventListener('click', () => {
+      isolatedAgency = null;
+      map.flyTo([46.5, 2.5], 6);
+      document.getElementById('mapReset').hidden = true;
+      refreshArtisans();
+    });
+
+    // Plein écran
+    const mapCard = document.getElementById('mapCard');
+    const fsBtn = document.getElementById('mapFullscreen');
+    function toggleFullscreen(force) {
+      const willOpen = force !== undefined ? force : !mapCard.classList.contains('fullscreen');
+      mapCard.classList.toggle('fullscreen', willOpen);
+      document.body.style.overflow = willOpen ? 'hidden' : '';
+      fsBtn.innerHTML = willOpen
+        ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Quitter'
+        : '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg> Plein écran';
+      // Activer le scroll-wheel-zoom uniquement en plein écran
+      if (willOpen) map.scrollWheelZoom.enable(); else map.scrollWheelZoom.disable();
+      setTimeout(() => map.invalidateSize(), 200);
+    }
+    fsBtn.addEventListener('click', () => toggleFullscreen());
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mapCard.classList.contains('fullscreen')) toggleFullscreen(false);
+    });
+
     // Tabs comparatif inter-agences
     document.querySelectorAll('#compTabs .comp-tab').forEach(tab => {
       tab.addEventListener('click', () => {
@@ -529,6 +980,43 @@
         document.querySelectorAll('#compTabs .comp-tab').forEach(t => t.classList.toggle('active', t === tab));
         document.querySelectorAll('.comp-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === axis));
       });
+    });
+
+    // ===== PEC sparklines (SVG inline, 6 derniers mois) =====
+    document.querySelectorAll('.pec-block-spark').forEach(el => {
+      const values = JSON.parse(el.dataset.values || '[]');
+      const labels = JSON.parse(el.dataset.labels || '[]');
+      if (!values.length) return;
+      const W = 240, H = 64, pad = 4;
+      const min = Math.min(...values), max = Math.max(...values);
+      const range = (max - min) || 1;
+      const step = (W - pad * 2) / (values.length - 1);
+      const pts = values.map((v, i) => {
+        const x = pad + i * step;
+        const y = pad + (1 - (v - min) / range) * (H - pad * 2);
+        return [x, y];
+      });
+      const path = pts.map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
+      const area = path + ` L${pts[pts.length - 1][0].toFixed(1)},${H} L${pts[0][0].toFixed(1)},${H} Z`;
+      const lastIdx = values.length - 1;
+      const prev = values[lastIdx - 1];
+      const curr = values[lastIdx];
+      const lineColor = curr >= prev ? '#2f9029' : '#c27b30';
+      const fillColor = curr >= prev ? 'rgba(47,144,41,0.12)' : 'rgba(194,123,48,0.12)';
+      const dots = pts.map(([x, y], i) => {
+        const isLast = i === lastIdx;
+        return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${isLast ? 3 : 2}" fill="${isLast ? lineColor : '#fff'}" stroke="${lineColor}" stroke-width="1.5"/>`;
+      }).join('');
+      const firstLabel = labels[0] || '';
+      const lastLabel = labels[lastIdx] || '';
+      el.innerHTML = `
+        <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+          <path d="${area}" fill="${fillColor}" stroke="none"/>
+          <path d="${path}" fill="none" stroke="${lineColor}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          ${dots}
+        </svg>
+        <div class="pec-block-spark-axis"><span>${firstLabel}</span><span>${lastLabel}</span></div>
+      `;
     });
 
   </script>

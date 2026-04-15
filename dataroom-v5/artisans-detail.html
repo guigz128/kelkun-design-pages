@@ -53,6 +53,7 @@
           <button class="filter-chip">Formés <span class="filter-chip-count">184</span></button>
           <button class="filter-chip">Non formés <span class="filter-chip-count">124</span></button>
           <button class="filter-chip">Documents vérifiés <span class="filter-chip-count">149</span></button>
+          <button class="filter-chip warning-chip">À relancer <span class="filter-chip-count">35</span></button>
           <button class="filter-chip">Non vérifiés <span class="filter-chip-count">28</span></button>
           <button class="filter-chip">Expirés <span class="filter-chip-count">7</span></button>
           <div style="flex:1;"></div>
@@ -232,21 +233,99 @@
 
   <script src="shared.js"></script>
   <script>
-    // Filter chips toggle
+    // Generate extra dummy rows so "À relancer" shows ~35 items
+    const tbody = document.querySelector('table.data-table tbody');
+    const extras = [
+      ['Garcia P.','Plomberie','Saintes','MDPA','valid','Formé','incomplete','Décennale manquante',2],
+      ['Vidal R.','Électricité','Saintes','MDPA','valid','Formé','incomplete','RCP manquante',5],
+      ['Picard M.','Chauffage','Niort','MDPA','valid','Formé','expired','Kbis expiré',6],
+      ['Roche T.','Serrurerie','Limoges','Kelkun','valid','Formé','incomplete','CNI manquante',3],
+      ['Marchal B.','Plomberie','Limoges','MDPA','valid','Formé','incomplete','Décennale manquante',8],
+      ['Bonnet H.','Vitrerie','Périgueux','Kelkun','valid','Formé','incomplete','RCP manquante',4],
+      ['Carlier O.','Menuiserie','Périgueux','MDPA','valid','Formé','expired','Décennale expirée',7],
+      ['Renard A.','Plomberie','La Rochelle','MDPA','valid','Formé','incomplete','Kbis manquant',1],
+      ['Lopez E.','Électricité','La Rochelle','MDPA','valid','Formé','incomplete','RCP manquante',2],
+      ['Faure G.','Peinture','Angoulême','Kelkun','valid','Formé','incomplete','Décennale manquante',3],
+      ['Henry V.','Serrurerie','Angoulême','MDPA','valid','Formé','expired','RCP expirée',5],
+      ['Olivier C.','Chauffage','Poitiers Centre','MDPA','valid','Formé','incomplete','CNI manquante',9],
+      ['Aubert F.','Plomberie','Poitiers Centre','Kelkun','valid','Formé','incomplete','Décennale manquante',6],
+      ['Gauthier I.','Vitrerie','Niort','MDPA','valid','Formé','incomplete','Kbis manquant',2],
+      ['Roussel D.','Menuiserie','Niort','Kelkun','valid','Formé','expired','Décennale expirée',4],
+      ['Schmitt L.','Plomberie','Saintes','Kelkun','valid','Formé','incomplete','RCP manquante',5],
+      ['Perrot J.','Électricité','Limoges','MDPA','valid','Formé','incomplete','CNI manquante',3],
+      ['Léger N.','Serrurerie','Périgueux','MDPA','valid','Formé','incomplete','Décennale manquante',1],
+      ['Boyer S.','Plomberie','La Rochelle','Kelkun','valid','Formé','incomplete','Kbis manquant',6],
+      ['Etienne K.','Chauffage','Angoulême','MDPA','valid','Formé','expired','CNI expirée',2],
+      ['Jacquet Y.','Vitrerie','Poitiers Centre','MDPA','valid','Formé','incomplete','RCP manquante',4],
+      ['Marchand W.','Menuiserie','Niort','MDPA','valid','Formé','incomplete','Décennale manquante',3],
+      ['Sanchez Z.','Plomberie','Saintes','MDPA','valid','Formé','expired','Kbis expiré',5],
+      ['Charrier U.','Électricité','Limoges','Kelkun','valid','Formé','incomplete','CNI manquante',2],
+      ['Bourgeois Q.','Peinture','Périgueux','MDPA','valid','Formé','incomplete','RCP manquante',1],
+    ];
+    const aRelancerStart = tbody.children.length + 1;
+    extras.forEach((e, i) => {
+      const [name, metier, agence, ajPar, formClass, formLbl, docClass, docLbl, interv] = e;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><a href="artisan-fiche.html?id=art-extra-${i}" class="ref-link">${name}</a></td>
+        <td>${metier}</td>
+        <td>${agence}</td>
+        <td><span class="badge ${ajPar === 'MDPA' ? 'primary' : 'accent'}">${ajPar}</span></td>
+        <td><span class="doc-status ${formClass}"><span class="doc-status-dot"></span>${formLbl}</span></td>
+        <td><span class="doc-status ${docClass}"><span class="doc-status-dot"></span>${docLbl}</span></td>
+        <td class="text-center">${interv}</td>
+        <td class="text-right"><a href="artisan-fiche.html?id=art-extra-${i}" class="see-details">Fiche →</a></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Filter rows according to chip
+    const rows = Array.from(document.querySelectorAll('table.data-table tbody tr'));
+    function applyFilter(label) {
+      // For each row, identify formation status (5e <td>) and documents status (6e <td>) classes
+      rows.forEach(r => {
+        const tds = r.querySelectorAll('td');
+        const formationStatus = tds[4]?.querySelector('.doc-status'); // valid|missing
+        const docsStatus = tds[5]?.querySelector('.doc-status');      // valid|incomplete|expired|missing
+        const formationClass = [...(formationStatus?.classList || [])].find(c => ['valid','missing'].includes(c)) || '';
+        const docsClass = [...(docsStatus?.classList || [])].find(c => ['valid','incomplete','expired','missing'].includes(c)) || '';
+        let show = true;
+        switch (label) {
+          case 'Tous': show = true; break;
+          case 'Formés': show = formationClass === 'valid'; break;
+          case 'Non formés': show = formationClass === 'missing'; break;
+          case 'Documents vérifiés': show = docsClass === 'valid'; break;
+          case 'À relancer': show = docsClass === 'incomplete' || docsClass === 'missing' || docsClass === 'expired'; break;
+          case 'Non vérifiés': show = docsClass === 'incomplete' || docsClass === 'missing'; break;
+          case 'Expirés': show = docsClass === 'expired'; break;
+        }
+        r.style.display = show ? '' : 'none';
+      });
+      // Update displayed count next to label "Affichage de X à Y sur Z"
+      const visible = rows.filter(r => r.style.display !== 'none').length;
+      const counter = document.querySelector('.pagination > div');
+      if (counter) counter.innerHTML = `Affichage de <strong>1</strong> à <strong>${visible}</strong> sur <strong>${visible}</strong> artisans${label !== 'Tous' ? ' filtrés' : ''}`;
+    }
+
+    // Filter chips toggle + apply
     document.querySelectorAll('.filter-chip').forEach(chip => {
       chip.addEventListener('click', function() {
         document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
         this.classList.add('active');
+        const label = this.firstChild.textContent.trim();
+        applyFilter(label);
       });
     });
 
     // Pré-sélection chip via ?filter=non-verifies
     const filterParam = new URLSearchParams(location.search).get('filter');
-    const filterMap = { 'non-verifies': 'Non vérifiés', 'expires': 'Expirés', 'non-formes': 'Non formés' };
+    const filterMap = { 'a-relancer': 'À relancer', 'non-verifies': 'Non vérifiés', 'expires': 'Expirés', 'non-formes': 'Non formés' };
     if (filterMap[filterParam]) {
       document.querySelectorAll('.filter-chip').forEach(c => {
-        c.classList.toggle('active', c.textContent.trim().startsWith(filterMap[filterParam]));
+        const isMatch = c.firstChild.textContent.trim() === filterMap[filterParam];
+        c.classList.toggle('active', isMatch);
       });
+      applyFilter(filterMap[filterParam]);
     }
   </script>
 

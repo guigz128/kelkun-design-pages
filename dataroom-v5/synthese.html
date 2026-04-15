@@ -139,8 +139,8 @@
           <div class="kpi-value">342</div>
           <div class="kpi-label">Interventions Kelcare ce mois</div>
           <div class="kpi-versus">
-            <span class="kpi-versus-pill mdpa"><span class="pill-label">MDPA</span><span class="pill-value">241 (70 %)</span></span>
-            <span class="kpi-versus-pill kelcare"><span class="pill-label">Kelkun</span><span class="pill-value">101 (30 %)</span></span>
+            <span class="kpi-versus-pill mdpa"><span class="pill-label">Réseau MDPA</span><span class="pill-value">241 (70 %)</span></span>
+            <span class="kpi-versus-pill kelcare"><span class="pill-label">Réseau Kelkun</span><span class="pill-value">101 (30 %)</span></span>
           </div>
         </div>
       </div>
@@ -173,8 +173,8 @@
           <div class="kpi-value">2,4<span class="unit">j</span></div>
           <div class="kpi-label">Délai moyen d'attribution</div>
           <div class="kpi-versus">
-            <span class="kpi-versus-pill mdpa"><span class="pill-label">MDPA</span><span class="pill-value">2,1 j</span></span>
-            <span class="kpi-versus-pill kelcare"><span class="pill-label">Kelkun</span><span class="pill-value">3,2 j</span></span>
+            <span class="kpi-versus-pill mdpa"><span class="pill-label">Réseau MDPA</span><span class="pill-value">2,1 j</span></span>
+            <span class="kpi-versus-pill kelcare"><span class="pill-label">Réseau Kelkun</span><span class="pill-value">3,2 j</span></span>
           </div>
         </div>
 
@@ -188,8 +188,8 @@
           <div class="kpi-value">487<span class="unit">&euro;</span></div>
           <div class="kpi-label">Panier moyen validé</div>
           <div class="kpi-versus">
-            <span class="kpi-versus-pill mdpa"><span class="pill-label">MDPA</span><span class="pill-value">472 &euro;</span></span>
-            <span class="kpi-versus-pill kelcare"><span class="pill-label">Kelkun</span><span class="pill-value">518 &euro;</span></span>
+            <span class="kpi-versus-pill mdpa"><span class="pill-label">Réseau MDPA</span><span class="pill-value">472 &euro;</span></span>
+            <span class="kpi-versus-pill kelcare"><span class="pill-label">Réseau Kelkun</span><span class="pill-value">518 &euro;</span></span>
           </div>
         </div>
       </div>
@@ -638,8 +638,8 @@
     function renderOpsCard(k) {
       const iconPath = OPS_ICONS[k.icon] || '';
       const breakdown = [
-        { label:'MDPA', ...k.mdpa, cls:'mdpa' },
-        { label:'Kelkun', ...k.kelkun, cls:'kelkun' },
+        { label:'Réseau MDPA', ...k.mdpa, cls:'mdpa' },
+        { label:'Réseau Kelkun', ...k.kelkun, cls:'kelkun' },
         { label:'Total', ...k.total, cls:'total' },
       ].map(b => {
         const isGood = k.goodDir === 'down' ? b.d < 0 : b.d > 0;

@@ -87,28 +87,7 @@
       </div>
 
       <!-- FILTRES scopés agence -->
-      <div class="filters-bar">
-        <div class="filter-group">
-          <span class="filter-label">Période</span>
-          <select class="filter-select">
-            <option>Ce mois</option><option>Ce trimestre</option><option>Cette année</option>
-          </select>
-        </div>
-        <div class="filter-group">
-          <span class="filter-label">Métier</span>
-          <select class="filter-select">
-            <option>Tous</option><option>Plomberie</option><option>Électricité</option><option>Menuiserie</option><option>Serrurerie</option>
-          </select>
-        </div>
-        <div class="filter-group">
-          <span class="filter-label">Réseau</span>
-          <select class="filter-select">
-            <option>Tous</option><option>Réseau MDPA</option><option>Réseau Kelkun</option>
-          </select>
-        </div>
-        <div class="filters-spacer"></div>
-        <span class="badge primary">Agence · 12 artisans</span>
-      </div>
+      <div class="filters-bar" id="filtersBar"></div>
 
       <!-- KPI HÉROS -->
       <div class="kpi-grid cols-2" style="margin-bottom: var(--space-4);">
@@ -135,8 +114,8 @@
           <div class="kpi-value">24</div>
           <div class="kpi-label">Interventions Kelcare ce mois</div>
           <div class="kpi-versus">
-            <span class="kpi-versus-pill mdpa"><span class="pill-label">MDPA</span><span class="pill-value">17 (71 %)</span></span>
-            <span class="kpi-versus-pill kelcare"><span class="pill-label">Kelkun</span><span class="pill-value">7 (29 %)</span></span>
+            <span class="kpi-versus-pill mdpa"><span class="pill-label">Réseau MDPA</span><span class="pill-value">17 (71 %)</span></span>
+            <span class="kpi-versus-pill kelcare"><span class="pill-label">Réseau Kelkun</span><span class="pill-value">7 (29 %)</span></span>
           </div>
         </div>
       </div>
@@ -289,7 +268,7 @@
                 <tr>
                   <td><a href="artisan-fiche.html" class="ref-link">Bernard Sébastien</a></td>
                   <td>Plomberie</td>
-                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="badge primary">Réseau MDPA</span></td>
                   <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
                   <td><span class="doc-status expired"><span class="doc-status-dot"></span>Non vérifié</span></td>
                   <td class="text-right cell-value">9</td>
@@ -298,7 +277,7 @@
                 <tr>
                   <td class="ref-link">Morel Christophe</td>
                   <td>Électricité</td>
-                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="badge primary">Réseau MDPA</span></td>
                   <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
                   <td><span class="doc-status valid"><span class="doc-status-dot"></span>Vérifié</span></td>
                   <td class="text-right cell-value">7</td>
@@ -307,7 +286,7 @@
                 <tr>
                   <td class="ref-link">Fontaine Julien</td>
                   <td>Menuiserie</td>
-                  <td><span class="badge accent">Kelkun</span></td>
+                  <td><span class="badge accent">Réseau Kelkun</span></td>
                   <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
                   <td><span class="doc-status valid"><span class="doc-status-dot"></span>Vérifié</span></td>
                   <td class="text-right cell-value">4</td>
@@ -316,7 +295,7 @@
                 <tr>
                   <td class="ref-link">Rivière Pascale</td>
                   <td>Serrurerie</td>
-                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="badge primary">Réseau MDPA</span></td>
                   <td><span class="doc-status valid"><span class="doc-status-dot"></span>Formé</span></td>
                   <td><span class="doc-status valid"><span class="doc-status-dot"></span>Vérifié</span></td>
                   <td class="text-right cell-value">3</td>
@@ -325,7 +304,7 @@
                 <tr>
                   <td class="ref-link">Chauvet Marc</td>
                   <td>Plomberie</td>
-                  <td><span class="badge primary">MDPA</span></td>
+                  <td><span class="badge primary">Réseau MDPA</span></td>
                   <td><span class="doc-status missing"><span class="doc-status-dot"></span>Non formé</span></td>
                   <td><span class="doc-status incomplete"><span class="doc-status-dot"></span>Non vérifié</span></td>
                   <td class="text-right cell-value">1</td>
@@ -580,6 +559,18 @@
 
   <script src="shared.js"></script>
   <script>
+    // Filtres agence : pas de recherche agence (scope fixe), pas de filtre Réseau, on ajoute Métier + badge
+    const metierFilterHtml = `
+      <div class="filter-group">
+        <span class="filter-label">Métier</span>
+        <select class="filter-select">
+          <option>Tous</option><option>Plomberie</option><option>Électricité</option><option>Menuiserie</option><option>Serrurerie</option><option>Chauffage</option><option>Peinture</option><option>Vitrerie</option><option>Maçonnerie</option>
+        </select>
+      </div>
+      <span class="badge primary">Agence · 12 artisans</span>
+    `;
+    document.getElementById('filtersBar').replaceWith(buildFilters({ showEntity: false, extraFilters: metierFilterHtml }));
+
     setTimeout(() => {
       const fill = document.querySelector('.ring-fill');
       if (fill) fill.style.strokeDashoffset = 314 - (314 * 68 / 100);

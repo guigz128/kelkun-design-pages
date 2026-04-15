@@ -139,12 +139,28 @@ function buildFilters(options) {
   bar.className = 'filters-bar';
   options = options || {};
 
+  // Période : preset + dates libres (audit rétroactif possible)
+  const today = new Date();
+  const firstOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  const toISO = (d) => d.toISOString().slice(0, 10);
   bar.innerHTML += `
-    <div class="filter-group">
+    <div class="filter-group filter-period">
       <span class="filter-label">Période</span>
-      <select class="filter-select">
-        <option>Ce mois</option><option>Ce trimestre</option><option>Cette année</option><option>Depuis le lancement</option>
-      </select>
+      <div class="period-picker">
+        <select class="filter-select period-preset" data-period-preset>
+          <option value="this-month">Ce mois</option>
+          <option value="this-quarter">Ce trimestre</option>
+          <option value="this-year">Cette année</option>
+          <option value="last-30">30 derniers jours</option>
+          <option value="last-90">90 derniers jours</option>
+          <option value="custom">Plage personnalisée…</option>
+        </select>
+        <div class="period-range" data-period-range>
+          <input type="date" class="filter-date period-from" value="${toISO(firstOfMonth)}" aria-label="Du">
+          <span class="period-range-sep">→</span>
+          <input type="date" class="filter-date period-to" value="${toISO(today)}" aria-label="Au">
+        </div>
+      </div>
     </div>
   `;
 
@@ -169,16 +185,9 @@ function buildFilters(options) {
     `;
   }
 
-  if (options.showReseau !== false) {
-    bar.innerHTML += `
-      <div class="filter-group">
-        <span class="filter-label">Réseau</span>
-        <select class="filter-select">
-          <option>Tous</option><option>Réseau MDPA</option><option>Réseau Kelkun</option>
-        </select>
-      </div>
-    `;
-  }
+  // Le filtre Réseau est volontairement retiré (retour MDPA) :
+  // la distinction Réseau MDPA / Réseau Kelkun se lit dans chaque KPI,
+  // mais pas comme scope macro dans la barre de filtres.
 
   bar.innerHTML += '<div class="filters-spacer"></div>';
 
@@ -188,6 +197,34 @@ function buildFilters(options) {
 
   return bar;
 }
+
+/* ---- Period picker : preset ↔ dates libres ---- */
+document.addEventListener('change', (e) => {
+  if (e.target.matches('[data-period-preset]')) {
+    const wrap = e.target.closest('.period-picker');
+    if (!wrap) return;
+    const range = wrap.querySelector('[data-period-range]');
+    const from = wrap.querySelector('.period-from');
+    const to = wrap.querySelector('.period-to');
+    const today = new Date();
+    const toISO = (d) => d.toISOString().slice(0, 10);
+    const setDates = (start, end) => { from.value = toISO(start); to.value = toISO(end); };
+    switch (e.target.value) {
+      case 'this-month':   setDates(new Date(today.getFullYear(), today.getMonth(), 1), today); break;
+      case 'this-quarter': setDates(new Date(today.getFullYear(), Math.floor(today.getMonth()/3)*3, 1), today); break;
+      case 'this-year':    setDates(new Date(today.getFullYear(), 0, 1), today); break;
+      case 'last-30': { const d = new Date(today); d.setDate(d.getDate() - 30); setDates(d, today); break; }
+      case 'last-90': { const d = new Date(today); d.setDate(d.getDate() - 90); setDates(d, today); break; }
+      case 'custom': range.classList.add('editable'); from.focus(); break;
+    }
+  }
+  if (e.target.classList.contains('period-from') || e.target.classList.contains('period-to')) {
+    const wrap = e.target.closest('.period-picker');
+    if (!wrap) return;
+    const select = wrap.querySelector('[data-period-preset]');
+    if (select && select.value !== 'custom') select.value = 'custom';
+  }
+});
 
 /* ---- Agency search dropdown (event delegation) ---- */
 document.addEventListener('input', (e) => {

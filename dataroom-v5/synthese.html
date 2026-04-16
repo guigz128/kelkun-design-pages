@@ -60,11 +60,12 @@
             <div class="ring-center">
               <div class="ring-value" id="heroScoreValue">74</div>
               <div class="ring-max">/100</div>
+              <div class="ring-delta up">+3 pts</div>
             </div>
           </div>
           <div class="hero-info">
             <div class="hero-title">État de santé du déploiement Kelcare</div>
-            <div class="hero-insight">Performance en progression. 184 artisans certifiés actifs sur 308 enregistrés. Poitiers Centre tire le réseau vers le haut, La Rochelle nécessite un plan d'action sur la formation et les documents.</div>
+            <div class="hero-insight">Performance en progression (+3 pts ce mois). 184 artisans formés sur 308 enregistrés. Poitiers Centre tire le réseau vers le haut ; 3 leviers identifiés pour accompagner La Rochelle sur la formation et les documents.</div>
             <div class="hero-axes">
               <div class="hero-axis-badge">+3 pts vs période préc.</div>
               <button class="hero-axis-info" type="button" id="toggleScoringPanel">
@@ -75,39 +76,62 @@
           </div>
         </div>
 
-        <!-- Panel scoring statique (collapsible) -->
+        <!-- Panel scoring explicite (collapsible) -->
         <div class="hero-scoring" id="heroScoring" hidden>
           <div class="hero-scoring-divider"></div>
           <div class="hero-scoring-header">
             <div>
-              <div class="hero-scoring-title">Méthode de calcul du score</div>
-              <div class="hero-scoring-sub">Pondération de référence définie avec l'équipe Pilotage Kelcare — identique pour les 20 agences</div>
+              <div class="hero-scoring-title">Méthode de calcul du score — lisible et évolutive</div>
+              <div class="hero-scoring-sub">Ce score est une <strong>boussole de progression</strong>, pas une évaluation. Il mesure la marge de marche à l'échelle réseau et se relit axe par axe.</div>
             </div>
           </div>
+
+          <div class="hero-scoring-chain">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <span>Le score réseau est la moyenne pondérée des 20 scores agences, recalculée mensuellement. Chaque axe agence se consolide au niveau natio selon la même grille.</span>
+          </div>
+
           <div class="hero-scoring-axes">
             <div class="hero-axis-static">
               <div class="hero-axis-static-head"><span class="hero-axis-label">Formation</span><span class="hero-axis-weight-static">35 %</span></div>
               <div class="hero-axis-static-score">Score réseau : <strong>78</strong> /100</div>
               <div class="hero-axis-foot">Part d'artisans formés Kelcare sur le total enregistré</div>
+              <div class="hero-axis-why"><strong>Pourquoi cet axe ?</strong> C'est le levier d'adoption — un artisan formé livre un parcours sociétaire prévisible.</div>
+              <div class="hero-axis-why"><strong>Pourquoi 35 % ?</strong> Prérequis de toute la chaîne : sans formation, les autres axes ne démarrent pas.</div>
+              <div class="hero-axis-source">Source : dashboard Kelcare · MAJ temps réel</div>
             </div>
             <div class="hero-axis-static">
               <div class="hero-axis-static-head"><span class="hero-axis-label">Documents</span><span class="hero-axis-weight-static">30 %</span></div>
               <div class="hero-axis-static-score">Score réseau : <strong>66</strong> /100</div>
               <div class="hero-axis-foot">Part d'artisans Documents vérifiés sur le total formé</div>
+              <div class="hero-axis-why"><strong>Pourquoi cet axe ?</strong> Conformité et confiance assureur : chaque document manquant est un risque porté par MDPA.</div>
+              <div class="hero-axis-why"><strong>Pourquoi 30 % ?</strong> Pèse fort car directement lié au contrat qui lie MDPA et ses sociétaires.</div>
+              <div class="hero-axis-source">Source : coffre-fort documents · MAJ quotidienne</div>
             </div>
             <div class="hero-axis-static">
               <div class="hero-axis-static-head"><span class="hero-axis-label">Attribution</span><span class="hero-axis-weight-static">20 %</span></div>
               <div class="hero-axis-static-score">Score réseau : <strong>72</strong> /100</div>
               <div class="hero-axis-foot">Taux d'acceptation devis &lt; 48 h</div>
+              <div class="hero-axis-why"><strong>Pourquoi cet axe ?</strong> Mesure la fluidité terrain — vitesse de réponse aux demandes des sociétaires.</div>
+              <div class="hero-axis-why"><strong>Pourquoi 20 % ?</strong> Important mais conditionné au contexte local (densité réseau, métiers disponibles).</div>
+              <div class="hero-axis-source">Source : log interventions Kelcare · MAJ temps réel</div>
             </div>
             <div class="hero-axis-static">
               <div class="hero-axis-static-head"><span class="hero-axis-label">Panier moyen</span><span class="hero-axis-weight-static">15 %</span></div>
               <div class="hero-axis-static-score">Score réseau : <strong>82</strong> /100</div>
               <div class="hero-axis-foot">Écart relatif au panier moyen réseau (487 €)</div>
+              <div class="hero-axis-why"><strong>Pourquoi cet axe ?</strong> Indicateur de maturité : un panier stable reflète un réseau qui couvre bien les typologies d'intervention.</div>
+              <div class="hero-axis-why"><strong>Pourquoi 15 % ?</strong> Poids volontairement modéré — conséquence plus qu'objectif direct.</div>
+              <div class="hero-axis-source">Source : devis validés Kelcare · MAJ quotidienne</div>
             </div>
           </div>
-          <div class="hero-scoring-footer">
-            <span>Calcul : (78 × 0,35) + (66 × 0,30) + (72 × 0,20) + (82 × 0,15) = <strong>74 /100</strong></span>
+
+          <div class="hero-scoring-formula">
+            <strong>Formule :</strong> (78 × 0,35) + (66 × 0,30) + (72 × 0,20) + (82 × 0,15) = <strong>74 /100</strong>
+          </div>
+
+          <div class="hero-scoring-note">
+            Cette grille est co-construite avec l'équipe Pilotage Kelcare et se relit à chaque fin de trimestre. Les pondérations peuvent évoluer si le terrain l'indique.
           </div>
         </div>
       </div>
@@ -397,7 +421,7 @@
               <div class="leaderboard-row warning">
                 <div class="leaderboard-rank">18</div>
                 <div class="leaderboard-body">
-                  <div class="leaderboard-name">La Rochelle <span class="badge warning">À soutenir</span> <span class="streak-badge declining">📉 -3 places</span></div>
+                  <div class="leaderboard-name">La Rochelle <span class="badge warning">Accompagnement prioritaire</span> <span class="streak-badge">3 leviers identifiés</span></div>
                   <div class="leaderboard-meta">Score <strong>68</strong> /100 · 24 interventions · 58 % documents vérifiés</div>
                 </div>
                 <div class="leaderboard-manager">Mme Isabelle Lefèvre</div>
@@ -513,7 +537,7 @@
               <div class="map-legend-row">
                 <span class="map-legend-item"><span class="map-legend-square gold"></span> Top 3</span>
                 <span class="map-legend-item"><span class="map-legend-square mdpa"></span> Standard</span>
-                <span class="map-legend-item"><span class="map-legend-square warn"></span> À soutenir</span>
+                <span class="map-legend-item"><span class="map-legend-square warn"></span> Accompagnement prioritaire</span>
               </div>
             </div>
             <div class="map-legend-sep"></div>

@@ -2140,6 +2140,21 @@ a { color: inherit; text-decoration: none; }
   color: var(--color-white);
 }
 
+.hero-score-ring .ring-delta {
+  margin-top: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--rounded-full);
+  background: rgba(47, 144, 41, 0.25);
+  color: #8ee681;
+  letter-spacing: 0.02em;
+}
+.hero-score-ring .ring-delta.down {
+  background: rgba(194, 123, 48, 0.25);
+  color: #f5b46a;
+}
+
 /* Gauge bar fill animation */
 .gauge-bar .fill {
   transform-origin: left;
@@ -3559,6 +3574,65 @@ a { color: inherit; text-decoration: none; }
 .hero-scoring-footer strong {
   color: var(--color-white);
   font-weight: 700;
+}
+
+/* Méthodo enrichie — chain (natio ↔ agence) + why + source + formula + note */
+.hero-scoring-chain {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: 10px 14px;
+  margin: var(--space-3) 0;
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 2px solid var(--color-primary);
+  border-radius: var(--rounded-md);
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+}
+.hero-scoring-chain svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-primary);
+}
+
+.hero-axis-why {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+  margin-top: 6px;
+}
+.hero-axis-why strong {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+}
+.hero-axis-source {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.hero-scoring-formula {
+  margin-top: var(--space-4);
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: var(--rounded-md);
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.8);
+}
+.hero-scoring-formula strong {
+  color: var(--color-white);
+  font-weight: 700;
+}
+
+.hero-scoring-note {
+  margin-top: var(--space-3);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  font-style: italic;
+  text-align: center;
 }
 
 /* V5 — Sticky simulation banner (apparait au scroll en mode simulation) */

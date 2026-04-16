@@ -19,7 +19,7 @@
       <div class="ai-insight">
         <div class="ai-insight-body">
           <div class="ai-insight-title">Bonjour Madame Lefèvre,</div>
-          <div class="ai-insight-text">votre agence <strong>La Rochelle</strong> est sur la pente ascendante : <strong>+6 points</strong> de certification ce mois. Priorité n° 1 : <strong>3 dossiers expirés</strong> à renouveler avant fin avril. Priorité n° 2 : relancer les <strong>4 artisans non certifiés</strong> pour atteindre la cible réseau de 80 %.</div>
+          <div class="ai-insight-text">votre agence <strong>La Rochelle</strong> est sur une belle dynamique : <strong>+6 points</strong> de formation ce mois. Deux leviers pour prolonger l'élan : <strong>3 dossiers à régulariser</strong> avant fin avril et <strong>4 artisans à inscrire</strong> à la prochaine session Kelcare pour atteindre la cible réseau de 80 %.</div>
         </div>
       </div>
 
@@ -34,11 +34,12 @@
             <div class="ring-center">
               <div class="ring-value">68</div>
               <div class="ring-max">/100</div>
+              <div class="ring-delta up">+6 pts</div>
             </div>
           </div>
           <div class="hero-info">
             <div class="hero-title">Score de santé — Agence La Rochelle</div>
-            <div class="hero-insight">Score inférieur à la moyenne réseau (74 /100). Gains possibles : documents (58 vs 78 moy.) et certification (68 vs 78 moy.).</div>
+            <div class="hero-insight">+6 pts ce mois — belle dynamique. Marge de progression sur documents (58 vs 78 réseau) et formation (68 vs 78 réseau) pour rejoindre le cœur du réseau.</div>
             <div class="hero-axes">
               <div class="hero-axis-badge">+6 pts vs période préc.</div>
               <button class="hero-axis-info" type="button" id="toggleScoringPanel">
@@ -49,39 +50,62 @@
           </div>
         </div>
 
-        <!-- Panel scoring (même pondération que national) -->
+        <!-- Panel scoring explicite (même pondération que national) -->
         <div class="hero-scoring" id="heroScoring" hidden>
           <div class="hero-scoring-divider"></div>
           <div class="hero-scoring-header">
             <div>
-              <div class="hero-scoring-title">Méthode de calcul du score</div>
-              <div class="hero-scoring-sub">Pondération identique pour les 20 agences — score agence vs score réseau</div>
+              <div class="hero-scoring-title">Méthode de calcul du score — lisible et évolutive</div>
+              <div class="hero-scoring-sub">Ce score est une <strong>boussole de progression</strong>, pas une évaluation. Il indique les leviers à activer pour remonter au cœur du réseau.</div>
             </div>
           </div>
+
+          <div class="hero-scoring-chain">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <span>Pondération identique pour les 20 agences. Le score agence nourrit le score réseau (moyenne pondérée des 20), consolidé chaque fin de mois.</span>
+          </div>
+
           <div class="hero-scoring-axes">
             <div class="hero-axis-static">
               <div class="hero-axis-static-head"><span class="hero-axis-label">Formation</span><span class="hero-axis-weight-static">35 %</span></div>
-              <div class="hero-axis-static-score">Score agence : <strong>68</strong> /100 <span class="axis-vs worse">· réseau 78</span></div>
+              <div class="hero-axis-static-score">Score agence : <strong>68</strong> /100 <span class="axis-vs">réseau 78</span></div>
               <div class="hero-axis-foot">Part d'artisans formés Kelcare sur le total enregistré</div>
+              <div class="hero-axis-why"><strong>Pourquoi cet axe ?</strong> Levier d'adoption : un artisan formé livre un parcours sociétaire prévisible.</div>
+              <div class="hero-axis-why"><strong>Pourquoi 35 % ?</strong> Prérequis de toute la chaîne — sans formation, les autres axes ne démarrent pas.</div>
+              <div class="hero-axis-source">Source : dashboard Kelcare · MAJ temps réel</div>
             </div>
             <div class="hero-axis-static">
               <div class="hero-axis-static-head"><span class="hero-axis-label">Documents</span><span class="hero-axis-weight-static">30 %</span></div>
-              <div class="hero-axis-static-score">Score agence : <strong>58</strong> /100 <span class="axis-vs worse">· réseau 66</span></div>
+              <div class="hero-axis-static-score">Score agence : <strong>58</strong> /100 <span class="axis-vs">réseau 66</span></div>
               <div class="hero-axis-foot">Part d'artisans Documents vérifiés sur le total formé</div>
+              <div class="hero-axis-why"><strong>Pourquoi cet axe ?</strong> Conformité et confiance assureur : chaque document manquant est un risque porté par MDPA.</div>
+              <div class="hero-axis-why"><strong>Pourquoi 30 % ?</strong> Pèse fort car directement lié au contrat qui lie MDPA et ses sociétaires.</div>
+              <div class="hero-axis-source">Source : coffre-fort documents · MAJ quotidienne</div>
             </div>
             <div class="hero-axis-static">
               <div class="hero-axis-static-head"><span class="hero-axis-label">Attribution</span><span class="hero-axis-weight-static">20 %</span></div>
-              <div class="hero-axis-static-score">Score agence : <strong>76</strong> /100 <span class="axis-vs better">· réseau 72</span></div>
+              <div class="hero-axis-static-score">Score agence : <strong>76</strong> /100 <span class="axis-vs better">réseau 72</span></div>
               <div class="hero-axis-foot">Taux d'acceptation devis &lt; 48 h</div>
+              <div class="hero-axis-why"><strong>Pourquoi cet axe ?</strong> Mesure la fluidité terrain — vitesse de réponse aux sociétaires.</div>
+              <div class="hero-axis-why"><strong>Pourquoi 20 % ?</strong> Important mais conditionné au contexte local (densité réseau, métiers disponibles).</div>
+              <div class="hero-axis-source">Source : log interventions Kelcare · MAJ temps réel</div>
             </div>
             <div class="hero-axis-static">
               <div class="hero-axis-static-head"><span class="hero-axis-label">Panier moyen</span><span class="hero-axis-weight-static">15 %</span></div>
-              <div class="hero-axis-static-score">Score agence : <strong>78</strong> /100 <span class="axis-vs worse">· réseau 82</span></div>
+              <div class="hero-axis-static-score">Score agence : <strong>78</strong> /100 <span class="axis-vs">réseau 82</span></div>
               <div class="hero-axis-foot">Écart relatif au panier moyen réseau (487 €)</div>
+              <div class="hero-axis-why"><strong>Pourquoi cet axe ?</strong> Indicateur de maturité : un panier stable reflète une couverture équilibrée des typologies.</div>
+              <div class="hero-axis-why"><strong>Pourquoi 15 % ?</strong> Poids volontairement modéré — conséquence plus qu'objectif direct.</div>
+              <div class="hero-axis-source">Source : devis validés Kelcare · MAJ quotidienne</div>
             </div>
           </div>
-          <div class="hero-scoring-footer">
-            <span>Calcul : (68 × 0,35) + (58 × 0,30) + (76 × 0,20) + (78 × 0,15) = <strong>68 /100</strong></span>
+
+          <div class="hero-scoring-formula">
+            <strong>Formule :</strong> (68 × 0,35) + (58 × 0,30) + (76 × 0,20) + (78 × 0,15) = <strong>68 /100</strong>
+          </div>
+
+          <div class="hero-scoring-note">
+            Cette grille est co-construite avec l'équipe Pilotage Kelcare et se relit à chaque fin de trimestre. Les pondérations peuvent évoluer si le terrain l'indique.
           </div>
         </div>
       </div>
@@ -329,8 +353,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
               </div>
               <div class="action-item-body">
-                <div class="action-item-title">3 décennales expirées</div>
-                <div class="action-item-desc">Bernard S., Leclerc P., Dumas J.</div>
+                <div class="action-item-title">3 décennales à régulariser</div>
+                <div class="action-item-desc">Bernard S., Leclerc P., Dumas J. — régularisation avant fin avril</div>
               </div>
               <a href="#" class="action-item-link">Relancer</a>
             </div>
@@ -340,8 +364,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 8 3 12 0v-5"/></svg>
               </div>
               <div class="action-item-body">
-                <div class="action-item-title">4 artisans non certifiés</div>
-                <div class="action-item-desc">Session formation Kelcare le 22/04</div>
+                <div class="action-item-title">4 artisans à inscrire à la prochaine session</div>
+                <div class="action-item-desc">Session Kelcare le 22/04 — places disponibles</div>
               </div>
               <a href="#" class="action-item-link">Inscrire</a>
             </div>
@@ -473,8 +497,8 @@
             <div class="leaderboard-row warning">
               <div class="leaderboard-rank">12</div>
               <div class="leaderboard-body">
-                <div class="leaderboard-name">Chauvet Marc <span class="badge warning">Priorité relance</span> <span class="streak-badge declining">📉 Non formé · 0 docs</span></div>
-                <div class="leaderboard-meta">Score <strong>28</strong> /100 · 1 intervention · à inscrire à la session du 22/04</div>
+                <div class="leaderboard-name">Chauvet Marc <span class="badge warning">Accompagnement recommandé</span> <span class="streak-badge">Formation à programmer · dossier à compléter</span></div>
+                <div class="leaderboard-meta">Score <strong>28</strong> /100 · 1 intervention · prochaine session Kelcare le 22/04 — place réservée</div>
               </div>
               <div class="leaderboard-manager">Plomberie · MDPA</div>
             </div>
@@ -529,7 +553,7 @@
               <div class="map-legend-title">Artisans (12)</div>
               <div class="map-legend-row">
                 <span class="map-legend-item"><span class="map-legend-dot ok"></span> Conformes (8)</span>
-                <span class="map-legend-item"><span class="map-legend-dot warn"></span> À relancer (3)</span>
+                <span class="map-legend-item"><span class="map-legend-dot warn"></span> Accompagnement (3)</span>
                 <span class="map-legend-item"><span class="map-legend-dot kelkun"></span> Non formé (1)</span>
               </div>
             </div>

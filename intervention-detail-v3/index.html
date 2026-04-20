@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intervention INT-2026-R1U0 — Détail d'une intervention</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="../dataroom-v4/dataroom.css">
+  <link rel="stylesheet" href="intervention.css">
+</head>
+<body data-page="intervention">
+
+  <!-- ========================================
+       SIDEBAR (Kelcare admin — preprod)
+  ========================================= -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <strong style="font-family: var(--font-family); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--color-secondary);">Kelcare</strong>
+      <span class="sidebar-badge">admin</span>
+    </div>
+
+    <div class="sidebar-section">
+      <ul class="sidebar-nav">
+        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Accueil</a></li>
+        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Utilisateurs</a></li>
+        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Prescripteurs</a></li>
+        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Dossiers</a></li>
+        <li><a href="#" class="active"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Interventions</a></li>
+        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Tâches</a></li>
+        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>Tutoriels</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Fonctionnalités Premium</div>
+      <ul class="sidebar-nav">
+        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><line x1="8" y1="8" x2="11" y2="16"/><line x1="16" y1="8" x2="13" y2="16"/><line x1="8.5" y1="6" x2="15.5" y2="6"/></svg>Analyse Réseau</a></li>
+        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>Climat'Ops</a></li>
+        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z"/><path d="M9 22v-7"/></svg>Ren'Ops</a></li>
+      </ul>
+    </div>
+
+    <div style="margin-top: auto; padding-top: var(--space-4); border-top: 1px solid var(--color-neutral-100);">
+      <ul class="sidebar-nav">
+        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Catalogue d'applications</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <div class="main">
+
+    <!-- ========================================
+         TOPBAR
+    ========================================= -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane">
+          <a href="#">Tableau de bord</a>
+          <span class="breadcrumb-sep">/</span>
+          <a href="#">Interventions</a>
+          <span class="breadcrumb-sep">/</span>
+          <span class="breadcrumb-current">INT-2026-R1U0</span>
+        </nav>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" placeholder="Rechercher…" aria-label="Rechercher">
+        </div>
+        <button class="icon-btn" aria-label="Notifications" title="Notifications (alt+T)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="icon-btn-dot"></span>
+        </button>
+        <button class="btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+          Actions
+        </button>
+        <div class="user-chip" role="button" tabindex="0" aria-label="Guillaume PONS — ouvrir le menu">
+          <div class="user-chip-avatar">G</div>
+          <span class="user-chip-name">Guillaume PONS</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- ========================================
+           PAGE HEADER (back + pager + titre)
+      ========================================= -->
+      <div class="page-header">
+        <div class="page-header-top">
+          <a href="#" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            Retour à la liste
+          </a>
+          <div class="topbar-pager" aria-label="Pagination">
+            <button aria-label="Précédent" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <span><strong>1</strong> / 68</span>
+            <button aria-label="Suivant">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="page-header-main">
+          <div>
+            <h1 class="page-title">Intervention INT-2026-R1U0</h1>
+            <div class="page-subtitle">
+              Rattachée au dossier <a href="#" class="ref-link">DOS-2026-SKAF</a> · Mehdi Salmi — 448 Chem. du Devès, 30500 Saint-Brès
+            </div>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              Messagerie
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================
+           ALERT — Statut courant (Devis validé)
+      ========================================= -->
+      <div class="alert-status">
+        <div class="alert-status-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="alert-status-body">
+          <div class="alert-status-title">Devis validé</div>
+          <div class="alert-status-desc">Le client a validé et réglé le devis mar. 14 avril 2026 à 11 h 09.</div>
+        </div>
+      </div>
+
+      <!-- ========================================
+           META INTERVENTION (résumé haut de page)
+      ========================================= -->
+      <div class="intervention-meta">
+        <div class="intervention-meta-status">
+          <span class="badge badge-lg success">Devis validé &amp; réglé</span>
+          <span class="intervention-meta-step">Étape : en attente de planification du RDV d'intervention</span>
+        </div>
+        <div class="intervention-meta-grid">
+          <div>
+            <span>Type</span>
+            <strong>Remise en état</strong>
+          </div>
+          <div>
+            <span>Métier</span>
+            <strong>Plombier</strong>
+          </div>
+          <div>
+            <span>Artisan attribué</span>
+            <strong>Mehdi Salmi</strong>
+          </div>
+          <div>
+            <span>Prescripteur</span>
+            <strong>AssuTest - Med</strong>
+          </div>
+          <div>
+            <span>Prise en charge</span>
+            <strong>Aucune</strong>
+          </div>
+          <div>
+            <span>Montant TTC</span>
+            <strong>275,00 €</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================
+           TABS NAV (ordre V2 : Synthèse / Artisans / Pièces / Devis / PEC / Suivi)
+      ========================================= -->
+      <nav class="tabs-nav" id="tabsNav">
+        <button class="tab-item active" data-tab="synthese">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Synthèse
+        </button>
+        <button class="tab-item" data-tab="artisans">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Artisans &amp; attribution
+        </button>
+        <button class="tab-item" data-tab="pieces">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Pièces
+        </button>
+        <button class="tab-item" data-tab="devis">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Devis
+          <span class="tab-count success">1</span>
+        </button>
+        <button class="tab-item" data-tab="pec">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          Prise en charge
+        </button>
+        <button class="tab-item" data-tab="suivi">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Suivi
+          <span class="tab-count">14</span>
+        </button>
+      </nav>
+
+      <!-- ========================================
+           TAB : SYNTHÈSE
+      ========================================= -->
+      <section class="tab-panel active" id="tab-synthese">
+
+        <!-- Informations générales (Client / Demande / Prescripteur) -->
+        <div class="card" style="margin-bottom: var(--space-4);">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Informations générales</div>
+              <div class="card-subtitle">Client, demande et prescripteur</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="info-grid">
+              <!-- Client -->
+              <div class="info-block">
+                <div class="info-block-title">Client</div>
+                <dl class="info-row">
+                  <dt>Nom</dt>
+                  <dd>Mehdi Salmi</dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>Téléphone</dt>
+                  <dd><a href="tel:+33783761243">+33 7 83 76 12 43</a></dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>Email</dt>
+                  <dd><a href="mailto:mehdisalmideveloper@gmail.com">mehdisalmideveloper@gmail.com</a></dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>Adresse</dt>
+                  <dd>448 Chem. du Devès<br>30500 Saint-Brès, France</dd>
+                </dl>
+              </div>
+
+              <!-- Demande -->
+              <div class="info-block">
+                <div class="info-block-title">Demande</div>
+                <dl class="info-row">
+                  <dt>Référence interne</dt>
+                  <dd>INT-2026-R1U0</dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>Type</dt>
+                  <dd>Remise en état</dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>Référence externe</dt>
+                  <dd>test</dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>Métiers</dt>
+                  <dd>Plombier</dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>Prise en charge</dt>
+                  <dd>Aucune</dd>
+                </dl>
+              </div>
+
+              <!-- Prescripteur -->
+              <div class="info-block">
+                <div class="info-block-title">Prescripteur</div>
+                <dl class="info-row">
+                  <dt>Nom</dt>
+                  <dd>
+                    <a href="#">AssuTest - Med</a>
+                    <span class="info-type-chip">Assurance</span>
+                  </dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>Téléphone</dt>
+                  <dd><a href="tel:+33783761243">+33 7 83 76 12 43</a></dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>Email</dt>
+                  <dd><a href="mailto:salmi.mehdi+medassu@kelkun.app">salmi.mehdi+medassu@kelkun.app</a></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rendez-vous : visite technique + intervention -->
+        <div class="grid-2" style="margin-bottom: var(--space-4);">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Visite technique — devis</div>
+                <div class="card-subtitle">Rendez-vous de chiffrage</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="rdv-card-body">
+                <div>
+                  <span class="rdv-label">Rendez-vous</span>
+                  <span class="rdv-value">
+                    mar. 14 avril 2026 à 11 h 00
+                    <span class="muted">MEHDI SALMI (SALMI MEHDI)</span>
+                  </span>
+                </div>
+                <div class="rdv-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Date d'intervention</div>
+                <div class="card-subtitle">Exécution des travaux</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="rdv-card-body">
+                <div>
+                  <span class="rdv-label">Rendez-vous</span>
+                  <span class="rdv-value">En attente de RDV</span>
+                </div>
+                <div class="rdv-icon neutral">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Description</div>
+              <div class="card-subtitle">Renseignée par le prescripteur</div>
+            </div>
+            <button class="btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Modifier
+            </button>
+          </div>
+          <div class="card-body">
+            <p style="margin:0; color: var(--color-neutral-700); font-size: var(--font-size-md);">test</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================
+           TAB : ARTISANS & ATTRIBUTION
+      ========================================= -->
+      <section class="tab-panel" id="tab-artisans">
+
+        <!-- Artisan attribué -->
+        <div class="card" style="margin-bottom: var(--space-4);">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Artisan attribué</div>
+              <div class="card-subtitle">Intervenant retenu pour cette intervention</div>
+            </div>
+            <span class="badge success">Sélectionné</span>
+          </div>
+          <div class="card-body">
+            <div class="info-grid" style="grid-template-columns: repeat(2, 1fr);">
+              <div class="info-block">
+                <dl class="info-row">
+                  <dt>Artisan</dt>
+                  <dd>Salmi Mehdi</dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>Entreprise</dt>
+                  <dd>MEHDI SALMI (SALMI MEHDI)</dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>SIREN</dt>
+                  <dd>
+                    <a href="https://annuaire-entreprises.data.gouv.fr/entreprise/513594099" target="_blank" rel="noopener">
+                      513 594 099
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-left:4px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                  </dd>
+                </dl>
+              </div>
+              <div class="info-block">
+                <dl class="info-row">
+                  <dt>Téléphone</dt>
+                  <dd><a href="tel:+33783761243">+33 7 83 76 12 43</a></dd>
+                </dl>
+                <dl class="info-row">
+                  <dt>Email</dt>
+                  <dd><a href="mailto:salmi.mehdi+artpro@kelkun.app">salmi.mehdi+artpro@kelkun.app</a></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Informations professionnelles -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Informations professionnelles</div>
+              <div class="card-subtitle">Retrouvez ici tous les artisans sollicités pour effectuer cette intervention.</div>
+            </div>
+          </div>
+          <div class="card-body flush">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Artisan</th>
+                  <th>Téléphone</th>
+                  <th>Email</th>
+                  <th>R.D.V devis</th>
+                  <th class="text-right">Étape</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <a href="#" class="ref-link">MEHDI SALMI (SALMI MEHDI)</a><br>
+                    <small style="color:var(--color-neutral-500);">Plombier</small>
+                  </td>
+                  <td><a href="tel:+33783761243">+33 7 83 76 12 43</a></td>
+                  <td><a href="mailto:salmi.mehdi+artpro@kelkun.app">salmi.mehdi+artpro@kelkun.app</a></td>
+                  <td>14 avr. 2026 à 11 h 00</td>
+                  <td class="text-right"><span class="badge success">Sélectionné</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================
+           TAB : PIÈCES
+      ========================================= -->
+      <section class="tab-panel" id="tab-pieces">
+
+        <!-- Photos client -->
+        <div class="card" style="margin-bottom: var(--space-4);">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Photos du client</div>
+              <div class="card-subtitle">Avant et après l'intervention</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="photos-split">
+              <div>
+                <div class="photos-col-title">Avant</div>
+                <div class="photos-row">
+                  <div class="photo-empty">Aucune photo avant l'intervention</div>
+                </div>
+              </div>
+              <div>
+                <div class="photos-col-title">Après</div>
+                <div class="photos-row">
+                  <div class="photo-empty">Aucune photo après l'intervention</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photos artisan -->
+        <div class="card" style="margin-bottom: var(--space-4);">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Photos de l'artisan</div>
+              <div class="card-subtitle">3 photos avant l'intervention</div>
+            </div>
+            <a href="https://preprod.kelcare.fr/int/pro/8MXVDVVUZVCI" target="_blank" rel="noopener" class="btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Ajouter à la place de l'artisan
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="photos-split">
+              <div>
+                <div class="photos-col-title">Avant · 3 photos</div>
+                <div class="photos-row">
+                  <div class="photo-thumb-sm"></div>
+                  <div class="photo-thumb-sm"></div>
+                  <div class="photo-thumb-sm"></div>
+                </div>
+              </div>
+              <div>
+                <div class="photos-col-title">Après</div>
+                <div class="photos-row">
+                  <div class="photo-empty">Aucune photo après l'intervention</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Documents -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Documents liés à l'intervention</div>
+              <div class="card-subtitle">Devis, facture, PV et rapport d'intervention</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="doc-download-list">
+              <div class="doc-download-row">
+                <div class="doc-download-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="doc-download-body">
+                  <div class="doc-download-title">Devis artisan</div>
+                  <div class="doc-download-desc">Document envoyé par l'artisan avec les détails de l'intervention.</div>
+                </div>
+                <button class="btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Télécharger
+                </button>
+              </div>
+              <div class="doc-download-row">
+                <div class="doc-download-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+                </div>
+                <div class="doc-download-body">
+                  <div class="doc-download-title">Facture client</div>
+                  <div class="doc-download-desc">Montant final facturé et réglé par le client.</div>
+                </div>
+                <button class="btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Télécharger
+                </button>
+              </div>
+              <div class="doc-download-row">
+                <div class="doc-download-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg>
+                </div>
+                <div class="doc-download-body">
+                  <div class="doc-download-title">Procès-verbal de fin de chantier</div>
+                  <div class="doc-download-desc">Atteste de la fin des travaux et de leur conformité.</div>
+                </div>
+                <button class="btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Télécharger
+                </button>
+              </div>
+              <div class="doc-download-row">
+                <div class="doc-download-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <div class="doc-download-body">
+                  <div class="doc-download-title">Rapport d'intervention</div>
+                  <div class="doc-download-desc">Résumé de l'intervention réalisée par l'artisan.</div>
+                </div>
+                <button class="btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Télécharger
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================
+           TAB : DEVIS
+      ========================================= -->
+      <section class="tab-panel" id="tab-devis">
+
+        <div class="card devis-card">
+          <div class="card-body">
+
+            <div class="devis-header">
+              <div class="devis-artisan">
+                <div class="stakeholder-avatar artisan">MS</div>
+                <div>
+                  <div class="devis-artisan-name">MEHDI SALMI (SALMI MEHDI)</div>
+                  <div class="devis-artisan-meta">SIREN 513 594 099 · Plombier</div>
+                </div>
+              </div>
+              <div class="devis-amount">
+                <div class="devis-amount-value">275,00 €</div>
+                <div class="devis-amount-label">TTC · dont 25 € TVA</div>
+              </div>
+            </div>
+
+            <div class="devis-meta-grid">
+              <div>
+                <span>Statut</span>
+                <span class="doc-status valid"><span class="doc-status-dot"></span>Validé &amp; payé</span>
+              </div>
+              <div>
+                <span>Validé le</span>
+                <strong>14/04/2026 à 11 h 09</strong>
+              </div>
+              <div>
+                <span>ID paiement</span>
+                <strong style="font-family: ui-monospace, monospace; font-size: 12px;">c972a795-9996-47af-b373-eedcc75cb883</strong>
+              </div>
+              <div>
+                <span>Pièces jointes</span>
+                <strong style="color: var(--color-neutral-500); font-weight: 500;">Aucune pièce</strong>
+              </div>
+            </div>
+
+            <!-- Lignes de chiffrage -->
+            <div class="quote-lines">
+              <div class="quote-line">
+                <span>Déplacement</span>
+                <strong>100,00 €</strong>
+              </div>
+              <div class="quote-line">
+                <span>Main d'œuvre</span>
+                <strong>150,00 €</strong>
+              </div>
+              <div class="quote-line subtotal">
+                <span>Total HT</span>
+                <strong>250,00 €</strong>
+              </div>
+              <div class="quote-line">
+                <span>TVA 10 %</span>
+                <strong>25,00 €</strong>
+              </div>
+              <div class="quote-line total">
+                <span>Total TTC</span>
+                <strong>275,00 €</strong>
+              </div>
+            </div>
+
+            <!-- Reste à charge -->
+            <div class="remains-due">
+              <div class="remains-due-label">
+                <span>Reste à charge</span>
+                <strong>Réglé par le client le 14/04/2026 à 11 h 09</strong>
+              </div>
+              <div class="remains-due-value">275,00 €</div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================
+           TAB : PRISE EN CHARGE
+      ========================================= -->
+      <section class="tab-panel" id="tab-pec">
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Prise en charge assurance</div>
+              <div class="card-subtitle">Couverture applicable à cette intervention</div>
+            </div>
+            <button class="btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Modifier la PEC
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="empty-state">
+              <div class="empty-state-title">Aucune prise en charge</div>
+              <div class="empty-state-desc">Cette intervention n'est rattachée à aucune couverture assurance.<br>Le montant reste à la charge du client.</div>
+            </div>
+
+            <div class="rgpd-disclaimer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              L'accès à ces informations est enregistré et tracé conformément à notre politique de sécurité.
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================
+           TAB : SUIVI
+      ========================================= -->
+      <section class="tab-panel" id="tab-suivi">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Chronologie de l'intervention</div>
+              <div class="card-subtitle">14 événements · du plus récent au plus ancien</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="timeline">
+
+              <div class="timeline-entry">
+                <div class="timeline-dot success"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Le client a accepté le devis</div>
+                  <div class="timeline-meta">Le devis a été validé par le client, l'intervention peut désormais avoir lieu.</div>
+                  <div class="timeline-meta"><strong>Validé le 14 avr. 2026 à 11 h 09</strong></div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot success"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Paiement client validé avec succès</div>
+                  <div class="timeline-meta">Le client a finalisé le paiement sécurisé pour cette intervention.</div>
+                  <div class="timeline-meta"><strong>Effectué le 14 avr. 2026 à 11 h 09</strong></div>
+                  <span class="timeline-uuid">ID paiement : c972a795-9996-47af-b373-eedcc75cb883</span>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot info"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Lien de paiement généré pour le client</div>
+                  <div class="timeline-meta">Un lien de paiement sécurisé a été créé afin que le client puisse régler l'intervention.</div>
+                  <div class="timeline-meta"><strong>Généré le 14 avr. 2026 à 10 h 52</strong></div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot info"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Le devis a été transmis au client</div>
+                  <div class="timeline-meta"><strong>Envoyé le 14 avr. 2026 à 10 h 52</strong> — par Mehdi Salmi</div>
+                  <span class="timeline-uuid">Organisation : ac900769-7bb7-41b1-a2c4-0458f5901df5</span>
+                  <span class="timeline-uuid">Demande : 1f68ce19-cb2e-485a-be7e-f7ceb354aa46</span>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot info"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Le devis a été envoyé au client</div>
+                  <div class="timeline-meta"><strong>Envoyé le 14 avr. 2026 à 10 h 52</strong> — par Mehdi Salmi</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot warning"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Le devis a été soumis pour validation</div>
+                  <div class="timeline-meta"><strong>Soumis le 14 avr. 2026 à 10 h 51</strong></div>
+                  <span class="timeline-uuid">Organisation : ac900769-7bb7-41b1-a2c4-0458f5901df5</span>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot warning"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Le devis a été soumis pour validation</div>
+                  <div class="timeline-meta"><strong>Soumis le 14 avr. 2026 à 10 h 50</strong></div>
+                  <span class="timeline-uuid">Organisation : ac900769-7bb7-41b1-a2c4-0458f5901df5</span>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot primary"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Analyse IA du devis effectuée</div>
+                  <div class="timeline-meta">Le devis a été analysé automatiquement par l'intelligence artificielle.</div>
+                  <div class="timeline-meta"><strong>Analysé le 14 avr. 2026 à 10 h 50</strong></div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot info"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Photos avant intervention envoyées</div>
+                  <div class="timeline-meta">L'artisan ou un opérateur a soumis les photos obligatoires d'avant intervention.</div>
+                  <div class="timeline-meta"><strong>Envoyé le 14 avr. 2026 à 10 h 50</strong></div>
+                  <span class="timeline-uuid">Organisation : ac900769-7bb7-41b1-a2c4-0458f5901df5</span>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot success"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Présence sur site confirmée</div>
+                  <div class="timeline-meta">L'artisan s'est déclaré présent sur le lieu de l'intervention.</div>
+                  <div class="timeline-meta"><strong>Déclaré le 14 avr. 2026 à 10 h 50</strong></div>
+                  <span class="timeline-uuid">Organisation : ac900769-7bb7-41b1-a2c4-0458f5901df5</span>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot info"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Un rendez-vous a été planifié</div>
+                  <div class="timeline-meta">Date du rendez-vous : mardi 14 avril 2026 à 11 h 00</div>
+                  <div class="timeline-meta"><strong>Planifié le 14 avr. 2026 à 10 h 49</strong></div>
+                  <span class="timeline-uuid">Organisation : ac900769-7bb7-41b1-a2c4-0458f5901df5</span>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot success"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Intervention acceptée par une organisation</div>
+                  <div class="timeline-meta"><strong>Acceptée le 14 avr. 2026 à 10 h 49</strong></div>
+                  <span class="timeline-uuid">Organisation : ac900769-7bb7-41b1-a2c4-0458f5901df5</span>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Intervention proposée à une organisation</div>
+                  <div class="timeline-meta"><strong>Envoyée le 14 avr. 2026 à 10 h 49</strong> — par Mehdi Salmi</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-dot primary"></div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Intervention créée</div>
+                  <div class="timeline-meta"><strong>Créée le 14 avr. 2026 à 10 h 49</strong> — par Mehdi Salmi</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Tabs behaviour
+    const tabs = document.querySelectorAll('.tab-item');
+    const panels = document.querySelectorAll('.tab-panel');
+    function activate(id) {
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+      panels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + id));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(tab => tab.addEventListener('click', () => activate(tab.dataset.tab)));
+    document.querySelectorAll('[data-goto]').forEach(link => {
+      link.addEventListener('click', (e) => { e.preventDefault(); activate(link.dataset.goto); });
+    });
+  </script>
+
+</body>
+</html>

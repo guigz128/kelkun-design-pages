@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon entreprise — Kelkun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ================================================
+       KELKUN DESIGN SYSTEM v2 — TOKENS
+    ================================================ */
+    :root {
+      --color-white: #ffffff;
+      --color-black: #000000;
+      --color-primary:     #03c5b8;
+      --color-primary-10:  #f1fefc;
+      --color-primary-25:  #d5fbf6;
+      --color-primary-50:  #c2faf3;
+      --color-primary-100: #93f6e9;
+      --color-primary-200: #76ede0;
+      --color-primary-500: #03c5b8;
+      --color-primary-600: #029284;
+      --color-primary-700: #015f56;
+      --color-secondary:     #0e2f58;
+      --color-secondary-1:   #f8f9fc;
+      --color-secondary-2:   #f4f6fa;
+      --color-secondary-10:  #eeeff7;
+      --color-secondary-25:  #e0e2f0;
+      --color-secondary-50:  #bdc3e0;
+      --color-secondary-100: #9aa3d0;
+      --color-secondary-400: #465d88;
+      --color-secondary-500: #0e2f58;
+      --color-tertiary:     #ffc114;
+      --color-tertiary-50:  #fffbeb;
+      --color-tertiary-100: #fff5c6;
+      --color-quarternary:     #ff7b1e;
+      --color-neutral-50:  #fafafa;
+      --color-neutral-100: #f5f5f5;
+      --color-neutral-200: #e5e5e5;
+      --color-neutral-300: #d4d4d4;
+      --color-neutral-400: #a3a3a3;
+      --color-neutral-500: #737373;
+      --color-neutral-600: #525252;
+      --color-neutral-700: #404040;
+      --color-neutral-800: #262626;
+      --color-success:     #3faf38;
+      --color-success-50:  #f3fbf2;
+      --color-success-100: #e2f8e0;
+      --color-error:       #fa4a57;
+      --color-error-50:    #fff1f1;
+      --color-accent:      #6778ed;
+      --color-accent-50:   #eff4fe;
+      --color-accent-100:  #e1ebfe;
+      --color-stone-50:    #dee5ef;
+      --color-stone-400:   #405163;
+      --color-stone-500:   #25303c;
+      --color-stone-600:   #0c1218;
+      --color-travaux:     #1c61c5;
+      --color-urgence:     #ff634d;
+      --color-depannage:   #ffc114;
+
+      --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-size-xs:  8px;
+      --font-size-sm:  10px;
+      --font-size-md:  12px;
+      --font-size-lg:  14px;
+      --font-size-xl:  16px;
+      --font-size-2xl: 20px;
+      --font-size-3xl: 22px;
+      --font-size-4xl: 24px;
+      --font-size-5xl: 32px;
+
+      --font-weight-normal:   400;
+      --font-weight-medium:   500;
+      --font-weight-semibold: 600;
+      --font-weight-bold:     700;
+      --font-weight-extrabold:800;
+
+      --space-1:  4px;
+      --space-2:  8px;
+      --space-3:  12px;
+      --space-4:  16px;
+      --space-5:  20px;
+      --space-6:  24px;
+      --space-7:  28px;
+      --space-8:  32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-14: 56px;
+      --space-16: 64px;
+      --space-20: 80px;
+      --space-24: 96px;
+
+      --rounded-sm:   4px;
+      --rounded-md:   6px;
+      --rounded-lg:   8px;
+      --rounded-xl:   12px;
+      --rounded-2xl:  16px;
+      --rounded-3xl:  24px;
+      --rounded-full: 9999px;
+
+      --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.10);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.10);
+      --shadow-xl: 0 20px 25px rgba(0,0,0,0.10);
+
+      --border: 1px;
+      --border-2: 2px;
+    }
+
+    /* ================================================
+       RESET & BASE
+    ================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-family);
+      background: var(--color-secondary-2);
+      color: var(--color-secondary);
+      min-height: 100vh;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ================================================
+       NAV (shared)
+    ================================================ */
+    .nav {
+      background: var(--color-white);
+      border-bottom: 1px solid var(--color-secondary-25);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .nav__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+    }
+    .nav__link {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-600);
+      transition: color 0.15s;
+    }
+    .nav__link:hover { color: var(--color-secondary); }
+    .nav__link--active { color: var(--color-secondary); font-weight: var(--font-weight-semibold); }
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .nav__avatar {
+      width: 36px;
+      height: 36px;
+      background: var(--color-secondary-10);
+      border-radius: var(--rounded-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-secondary);
+      cursor: pointer;
+    }
+    .nav__notif {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--rounded-full);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-neutral-500);
+      position: relative;
+    }
+    .nav__notif-dot {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 8px;
+      height: 8px;
+      background: var(--color-error);
+      border-radius: var(--rounded-full);
+      border: 2px solid white;
+    }
+    .nav__burger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-secondary);
+      padding: var(--space-2);
+      margin-left: calc(-1 * var(--space-2));
+      margin-right: var(--space-2);
+    }
+
+    /* ================================================
+       LAYOUT (shared)
+    ================================================ */
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 64px);
+    }
+    .sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      background: var(--color-white);
+      border-right: 1px solid var(--color-secondary-25);
+      padding: var(--space-6) 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+    }
+    .sidebar__section-label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-neutral-400);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: var(--space-4) var(--space-6) var(--space-2);
+      margin-top: var(--space-4);
+    }
+    .sidebar__section-label:first-child { margin-top: 0; }
+    .sidebar__item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-6);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-600);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+    .sidebar__item:hover {
+      color: var(--color-secondary);
+      background: var(--color-secondary-1);
+    }
+    .sidebar__item--active {
+      color: var(--color-primary-600);
+      background: var(--color-primary-10);
+      border-left-color: var(--color-primary);
+      font-weight: var(--font-weight-semibold);
+    }
+    .sidebar__item-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+    .sidebar__badge {
+      margin-left: auto;
+      background: var(--color-primary);
+      color: var(--color-white);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-bold);
+      padding: 2px var(--space-2);
+      border-radius: var(--rounded-full);
+      line-height: 1.6;
+    }
+    .sidebar__plan-chip {
+      margin: var(--space-6);
+      background: var(--color-secondary-10);
+      border-radius: var(--rounded-xl);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .sidebar__plan-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-neutral-500);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      font-weight: var(--font-weight-semibold);
+    }
+    .sidebar__plan-name {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-secondary);
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--space-10) var(--space-8);
+      max-width: calc(100% - 240px);
+    }
+    .main__inner {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    /* ================================================
+       PAGE HEADER
+    ================================================ */
+    .page-header {
+      margin-bottom: var(--space-8);
+    }
+    .page-header__eyebrow {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--color-primary-600);
+      margin-bottom: var(--space-2);
+    }
+    .page-header__title {
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-extrabold);
+      color: var(--color-secondary);
+      line-height: 1.15;
+      margin-bottom: var(--space-3);
+    }
+    .page-header__sub {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-neutral-500);
+      max-width: 640px;
+      line-height: 1.5;
+    }
+
+    /* ================================================
+       TABS (style preprod)
+    ================================================ */
+    .tabs {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-white);
+      border: 1px solid var(--color-secondary-25);
+      border-radius: var(--rounded-full);
+      padding: var(--space-1);
+      margin-bottom: var(--space-6);
+      width: fit-content;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tab {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-500);
+      background: transparent;
+      border: none;
+      border-radius: var(--rounded-full);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .tab:hover {
+      color: var(--color-secondary);
+      background: var(--color-secondary-1);
+    }
+    .tab--active {
+      background: var(--color-secondary);
+      color: var(--color-white);
+      font-weight: var(--font-weight-semibold);
+    }
+    .tab--active:hover {
+      background: var(--color-secondary);
+      color: var(--color-white);
+    }
+    .tab__icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ================================================
+       STATS (preprod style — 3 cards)
+    ================================================ */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+    .stat-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-secondary-25);
+      border-radius: var(--rounded-2xl);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      transition: box-shadow 0.2s;
+    }
+    .stat-card:hover { box-shadow: var(--shadow-md); }
+    .stat-card__label {
+      font-size: var(--font-size-md);
+      color: var(--color-neutral-500);
+      font-weight: var(--font-weight-medium);
+      margin-bottom: var(--space-1);
+    }
+    .stat-card__value {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-extrabold);
+      color: var(--color-secondary);
+      line-height: 1.1;
+      margin-bottom: var(--space-2);
+    }
+    .stat-card__desc {
+      font-size: var(--font-size-md);
+      color: var(--color-neutral-500);
+      line-height: 1.5;
+    }
+    .stat-card__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      padding: 2px var(--space-2);
+      border-radius: var(--rounded-full);
+      width: fit-content;
+      margin-top: var(--space-1);
+    }
+    .stat-card__badge--success { background: var(--color-success-50); color: var(--color-success); }
+
+    /* ================================================
+       SECTION HEADER
+    ================================================ */
+    .section-header {
+      margin-bottom: var(--space-5);
+    }
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-1);
+    }
+    .section-title {
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-secondary);
+    }
+    .section-help {
+      color: var(--color-neutral-400);
+      cursor: help;
+    }
+    .section-sub {
+      font-size: var(--font-size-lg);
+      color: var(--color-neutral-500);
+      max-width: 720px;
+      line-height: 1.5;
+    }
+
+    /* ================================================
+       OVERVIEW GRID — cartes synthèse Vue d'ensemble
+    ================================================ */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-5);
+      margin-bottom: var(--space-10);
+    }
+    .overview-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-secondary-25);
+      border-radius: var(--rounded-2xl);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .overview-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary-200);
+    }
+    .overview-card__head {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+    .overview-card__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--rounded-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .overview-card__icon--entreprise { background: var(--color-accent-50); color: var(--color-accent); }
+    .overview-card__icon--profil { background: var(--color-primary-10); color: var(--color-primary-600); }
+    .overview-card__icon--metiers { background: var(--color-tertiary-50); color: #ad7f00; }
+    .overview-card__icon--dossier { background: rgba(28, 97, 197, 0.08); color: var(--color-travaux); }
+    .overview-card__title-wrap {
+      flex: 1;
+      min-width: 0;
+    }
+    .overview-card__title {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-secondary);
+      margin-bottom: var(--space-1);
+    }
+    .overview-card__sub {
+      font-size: var(--font-size-md);
+      color: var(--color-neutral-500);
+      line-height: 1.5;
+    }
+    .overview-card__status {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      padding: 2px var(--space-2);
+      border-radius: var(--rounded-full);
+      width: fit-content;
+      flex-shrink: 0;
+    }
+    .overview-card__status--ok { background: var(--color-success-50); color: var(--color-success); }
+    .overview-card__status--todo { background: var(--color-tertiary-50); color: #ad7f00; }
+    .overview-card__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .overview-card__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      font-size: var(--font-size-md);
+    }
+    .overview-card__row-label {
+      color: var(--color-neutral-500);
+    }
+    .overview-card__row-value {
+      color: var(--color-secondary);
+      font-weight: var(--font-weight-semibold);
+      text-align: right;
+      max-width: 60%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .overview-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-primary-600);
+      margin-top: auto;
+      cursor: pointer;
+    }
+    .overview-card__cta:hover { color: var(--color-primary-700); }
+
+    /* ================================================
+       COMPLETION BAR
+    ================================================ */
+    .completion {
+      background: var(--color-white);
+      border: 1px solid var(--color-secondary-25);
+      border-radius: var(--rounded-2xl);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .completion__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+    .completion__title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-secondary);
+    }
+    .completion__value {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary-600);
+    }
+    .completion__bar {
+      height: 8px;
+      background: var(--color-secondary-10);
+      border-radius: var(--rounded-full);
+      overflow: hidden;
+    }
+    .completion__fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-600) 100%);
+      border-radius: var(--rounded-full);
+      width: 72%;
+    }
+    .completion__note {
+      font-size: var(--font-size-md);
+      color: var(--color-neutral-500);
+    }
+
+    /* ================================================
+       Button (v2)
+    ================================================ */
+    .kl-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      border-radius: var(--rounded-sm);
+      font-family: var(--font-family);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-lg);
+      line-height: 1.2;
+      transition: box-shadow 0.15s ease, opacity 0.15s ease;
+      white-space: nowrap;
+      text-decoration: none;
+      padding: var(--space-3) var(--space-4);
+      gap: var(--space-2);
+    }
+    .kl-button:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+    .kl-button--primary { background: var(--color-primary); color: var(--color-white); }
+    .kl-button--primary:hover { box-shadow: var(--shadow-md); }
+    .kl-button--secondary { background: var(--color-secondary); color: var(--color-white); }
+    .kl-button--secondary:hover { box-shadow: var(--shadow-md); }
+    .kl-button--ghost { background: var(--color-white); color: var(--color-secondary); border: 1px solid var(--color-secondary-25); }
+    .kl-button--ghost:hover { box-shadow: var(--shadow-md); }
+    .kl-button--sm { padding: var(--space-2) var(--space-3); font-size: var(--font-size-md); }
+
+    /* ================================================
+       SIDEBAR OVERLAY (mobile)
+    ================================================ */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(14, 47, 88, 0.4);
+      z-index: 299;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .sidebar-overlay.active { opacity: 1; }
+
+    /* ================================================
+       RESPONSIVE
+    ================================================ */
+    @media (max-width: 1024px) {
+      .stats { grid-template-columns: repeat(3, 1fr); }
+      .overview-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav__burger { display: flex; }
+      .nav__links { display: none; }
+      .nav__inner { padding: 0 var(--space-4); }
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 280px;
+        z-index: 300;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding-top: var(--space-4);
+        overflow-y: auto;
+      }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-overlay.visible { display: block; }
+
+      .layout { display: block; }
+      .main {
+        max-width: 100%;
+        padding: var(--space-6) var(--space-4);
+      }
+      .page-header__title { font-size: var(--font-size-4xl); }
+      .page-header__sub { font-size: var(--font-size-lg); }
+      .stats { grid-template-columns: 1fr; }
+      .tabs { width: 100%; }
+      .section-title { font-size: var(--font-size-2xl); }
+    }
+    @media (max-width: 480px) {
+      .page-header__title { font-size: var(--font-size-3xl); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <button class="nav__burger" aria-label="Menu" onclick="toggleSidebar()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      </button>
+      <a class="nav__logo" href="tableau-de-bord.html">
+        <svg width="120" height="44" viewBox="0 0 160 59" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Kelkun" role="img">
+          <path d="M67.8352 44.2517H59.8718V0H67.8352V44.2517Z" fill="#03C5B8"/>
+          <path d="M102.15 33.6234V15.2906H110.175V32.1062C110.175 36.0889 112.768 37.6693 115.608 37.6693C118.447 37.6693 121.04 36.0889 121.04 32.1062V15.2906H129.003V33.6234C129.003 39.6922 124.312 45.0024 115.608 45.0024C106.903 45.0024 102.15 39.6922 102.15 33.6234Z" fill="#03C5B8"/>
+          <path d="M160 25.9189V44.2517H151.975V27.4361C151.975 23.4535 149.382 21.873 146.542 21.873C143.703 21.873 141.11 23.4535 141.11 27.4361V44.2517H133.147V25.9189C133.147 19.8501 137.838 14.5399 146.542 14.5399C155.247 14.5399 160 19.8501 160 25.9189Z" fill="#03C5B8"/>
+          <path d="M80.0193 44.2517H72.0559V0H80.0193V44.2517Z" fill="#03C5B8"/>
+          <path d="M82.5196 25.3737L89.395 16.4917C89.9814 15.7331 90.8688 15.2906 91.8102 15.2906H100.013L90.2592 27.1437C89.5725 27.9813 89.5339 29.1904 90.1666 30.0754L100.321 44.2517H92.3041C91.2932 44.2517 90.3518 43.746 89.7731 42.9005L82.3267 31.9798C80.9609 29.9727 81.0381 27.2939 82.5196 25.3737Z" fill="#03C5B8"/>
+          <path d="M7.96336 44.2517H0V0H7.96336V44.2517Z" fill="#03C5B8"/>
+          <path d="M10.4635 25.3737L17.3388 16.4917C17.9253 15.7331 18.8127 15.2906 19.7541 15.2906H27.9566L18.2031 27.1437C17.5163 27.9813 17.4777 29.1904 18.1105 30.0754L28.2653 44.2517H20.2479C19.2371 44.2517 18.2957 43.746 17.7169 42.9005L10.2706 31.9798C8.90477 29.9727 8.98194 27.2939 10.4635 25.3737Z" fill="#03C5B8"/>
+          <path d="M55.8902 31.8613C55.8902 19.7237 48.8528 14.5399 41.0747 14.5399C32.6174 14.5399 26.3826 20.9248 26.3826 29.7751C26.3826 38.6255 32.7409 45.0103 41.1981 45.0103C47.4947 45.0103 52.8036 42.1024 55.3346 35.9071C55.4504 35.6148 55.5584 35.3224 55.6587 35.0221H47.0009C45.8897 36.9818 43.6674 37.9933 41.3216 37.9933C37.7412 37.9933 35.2719 35.4014 34.8398 32.1774H55.8902V31.8613ZM34.6546 26.6775C35.2719 23.5799 37.6794 21.3673 41.0747 21.3673C44.4699 21.3673 46.8774 23.7695 47.3095 26.6775H34.6546Z" fill="#03C5B8"/>
+        </svg>
+      </a>
+      <div class="nav__links">
+        <a class="nav__link" href="tableau-de-bord.html">Tableau de bord</a>
+        <a class="nav__link" href="mes-chantiers.html">Mes chantiers</a>
+        <a class="nav__link" href="#">Annuaire</a>
+        <a class="nav__link nav__link--active" href="espace-pro.html">Mon espace pro</a>
+      </div>
+      <div class="nav__actions">
+        <button class="nav__notif" aria-label="Notifications">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="nav__notif-dot"></span>
+        </button>
+        <div class="nav__avatar">JP</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <span class="sidebar__section-label">Mon compte</span>
+
+      <a class="sidebar__item" href="tableau-de-bord.html">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Tableau de bord
+      </a>
+      <a class="sidebar__item sidebar__item--active" href="mon-entreprise.html">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/><path d="M9 18v.01"/></svg>
+        Mon entreprise
+      </a>
+      <a class="sidebar__item" href="espace-pro.html">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Mon abonnement
+      </a>
+      <a class="sidebar__item" href="mes-kredits.html">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+        Mes kredits
+        <span class="sidebar__badge">12</span>
+      </a>
+      <div class="sidebar__item">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Mes factures
+      </div>
+
+      <span class="sidebar__section-label">Activité</span>
+
+      <a class="sidebar__item" href="mes-chantiers.html">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Mes chantiers
+        <span class="sidebar__badge">3</span>
+      </a>
+      <div class="sidebar__item">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Demandes directes
+      </div>
+      <a class="sidebar__item" href="profil-artisan.html">
+        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Mon profil artisan
+      </a>
+
+      <div class="sidebar__plan-chip">
+        <span class="sidebar__plan-label">Plan actuel</span>
+        <span class="sidebar__plan-name">Free</span>
+        <a href="espace-pro.html"><button class="kl-button kl-button--primary" style="font-size: var(--font-size-md); padding: var(--space-2) var(--space-3); width: 100%;">Passer Master</button></a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+      <div class="main__inner">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+          <p class="page-header__eyebrow">Espace Pro</p>
+          <h1 class="page-header__title">Mon entreprise</h1>
+          <p class="page-header__sub">Gérez les informations de votre entreprise, votre profil public et votre dossier administratif depuis un seul endroit.</p>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs" role="tablist">
+          <button class="tab tab--active" role="tab" data-tab="overview">
+            <svg class="tab__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Vue d'ensemble
+          </button>
+          <button class="tab" role="tab" data-tab="fiche">
+            <svg class="tab__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+            Fiche entreprise
+          </button>
+          <button class="tab" role="tab" data-tab="profil">
+            <svg class="tab__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
+            Profil public
+          </button>
+          <button class="tab" role="tab" data-tab="metiers">
+            <svg class="tab__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l10-9 10 9"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/></svg>
+            Métiers &amp; zone
+          </button>
+          <button class="tab" role="tab" data-tab="dossier">
+            <svg class="tab__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Dossier administratif
+          </button>
+        </div>
+
+        <!-- ======================================================
+             TAB CONTENT — Vue d'ensemble (section en bleu du screenshot)
+             Réorganisée : on allège la première page et on pointe
+             vers les onglets dédiés au lieu de tout empiler ici.
+        ====================================================== -->
+        <section class="tab-panel" id="panel-overview">
+
+          <!-- STAT CARDS (inchangées, style preprod) -->
+          <div class="stats">
+            <div class="stat-card">
+              <p class="stat-card__label">Métiers enregistrés</p>
+              <p class="stat-card__value">2</p>
+              <p class="stat-card__desc">Vos savoir-faire visibles sur votre profil public.</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-card__label">Ville de référence</p>
+              <p class="stat-card__value">Saint-Denis</p>
+              <p class="stat-card__desc">Base utilisée pour vos coordonnées et votre zone d'intervention.</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-card__label">Statut du compte</p>
+              <p class="stat-card__value">Vérifié</p>
+              <p class="stat-card__desc">Votre dossier est validé et votre entreprise peut exercer sur Kelkun.</p>
+            </div>
+          </div>
+
+          <!-- COMPLETION BAR -->
+          <div class="completion">
+            <div class="completion__head">
+              <span class="completion__title">Complétion de votre espace</span>
+              <span class="completion__value">72 %</span>
+            </div>
+            <div class="completion__bar">
+              <div class="completion__fill"></div>
+            </div>
+            <p class="completion__note">Il manque quelques éléments sur votre <strong>profil public</strong> pour maximiser votre visibilité auprès des clients.</p>
+          </div>
+
+          <!-- SECTION TITLE -->
+          <div class="section-header">
+            <div class="section-title-row">
+              <h2 class="section-title">Gérer mon entreprise</h2>
+              <svg class="section-help" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Aide"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <p class="section-sub">Chaque section est désormais regroupée dans un onglet dédié. Cliquez pour modifier les informations ou compléter les éléments manquants.</p>
+          </div>
+
+          <!-- OVERVIEW GRID — 4 cards qui renvoient vers les onglets -->
+          <div class="overview-grid">
+
+            <!-- Fiche entreprise -->
+            <article class="overview-card">
+              <div class="overview-card__head">
+                <div class="overview-card__icon overview-card__icon--entreprise">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+                </div>
+                <div class="overview-card__title-wrap">
+                  <h3 class="overview-card__title">Fiche entreprise</h3>
+                  <p class="overview-card__sub">Informations légales et coordonnées de contact.</p>
+                </div>
+                <span class="overview-card__status overview-card__status--ok">Complet</span>
+              </div>
+              <div class="overview-card__list">
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">Raison sociale</span>
+                  <span class="overview-card__row-value">guyguy plomberie</span>
+                </div>
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">SIREN</span>
+                  <span class="overview-card__row-value">231 654 987</span>
+                </div>
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">Email de contact</span>
+                  <span class="overview-card__row-value">pons.guillaume+1812@kelkun.app</span>
+                </div>
+              </div>
+              <a class="overview-card__cta" href="#" data-goto="fiche">
+                Modifier la fiche
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </article>
+
+            <!-- Profil public -->
+            <article class="overview-card">
+              <div class="overview-card__head">
+                <div class="overview-card__icon overview-card__icon--profil">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
+                </div>
+                <div class="overview-card__title-wrap">
+                  <h3 class="overview-card__title">Profil public</h3>
+                  <p class="overview-card__sub">Ce que les clients voient sur votre page Kelkun.</p>
+                </div>
+                <span class="overview-card__status overview-card__status--todo">À compléter</span>
+              </div>
+              <div class="overview-card__list">
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">Photo de profil</span>
+                  <span class="overview-card__row-value">Ajoutée</span>
+                </div>
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">Présentation</span>
+                  <span class="overview-card__row-value" style="color: var(--color-neutral-400); font-weight: var(--font-weight-normal);">À rédiger</span>
+                </div>
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">Photos de chantiers</span>
+                  <span class="overview-card__row-value">3 photos</span>
+                </div>
+              </div>
+              <a class="overview-card__cta" href="#" data-goto="profil">
+                Compléter le profil
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </article>
+
+            <!-- Métiers & zone -->
+            <article class="overview-card">
+              <div class="overview-card__head">
+                <div class="overview-card__icon overview-card__icon--metiers">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l10-9 10 9"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/></svg>
+                </div>
+                <div class="overview-card__title-wrap">
+                  <h3 class="overview-card__title">Métiers &amp; zone</h3>
+                  <p class="overview-card__sub">Savoir-faire et secteur d'intervention.</p>
+                </div>
+                <span class="overview-card__status overview-card__status--ok">Complet</span>
+              </div>
+              <div class="overview-card__list">
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">Métiers</span>
+                  <span class="overview-card__row-value">Plomberie, Chauffage</span>
+                </div>
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">Rayon d'intervention</span>
+                  <span class="overview-card__row-value">30 km autour de Saint-Denis</span>
+                </div>
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">Types de mission</span>
+                  <span class="overview-card__row-value">Travaux, Dépannage</span>
+                </div>
+              </div>
+              <a class="overview-card__cta" href="#" data-goto="metiers">
+                Ajuster mes métiers
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </article>
+
+            <!-- Dossier administratif -->
+            <article class="overview-card">
+              <div class="overview-card__head">
+                <div class="overview-card__icon overview-card__icon--dossier">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div class="overview-card__title-wrap">
+                  <h3 class="overview-card__title">Dossier administratif</h3>
+                  <p class="overview-card__sub">Kbis, assurance, attestations obligatoires.</p>
+                </div>
+                <span class="overview-card__status overview-card__status--ok">Validé</span>
+              </div>
+              <div class="overview-card__list">
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">Kbis</span>
+                  <span class="overview-card__row-value">À jour</span>
+                </div>
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">Assurance RC Pro</span>
+                  <span class="overview-card__row-value">Valide jusqu'au 31/12/2026</span>
+                </div>
+                <div class="overview-card__row">
+                  <span class="overview-card__row-label">Attestation URSSAF</span>
+                  <span class="overview-card__row-value">Validée</span>
+                </div>
+              </div>
+              <a class="overview-card__cta" href="#" data-goto="dossier">
+                Consulter les documents
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </article>
+
+          </div>
+
+        </section>
+
+        <!-- Panneaux placeholders pour les autres onglets -->
+        <section class="tab-panel" id="panel-fiche" hidden>
+          <div style="background: var(--color-white); border: 1px solid var(--color-secondary-25); border-radius: var(--rounded-2xl); padding: var(--space-10); text-align: center; color: var(--color-neutral-500);">
+            <p style="font-size: var(--font-size-xl); font-weight: var(--font-weight-semibold); color: var(--color-secondary); margin-bottom: var(--space-2);">Fiche entreprise</p>
+            <p>Formulaire Entreprise, Coordonnées de contact, Adresse du siège social, Représentant légal.</p>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="panel-profil" hidden>
+          <div style="background: var(--color-white); border: 1px solid var(--color-secondary-25); border-radius: var(--rounded-2xl); padding: var(--space-10); text-align: center; color: var(--color-neutral-500);">
+            <p style="font-size: var(--font-size-xl); font-weight: var(--font-weight-semibold); color: var(--color-secondary); margin-bottom: var(--space-2);">Profil public</p>
+            <p>Photo, présentation, photos de chantiers, avis clients.</p>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="panel-metiers" hidden>
+          <div style="background: var(--color-white); border: 1px solid var(--color-secondary-25); border-radius: var(--rounded-2xl); padding: var(--space-10); text-align: center; color: var(--color-neutral-500);">
+            <p style="font-size: var(--font-size-xl); font-weight: var(--font-weight-semibold); color: var(--color-secondary); margin-bottom: var(--space-2);">Métiers &amp; zone</p>
+            <p>Sélection des métiers, rayon d'intervention, types de mission.</p>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="panel-dossier" hidden>
+          <div style="background: var(--color-white); border: 1px solid var(--color-secondary-25); border-radius: var(--rounded-2xl); padding: var(--space-10); text-align: center; color: var(--color-neutral-500);">
+            <p style="font-size: var(--font-size-xl); font-weight: var(--font-weight-semibold); color: var(--color-secondary); margin-bottom: var(--space-2);">Dossier administratif</p>
+            <p>Kbis, assurance RC Pro, attestation URSSAF, qualifications.</p>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Toggle sidebar (mobile)
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('visible');
+      requestAnimationFrame(() => overlay.classList.toggle('active'));
+    }
+
+    // Tabs
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.tab-panel');
+    function activateTab(name) {
+      tabs.forEach(t => t.classList.toggle('tab--active', t.dataset.tab === name));
+      panels.forEach(p => p.hidden = p.id !== 'panel-' + name);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab.dataset.tab)));
+
+    // CTA dans les overview cards → onglet cible
+    document.querySelectorAll('[data-goto]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        activateTab(link.dataset.goto);
+      });
+    });
+  </script>
+
+</body>
+</html>

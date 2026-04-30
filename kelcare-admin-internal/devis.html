@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelcare Admin Interne — Devis</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin-overrides.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="devis" data-title="Devis" data-subtitle="Cycle complet — réception, validation, transformation devis → facture artisan">
+
+  <div class="main">
+    <main class="content cockpit">
+      <div id="filtersBar"></div>
+
+      <!-- KPIs Volume -->
+      <div class="kpi-group-header"><span class="group-pill"><span class="status-dot orange"></span> Volume</span></div>
+      <div class="kpi-grid cols-6 admin-kpi-grid">
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon info"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div><span class="kpi-trend up">+15 %</span></div><div class="kpi-value">589</div><div class="kpi-label">Devis reçus</div><div class="kpi-sub">286 920 € total</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon violet"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h12"/></svg></div><span class="kpi-trend up">+4 %</span></div><div class="kpi-value">487<span class="unit">&nbsp;€</span></div><div class="kpi-label">Panier moyen</div><div class="kpi-sub">stable vs M-1</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><span class="kpi-trend up">+8</span></div><div class="kpi-value">68</div><div class="kpi-label">En attente</div><div class="kpi-sub">ancienneté moy. 3,6 j</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><span class="kpi-trend up">+12 %</span></div><div class="kpi-value">448</div><div class="kpi-label">Validés</div><div class="kpi-sub">218 240 € validés</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon error"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/></svg></div><span class="kpi-trend down">-2</span></div><div class="kpi-value">52</div><div class="kpi-label">Refusés</div><div class="kpi-sub">26 410 € refusés</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon neutral" style="background:var(--color-neutral-100);color:var(--color-neutral-500);"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><span class="kpi-trend neutral">0</span></div><div class="kpi-value">21</div><div class="kpi-label">Expirés / annulés</div><div class="kpi-sub">14 + 7</div></div>
+      </div>
+
+      <!-- KPIs Transformation -->
+      <div class="kpi-group-header"><span class="group-pill"><span class="status-dot green"></span> Transformation</span></div>
+      <div class="kpi-grid cols-6 admin-kpi-grid">
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><span class="kpi-trend up">+3 pts</span></div><div class="kpi-value">76<span class="unit">%</span></div><div class="kpi-label">Validation devis</div><div class="kpi-sub">448 / 589</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon primary"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 17 9 11 13 15 21 7"/></svg></div><span class="kpi-trend up">+5 pts</span></div><div class="kpi-value">82<span class="unit">%</span></div><div class="kpi-label">Devis → facture artisan</div><div class="kpi-sub">367 facturés sur 448</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon info"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 17 9 11 13 15 21 7"/></svg></div><span class="kpi-trend up">+2 pts</span></div><div class="kpi-value">84<span class="unit">%</span></div><div class="kpi-label">Devis → interv. terminée</div><div class="kpi-sub">376 / 448 validés</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><span class="kpi-trend down">-0,4 j</span></div><div class="kpi-value">2,1<span class="unit">j</span></div><div class="kpi-label">Délai validation</div><div class="kpi-sub">cible &lt; 2 j</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><span class="kpi-trend up">+0,2 j</span></div><div class="kpi-value">1,8<span class="unit">j</span></div><div class="kpi-label">Délai réception devis</div><div class="kpi-sub">depuis demande</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><span class="kpi-trend down">-1,2 j</span></div><div class="kpi-value">6,2<span class="unit">j</span></div><div class="kpi-label">Délai validation → facture</div><div class="kpi-sub">cible &lt; 7 j</div></div>
+      </div>
+
+      <!-- KPIs Risque DAF -->
+      <div class="kpi-group-header"><span class="group-pill" style="background:var(--color-error-50);color:var(--color-error-600);border-color:var(--color-error-100);"><span class="status-dot red"></span> Risque DAF</span></div>
+      <div class="kpi-grid cols-3 admin-kpi-grid">
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon error"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div><span class="kpi-trend up">+12 %</span></div><div class="kpi-value">61 240<span class="unit">&nbsp;€</span></div><div class="kpi-label">Devis validés non facturés</div><div class="kpi-sub">27 dossiers · ancienneté moy. 11 j</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><span class="kpi-trend up">+3</span></div><div class="kpi-value">14</div><div class="kpi-label">Devis en attente &gt; 7 j</div><div class="kpi-sub">à relancer</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon error"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div><span class="kpi-trend up">+1 240 €</span></div><div class="kpi-value">8 480<span class="unit">&nbsp;€</span></div><div class="kpi-label">Écart devis / facture</div><div class="kpi-sub">12 dossiers avec écart &gt; 100 €</div></div>
+      </div>
+
+      <!-- Charts -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><div><div class="card-title">Évolution des devis</div><div class="card-subtitle">Reçus · validés · refusés · annulés</div></div></div>
+          <div class="card-body"><div class="chart-wrap" style="height:260px;"><canvas id="chartDevis"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div><div class="card-title">Devis par statut</div><div class="card-subtitle">Stock courant</div></div></div>
+          <div class="card-body"><div class="chart-wrap" style="height:260px;"><canvas id="chartStatut"></canvas></div></div>
+        </div>
+      </div>
+
+      <!-- Tableau devis validés non facturés -->
+      <div class="section-head">
+        <div>
+          <div class="section-head-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+            <h2>Devis validés non facturés</h2>
+            <span class="section-tag finance">61 240 €</span>
+          </div>
+          <div class="section-head-sub">À résoudre par les Ops — facture artisan manquante ou écart à investiguer</div>
+        </div>
+        <div class="section-head-actions">
+          <button class="btn">Export CSV</button>
+          <button class="btn btn-primary">Relancer les artisans</button>
+        </div>
+      </div>
+
+      <div class="card admin-table-card">
+        <div class="card-body" style="padding:0;">
+          <table class="data-table">
+            <thead><tr><th>Devis</th><th>Compte</th><th>Artisan</th><th>Réseau</th><th class="text-right">Montant validé</th><th class="text-right">Validé le</th><th class="text-right">Ancienneté</th><th>Interv. terminée</th><th>Facture artisan</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td><a href="#" class="ref-link">#KC-D-3812</a></td><td>MDPA Niort</td><td>Plomberie Express</td><td><span class="badge primary">Kelkun</span></td><td class="cell-num"><strong>1 240 €</strong></td><td>02/04</td><td class="cell-num"><strong style="color:var(--color-error);">28 j</strong></td><td><span class="status-dot green"></span>Oui</td><td><span class="status-dot red"></span>Manquante</td><td><a href="#" class="ref-link">Relancer</a></td></tr>
+              <tr><td><a href="#" class="ref-link">#KC-D-3805</a></td><td>Abeille Béziers</td><td>Élec Pro</td><td><span class="badge neutral">Prescripteur</span></td><td class="cell-num"><strong>2 480 €</strong></td><td>05/04</td><td class="cell-num"><strong style="color:var(--color-error);">25 j</strong></td><td><span class="status-dot green"></span>Oui</td><td><span class="status-dot red"></span>Manquante</td><td><a href="#" class="ref-link">Relancer</a></td></tr>
+              <tr><td><a href="#" class="ref-link">#KC-D-3798</a></td><td>AXA Montpellier</td><td>Vitrerie Sud</td><td><span class="badge primary">Kelkun</span></td><td class="cell-num"><strong>892 €</strong></td><td>08/04</td><td class="cell-num">22 j</td><td><span class="status-dot green"></span>Oui</td><td><span class="status-dot orange"></span>En attente</td><td><a href="#" class="ref-link">Relancer</a></td></tr>
+              <tr><td><a href="#" class="ref-link">#KC-D-3787</a></td><td>Stelliant</td><td>Couvreur 16</td><td><span class="badge neutral">Prescripteur</span></td><td class="cell-num"><strong>3 280 €</strong></td><td>11/04</td><td class="cell-num">19 j</td><td><span class="status-dot orange"></span>En cours</td><td><span class="status-dot grey"></span>—</td><td><a href="#" class="ref-link">Relancer</a></td></tr>
+              <tr><td><a href="#" class="ref-link">#KC-D-3776</a></td><td>Monceau Bordeaux</td><td>Serrurier Pro</td><td><span class="badge primary">Kelkun</span></td><td class="cell-num"><strong>456 €</strong></td><td>14/04</td><td class="cell-num">16 j</td><td><span class="status-dot green"></span>Oui</td><td><span class="status-dot red"></span>Manquante</td><td><a href="#" class="ref-link">Relancer</a></td></tr>
+              <tr><td><a href="#" class="ref-link">#KC-D-3768</a></td><td>MDPA Poitiers Centre</td><td>Plomberie 79</td><td><span class="badge neutral">Prescripteur</span></td><td class="cell-num"><strong>1 850 €</strong></td><td>17/04</td><td class="cell-num">13 j</td><td><span class="status-dot green"></span>Oui</td><td><span class="status-dot orange"></span>En attente</td><td><a href="#" class="ref-link">Relancer</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+  <script>
+    new Chart(document.getElementById('chartDevis'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'Déc.', 'Janv.', 'Fév.', 'Mars', 'Avr.'],
+        datasets: [
+          { label: 'Reçus', data: [380,420,460,490,512,589], borderColor: KC_COLORS.info, fill: false, tension: 0.35, borderWidth: 2 },
+          { label: 'Validés', data: [280,310,340,370,398,448], borderColor: KC_COLORS.success, fill: false, tension: 0.35, borderWidth: 2 },
+          { label: 'Refusés', data: [42, 48, 50, 54, 56, 52], borderColor: KC_COLORS.error, fill: false, tension: 0.35, borderWidth: 2 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font:{family:'Poppins',size:11}, padding: 12, usePointStyle: true } } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f5f5f5' } } } }
+    });
+
+    new Chart(document.getElementById('chartStatut'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Reçu', 'En attente', 'Validé', 'Refusé', 'Expiré', 'Annulé', 'Validé non facturé'],
+        datasets: [{ data: [12, 56, 421, 52, 14, 7, 27], backgroundColor: ['#9aa3d0', '#c27b30', '#3faf38', '#fa4a57', '#a3a3a3', '#737373', '#6778ed'], borderWidth: 0, hoverOffset: 6 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'right', labels: { font:{family:'Poppins',size:10}, padding: 8, usePointStyle: true, boxWidth: 8 } } } }
+    });
+  </script>
+</body>
+</html>

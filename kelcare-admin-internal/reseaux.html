@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelcare Admin Interne — Réseaux</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin-overrides.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="reseaux" data-title="Réseaux" data-subtitle="Comparaison Réseau Kelkun vs Réseaux artisans des prescripteurs">
+
+  <div class="main">
+    <main class="content cockpit">
+      <div id="filtersBar"></div>
+
+      <!-- KPI comparatifs -->
+      <div class="kpi-group-header"><span class="group-pill"><span class="status-dot blue"></span> Volume comparé</span></div>
+      <div class="kpi-grid cols-3 admin-kpi-grid">
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon primary"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><span class="kpi-trend up">+22 %</span></div><div class="kpi-value">412</div><div class="kpi-label">Interventions Réseau Kelkun</div><div class="kpi-sub">33 % du total</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon navy"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><span class="kpi-trend up">+12 %</span></div><div class="kpi-value">836</div><div class="kpi-label">Interventions Réseaux prescripteurs</div><div class="kpi-sub">67 % du total · consolidé sur 5 parents</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon accent"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/></svg></div><span class="kpi-trend up">+18 %</span></div><div class="kpi-value">1 248</div><div class="kpi-label">Total consolidé</div><div class="kpi-sub">19 comptes prescripteurs</div></div>
+      </div>
+
+      <div class="kpi-group-header"><span class="group-pill"><span class="status-dot orange"></span> Performance comparée</span></div>
+      <div class="kpi-grid cols-3 admin-kpi-grid">
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div></div><div class="kpi-value">5,6<span class="unit">%</span></div><div class="kpi-label">Taux annulation Kelkun</div><div class="kpi-versus"><span class="kpi-versus-pill kelcare"><span class="pill-value">5,6 %</span></span><span class="kpi-versus-pill mdpa"><span class="pill-value">10,2 %</span></span></div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div></div><div class="kpi-value">2,1<span class="unit">%</span></div><div class="kpi-label">Hors SLA Kelkun</div><div class="kpi-versus"><span class="kpi-versus-pill kelcare"><span class="pill-value">2,1 %</span></span><span class="kpi-versus-pill mdpa"><span class="pill-value">3,6 %</span></span></div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon primary"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 17 9 11 13 15 21 7"/></svg></div></div><div class="kpi-value">88<span class="unit">%</span></div><div class="kpi-label">Transformation devis Kelkun</div><div class="kpi-versus"><span class="kpi-versus-pill kelcare"><span class="pill-value">88 %</span></span><span class="kpi-versus-pill mdpa"><span class="pill-value">79 %</span></span></div></div>
+      </div>
+
+      <!-- Graphiques -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><div><div class="card-title">Performance comparée — bar chart groupé</div><div class="card-subtitle">Kelkun vs Prescripteurs · 4 axes principaux</div></div></div>
+          <div class="card-body"><div class="chart-wrap" style="height:300px;"><canvas id="chartCompare"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div><div class="card-title">Évolution comparée</div><div class="card-subtitle">Volume mensuel — 6 mois</div></div></div>
+          <div class="card-body"><div class="chart-wrap" style="height:300px;"><canvas id="chartCompareEvo"></canvas></div></div>
+        </div>
+      </div>
+
+      <!-- Dépendance par compte -->
+      <div class="section-head">
+        <div>
+          <div class="section-head-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/></svg>
+            <h2>Dépendance Kelkun par compte</h2>
+            <span class="section-tag network">Décision recommandée</span>
+          </div>
+          <div class="section-head-sub">Part Kelkun vs prescripteur · diagnostic réseau · stratégie</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body"><div class="chart-wrap" style="height:340px;"><canvas id="chartDependance"></canvas></div></div>
+      </div>
+
+      <!-- Tableau détaillé -->
+      <div class="card admin-table-card" style="margin-top:16px;">
+        <div class="card-header"><div><div class="card-title">Performance réseau par compte</div><div class="card-subtitle">Décision réseau recommandée par compte</div></div></div>
+        <div class="card-body" style="padding:0;">
+          <table class="data-table">
+            <thead><tr><th>Compte</th><th class="text-right">Total interv.</th><th>Part Kelkun</th><th class="text-right">Annul. Kelkun</th><th class="text-right">Annul. Prescr.</th><th class="text-right">Hors SLA Kelkun</th><th class="text-right">Hors SLA Prescr.</th><th>Décision recommandée</th></tr></thead>
+            <tbody>
+              <tr><td>MDPA</td><td class="cell-num">486</td><td><div class="netbar" style="height:16px;"><div class="netbar-kelkun" style="width:28%;font-size:9px;">28%</div><div class="netbar-prescripteur" style="width:72%;font-size:9px;">72%</div></div></td><td class="cell-num">4,2 %</td><td class="cell-num">8,4 %</td><td class="cell-num">1,2 %</td><td class="cell-num">3,8 %</td><td><span class="badge success">Continuer prescripteur</span></td></tr>
+              <tr><td>AXA</td><td class="cell-num">298</td><td><div class="netbar" style="height:16px;"><div class="netbar-kelkun" style="width:42%;font-size:9px;">42%</div><div class="netbar-prescripteur" style="width:58%;font-size:9px;">58%</div></div></td><td class="cell-num">5,8 %</td><td class="cell-num">12,8 %</td><td class="cell-num">1,8 %</td><td class="cell-num">5,4 %</td><td><span class="badge primary">Renforcer Kelkun</span></td></tr>
+              <tr><td>Abeille</td><td class="cell-num">186</td><td><div class="netbar" style="height:16px;"><div class="netbar-kelkun" style="width:21%;font-size:9px;">21%</div><div class="netbar-prescripteur" style="width:79%;font-size:9px;">79%</div></div></td><td class="cell-num">6,2 %</td><td class="cell-num">14,8 %</td><td class="cell-num">2,1 %</td><td class="cell-num">7,2 %</td><td><span class="badge warning">Accompagner réseau</span></td></tr>
+              <tr><td>Monceau</td><td class="cell-num">98</td><td><div class="netbar" style="height:16px;"><div class="netbar-kelkun" style="width:55%;font-size:9px;">55%</div><div class="netbar-prescripteur" style="width:45%;font-size:9px;">45%</div></div></td><td class="cell-num">5,4 %</td><td class="cell-num">14,2 %</td><td class="cell-num">1,4 %</td><td class="cell-num">8,2 %</td><td><span class="badge primary">Basculer Kelkun</span></td></tr>
+              <tr><td>Stelliant</td><td class="cell-num">76</td><td><div class="netbar" style="height:16px;"><div class="netbar-kelkun" style="width:18%;font-size:9px;">18%</div><div class="netbar-prescripteur" style="width:82%;font-size:9px;">82%</div></div></td><td class="cell-num">7,1 %</td><td class="cell-num">17,2 %</td><td class="cell-num">2,4 %</td><td class="cell-num">9,8 %</td><td><span class="badge error">Recrutement prio.</span></td></tr>
+              <tr><td>Kelcare Direct</td><td class="cell-num">142</td><td><div class="netbar" style="height:16px;"><div class="netbar-kelkun" style="width:96%;font-size:9px;">96%</div><div class="netbar-prescripteur" style="width:4%;"></div></div></td><td class="cell-num">5,6 %</td><td class="cell-num">—</td><td class="cell-num">2,0 %</td><td class="cell-num">—</td><td><span class="badge success">Continuer Kelkun</span></td></tr>
+              <tr><td>Habitat &amp; Co</td><td class="cell-num">62</td><td><div class="netbar" style="height:16px;"><div class="netbar-kelkun" style="width:88%;font-size:9px;">88%</div><div class="netbar-prescripteur" style="width:12%;font-size:9px;">12%</div></div></td><td class="cell-num">7,8 %</td><td class="cell-num">12,4 %</td><td class="cell-num">2,2 %</td><td class="cell-num">4,8 %</td><td><span class="badge success">Continuer Kelkun</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+  <script>
+    new Chart(document.getElementById('chartCompare'), {
+      type: 'bar',
+      data: {
+        labels: ['Acceptation', 'Hors SLA', 'Annulation', 'Transformation devis'],
+        datasets: [
+          { label: 'Réseau Kelkun',          data: [28, 2.1, 5.6, 88], backgroundColor: KC_COLORS.primary, borderRadius: 6 },
+          { label: 'Réseaux prescripteurs',  data: [38, 3.6, 10.2, 79], backgroundColor: KC_COLORS.secondary, borderRadius: 6 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font:{family:'Poppins',size:11}, padding: 12, usePointStyle: true } } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f5f5f5' } } } }
+    });
+
+    new Chart(document.getElementById('chartCompareEvo'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'Déc.', 'Janv.', 'Fév.', 'Mars', 'Avr.'],
+        datasets: [
+          { label: 'Réseau Kelkun', data: [220,250,280,310,360,412], borderColor: KC_COLORS.primary, backgroundColor: KC_COLORS.primaryLight, fill: true, tension: 0.35, borderWidth: 2 },
+          { label: 'Réseaux prescripteurs', data: [600,630,640,670,698,836], borderColor: KC_COLORS.secondary, backgroundColor: KC_COLORS.secondaryLight, fill: true, tension: 0.35, borderWidth: 2 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font:{family:'Poppins',size:11}, padding: 12, usePointStyle: true } } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f5f5f5' }, beginAtZero: true } } }
+    });
+
+    new Chart(document.getElementById('chartDependance'), {
+      type: 'bar',
+      data: {
+        labels: ['Stelliant','Abeille','MDPA','AXA','Monceau','Réno Assistance','Maison Sérénité','Habitat & Co','Kelcare Direct'],
+        datasets: [
+          { label: 'Part Kelkun', data: [18, 21, 28, 42, 55, 64, 72, 88, 96], backgroundColor: KC_COLORS.primary, borderRadius: 6, stack: 'a' },
+          { label: 'Part Réseau prescripteur', data: [82, 79, 72, 58, 45, 36, 28, 12, 4], backgroundColor: KC_COLORS.secondary, borderRadius: 6, stack: 'a' }
+        ]
+      },
+      options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font:{family:'Poppins',size:11}, padding: 12, usePointStyle: true } }, tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label} : ${ctx.parsed.x} %` } } }, scales: { x: { stacked: true, grid: { color: '#f5f5f5' }, max: 100, ticks: { callback: (v) => v + ' %' } }, y: { stacked: true, grid: { display: false } } } }
+    });
+  </script>
+</body>
+</html>

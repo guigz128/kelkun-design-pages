@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelcare Admin Interne — Reporting</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin-overrides.css">
+  <style>
+    .report-form {
+      background: var(--color-white);
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--rounded-2xl);
+      padding: var(--space-6);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
+    }
+    .report-form-col { display: flex; flex-direction: column; gap: var(--space-4); }
+    .report-form-field { display: flex; flex-direction: column; gap: 6px; }
+    .report-form-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-neutral-500); }
+    .report-form-input,
+    .report-form-select {
+      padding: 8px 12px;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--rounded-md);
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--color-secondary);
+      background: var(--color-white);
+    }
+
+    .report-types {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-2);
+    }
+    .report-type {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 10px 12px;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--rounded-md);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-neutral-700);
+      transition: all 150ms ease;
+    }
+    .report-type:hover { background: var(--color-neutral-50); }
+    .report-type.active {
+      border-color: var(--color-primary);
+      background: var(--color-primary-10);
+      color: var(--color-primary-700);
+      font-weight: 600;
+    }
+    .report-type input[type="radio"] { display: none; }
+
+    .format-pills {
+      display: inline-flex;
+      gap: 4px;
+      background: var(--color-neutral-100);
+      padding: 3px;
+      border-radius: var(--rounded-md);
+    }
+    .format-pill {
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: var(--rounded-sm);
+      color: var(--color-neutral-500);
+      cursor: pointer;
+    }
+    .format-pill.active { background: var(--color-white); color: var(--color-secondary); box-shadow: var(--shadow-xs); }
+
+    .report-preview {
+      background: var(--color-neutral-50);
+      border: 1px dashed var(--color-neutral-300);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-5);
+    }
+    .report-preview-title { font-size: 14px; font-weight: 600; margin-bottom: var(--space-3); color: var(--color-neutral-900); }
+    .report-preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); font-size: 12px; }
+    .report-preview-item { display: flex; flex-direction: column; gap: 2px; }
+    .report-preview-item span { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; color: var(--color-neutral-500); }
+    .report-preview-item strong { font-size: 12px; color: var(--color-neutral-900); }
+
+    .report-content-list {
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-neutral-200);
+      font-size: 12px;
+      color: var(--color-neutral-700);
+    }
+    .report-content-list .clline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+    }
+    .report-content-list .clline svg { color: var(--color-success); flex-shrink: 0; }
+
+    .report-actions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-4); }
+  </style>
+</head>
+<body data-page="reporting" data-title="Reporting" data-subtitle="Génération de rapports propres pour direction, finance, opérations, comptes prescripteurs">
+
+  <div class="main">
+    <main class="content cockpit">
+
+      <!-- Génération de rapport -->
+      <div class="section-head">
+        <div>
+          <div class="section-head-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <h2>Générer un rapport</h2>
+          </div>
+          <div class="section-head-sub">PDF, Excel ou CSV — 15 typologies disponibles</div>
+        </div>
+      </div>
+
+      <div class="report-form">
+        <div class="report-form-col">
+          <div class="report-form-field">
+            <label class="report-form-label">Type de rapport</label>
+            <div class="report-types">
+              <label class="report-type active"><input type="radio" name="reportType" checked>Direction Kelcare</label>
+              <label class="report-type"><input type="radio" name="reportType">Financier</label>
+              <label class="report-type"><input type="radio" name="reportType">Opérationnel</label>
+              <label class="report-type"><input type="radio" name="reportType">Par compte prescripteur</label>
+              <label class="report-type"><input type="radio" name="reportType">Parent consolidé</label>
+              <label class="report-type"><input type="radio" name="reportType">Enfant / agence</label>
+              <label class="report-type"><input type="radio" name="reportType">Parent sans Enfant</label>
+              <label class="report-type"><input type="radio" name="reportType">Annulations</label>
+              <label class="report-type"><input type="radio" name="reportType">Hors SLA</label>
+              <label class="report-type"><input type="radio" name="reportType">Devis</label>
+              <label class="report-type"><input type="radio" name="reportType">Réseau Kelkun vs Prescripteurs</label>
+              <label class="report-type"><input type="radio" name="reportType">Dépendance réseau</label>
+              <label class="report-type"><input type="radio" name="reportType">MRR &amp; abonnements</label>
+              <label class="report-type"><input type="radio" name="reportType">Comptes actifs non payants</label>
+              <label class="report-type"><input type="radio" name="reportType">Potentiel MRR</label>
+            </div>
+          </div>
+
+          <div class="report-form-field">
+            <label class="report-form-label">Période</label>
+            <select class="report-form-select">
+              <option>Mois en cours</option>
+              <option>Mois précédent</option>
+              <option>Trimestre en cours</option>
+              <option>Année en cours</option>
+              <option>Plage personnalisée…</option>
+            </select>
+          </div>
+
+          <div class="report-form-field">
+            <label class="report-form-label">Compte prescripteur</label>
+            <select class="report-form-select">
+              <option>Tous les comptes</option>
+              <option>MDPA (Parent consolidé)</option>
+              <option>AXA (Parent consolidé)</option>
+              <option>Abeille (Parent consolidé)</option>
+              <option>Monceau (Parent consolidé)</option>
+              <option>Stelliant (Parent consolidé)</option>
+              <option>MDPA Poitiers Centre (Enfant)</option>
+              <option>MDPA Niort (Enfant)</option>
+              <option>MDPA Angoulême (Enfant)</option>
+              <option>AXA Montpellier (Enfant)</option>
+              <option>Kelcare Direct (Direct)</option>
+              <option>Habitat &amp; Co (Direct)</option>
+              <option>Maison Sérénité (Direct)</option>
+              <option>Réno Assistance (Direct)</option>
+            </select>
+          </div>
+
+          <div class="report-form-field">
+            <label class="report-form-label">Niveau de consolidation</label>
+            <select class="report-form-select">
+              <option>Consolidé</option>
+              <option>Direct (Parent uniquement)</option>
+              <option>Détaillé (avec Enfants)</option>
+            </select>
+          </div>
+
+          <div class="report-form-field">
+            <label class="report-form-label">Format</label>
+            <div class="format-pills">
+              <span class="format-pill active">PDF</span>
+              <span class="format-pill">Excel</span>
+              <span class="format-pill">CSV</span>
+            </div>
+          </div>
+
+          <div class="report-actions">
+            <button class="btn">Aperçu</button>
+            <button class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Générer le rapport</button>
+          </div>
+        </div>
+
+        <div class="report-form-col">
+          <div class="report-preview">
+            <div class="report-preview-title">Prévisualisation — Reporting Direction Kelcare</div>
+            <div class="report-preview-grid">
+              <div class="report-preview-item"><span>Période</span><strong>Avril 2026</strong></div>
+              <div class="report-preview-item"><span>Compte</span><strong>Tous les comptes</strong></div>
+              <div class="report-preview-item"><span>Niveau</span><strong>Consolidé</strong></div>
+              <div class="report-preview-item"><span>Réseau</span><strong>Tous</strong></div>
+              <div class="report-preview-item"><span>Date génération</span><strong>30/04/2026</strong></div>
+              <div class="report-preview-item"><span>Préparé par</span><strong>Guillaume Pons</strong></div>
+            </div>
+
+            <div class="report-content-list">
+              <strong style="display:block;margin-bottom:8px;">Contenu inclus :</strong>
+              <div class="clline"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 30 KPI principaux (portefeuille, interventions, devis, finance, MRR)</div>
+              <div class="clline"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 4 graphiques synthèse (activité, statut, causes annul., finance)</div>
+              <div class="clline"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 6 cartes comparatives perf. réseaux</div>
+              <div class="clline"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Tableau performance par compte (19 comptes)</div>
+              <div class="clline"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 10 points d'attention priorisés</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Historique des exports -->
+      <div class="section-head">
+        <div>
+          <div class="section-head-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <h2>Historique des exports</h2>
+            <span class="section-tag">28 rapports ce mois</span>
+          </div>
+          <div class="section-head-sub">Tous les rapports générés — réutilisables, téléchargeables</div>
+        </div>
+      </div>
+
+      <div class="card admin-table-card">
+        <div class="card-body" style="padding:0;">
+          <table class="data-table">
+            <thead><tr><th>Date génération</th><th>Type rapport</th><th>Période</th><th>Compte concerné</th><th>Type compte</th><th>Format</th><th>Généré par</th><th class="text-right">Taille</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>30/04/2026 09:42</td><td>Direction Kelcare</td><td>Avril 2026</td><td>Tous les comptes</td><td>—</td><td><span class="badge primary">PDF</span></td><td>Guillaume Pons</td><td class="cell-num">2,4 Mo</td><td><a href="#" class="ref-link">Télécharger</a></td></tr>
+              <tr><td>29/04/2026 17:18</td><td>Financier</td><td>Avril 2026</td><td>Tous les comptes</td><td>—</td><td><span class="badge accent">Excel</span></td><td>DAF Kelcare</td><td class="cell-num">186 Ko</td><td><a href="#" class="ref-link">Télécharger</a></td></tr>
+              <tr><td>29/04/2026 14:02</td><td>Parent consolidé</td><td>Avril 2026</td><td>MDPA</td><td><span class="badge parent">Parent</span></td><td><span class="badge primary">PDF</span></td><td>Sarah Martin</td><td class="cell-num">1,8 Mo</td><td><a href="#" class="ref-link">Télécharger</a></td></tr>
+              <tr><td>28/04/2026 11:34</td><td>Annulations</td><td>30 derniers jours</td><td>Stelliant</td><td><span class="badge parent">Parent</span></td><td><span class="badge primary">PDF</span></td><td>Marc Dubois</td><td class="cell-num">680 Ko</td><td><a href="#" class="ref-link">Télécharger</a></td></tr>
+              <tr><td>28/04/2026 09:18</td><td>Réseau Kelkun vs Prescripteurs</td><td>Trimestre en cours</td><td>Tous</td><td>—</td><td><span class="badge accent">Excel</span></td><td>Guillaume Pons</td><td class="cell-num">240 Ko</td><td><a href="#" class="ref-link">Télécharger</a></td></tr>
+              <tr><td>27/04/2026 16:48</td><td>Hors SLA</td><td>Avril 2026</td><td>MDPA Niort</td><td><span class="badge enfant">Enfant</span></td><td><span class="badge neutral">CSV</span></td><td>Lucas Petit</td><td class="cell-num">42 Ko</td><td><a href="#" class="ref-link">Télécharger</a></td></tr>
+              <tr><td>26/04/2026 10:22</td><td>MRR &amp; abonnements</td><td>Année en cours</td><td>Tous</td><td>—</td><td><span class="badge accent">Excel</span></td><td>DAF Kelcare</td><td class="cell-num">312 Ko</td><td><a href="#" class="ref-link">Télécharger</a></td></tr>
+              <tr><td>25/04/2026 15:08</td><td>Devis</td><td>Avril 2026</td><td>Abeille</td><td><span class="badge parent">Parent</span></td><td><span class="badge primary">PDF</span></td><td>Clara Bernard</td><td class="cell-num">920 Ko</td><td><a href="#" class="ref-link">Télécharger</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+  <script>
+    // Toggle types de rapport
+    document.querySelectorAll('.report-type').forEach(el => {
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.report-type').forEach(x => x.classList.remove('active'));
+        el.classList.add('active');
+        const radio = el.querySelector('input');
+        if (radio) radio.checked = true;
+      });
+    });
+
+    // Toggle format pills
+    document.querySelectorAll('.format-pill').forEach(el => {
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.format-pill').forEach(x => x.classList.remove('active'));
+        el.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

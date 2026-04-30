@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelcare Admin Interne — Finance</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin-overrides.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="finance" data-title="Finance" data-subtitle="Volume éco. · transactions · commissions calc./facturée/encaissée · DAF">
+
+  <div class="main">
+    <main class="content cockpit">
+      <div id="filtersBar"></div>
+
+      <!-- Volume éco. -->
+      <div class="kpi-group-header"><span class="group-pill" style="background:#ede9fe;color:#6d28d9;border-color:#ddd6fe;"><span class="status-dot violet"></span> Volume économique traité</span></div>
+      <div class="kpi-grid cols-5 admin-kpi-grid">
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon violet"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div></div><div class="kpi-value">486 720<span class="unit">&nbsp;€</span></div><div class="kpi-label">Total devis enregistrés</div><div class="kpi-sub">589 devis</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon violet"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div></div><div class="kpi-value">312 480<span class="unit">&nbsp;€</span></div><div class="kpi-label">Total factures travaux</div><div class="kpi-sub">624 factures</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon violet"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h12"/></svg></div></div><div class="kpi-value">487<span class="unit">&nbsp;€</span></div><div class="kpi-label">Panier moyen devis</div><div class="kpi-sub">stable</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon violet"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h12"/></svg></div></div><div class="kpi-value">501<span class="unit">&nbsp;€</span></div><div class="kpi-label">Panier moyen facture artisan</div><div class="kpi-sub">+3 % vs M-1</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon error"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div></div><div class="kpi-value">61 240<span class="unit">&nbsp;€</span></div><div class="kpi-label">Devis validés non facturés</div><div class="kpi-sub">27 dossiers en risque</div></div>
+      </div>
+
+      <!-- Commissions -->
+      <div class="kpi-group-header"><span class="group-pill" style="background:#ede9fe;color:#6d28d9;border-color:#ddd6fe;"><span class="status-dot violet"></span> Commissions</span> <span style="font-weight:500;color:var(--color-neutral-400);">29 € + 10 % facture artisan</span></div>
+      <div class="kpi-grid cols-4 admin-kpi-grid">
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon accent"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h12"/></svg></div><span class="kpi-trend up">+22 %</span></div><div class="kpi-value">68 940<span class="unit">&nbsp;€</span></div><div class="kpi-label">Commission calculée</div><div class="kpi-sub">18 096 € fixe + 50 844 € var.</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><span class="kpi-trend up">+18 %</span></div><div class="kpi-value">52 180<span class="unit">&nbsp;€</span></div><div class="kpi-label">Commission facturée</div><div class="kpi-sub">76 % de la calculée</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon primary"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><span class="kpi-trend up">+14 %</span></div><div class="kpi-value">29 770<span class="unit">&nbsp;€</span></div><div class="kpi-label">Commission encaissée</div><div class="kpi-sub">57 % de la facturée</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div></div><div class="kpi-value">110<span class="unit">&nbsp;€</span></div><div class="kpi-label">Commission moyenne / interv.</div><div class="kpi-sub">624 interv. commissionnées</div></div>
+      </div>
+
+      <!-- Reste à -->
+      <div class="kpi-group-header"><span class="group-pill" style="background:var(--color-warning-50);color:var(--color-warning-500);"><span class="status-dot orange"></span> Risque DAF</span></div>
+      <div class="kpi-grid cols-3 admin-kpi-grid">
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div></div><div class="kpi-value">16 760<span class="unit">&nbsp;€</span></div><div class="kpi-label">Reste à facturer</div><div class="kpi-sub">commission calc. - facturée</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon error"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div></div><div class="kpi-value">22 410<span class="unit">&nbsp;€</span></div><div class="kpi-label">Reste à encaisser</div><div class="kpi-sub">DSO 18 j</div></div>
+        <div class="kpi-card"><div class="kpi-header"><div class="kpi-icon success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><span class="kpi-trend up">+5 pts</span></div><div class="kpi-value">76<span class="unit">%</span></div><div class="kpi-label">Taux de facturation</div><div class="kpi-sub">facturée / calculée</div></div>
+      </div>
+
+      <!-- Charts -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><div><div class="card-title">Évolution des transactions et commissions</div><div class="card-subtitle">6 mois — multi-séries</div></div></div>
+          <div class="card-body"><div class="chart-wrap" style="height:300px;"><canvas id="chartFinance"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div><div class="card-title">Reste à facturer / reste à encaisser</div><div class="card-subtitle">Vision DAF</div></div></div>
+          <div class="card-body"><div class="chart-wrap" style="height:300px;"><canvas id="chartReste"></canvas></div></div>
+        </div>
+      </div>
+
+      <!-- Tableau -->
+      <div class="section-head">
+        <div>
+          <div class="section-head-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            <h2>Finance par compte</h2>
+          </div>
+          <div class="section-head-sub">Tableau exportable — vision DAF complète</div>
+        </div>
+        <div class="section-head-actions">
+          <button class="btn">Export CSV</button>
+          <button class="btn btn-primary">Export Excel</button>
+        </div>
+      </div>
+
+      <div class="card admin-table-card">
+        <div class="card-body" style="padding:0;overflow-x:auto;">
+          <table class="data-table">
+            <thead><tr><th>Compte</th><th class="text-right">Vol. transactions</th><th class="text-right">Comm. calc.</th><th class="text-right">Comm. facturée</th><th class="text-right">Comm. encaissée</th><th class="text-right">Reste à fact.</th><th class="text-right">Reste à enc.</th><th class="text-right">Tx fact.</th><th class="text-right">Tx enc.</th><th>Statut</th></tr></thead>
+            <tbody>
+              <tr><td>MDPA</td><td class="cell-num">128 480</td><td class="cell-num">26 480</td><td class="cell-num">21 480</td><td class="cell-num">14 280</td><td class="cell-num">5 000</td><td class="cell-num">7 200</td><td class="cell-num">81 %</td><td class="cell-num">66 %</td><td><span class="badge success">OK</span></td></tr>
+              <tr><td>AXA</td><td class="cell-num">82 240</td><td class="cell-num">14 920</td><td class="cell-num">12 480</td><td class="cell-num">7 880</td><td class="cell-num">2 440</td><td class="cell-num">4 600</td><td class="cell-num">84 %</td><td class="cell-num">63 %</td><td><span class="badge success">OK</span></td></tr>
+              <tr><td>Abeille</td><td class="cell-num">42 880</td><td class="cell-num">9 680</td><td class="cell-num">6 240</td><td class="cell-num">3 480</td><td class="cell-num">3 440</td><td class="cell-num">2 760</td><td class="cell-num">64 %</td><td class="cell-num">56 %</td><td><span class="badge warning">À surveiller</span></td></tr>
+              <tr><td>Monceau</td><td class="cell-num">22 480</td><td class="cell-num">5 280</td><td class="cell-num">3 280</td><td class="cell-num">1 280</td><td class="cell-num">2 000</td><td class="cell-num">2 000</td><td class="cell-num">62 %</td><td class="cell-num">39 %</td><td><span class="badge error">Risque</span></td></tr>
+              <tr><td>Stelliant</td><td class="cell-num">18 240</td><td class="cell-num">3 940</td><td class="cell-num">1 480</td><td class="cell-num">680</td><td class="cell-num">2 460</td><td class="cell-num">800</td><td class="cell-num">38 %</td><td class="cell-num">46 %</td><td><span class="badge error">Risque</span></td></tr>
+              <tr><td>Kelcare Direct</td><td class="cell-num">12 480</td><td class="cell-num">7 240</td><td class="cell-num">5 800</td><td class="cell-num">1 480</td><td class="cell-num">1 440</td><td class="cell-num">4 320</td><td class="cell-num">80 %</td><td class="cell-num">26 %</td><td><span class="badge warning">DSO élevé</span></td></tr>
+              <tr><td>Habitat &amp; Co</td><td class="cell-num">5 680</td><td class="cell-num">3 120</td><td class="cell-num">2 280</td><td class="cell-num">680</td><td class="cell-num">840</td><td class="cell-num">1 600</td><td class="cell-num">73 %</td><td class="cell-num">30 %</td><td><span class="badge warning">DSO élevé</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+  <script>
+    new Chart(document.getElementById('chartFinance'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'Déc.', 'Janv.', 'Fév.', 'Mars', 'Avr.'],
+        datasets: [
+          { label: 'Vol. transactions (k€)', data: [220,232,248,265,278,312], borderColor: KC_COLORS.secondary, fill: false, tension: 0.35, borderWidth: 2 },
+          { label: 'Comm. calculée (k€)', data: [48,51,55,58,62,69], borderColor: KC_COLORS.accent, fill: false, tension: 0.35, borderWidth: 2 },
+          { label: 'Comm. facturée (k€)', data: [42,44,47,49,52,52], borderColor: KC_COLORS.success, fill: false, tension: 0.35, borderWidth: 2 },
+          { label: 'Comm. encaissée (k€)', data: [22,24,26,28,29,30], borderColor: KC_COLORS.primary, backgroundColor: KC_COLORS.primaryLight, fill: true, tension: 0.35, borderWidth: 2 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font:{family:'Poppins',size:10}, padding: 12, usePointStyle: true, boxWidth: 8 } } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f5f5f5' }, beginAtZero: true } } }
+    });
+
+    new Chart(document.getElementById('chartReste'), {
+      type: 'bar',
+      data: {
+        labels: ['MDPA','AXA','Abeille','Monceau','Stelliant','Kelcare Direct','Habitat & Co'],
+        datasets: [
+          { label: 'Reste à facturer', data: [5000, 2440, 3440, 2000, 2460, 1440, 840], backgroundColor: KC_COLORS.warning, borderRadius: 4, stack: 'a' },
+          { label: 'Reste à encaisser', data: [7200, 4600, 2760, 2000, 800, 4320, 1600], backgroundColor: KC_COLORS.error, borderRadius: 4, stack: 'a' }
+        ]
+      },
+      options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font:{family:'Poppins',size:10}, padding: 12, usePointStyle: true, boxWidth: 8 } }, tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label} : ${ctx.parsed.x.toLocaleString('fr-FR')} €` } } }, scales: { x: { stacked: true, grid: { color: '#f5f5f5' }, ticks: { callback: (v) => (v/1000) + ' k€' } }, y: { stacked: true, grid: { display: false } } } }
+    });
+  </script>
+</body>
+</html>

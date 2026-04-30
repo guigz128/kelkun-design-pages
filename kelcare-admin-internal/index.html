@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelcare Admin Interne — Vue globale</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin-overrides.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="index" data-title="Tableau de bord interne Kelcare" data-subtitle="Pilotage opérationnel, financier et réseau des comptes prescripteurs">
+
+  <div class="main">
+    <main class="content cockpit">
+
+      <!-- HERO BANNER ADMIN -->
+      <div class="admin-hero">
+        <div class="admin-hero-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        </div>
+        <div class="admin-hero-body">
+          <div class="admin-hero-eyebrow">Avril 2026 · Période en cours</div>
+          <div class="admin-hero-title">Cockpit interne Kelcare</div>
+          <div class="admin-hero-text">
+            Activité en hausse de <strong>+18 %</strong> ce mois (1 248 interventions reçues sur 19 comptes prescripteurs).
+            Point de vigilance : <strong>27 devis validés non facturés</strong> (61 240 €) et <strong>4 comptes actifs non payants</strong> à requalifier.
+            MRR actuel <strong>14 280 €</strong>, potentiel non activé estimé à <strong>+6 920 €</strong>.
+          </div>
+        </div>
+        <div class="admin-hero-stats">
+          <div class="admin-hero-stat">
+            <div class="admin-hero-stat-value">1 248</div>
+            <div class="admin-hero-stat-label">Interventions</div>
+          </div>
+          <div class="admin-hero-stat-divider"></div>
+          <div class="admin-hero-stat">
+            <div class="admin-hero-stat-value">14 280<span style="font-size:14px;font-weight:500;opacity:.7;">&nbsp;€</span></div>
+            <div class="admin-hero-stat-label">MRR</div>
+          </div>
+          <div class="admin-hero-stat-divider"></div>
+          <div class="admin-hero-stat">
+            <div class="admin-hero-stat-value">68 940<span style="font-size:14px;font-weight:500;opacity:.7;">&nbsp;€</span></div>
+            <div class="admin-hero-stat-label">Commission calc.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTRES GLOBAUX -->
+      <div id="filtersBar"></div>
+
+      <!-- ============================================
+           A. KPI PRIORITAIRES — par famille
+           ============================================ -->
+
+      <!-- Famille 1 — Portefeuille -->
+      <div class="kpi-group-header">
+        <span class="group-pill"><span class="status-dot blue"></span> Portefeuille</span>
+        <span style="font-weight:500;color:var(--color-neutral-400);">19 comptes · 8 enfants · 4 directs</span>
+      </div>
+
+      <div class="kpi-grid cols-6 admin-kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon turquoise">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/></svg>
+            </div>
+            <span class="kpi-trend up">+2</span>
+          </div>
+          <div class="kpi-value">19</div>
+          <div class="kpi-label">Comptes actifs</div>
+          <div class="kpi-sub">5 parents · 8 enfants · 4 directs · 2 dormants</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon navy">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg>
+            </div>
+            <span class="kpi-trend up">+1</span>
+          </div>
+          <div class="kpi-value">5</div>
+          <div class="kpi-label">Parents consolidés</div>
+          <div class="kpi-sub">MDPA · AXA · Abeille · Monceau · Stelliant</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <span class="kpi-trend up">+1</span>
+          </div>
+          <div class="kpi-value">8</div>
+          <div class="kpi-label">Enfants / agences</div>
+          <div class="kpi-sub">Taux d'activation : <strong>62 %</strong> (5/8)</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            </div>
+            <span class="kpi-trend neutral">0</span>
+          </div>
+          <div class="kpi-value">4</div>
+          <div class="kpi-label">Parents sans Enfant</div>
+          <div class="kpi-sub">Kelcare Direct · Habitat &amp; Co · …</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="kpi-trend down">-1</span>
+          </div>
+          <div class="kpi-value">2</div>
+          <div class="kpi-label">Comptes dormants</div>
+          <div class="kpi-sub">Aucune intervention sur 30 j</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <span class="kpi-trend up">+1</span>
+          </div>
+          <div class="kpi-value">3</div>
+          <div class="kpi-label">Comptes à risque</div>
+          <div class="kpi-sub">Annulation &gt; 25 % ou hors SLA &gt; 15 %</div>
+        </div>
+      </div>
+
+      <!-- Famille 2 — Interventions -->
+      <div class="kpi-group-header">
+        <span class="group-pill"><span class="status-dot green"></span> Interventions</span>
+        <span style="font-weight:500;color:var(--color-neutral-400);">flux &amp; statuts opérationnels</span>
+      </div>
+
+      <div class="kpi-grid cols-6 admin-kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <span class="kpi-trend up">+18 %</span>
+          </div>
+          <div class="kpi-value">1 248</div>
+          <div class="kpi-label">Interventions reçues</div>
+          <div class="kpi-sub">Réseau Kelkun : 412 (33 %) · Prescripteur : 836 (67 %)</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="kpi-trend up">+12 %</span>
+          </div>
+          <div class="kpi-value">412</div>
+          <div class="kpi-label">En cours</div>
+          <div class="kpi-sub">Délai moyen de qualification : 2,1 j</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="kpi-trend up">+22 %</span>
+          </div>
+          <div class="kpi-value">724</div>
+          <div class="kpi-label">Terminées</div>
+          <div class="kpi-sub">58 % du flux du mois</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            </div>
+            <span class="kpi-trend up">+3 %</span>
+          </div>
+          <div class="kpi-value">112</div>
+          <div class="kpi-label">Annulées</div>
+          <div class="kpi-sub">Cause #1 : Refus du devis (28 %)</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            </div>
+            <span class="kpi-trend down">-2 pts</span>
+          </div>
+          <div class="kpi-value">9<span class="unit">%</span></div>
+          <div class="kpi-label">Taux d'annulation</div>
+          <div class="kpi-sub">Cible interne &lt; 8 %</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <span class="kpi-trend down">-4</span>
+          </div>
+          <div class="kpi-value">38</div>
+          <div class="kpi-label">Hors SLA</div>
+          <div class="kpi-sub">3,1 % du stock en cours</div>
+        </div>
+      </div>
+
+      <!-- Famille 3 — Devis -->
+      <div class="kpi-group-header">
+        <span class="group-pill"><span class="status-dot orange"></span> Devis</span>
+        <span style="font-weight:500;color:var(--color-neutral-400);">cycle réception → validation → facture artisan</span>
+      </div>
+
+      <div class="kpi-grid cols-6 admin-kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+            </div>
+            <span class="kpi-trend up">+15 %</span>
+          </div>
+          <div class="kpi-value">589</div>
+          <div class="kpi-label">Devis reçus</div>
+          <div class="kpi-sub">Panier moyen : 487 €</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="kpi-trend up">+8</span>
+          </div>
+          <div class="kpi-value">68</div>
+          <div class="kpi-label">En attente de validation</div>
+          <div class="kpi-sub">Ancienneté moyenne : 3,6 j</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="kpi-trend up">+3 pts</span>
+          </div>
+          <div class="kpi-value">76<span class="unit">%</span></div>
+          <div class="kpi-label">Taux de validation</div>
+          <div class="kpi-sub">448 validés sur 589 reçus</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="3 17 9 11 13 15 21 7"/></svg>
+            </div>
+            <span class="kpi-trend up">+5 pts</span>
+          </div>
+          <div class="kpi-value">82<span class="unit">%</span></div>
+          <div class="kpi-label">Transformation devis → facture</div>
+          <div class="kpi-sub">Délai moyen 6,2 j</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="kpi-trend down">-0,4 j</span>
+          </div>
+          <div class="kpi-value">2,1<span class="unit">j</span></div>
+          <div class="kpi-label">Délai moyen de validation</div>
+          <div class="kpi-sub">Cible interne &lt; 2 j</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            </div>
+            <span class="kpi-trend up">+12 %</span>
+          </div>
+          <div class="kpi-value">61 240<span class="unit">&nbsp;€</span></div>
+          <div class="kpi-label">Devis validés non facturés</div>
+          <div class="kpi-sub">27 dossiers · risque DAF</div>
+        </div>
+      </div>
+
+      <!-- Famille 4 — Finance -->
+      <div class="kpi-group-header">
+        <span class="group-pill" style="background:#ede9fe;color:#6d28d9;border-color:#ddd6fe;"><span class="status-dot violet"></span> Finance</span>
+        <span style="font-weight:500;color:var(--color-neutral-400);">commission Kelcare = 29 € + 10 % facture artisan</span>
+      </div>
+
+      <div class="kpi-grid cols-6 admin-kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon violet"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8" rx="1"/><rect x="14" y="6" width="3" height="12" rx="1"/></svg></div>
+            <span class="kpi-trend up">+19 %</span>
+          </div>
+          <div class="kpi-value">486 720<span class="unit">&nbsp;€</span></div>
+          <div class="kpi-label">Volume éco. traité</div>
+          <div class="kpi-sub">Devis + factures travaux suivis</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon violet"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+            <span class="kpi-trend up">+22 %</span>
+          </div>
+          <div class="kpi-value">312 480<span class="unit">&nbsp;€</span></div>
+          <div class="kpi-label">Transactions enregistrées</div>
+          <div class="kpi-sub">624 factures artisans · panier moyen 501 €</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon violet"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h12"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg></div>
+            <span class="kpi-trend up">+22 %</span>
+          </div>
+          <div class="kpi-value">68 940<span class="unit">&nbsp;€</span></div>
+          <div class="kpi-label">Commission calculée</div>
+          <div class="kpi-sub">29 € fixe × 624 + 10 % var.</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="kpi-trend up">+18 %</span>
+          </div>
+          <div class="kpi-value">52 180<span class="unit">&nbsp;€</span></div>
+          <div class="kpi-label">Commission facturée</div>
+          <div class="kpi-sub">Taux de facturation : 76 %</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <span class="kpi-trend down">-2 j</span>
+          </div>
+          <div class="kpi-value">16 760<span class="unit">&nbsp;€</span></div>
+          <div class="kpi-label">Reste à facturer</div>
+          <div class="kpi-sub">Ancienneté moyenne 9 j</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon error"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <span class="kpi-trend up">+8 %</span>
+          </div>
+          <div class="kpi-value">22 410<span class="unit">&nbsp;€</span></div>
+          <div class="kpi-label">Reste à encaisser</div>
+          <div class="kpi-sub">DSO 18 j · cible &lt; 30 j</div>
+        </div>
+      </div>
+
+      <!-- Famille 5 — MRR -->
+      <div class="kpi-group-header">
+        <span class="group-pill" style="background:#ede9fe;color:#6d28d9;border-color:#ddd6fe;"><span class="status-dot violet"></span> MRR &amp; abonnements</span>
+        <span style="font-weight:500;color:var(--color-neutral-400);">revenu récurrent mensuel — distinct de la commission</span>
+      </div>
+
+      <div class="kpi-grid cols-6 admin-kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon accent"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+            <span class="kpi-trend up">+9 %</span>
+          </div>
+          <div class="kpi-value">14 280<span class="unit">&nbsp;€</span></div>
+          <div class="kpi-label">MRR actuel</div>
+          <div class="kpi-sub">+1 180 € vs mois précédent</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon accent"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="3 17 9 11 13 15 21 7"/></svg></div>
+            <span class="kpi-trend up">+9 %</span>
+          </div>
+          <div class="kpi-value">171 360<span class="unit">&nbsp;€</span></div>
+          <div class="kpi-label">ARR projeté</div>
+          <div class="kpi-sub">MRR × 12</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></div>
+            <span class="kpi-trend up">+1</span>
+          </div>
+          <div class="kpi-value">12</div>
+          <div class="kpi-label">Comptes payants</div>
+          <div class="kpi-sub">63 % du portefeuille actif</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            <span class="kpi-trend up">+2</span>
+          </div>
+          <div class="kpi-value">7</div>
+          <div class="kpi-label">Comptes non payants</div>
+          <div class="kpi-sub">4 actifs · 2 pilotes · 1 exonéré</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon accent"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/></svg></div>
+            <span class="kpi-trend up">+12 %</span>
+          </div>
+          <div class="kpi-value">+6 920<span class="unit">&nbsp;€</span></div>
+          <div class="kpi-label">Potentiel MRR non activé</div>
+          <div class="kpi-sub">7 comptes non convertis</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon error"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div>
+            <span class="kpi-trend down">-1 pt</span>
+          </div>
+          <div class="kpi-value">2,1<span class="unit">%</span></div>
+          <div class="kpi-label">Churn mensuel</div>
+          <div class="kpi-sub">1 résiliation · cible &lt; 3 %</div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           B. GRAPHIQUES SYNTHÈSE
+           ============================================ -->
+
+      <div class="section-head">
+        <div>
+          <div class="section-head-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <h2>Tendances clés</h2>
+          </div>
+          <div class="section-head-sub">Évolution sur 6 mois — vision direction</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Activité globale</div>
+              <div class="card-subtitle">Reçues · terminées · annulées · hors SLA</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartActivity"></canvas></div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Répartition par statut intervention</div>
+              <div class="card-subtitle">Stock opérationnel actuel</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="chart-wrap"><canvas id="chartStatus"></canvas></div></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Annulations par cause</div>
+              <div class="card-subtitle">7 causes métier — bar horizontal pour lisibilité</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="chart-wrap" style="height:300px;"><canvas id="chartCauses"></canvas></div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Synthèse finance</div>
+              <div class="card-subtitle">Volume transactions · commission calc. · facturée · encaissée · MRR</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="chart-wrap" style="height:300px;"><canvas id="chartFinance"></canvas></div></div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           C. PERFORMANCE COMPARÉE DES RÉSEAUX
+           ============================================ -->
+
+      <div class="section-head">
+        <div>
+          <div class="section-head-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
+            <h2>Performance comparée des réseaux</h2>
+            <span class="section-tag network">Kelkun vs Prescripteurs</span>
+          </div>
+          <div class="section-head-sub">6 indicateurs de réactivité et qualité terrain — consolidé sur la période</div>
+        </div>
+        <div class="section-head-actions">
+          <a href="reseaux.html" class="btn">Voir le détail réseaux <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+
+      <div class="compcard-grid">
+
+        <!-- 1. Acceptation -->
+        <div class="compcard">
+          <div class="compcard-head">
+            <div class="compcard-title">Temps moyen d'acceptation</div>
+            <div class="compcard-sub">Réactivité face au dispatch</div>
+          </div>
+          <div class="compcard-main">
+            <span class="compcard-value">32</span>
+            <span class="compcard-unit">min</span>
+            <span class="compcard-target">Cible <strong>&lt; 45 min</strong></span>
+          </div>
+          <div class="compcard-spark"><canvas data-spark="acceptation"></canvas></div>
+          <div class="compcard-rows">
+            <div class="compcard-row kelkun"><span class="compcard-row-label">Réseau Kelkun</span><span><span class="compcard-row-value">28 min</span><span class="compcard-row-delta up">-12 %</span></span></div>
+            <div class="compcard-row prescripteur"><span class="compcard-row-label">Rés. prescripteurs</span><span><span class="compcard-row-value">38 min</span><span class="compcard-row-delta up">-5 %</span></span></div>
+            <div class="compcard-row total"><span class="compcard-row-label">Total consolidé</span><span><span class="compcard-row-value">32 min</span><span class="compcard-row-delta up">-9 %</span></span></div>
+          </div>
+        </div>
+
+        <!-- 2. Premier contact -->
+        <div class="compcard">
+          <div class="compcard-head">
+            <div class="compcard-title">Premier contact client</div>
+            <div class="compcard-sub">Vitesse de prise d'appel après assignation</div>
+          </div>
+          <div class="compcard-main">
+            <span class="compcard-value">17</span>
+            <span class="compcard-unit">min</span>
+            <span class="compcard-target">Cible <strong>&lt; 20 min</strong></span>
+          </div>
+          <div class="compcard-spark"><canvas data-spark="contact"></canvas></div>
+          <div class="compcard-rows">
+            <div class="compcard-row kelkun"><span class="compcard-row-label">Réseau Kelkun</span><span><span class="compcard-row-value">14 min</span><span class="compcard-row-delta up">-18 %</span></span></div>
+            <div class="compcard-row prescripteur"><span class="compcard-row-label">Rés. prescripteurs</span><span><span class="compcard-row-value">21 min</span><span class="compcard-row-delta down">+3 %</span></span></div>
+            <div class="compcard-row total"><span class="compcard-row-label">Total consolidé</span><span><span class="compcard-row-value">17 min</span><span class="compcard-row-delta up">-7 %</span></span></div>
+          </div>
+        </div>
+
+        <!-- 3. Délai RDV → intervention -->
+        <div class="compcard">
+          <div class="compcard-head">
+            <div class="compcard-title">Délai RDV → intervention</div>
+            <div class="compcard-sub">Capacité de planification du réseau</div>
+          </div>
+          <div class="compcard-main">
+            <span class="compcard-value">2,8</span>
+            <span class="compcard-unit">j</span>
+            <span class="compcard-target">Cible <strong>&lt; 3 j</strong></span>
+          </div>
+          <div class="compcard-spark"><canvas data-spark="delairdv"></canvas></div>
+          <div class="compcard-rows">
+            <div class="compcard-row kelkun"><span class="compcard-row-label">Réseau Kelkun</span><span><span class="compcard-row-value">2,3 j</span><span class="compcard-row-delta up">-9 %</span></span></div>
+            <div class="compcard-row prescripteur"><span class="compcard-row-label">Rés. prescripteurs</span><span><span class="compcard-row-value">3,2 j</span><span class="compcard-row-delta neutral">0 %</span></span></div>
+            <div class="compcard-row total"><span class="compcard-row-label">Total consolidé</span><span><span class="compcard-row-value">2,8 j</span><span class="compcard-row-delta up">-4 %</span></span></div>
+          </div>
+        </div>
+
+        <!-- 4. Ponctualité -->
+        <div class="compcard">
+          <div class="compcard-head">
+            <div class="compcard-title">Ponctualité terrain</div>
+            <div class="compcard-sub">Écart RDV planifié → arrivée réelle</div>
+          </div>
+          <div class="compcard-main">
+            <span class="compcard-value">+12</span>
+            <span class="compcard-unit">min</span>
+            <span class="compcard-target">Cible <strong>&lt; 15 min</strong></span>
+          </div>
+          <div class="compcard-spark"><canvas data-spark="ponct"></canvas></div>
+          <div class="compcard-rows">
+            <div class="compcard-row kelkun"><span class="compcard-row-label">Réseau Kelkun</span><span><span class="compcard-row-value">+8 min</span><span class="compcard-row-delta up">-3 min</span></span></div>
+            <div class="compcard-row prescripteur"><span class="compcard-row-label">Rés. prescripteurs</span><span><span class="compcard-row-value">+15 min</span><span class="compcard-row-delta down">+2 min</span></span></div>
+            <div class="compcard-row total"><span class="compcard-row-label">Total consolidé</span><span><span class="compcard-row-value">+12 min</span><span class="compcard-row-delta neutral">0 min</span></span></div>
+          </div>
+        </div>
+
+        <!-- 5. Reprogrammation -->
+        <div class="compcard">
+          <div class="compcard-head">
+            <div class="compcard-title">Taux de reprogrammation</div>
+            <div class="compcard-sub">Reports identifiés et causes racines</div>
+          </div>
+          <div class="compcard-main">
+            <span class="compcard-value">11</span>
+            <span class="compcard-unit">%</span>
+            <span class="compcard-target">Cible <strong>&lt; 12 %</strong></span>
+          </div>
+          <div class="compcard-spark"><canvas data-spark="repro"></canvas></div>
+          <div class="compcard-rows">
+            <div class="compcard-row kelkun"><span class="compcard-row-label">Réseau Kelkun</span><span><span class="compcard-row-value">7 %</span><span class="compcard-row-delta up">-2 pts</span></span></div>
+            <div class="compcard-row prescripteur"><span class="compcard-row-label">Rés. prescripteurs</span><span><span class="compcard-row-value">14 %</span><span class="compcard-row-delta down">+1 pt</span></span></div>
+            <div class="compcard-row total"><span class="compcard-row-label">Total consolidé</span><span><span class="compcard-row-value">11 %</span><span class="compcard-row-delta up">-1 pt</span></span></div>
+          </div>
+        </div>
+
+        <!-- 6. Durée intervention -->
+        <div class="compcard">
+          <div class="compcard-head">
+            <div class="compcard-title">Temps moyen d'intervention</div>
+            <div class="compcard-sub">Durée terrain — par typologie</div>
+          </div>
+          <div class="compcard-main">
+            <span class="compcard-value">1,8</span>
+            <span class="compcard-unit">h</span>
+            <span class="compcard-target">Cible <strong>&lt; 2 h</strong></span>
+          </div>
+          <div class="compcard-spark"><canvas data-spark="duree"></canvas></div>
+          <div class="compcard-rows">
+            <div class="compcard-row kelkun"><span class="compcard-row-label">Réseau Kelkun</span><span><span class="compcard-row-value">1,6 h</span><span class="compcard-row-delta up">-0,1 h</span></span></div>
+            <div class="compcard-row prescripteur"><span class="compcard-row-label">Rés. prescripteurs</span><span><span class="compcard-row-value">1,9 h</span><span class="compcard-row-delta neutral">0 h</span></span></div>
+            <div class="compcard-row total"><span class="compcard-row-label">Total consolidé</span><span><span class="compcard-row-value">1,8 h</span><span class="compcard-row-delta up">-0,1 h</span></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Répartition réseau + tableau perf par compte -->
+      <div class="grid-1-2">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Répartition par réseau</div>
+              <div class="card-subtitle">Interventions du mois</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-wrap" style="height:200px;"><canvas id="chartReseau"></canvas></div>
+            <div class="netbar">
+              <div class="netbar-kelkun" style="width:33%;">412 · Kelkun</div>
+              <div class="netbar-prescripteur" style="width:67%;">836 · Prescripteurs</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card admin-table-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Top comptes — performance réseau</div>
+              <div class="card-subtitle">Activité, part Kelkun, taux d'annulation, transformation devis</div>
+            </div>
+            <a href="comptes.html" class="btn btn-ghost" style="font-size:12px;">Voir tous les comptes →</a>
+          </div>
+          <div class="card-body" style="padding:0;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Compte</th>
+                  <th>Type</th>
+                  <th class="text-right">Interv.</th>
+                  <th>Part Kelkun</th>
+                  <th class="text-right">Annul.</th>
+                  <th class="text-right">Transf. devis</th>
+                  <th>Décision</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="cell-account-name">
+                      <span class="acc-avatar">MD</span>
+                      <div class="acc-info"><span class="acc-name">MDPA</span><span class="acc-parent">3 enfants</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge parent">Parent</span></td>
+                  <td class="cell-num">486</td>
+                  <td><div class="netbar" style="height:18px;"><div class="netbar-kelkun" style="width:28%;font-size:9px;">28%</div><div class="netbar-prescripteur" style="width:72%;font-size:9px;">72%</div></div></td>
+                  <td class="cell-num">7,2 %</td>
+                  <td class="cell-num">86 %</td>
+                  <td><span class="badge success">Continuer</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-account-name">
+                      <span class="acc-avatar">AX</span>
+                      <div class="acc-info"><span class="acc-name">AXA</span><span class="acc-parent">2 enfants</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge parent">Parent</span></td>
+                  <td class="cell-num">298</td>
+                  <td><div class="netbar" style="height:18px;"><div class="netbar-kelkun" style="width:42%;font-size:9px;">42%</div><div class="netbar-prescripteur" style="width:58%;font-size:9px;">58%</div></div></td>
+                  <td class="cell-num">9,8 %</td>
+                  <td class="cell-num">81 %</td>
+                  <td><span class="badge primary">Renforcer Kelkun</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-account-name">
+                      <span class="acc-avatar">AB</span>
+                      <div class="acc-info"><span class="acc-name">Abeille</span><span class="acc-parent">2 enfants</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge parent">Parent</span></td>
+                  <td class="cell-num">186</td>
+                  <td><div class="netbar" style="height:18px;"><div class="netbar-kelkun" style="width:21%;font-size:9px;">21%</div><div class="netbar-prescripteur" style="width:79%;font-size:9px;">79%</div></div></td>
+                  <td class="cell-num">12,4 %</td>
+                  <td class="cell-num">73 %</td>
+                  <td><span class="badge warning">Accompagner réseau</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-account-name">
+                      <span class="acc-avatar">KD</span>
+                      <div class="acc-info"><span class="acc-name">Kelcare Direct</span><span class="acc-parent">Direct</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge direct">Direct</span></td>
+                  <td class="cell-num">142</td>
+                  <td><div class="netbar" style="height:18px;"><div class="netbar-kelkun" style="width:96%;font-size:9px;">96%</div><div class="netbar-prescripteur" style="width:4%;"></div></div></td>
+                  <td class="cell-num">5,6 %</td>
+                  <td class="cell-num">89 %</td>
+                  <td><span class="badge success">Continuer</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-account-name">
+                      <span class="acc-avatar">MO</span>
+                      <div class="acc-info"><span class="acc-name">Monceau</span><span class="acc-parent">1 enfant</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge parent">Parent</span></td>
+                  <td class="cell-num">98</td>
+                  <td><div class="netbar" style="height:18px;"><div class="netbar-kelkun" style="width:55%;font-size:9px;">55%</div><div class="netbar-prescripteur" style="width:45%;font-size:9px;">45%</div></div></td>
+                  <td class="cell-num">11,2 %</td>
+                  <td class="cell-num">78 %</td>
+                  <td><span class="badge primary">Basculer Kelkun</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-account-name">
+                      <span class="acc-avatar">ST</span>
+                      <div class="acc-info"><span class="acc-name">Stelliant</span><span class="acc-parent">0 enfant</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge parent">Parent</span></td>
+                  <td class="cell-num">76</td>
+                  <td><div class="netbar" style="height:18px;"><div class="netbar-kelkun" style="width:18%;font-size:9px;">18%</div><div class="netbar-prescripteur" style="width:82%;font-size:9px;">82%</div></div></td>
+                  <td class="cell-num">14,8 %</td>
+                  <td class="cell-num">68 %</td>
+                  <td><span class="badge error">Recrutement prio.</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-account-name">
+                      <span class="acc-avatar">HC</span>
+                      <div class="acc-info"><span class="acc-name">Habitat &amp; Co</span><span class="acc-parent">Direct</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge direct">Direct</span></td>
+                  <td class="cell-num">62</td>
+                  <td><div class="netbar" style="height:18px;"><div class="netbar-kelkun" style="width:88%;font-size:9px;">88%</div><div class="netbar-prescripteur" style="width:12%;"></div></div></td>
+                  <td class="cell-num">8,1 %</td>
+                  <td class="cell-num">82 %</td>
+                  <td><span class="badge success">Continuer</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           D. POINTS D'ATTENTION DIRECTION
+           ============================================ -->
+
+      <div class="section-head">
+        <div>
+          <div class="section-head-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <h2>Points d'attention direction</h2>
+            <span class="section-tag priority">10 alertes priorisées</span>
+          </div>
+          <div class="section-head-sub">Anomalies opérationnelles, financières et commerciales</div>
+        </div>
+        <div class="section-head-actions">
+          <button class="btn">Tout exporter</button>
+          <button class="btn btn-primary">Assigner</button>
+        </div>
+      </div>
+
+      <div class="attention-list">
+
+        <!-- HIGH priority — risque opérationnel -->
+        <div class="attention-item priority-high">
+          <div class="attention-icon high"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+          <div class="attention-body">
+            <div class="attention-title">Hausse forte des annulations sur Stelliant</div>
+            <div class="attention-desc">Taux d'annulation à <strong>14,8 %</strong> (+5 pts vs M-1) — cause principale : « Refus du devis » (42 %). Réseau prescripteur sous-dimensionné.</div>
+          </div>
+          <div class="attention-meta"><strong>+5 pts</strong>vs M-1</div>
+          <a href="interventions.html" class="attention-cta">Voir les annulations <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+
+        <div class="attention-item priority-high">
+          <div class="attention-icon high"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="attention-body">
+            <div class="attention-title">38 interventions hors SLA — concentration MDPA Niort &amp; Abeille Béziers</div>
+            <div class="attention-desc">Délai d'attribution &gt; 4 j sur ces 2 entités. Responsables Ops : Marc Dubois &amp; Lucas Petit.</div>
+          </div>
+          <div class="attention-meta"><strong>38</strong>dossiers</div>
+          <a href="operations.html" class="attention-cta">Traiter <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+
+        <!-- REVENUE priority — finance -->
+        <div class="attention-item priority-rev">
+          <div class="attention-icon rev"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="attention-body">
+            <div class="attention-title">61 240 € de devis validés non facturés</div>
+            <div class="attention-desc">27 dossiers · ancienneté moyenne 11 j. Risque DAF — manque de facture artisan enregistrée.</div>
+          </div>
+          <div class="attention-meta"><strong>27</strong>dossiers</div>
+          <a href="devis.html" class="attention-cta">Voir la liste <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+
+        <div class="attention-item priority-rev">
+          <div class="attention-icon rev"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div>
+          <div class="attention-body">
+            <div class="attention-title">+6 920 € de potentiel MRR non activé</div>
+            <div class="attention-desc">7 comptes actifs non payants — Abeille Béziers, Monceau Bordeaux, Maison Sérénité… période gratuite expirée.</div>
+          </div>
+          <div class="attention-meta"><strong>7</strong>comptes</div>
+          <a href="mrr.html" class="attention-cta">Convertir <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+
+        <div class="attention-item priority-rev">
+          <div class="attention-icon rev"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="attention-body">
+            <div class="attention-title">22 410 € de reste à encaisser</div>
+            <div class="attention-desc">DSO actuel 18 j (cible 30 j). 4 factures en retard &gt; 45 j — relance recommandée.</div>
+          </div>
+          <div class="attention-meta"><strong>18 j</strong>DSO</div>
+          <a href="finance.html" class="attention-cta">Relancer <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+
+        <!-- MID priority — réseau -->
+        <div class="attention-item priority-mid">
+          <div class="attention-icon mid"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg></div>
+          <div class="attention-body">
+            <div class="attention-title">Réseau prescripteur AXA en sous-performance</div>
+            <div class="attention-desc">Taux hors SLA <strong>16,2 %</strong>, délai acceptation 52 min. Bascule recommandée vers Kelkun (+8 pts performance).</div>
+          </div>
+          <div class="attention-meta"><strong>AXA</strong>2 enfants</div>
+          <a href="reseaux.html" class="attention-cta">Analyser <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+
+        <div class="attention-item priority-mid">
+          <div class="attention-icon mid"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div class="attention-body">
+            <div class="attention-title">Dépendance Kelkun élevée sur Kelcare Direct &amp; Habitat &amp; Co</div>
+            <div class="attention-desc">96 % et 88 % d'interventions Kelkun. Recrutement réseau prescripteur à envisager pour réduire le risque.</div>
+          </div>
+          <div class="attention-meta"><strong>92 %</strong>moyenne</div>
+          <a href="reseaux.html" class="attention-cta">Analyser <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+
+        <!-- LOW priority — opérationnel -->
+        <div class="attention-item priority-low">
+          <div class="attention-icon low"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></div>
+          <div class="attention-body">
+            <div class="attention-title">12 factures artisans manquantes &gt; 10 j</div>
+            <div class="attention-desc">Interventions terminées sans facture enregistrée. Bloque le calcul de la commission.</div>
+          </div>
+          <div class="attention-meta"><strong>12</strong>dossiers</div>
+          <a href="finance.html" class="attention-cta">Relancer artisans <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+
+        <div class="attention-item priority-low">
+          <div class="attention-icon low"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></div>
+          <div class="attention-body">
+            <div class="attention-title">2 réclamations clients ouvertes &gt; 5 j</div>
+            <div class="attention-desc">MDPA Poitiers Centre &amp; AXA Montpellier — qualité d'intervention contestée par le sociétaire.</div>
+          </div>
+          <div class="attention-meta"><strong>2</strong>dossiers</div>
+          <a href="operations.html" class="attention-cta">Voir <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+
+        <div class="attention-item priority-mid">
+          <div class="attention-icon mid"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="attention-body">
+            <div class="attention-title">2 périodes gratuites arrivant à échéance &lt; 14 j</div>
+            <div class="attention-desc">Réno Assistance (3 j) &amp; Maison Sérénité (12 j). Lancer le cycle de conversion.</div>
+          </div>
+          <div class="attention-meta"><strong>2</strong>comptes</div>
+          <a href="mrr.html" class="attention-cta">Convertir <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+  <script>
+    // ============================================
+    // Charts — Vue globale
+    // ============================================
+
+    // Chart 1 : Activité globale (line multi-séries)
+    new Chart(document.getElementById('chartActivity'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'Déc.', 'Janv.', 'Fév.', 'Mars', 'Avr.'],
+        datasets: [
+          { label: 'Reçues',     data: [820, 880, 920, 980, 1058, 1248], borderColor: KC_COLORS.primary, backgroundColor: KC_COLORS.primaryLight, fill: true, tension: 0.35, borderWidth: 2, pointRadius: 3 },
+          { label: 'Terminées',  data: [510, 540, 590, 620, 668, 724],   borderColor: KC_COLORS.success, backgroundColor: 'transparent', fill: false, tension: 0.35, borderWidth: 2, pointRadius: 3 },
+          { label: 'Annulées',   data: [76, 82, 88, 96, 108, 112],       borderColor: KC_COLORS.error,   backgroundColor: 'transparent', fill: false, tension: 0.35, borderWidth: 2, pointRadius: 3 },
+          { label: 'Hors SLA',   data: [44, 48, 52, 46, 42, 38],         borderColor: KC_COLORS.warning, backgroundColor: 'transparent', fill: false, tension: 0.35, borderWidth: 2, pointRadius: 3, borderDash: [4,4] }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { font: { family:'Poppins', size:11 }, padding: 16, usePointStyle: true, pointStyle: 'circle' } }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: '#f5f5f5' }, beginAtZero: true }
+        }
+      }
+    });
+
+    // Chart 2 : Statut intervention (donut)
+    new Chart(document.getElementById('chartStatus'), {
+      type: 'doughnut',
+      data: {
+        labels: ['En attente', 'Qualifiée', 'Artisan attribué', 'RDV fixé', 'Devis reçu', 'En travaux', 'Terminée', 'Annulée', 'Hors SLA'],
+        datasets: [{
+          data: [86, 124, 102, 88, 68, 130, 724, 112, 38],
+          backgroundColor: ['#9aa3d0', '#3cb0f5', '#03c5b8', '#76ede0', '#ffc114', '#6778ed', '#3faf38', '#fa4a57', '#c27b30'],
+          borderWidth: 0,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '60%',
+        plugins: {
+          legend: { display: true, position: 'right', labels: { font: { family:'Poppins', size: 10 }, padding: 8, usePointStyle: true, pointStyle: 'circle', boxWidth: 8 } }
+        }
+      }
+    });
+
+    // Chart 3 : Annulations par cause (bar horizontal)
+    new Chart(document.getElementById('chartCauses'), {
+      type: 'bar',
+      data: {
+        labels: [
+          'Le client a refusé le devis',
+          'Nous n\'avons pas trouvé d\'artisan',
+          'Le prescripteur a annulé',
+          'Le client a refusé le reste à charge',
+          'Le devis est non-conforme',
+          'La déclaration est non-conforme',
+          'Annulation pour un autre motif'
+        ],
+        datasets: [{
+          data: [31, 24, 18, 14, 12, 8, 5],
+          backgroundColor: KC_COLORS.error,
+          borderRadius: 6,
+          barThickness: 16
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: { label: (ctx) => `${ctx.parsed.x} % des annulations` }
+          }
+        },
+        scales: {
+          x: { grid: { color: '#f5f5f5' }, ticks: { callback: (v) => v + ' %' } },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+
+    // Chart 4 : Synthèse finance (line multi-séries)
+    new Chart(document.getElementById('chartFinance'), {
+      type: 'line',
+      data: {
+        labels: ['Nov.', 'Déc.', 'Janv.', 'Fév.', 'Mars', 'Avr.'],
+        datasets: [
+          { label: 'Volume transactions', data: [220,232,248,265,278,312], borderColor: KC_COLORS.secondary, backgroundColor: 'transparent', fill: false, tension: 0.35, borderWidth: 2, pointRadius: 3, yAxisID: 'y' },
+          { label: 'Commission calc.',    data: [48,51,55,58,62,69],       borderColor: KC_COLORS.accent,    backgroundColor: 'transparent', fill: false, tension: 0.35, borderWidth: 2, pointRadius: 3, yAxisID: 'y' },
+          { label: 'Commission facturée', data: [42,44,47,49,52,52],       borderColor: KC_COLORS.success,   backgroundColor: 'transparent', fill: false, tension: 0.35, borderWidth: 2, pointRadius: 3, yAxisID: 'y' },
+          { label: 'Commission encaissée',data: [38,41,42,46,48,49],       borderColor: KC_COLORS.primary,   backgroundColor: KC_COLORS.primaryLight, fill: true, tension: 0.35, borderWidth: 2, pointRadius: 3, yAxisID: 'y' },
+          { label: 'MRR',                 data: [9.8,10.6,11.4,12.2,13.1,14.3], borderColor: KC_COLORS.warning, backgroundColor: 'transparent', fill: false, tension: 0.35, borderWidth: 2, pointRadius: 3, borderDash: [4,4], yAxisID: 'y' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { font: { family:'Poppins', size:10 }, padding: 12, usePointStyle: true, pointStyle: 'circle', boxWidth: 8 } },
+          tooltip: {
+            callbacks: { label: (ctx) => `${ctx.dataset.label} : ${ctx.parsed.y} k€` }
+          }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: '#f5f5f5' }, beginAtZero: true, ticks: { callback: (v) => v + ' k€' } }
+        }
+      }
+    });
+
+    // Chart 5 : Réseau (donut)
+    new Chart(document.getElementById('chartReseau'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Réseau Kelkun', 'Réseaux prescripteurs'],
+        datasets: [{ data: [33, 67], backgroundColor: [KC_COLORS.primary, KC_COLORS.secondary], borderWidth: 0, hoverOffset: 6 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '65%',
+        plugins: { legend: { display: true, position: 'bottom', labels: { font: { family:'Poppins', size:11 }, padding: 12, usePointStyle: true, pointStyle: 'circle' } } }
+      }
+    });
+
+    // Sparklines des compcards
+    function drawSpark(canvas, values, color) {
+      const fill = color + '1f';
+      const min = Math.min(...values), max = Math.max(...values);
+      new Chart(canvas, {
+        type: 'line',
+        data: { labels: values.map((_, i) => i), datasets: [{
+          data: values, borderColor: color, backgroundColor: fill,
+          borderWidth: 1.8, fill: true, tension: 0.4,
+          pointRadius: values.map(v => v === min || v === max ? 3 : 0),
+          pointBackgroundColor: values.map(v => v === max ? color : '#fff'),
+          pointBorderColor: color, pointBorderWidth: 1.5
+        }]},
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { enabled: false } },
+          scales: { x: { display: false }, y: { display: false } },
+          elements: { line: { borderJoinStyle: 'round' } }
+        }
+      });
+    }
+
+    const SPARKS = {
+      acceptation: { values: [44, 41, 38, 36, 34, 32], color: KC_COLORS.success },
+      contact:     { values: [22, 21, 19, 18, 18, 17], color: KC_COLORS.success },
+      delairdv:    { values: [3.4, 3.2, 3.0, 2.9, 2.8, 2.8], color: KC_COLORS.success },
+      ponct:       { values: [16, 15, 14, 13, 12, 12], color: KC_COLORS.success },
+      repro:       { values: [13, 12, 12, 11, 11, 11], color: KC_COLORS.success },
+      duree:       { values: [2.0, 1.95, 1.9, 1.85, 1.8, 1.8], color: KC_COLORS.success }
+    };
+    document.querySelectorAll('[data-spark]').forEach(canvas => {
+      const cfg = SPARKS[canvas.dataset.spark];
+      if (cfg) drawSpark(canvas, cfg.values, cfg.color);
+    });
+  </script>
+
+</body>
+</html>

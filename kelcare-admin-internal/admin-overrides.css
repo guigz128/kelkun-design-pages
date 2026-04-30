@@ -332,7 +332,9 @@
 }
 
 /* KPI cards plus denses pour cockpit admin */
-.admin-kpi-grid { gap: var(--space-3); margin-bottom: 0; }
+.admin-kpi-grid { gap: var(--space-3); margin-bottom: var(--space-5); }
+/* Quand 2 groupes KPI s'enchaînent, on évite le double espacement */
+.admin-kpi-grid + .kpi-group-header { margin-top: var(--space-3); }
 .admin-kpi-grid .kpi-card { padding: var(--space-4); border-radius: var(--rounded-xl); }
 .admin-kpi-grid .kpi-icon { width: 32px; height: 32px; border-radius: var(--rounded-lg); }
 .admin-kpi-grid .kpi-icon svg { width: 16px; height: 16px; }
